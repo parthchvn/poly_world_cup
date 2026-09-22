@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "poly-world-cup"
+version = "0.1.0"
+description = "Auditable World Cup prediction-market actor-decision dataset foundations"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+poly-world-cup = "poly_world_cup.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["poly_world_cup*"]
