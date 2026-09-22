@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+.DS_Store
+# Raw API bodies, wallet-level observations, and caches are local research data.
+data/
+.cache/
+.env
+.env.*

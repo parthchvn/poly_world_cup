@@ -1,0 +1,243 @@
+{
+  "api_schema_source": {
+    "body_sha256": "539626e74cb0d17ad647035fa1ba7b9048efc4b6b52011c2366c73a585432d89",
+    "info": {
+      "contact": {
+        "name": "Polymarket"
+      },
+      "description": "The Polymarket Data API: wallet portfolios, trade and activity feeds, market state and ranked boards.\n\n## Conventions every endpoint shares\n\n- **Envelope**: every response wraps its payload in `data` (paged routes add `pagination`). A documented miss is `data: null` or an empty list, never an error.\n- **Pagination is cursor-only**: follow `pagination.next_cursor` until `null`; `has_more` is exact, and there is no `offset` query parameter (sending one is a `400`). Cursors are signed, typed per endpoint, and opaque. The feeds (`trades`, `activity`, combo activity) are keyset walks, stable across concurrent writes; the boards, `holders` and most combo-position sorts are offset walks behind the opaque token, so a page taken across a data refresh can skip or repeat rows. Where a cursor binds its cohort (the boards, positions, combo positions), resuming bare is fine, restating the same values is fine, and contradicting them is a `400`. The `trades`/`activity` feed cursors carry only the seek anchor and page size (plus the sort direction on activity): re-send identical filters on every page, because changing one mid-walk re-anchors silently.\n- **Rate limiting**: `429` with `Retry-After` is the busy signal for heavy queries. A heavy query may first be queued briefly for a capacity slot; the `429` arrives only if that short wait ends unserved. Each caller also has a per-client request allowance, and bursts past it get the same `429` with `Retry-After` sized to the remaining wait. Retry after the given delay. A request that could not get a database connection within its budget is NOT a `429`: it is a `503` `request_timeout` with `Retry-After`, because the shortage is on the server side, not in the caller's rate.\n- **Identifiers**: `condition` (aliases `condition_id`, `conditionId`) is the unified query key for on-chain 0x condition ids; `market_id` fields carry Gamma's own market ids; `event_id` takes Gamma event ids; `token_id` is the CLOB asset id (the key on `/v2/prices-history`).\n- **Params** accept both snake_case and camelCase spellings.\n- **Units**: bare `volume`/`size` values are **shares**; `_usdc` suffixed fields are USD; `taker_` prefixed volumes are one-side.\n- **Sentinels**: `outcome_index: 999` means the outcome could not be labeled; a missing or `null` numeric field means unavailable, never zero.\n- **Windows on `/v2/trades?user=` and `/v2/activity`**: an omitted or `0` `start` floors to three years back (`start=1` asks for full history); an omitted or `0` `end` is now plus one day. The other `/v2/trades` shapes ignore `start`/`end`: `condition`/`event_id` serve a fixed three-year window and the bare feed serves the rolling current-plus-previous month. Other windowed routes treat omitted/`0` bounds as unbounded; each documents its own rule. `/v2/prices-history` is the strict one, where a `0` bound is a `400`.\n- **Errors**: every unsuccessful response is JSON with a human-readable `error`, stable `code`, `retryable` flag, and opaque `trace_id`; validation failures may also name `parameter`. Codes map to statuses as follows: `invalid_request` = `400`, `unauthorized` = `401`, `not_found` = `404`, `method_not_allowed` = `405`, `rate_limited` = `429`, `internal` = `500`, and both `request_timeout` (the request deadline, the datastore's statement timeout, or the connection pool's acquire budget) and `dependency_unavailable` = `503`. A `429` or `503` that is worth retrying carries `Retry-After` in seconds. Every response, successful or not, echoes the same id in the `x-trace-id` header; supply it when reporting a failure so operators can correlate it with telemetry.\n- **Auth**: none. All data routes are public; no API key or token is required.",
+      "license": {
+        "identifier": "MIT",
+        "name": "MIT"
+      },
+      "title": "Polymarket Data API v2",
+      "version": "0.1.0"
+    },
+    "retrieved_at": "2026-09-22T23:48:13.519920Z",
+    "url": "https://data-api.polymarket.com/v2/openapi.json"
+  },
+  "archive_note": "Raw source bodies and wallet observations remain in ignored local data; hashes are provenance, not a public raw archive.",
+  "discovery": {
+    "base_match_event_count": 104,
+    "contract_count": 312,
+    "coverage_complete": true,
+    "excluded_other_event_count": 727,
+    "expected_fixtures": 104,
+    "failures": [],
+    "feature_eligible": false,
+    "fixture_count": 104,
+    "gamma_event_count": 831,
+    "gamma_pages": 10,
+    "kickoff_tolerance_seconds": 10800,
+    "limits": [
+      "This parser requires the three binary moneyline contracts observed for 2026 (each team and draw); changed market structures are flagged for review, not inferred.",
+      "Current registry metadata cannot establish historical availability or rule versions.",
+      "A matched event establishes identifiers, not trade-history or context completeness.",
+      "The two sources' kickoff timestamps are retained separately; disagreements require review before time-sensitive features.",
+      "Opening timestamps are retrospective API claims, not independently captured proof of the first executable order.",
+      "Source scores, winners, prices, volume, descriptions of final results, and current team form are excluded from normalized records."
+    ],
+    "mapped_fixtures": 104,
+    "mapping_status_counts": {
+      "matched": 104
+    },
+    "retrospective_metadata": true,
+    "series_id": "11433",
+    "token_count": 624,
+    "total_fixtures": 104,
+    "warnings": [
+      {
+        "code": "kickoff_disagreement",
+        "difference_seconds": -3600,
+        "fixture_id": "espn:760491"
+      },
+      {
+        "code": "kickoff_disagreement",
+        "difference_seconds": -3600,
+        "fixture_id": "espn:760505"
+      }
+    ]
+  },
+  "readiness": {
+    "blockers": [
+      {
+        "code": "UNINGESTED_CONDITIONS",
+        "detail": "No local ingestion manifest for 311 of 312 conditions."
+      },
+      {
+        "code": "EXECUTION_IDENTITY",
+        "detail": "Reconcile wallet-side observations to canonical executions and verified maker/taker roles; API rows lack log/order IDs."
+      },
+      {
+        "code": "HISTORICAL_AVAILABILITY",
+        "detail": "Establish historical availability and versions of news, market state, fixture metadata, and prior activity."
+      },
+      {
+        "code": "SOURCE_COVERAGE",
+        "detail": "Independently establish label coverage; API exhaustion and filtered observations do not prove full trade history."
+      },
+      {
+        "code": "HISTORICAL_UNIVERSE",
+        "detail": "Construct checkpoint cohorts from global past activity or explicitly restrict to already observed tournament participants."
+      },
+      {
+        "code": "INVENTORY",
+        "detail": "Reconcile initial balances, transfers, splits, merges, redemptions, and fills; retain unknowns until established."
+      },
+      {
+        "code": "SPLIT_AND_BASELINES",
+        "detail": "Freeze fixture-disjoint temporal splits, build baselines, and run context ablations before SFT."
+      }
+    ],
+    "conditions_with_manifests": 1,
+    "conditions_with_observations": 1,
+    "conditions_without_manifests": 311,
+    "contract_count": 312,
+    "fixture_count": 104,
+    "fixture_mapping_status_counts": {
+      "matched": 104
+    },
+    "manifest_status_counts": {
+      "paused": 1
+    },
+    "note": "This is a collection-foundation audit, not a scientific validity certificate. No training examples are exported.",
+    "observation_count": 200,
+    "scope": "2026 FIFA World Cup, all 104 fixtures, match-result contracts",
+    "sft_ready": false,
+    "structural_audit_passed": true,
+    "structural_errors": [],
+    "zero_page_manifest_count": 0
+  },
+  "scope": "2026 FIFA World Cup, all 104 fixtures, match-result contracts",
+  "snapshot_index_sha256": "375efc0f1435462507a911c8af99e6fa3d33daf58bf450dcfcadafd8d0775755",
+  "snapshot_registry_sha256": "cf45395a65fc140de93055c6b7ef4b30bbcf7b8970f898e37ac74dfed9da8561",
+  "sources": [
+    {
+      "body_sha256": "028729fac08ae6ab2ccb9d417323c85f1a524b52d5d419729d945559eca262d5",
+      "feature_eligible": false,
+      "retrieved_at": "2026-09-22T23:45:21.143972Z",
+      "retrospective_metadata": true,
+      "url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=2026&limit=1000"
+    },
+    {
+      "body_sha256": "b68b5beadc959d2268e67d4fda13f02d00706a5bcc5c226530f9befb3a1fc92a",
+      "feature_eligible": false,
+      "retrieved_at": "2026-09-22T23:45:26.069177Z",
+      "retrospective_metadata": true,
+      "url": "https://gamma-api.polymarket.com/events?ascending=true&limit=100&offset=0&order=id&series_id=11433"
+    },
+    {
+      "body_sha256": "7194738b34811c36a8f615a27e4c607ad565c06da330b51bb38af176f45cb902",
+      "feature_eligible": false,
+      "retrieved_at": "2026-09-22T23:45:32.138439Z",
+      "retrospective_metadata": true,
+      "url": "https://gamma-api.polymarket.com/events?ascending=true&limit=100&offset=100&order=id&series_id=11433"
+    },
+    {
+      "body_sha256": "0e1fae396f18f114b8a9c9968a91c36c346b0ec0d5da8e861d2bad798f46a2ca",
+      "feature_eligible": false,
+      "retrieved_at": "2026-09-22T23:45:38.538953Z",
+      "retrospective_metadata": true,
+      "url": "https://gamma-api.polymarket.com/events?ascending=true&limit=100&offset=200&order=id&series_id=11433"
+    },
+    {
+      "body_sha256": "f61a7c4da161522292178f949f45601ae45d4c624e140dd1cf14db94fa34dcb3",
+      "feature_eligible": false,
+      "retrieved_at": "2026-09-22T23:45:45.641175Z",
+      "retrospective_metadata": true,
+      "url": "https://gamma-api.polymarket.com/events?ascending=true&limit=100&offset=300&order=id&series_id=11433"
+    },
+    {
+      "body_sha256": "47b3ae141cf364db170e10eec833554784c8d9d09dbe787d43fc7ca0c8071a90",
+      "feature_eligible": false,
+      "retrieved_at": "2026-09-22T23:45:52.473971Z",
+      "retrospective_metadata": true,
+      "url": "https://gamma-api.polymarket.com/events?ascending=true&limit=100&offset=400&order=id&series_id=11433"
+    },
+    {
+      "body_sha256": "10b16f195540ed2b7ba81c6ad9c1b5cef8a81f5ce93014c8bf95a3beb81dc0ac",
+      "feature_eligible": false,
+      "retrieved_at": "2026-09-22T23:46:02.291353Z",
+      "retrospective_metadata": true,
+      "url": "https://gamma-api.polymarket.com/events?ascending=true&limit=100&offset=500&order=id&series_id=11433"
+    },
+    {
+      "body_sha256": "4db2b4b685386753c10210b65f41c12be19c198dc990ecdfe0deed1b9ef29793",
+      "feature_eligible": false,
+      "retrieved_at": "2026-09-22T23:46:08.702967Z",
+      "retrospective_metadata": true,
+      "url": "https://gamma-api.polymarket.com/events?ascending=true&limit=100&offset=600&order=id&series_id=11433"
+    },
+    {
+      "body_sha256": "2b247273af5f60b7cf1ece77afd112a4c35c5985b3b1d3f62ad55448640a6c83",
+      "feature_eligible": false,
+      "retrieved_at": "2026-09-22T23:46:26.411284Z",
+      "retrospective_metadata": true,
+      "url": "https://gamma-api.polymarket.com/events?ascending=true&limit=100&offset=700&order=id&series_id=11433"
+    },
+    {
+      "body_sha256": "a067fca1e2eb1bec5672feca92b2edda6e18319b526b34eb48b5098345ce7608",
+      "feature_eligible": false,
+      "retrieved_at": "2026-09-22T23:46:33.666565Z",
+      "retrospective_metadata": true,
+      "url": "https://gamma-api.polymarket.com/events?ascending=true&limit=100&offset=800&order=id&series_id=11433"
+    },
+    {
+      "body_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "feature_eligible": false,
+      "retrieved_at": "2026-09-22T23:46:38.312114Z",
+      "retrospective_metadata": true,
+      "url": "https://gamma-api.polymarket.com/events?ascending=true&limit=100&offset=831&order=id&series_id=11433"
+    }
+  ],
+  "trade_smoke": {
+    "api_traversal_status": "paused",
+    "command": "python -m poly_world_cup ingest --condition 0x04b6d6630d49e6513355ff045c96439c929335cb0d18da7792dea6c2fc717ead --limit 100 --max-pages 2 --output data/verified_trades",
+    "condition_id": "0x04b6d6630d49e6513355ff045c96439c929335cb0d18da7792dea6c2fc717ead",
+    "earliest_block_timestamp": "2026-06-16T21:28:58Z",
+    "latest_block_timestamp": "2026-06-16T21:31:31Z",
+    "limitations": [
+      "API excludes trades smaller than the minimum size filter",
+      "API exhaustion does not establish archive completeness or zero trading",
+      "Block timestamps do not establish order submission or public availability",
+      "No canonical log index, order ID, or maker/taker role is exposed",
+      "A live traversal is not a guaranteed database snapshot"
+    ],
+    "note": "Final normalization replayed the same captured API pages with Decimal parsing; no full-history collection was performed.",
+    "page_count": 2,
+    "pages": [
+      {
+        "body_sha256": "39657ac6f9a483ef6dfd2e9e380304431455ae73959ada0526be91292bb961a2",
+        "normalized_sha256": "7debf1b1b3fa8b574c51c192d283136918ce3f6f710aca2f87f12cebbf9d1945",
+        "page_index": 0,
+        "retrieved_at": "2026-09-22T23:45:45.477385Z",
+        "row_count": 100
+      },
+      {
+        "body_sha256": "4de685971c01ac836e4234109956aad260a37a83764e4d6cd3aa08683b9cb628",
+        "normalized_sha256": "957b01ae834570cde34a5e9f2d85ede63e4a1d4b66f32fb14a6fe4f860817520",
+        "page_index": 1,
+        "retrieved_at": "2026-09-22T23:45:54.285527Z",
+        "row_count": 100
+      }
+    ],
+    "parameters": {
+      "condition": "0x04b6d6630d49e6513355ff045c96439c929335cb0d18da7792dea6c2fc717ead",
+      "filter_amount": "0.01",
+      "filter_type": "TOKENS",
+      "limit": 100,
+      "taker_only": "false"
+    },
+    "row_count": 200,
+    "training_coverage_certified": false
+  },
+  "unit_tests": {
+    "command": "python -m unittest discover -s tests -v",
+    "errors": 0,
+    "failures": 0,
+    "network_required": false,
+    "passed": 58,
+    "python": "3.12.14"
+  },
+  "validated_at_utc": "2026-09-22T23:50:54.932272Z"
+}
