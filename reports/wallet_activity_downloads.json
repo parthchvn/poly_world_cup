@@ -1,0 +1,47 @@
+{
+  "format_version": 1,
+  "archive": {
+    "file": "world_cup_lt20.zip",
+    "bytes": 914583218,
+    "sha256": "47082800bb16d5a42252b27ac51606e175174dffa9bc1bbf548aa74106c4137f"
+  },
+  "download_files": [
+    {
+      "file": "world_cup_lt20.part01",
+      "bytes": 500000000,
+      "sha256": "633a3a45b8abf1c8438baebccdc234d387d30ff41002c9dfbe4dd699ce952f54"
+    },
+    {
+      "file": "world_cup_lt20.part02",
+      "bytes": 414583218,
+      "sha256": "95b534d86a552ac16d67a6c760e84ebe0b465725ad24c5832b1ba66c1ebc7077"
+    }
+  ],
+  "members": [
+    {
+      "file": "world_cup_lt20.sqlite",
+      "bytes": 3352584192,
+      "sha256": "98a0f7db2685c459a60c90766e2d4edbf32e314e27a6b600121495e57cb28bcd"
+    },
+    {
+      "file": "filter_report.json",
+      "bytes": 4187,
+      "sha256": "053ad1aceb2114c995b3e9eb87f5259a665f75dd35c3fc29baa87c20b7757100"
+    },
+    {
+      "file": "selected_trades_preview.jsonl",
+      "bytes": 20491,
+      "sha256": "14aaa42affe00baae3ea4f20b8a8491cde63fbff0075acb81e2de5011c6c32a8"
+    },
+    {
+      "file": "FILTERED_DATASET_README.md",
+      "bytes": 2410,
+      "sha256": "f6b11b482d6d594ffb43aca52e4705895797e3507423b06a6d8752438d186692"
+    }
+  ],
+  "retained_observations": 3810250,
+  "threshold_exclusive": 20,
+  "original_dataset_modified": false,
+  "source_partial": true,
+  "training_ready": false
+}
