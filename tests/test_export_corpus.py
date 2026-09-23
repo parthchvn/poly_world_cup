@@ -163,6 +163,91 @@ class ExportCorpusTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "counts do not match"):
             self.export(provenance_report=path)
 
+    def checkpoint_inputs(self):
+        fixtures = [{"fixture_id": f"fixture:{i}"} for i in range(1, 105)]
+        contracts = []
+        for index in range(312):
+            condition = CONDITION if index == 0 else "0x" + f"{index:064x}"
+            contracts.append({"condition_id": condition, "fixture_id": f"fixture:{index // 3 + 1}",
+                              "selection": "test", "tokens": [{"token_id": str(10000 + index * 2), "outcome": "Yes"},
+                                                                   {"token_id": str(10001 + index * 2), "outcome": "No"}]})
+            if index == 0:
+                manifest = {**self.manifest, "api_traversal_status": "paused"}
+            else:
+                manifest = {"condition_id": condition, "api_traversal_status": "paused" if index < 19 else "exhausted",
+                            "row_count": 0, "page_count": 0, "pages": []}
+            path = self.trades / condition / "manifest.json"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(manifest))
+        self.registry.write_text(json.dumps({"fixtures": fixtures, "contracts": contracts}))
+        provenance = self.root / "checkpoint_provenance.json"
+        provenance.write_text(json.dumps({"raw_provenance_verified": True, "condition_selection": "explicit", "verified_observation_count": 3,
+            "verified_condition_count": 312, "verified_raw_page_count": 1, "api_exhausted_conditions": 293,
+            "requested_condition_count": 312, "normalized_integrity_verified_conditions": 312, "errors": []}))
+        return provenance
+
+    def test_paused_checkpoints_still_fail_without_explicit_partial_flag(self):
+        provenance = self.checkpoint_inputs()
+        with self.assertRaisesRegex(ValueError, "exhausted traversal"):
+            self.export(provenance_report=provenance)
+
+    def test_explicit_partial_export_labels_archives_and_both_manifests(self):
+        provenance = self.checkpoint_inputs()
+        result = self.export(allow_partial=True, provenance_report=provenance,
+                             include_raw_trades=True, trade_cache=self.root / "cache")
+        self.assertTrue(result["partial"])
+        self.assertFalse(result["training_ready"])
+        self.assertEqual(result["manifest_status_counts"], {"exhausted": 293, "paused": 19})
+        self.assertEqual([row["file"] for row in result["artifacts"]],
+                         ["world_cup_partial_corpus.tar.gz", "trade_partial_provenance.tar.gz"])
+        for artifact in result["artifacts"]:
+            with tarfile.open(self.root / "release" / artifact["file"]) as archive:
+                manifest = json.load(archive.extractfile("MANIFEST.json"))
+                self.assertTrue(manifest["partial"])
+                self.assertEqual(manifest["manifest_status_counts"], {"exhausted": 293, "paused": 19})
+                readme = archive.extractfile("README.md").read().decode()
+                self.assertIn("INCOMPLETE CHECKPOINT", readme)
+                self.assertIn("293 exhausted", readme)
+                self.assertIn("19 paused", readme)
+        self.assertFalse((self.root / "release" / "world_cup_corpus.tar.gz").exists())
+
+    def test_partial_export_requires_every_registry_manifest(self):
+        provenance = self.checkpoint_inputs()
+        (self.trades / ("0x" + f"{311:064x}") / "manifest.json").unlink()
+        with self.assertRaisesRegex(ValueError, "regular input file"):
+            self.export(allow_partial=True, provenance_report=provenance)
+
+    def test_partial_export_does_not_accept_failed_or_arbitrary_status(self):
+        provenance = self.checkpoint_inputs()
+        self.manifest["api_traversal_status"] = "failed"
+        self.manifest_path.write_text(json.dumps(self.manifest))
+        with self.assertRaisesRegex(ValueError, "only paused or exhausted"):
+            self.export(allow_partial=True, provenance_report=provenance)
+
+    def test_partial_export_requires_full_312_contract_universe(self):
+        with self.assertRaisesRegex(ValueError, "104 fixtures and 312"):
+            self.export(allow_partial=True)
+
+    def test_partial_export_requires_saved_page_provenance_verification(self):
+        self.checkpoint_inputs()
+        with self.assertRaisesRegex(ValueError, "passing provenance report"):
+            self.export(allow_partial=True)
+
+    def test_partial_export_checks_reported_exhaustion_against_saved_states(self):
+        provenance = self.checkpoint_inputs()
+        report = json.loads(provenance.read_text())
+        report["api_exhausted_conditions"] = 312
+        provenance.write_text(json.dumps(report))
+        with self.assertRaisesRegex(ValueError, "traversal counts disagree"):
+            self.export(allow_partial=True, provenance_report=provenance)
+
+    def test_partial_export_keeps_exact_database_row_count_gate(self):
+        provenance = self.checkpoint_inputs()
+        with sqlite3.connect(self.database) as db:
+            db.execute("DELETE FROM trades WHERE trade_row_id=1")
+        with self.assertRaisesRegex(ValueError, "every manifested trade"):
+            self.export(allow_partial=True, provenance_report=provenance)
+
     def test_dry_run_does_not_copy_or_create_release_directory(self):
         result = self.export(dry_run=True)
         self.assertTrue(result["dry_run"])

@@ -71,17 +71,28 @@ def _regular(path: Path) -> Path:
     return path
 
 
-def _manifests(registry: dict, trades_root: Path) -> list[tuple[Path, dict]]:
+def _manifests(registry: dict, trades_root: Path, *, allow_partial: bool = False) -> list[tuple[Path, dict]]:
     conditions = sorted({row["condition_id"].lower() for row in registry["contracts"]})
     if not conditions:
         raise ValueError("Registry has no contracts")
+    if allow_partial and (len(conditions) != 312 or len(registry["contracts"]) != 312
+                          or len(registry.get("fixtures", [])) != 104
+                          or len({row["fixture_id"] for row in registry.get("fixtures", [])}) != 104
+                          or {row["fixture_id"] for row in registry["contracts"]} !=
+                             {row["fixture_id"] for row in registry.get("fixtures", [])}):
+        raise ValueError("Partial checkpoint export requires all 104 fixtures and 312 registry contracts")
     result = []
     for condition in conditions:
         if len(condition) != 66 or not condition.startswith("0x") or any(c not in "0123456789abcdef" for c in condition[2:]):
             raise ValueError("Malformed registry condition ID")
         path = _regular(trades_root / condition / "manifest.json")
         item = json.loads(path.read_text())
-        if item.get("condition_id") != condition or item.get("api_traversal_status") != "exhausted":
+        if item.get("condition_id") != condition:
+            raise ValueError(f"Manifest identity disagrees for {condition}")
+        allowed_statuses = {"exhausted", "paused"} if allow_partial else {"exhausted"}
+        if item.get("api_traversal_status") not in allowed_statuses:
+            if allow_partial:
+                raise ValueError(f"Partial checkpoint accepts only paused or exhausted traversals: {condition}")
             raise ValueError(f"Release requires exhausted traversal for {condition}")
         pages = item.get("pages", [])
         if item.get("page_count") != len(pages) or item.get("row_count") != sum(p["row_count"] for p in pages):
@@ -229,7 +240,7 @@ def export_corpus(*, database: Path, registry: Path, news: Path, archived_news: 
                   include_raw_trades: bool = False, trade_cache: Path | None = None,
                   sample_fixtures: int = 12, dry_run: bool = False,
                   cache_layout: str = "per_condition", immutable_database: bool = False,
-                  provenance_report: Path | None = None) -> dict:
+                  provenance_report: Path | None = None, allow_partial: bool = False) -> dict:
     database, registry, news, trades_root, output_dir = map(Path, (database, registry, news, trades_root, output_dir))
     archived_news, reports = list(map(Path, archived_news)), list(map(Path, reports))
     provenance = None
@@ -245,7 +256,14 @@ def export_corpus(*, database: Path, registry: Path, news: Path, archived_news: 
         if path.suffix != ".json":
             raise ValueError("Release reports must be JSON audit metadata")
         metadata_only(json.loads(path.read_text()), "report:" + path.name)
-    manifests = _manifests(json.loads(registry.read_text()), trades_root)
+    manifests = _manifests(json.loads(registry.read_text()), trades_root, allow_partial=allow_partial)
+    status_counts = {status: sum(item["api_traversal_status"] == status for _, item in manifests)
+                     for status in ("exhausted", "paused")}
+    partial = status_counts["paused"] > 0
+    if partial and provenance is None:
+        raise ValueError("Partial checkpoints require a passing provenance report for every saved page")
+    corpus_filename = "world_cup_partial_corpus.tar.gz" if partial else "world_cup_corpus.tar.gz"
+    raw_filename = "trade_partial_provenance.tar.gz" if partial else "trade_provenance.tar.gz"
     if include_raw_trades and trade_cache is None:
         raise ValueError("--raw-trades requires --trade-cache")
     if cache_layout not in {"per_condition", "shared"}:
@@ -261,13 +279,16 @@ def export_corpus(*, database: Path, registry: Path, news: Path, archived_news: 
     estimate = {"normalized_input_bytes": inputs_size, "raw_trade_input_bytes": raw_size,
                 "estimated_extra_disk_required_bytes": 2 * inputs_size - (database.stat().st_size if immutable_database else 0) + 2 * raw_size + 256 * 1024**2,
                 "compression_ratio_assumed": None, "raw_trade_export_requested": include_raw_trades,
-                "immutable_database_requested": immutable_database}
+                "immutable_database_requested": immutable_database,
+                "partial": partial, "partial_collection_allowed": allow_partial,
+                "manifest_status_counts": status_counts}
     if dry_run:
         return {"dry_run": True, **estimate}
     output_dir.mkdir(parents=True, exist_ok=True)
     if shutil.disk_usage(output_dir).free < estimate["estimated_extra_disk_required_bytes"]:
         raise ValueError("Insufficient free space for a conservative snapshot/archive estimate; run --dry-run")
-    if any((output_dir / name).exists() for name in ["world_cup_corpus.tar.gz", "trade_provenance.tar.gz", "release_manifest.json"]):
+    if any((output_dir / name).exists() for name in ["world_cup_corpus.tar.gz", "trade_provenance.tar.gz",
+            "world_cup_partial_corpus.tar.gz", "trade_partial_provenance.tar.gz", "release_manifest.json"]):
         raise ValueError("Use a fresh output directory; existing release files are never overwritten")
     artifacts = []
     with tempfile.TemporaryDirectory(prefix=".corpus-export-", dir=output_dir) as tmp:
@@ -301,11 +322,20 @@ def export_corpus(*, database: Path, registry: Path, news: Path, archived_news: 
             facts = _verify_database(snapshot, manifests, catalog_records)
             schema = ";\n".join(row[0] for row in snapshot.execute("SELECT sql FROM sqlite_master WHERE sql IS NOT NULL ORDER BY type,name")) + ";\n"
         facts["raw_provenance_checked"] = provenance is not None
+        facts["partial"] = partial
+        facts["partial_collection_allowed"] = allow_partial
+        facts["manifest_status_counts"] = status_counts
         if provenance is not None:
             if (provenance.get("verified_observation_count") != facts["trade_observations"]
                     or provenance.get("verified_condition_count", provenance.get("condition_count")) != facts["conditions"]
                     or provenance.get("verified_raw_page_count", provenance.get("raw_page_count")) != facts["source_pages"]):
                 raise ValueError("Provenance report counts do not match the exported corpus")
+            if partial and (provenance.get("condition_selection") != "explicit"
+                            or provenance.get("api_exhausted_conditions") != status_counts["exhausted"]
+                            or provenance.get("requested_condition_count") != len(manifests)
+                            or provenance.get("normalized_integrity_verified_conditions") != len(manifests)
+                            or provenance.get("errors") != []):
+                raise ValueError("Partial checkpoint provenance scope or traversal counts disagree")
         (stage / "schema.sql").write_text(schema)
         for path, manifest in manifests:
             copy(path, "trade_manifests/" + manifest["condition_id"] + ".json")
@@ -314,13 +344,21 @@ def export_corpus(*, database: Path, registry: Path, news: Path, archived_news: 
         samples, sampling = _sample_contexts(stage / "attribution.sqlite", sample_fixtures)
         write_jsonl(stage / "context_samples.jsonl", samples)
         write_json(stage / "sample_method.json", sampling)
-        (stage / "README.md").write_text(_README)
-        _manifest(stage, {"kind": "normalized_observation_corpus", "counts": facts,
+        readme = _README
+        if partial:
+            notice = (f"**INCOMPLETE CHECKPOINT: {status_counts['exhausted']} exhausted contracts and "
+                      f"{status_counts['paused']} paused contracts.** All 312 contracts are present, but only "
+                      "the currently saved pages are included. Remaining API pages have not been collected. "
+                      "Saved-page integrity does not establish full-history coverage. This checkpoint is not SFT-ready.\n\n")
+            readme = readme.replace("# World Cup observation corpus\n\n", "# Partial World Cup observation checkpoint\n\n" + notice)
+        (stage / "README.md").write_text(readme)
+        _manifest(stage, {"kind": "partial_normalized_observation_checkpoint" if partial else "normalized_observation_corpus", "counts": facts,
+                          "partial": partial, "manifest_status_counts": status_counts,
                           "news_full_text_included": False, "raw_trade_provenance_is_separate": include_raw_trades})
-        corpus_artifact = _archive(stage, output_dir / "world_cup_corpus.tar.gz")
+        corpus_artifact = _archive(stage, output_dir / corpus_filename)
         if immutable_database and ((database.stat().st_size, database.stat().st_mtime_ns) != immutable_stat
                 or (Path(str(database) + "-wal").exists() and Path(str(database) + "-wal").stat().st_size)):
-            (output_dir / "world_cup_corpus.tar.gz").unlink()
+            (output_dir / corpus_filename).unlink()
             raise ValueError("Immutable database changed during export; the incomplete archive was removed")
         artifacts.append(corpus_artifact)
         if include_raw_trades:
@@ -334,11 +372,14 @@ def export_corpus(*, database: Path, registry: Path, news: Path, archived_news: 
                     target.hardlink_to(source.resolve())
                 except OSError:
                     shutil.copyfile(source, target)
-            (raw_stage / "README.md").write_text("# Trade provenance\n\nOnly committed manifest-referenced normalized observations and original Polymarket trade response bodies are included. No news responses or HTML are included. Stored response SHA256 values refer to uncompressed bytes; archive member hashes refer to the actual stored bytes. API exhaustion is not a certificate of complete on-chain history.\n")
-            _manifest(raw_stage, {"kind": "trade_provenance", "news_files_included": False})
-            artifacts.append(_archive(raw_stage, output_dir / "trade_provenance.tar.gz"))
+            raw_notice = (f"**INCOMPLETE CHECKPOINT: {status_counts['exhausted']} exhausted contracts; {status_counts['paused']} paused contracts. Only saved pages are included. Not SFT-ready.**\n\n" if partial else "")
+            (raw_stage / "README.md").write_text("# Trade provenance\n\n" + raw_notice + "Only committed manifest-referenced normalized observations and original Polymarket trade response bodies are included. No news responses or HTML are included. Stored response SHA256 values refer to uncompressed bytes; archive member hashes refer to the actual stored bytes. API exhaustion is not a certificate of complete on-chain history.\n")
+            _manifest(raw_stage, {"kind": "partial_trade_provenance" if partial else "trade_provenance",
+                                  "partial": partial, "manifest_status_counts": status_counts, "news_files_included": False})
+            artifacts.append(_archive(raw_stage, output_dir / raw_filename))
         summary = {"format_version": 1, "artifacts": artifacts, "counts": facts, "disk_estimate": estimate,
-                   "news_full_text_included": False, "training_ready": False}
+                   "news_full_text_included": False, "training_ready": False, "partial": partial,
+                   "manifest_status_counts": status_counts, "partial_collection_allowed": allow_partial}
         write_json(output_dir / "release_manifest.json", summary)
         return summary
 
@@ -347,7 +388,7 @@ _README = """# World Cup observation corpus
 
 Open `attribution.sqlite` with SQLite, Python's standard sqlite3 module, or a
 SQLite database browser. The database contains every normalized trade observation
-listed by the included exhausted API collection manifests, along with news
+listed by the included API collection manifests, along with news
 metadata and context links. It does not require the original machine's files.
 
 Tables: trades, news, fixture_news, global_news, context_states, source_pages,
@@ -400,6 +441,7 @@ def main(argv=None) -> int:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--report", type=Path, action="append", default=[])
     parser.add_argument("--raw-trades", action="store_true")
+    parser.add_argument("--allow-partial", action="store_true", help="Explicitly export a labeled checkpoint with all 312 manifests, allowing only paused/exhausted states and requiring saved-page provenance verification")
     parser.add_argument("--immutable-database", action="store_true", help="Avoid a database copy; requires a closed immutable DB on the output filesystem")
     parser.add_argument("--provenance-report", type=Path)
     parser.add_argument("--trade-cache", type=Path, default=Path("data/full/cache"))
@@ -412,7 +454,8 @@ def main(argv=None) -> int:
             archived_news=args.archive_news, trades_root=args.trades_root, output_dir=args.output,
             reports=args.report, include_raw_trades=args.raw_trades, trade_cache=args.trade_cache,
             sample_fixtures=args.sample_fixtures, dry_run=args.dry_run, cache_layout=args.cache_layout,
-            immutable_database=args.immutable_database, provenance_report=args.provenance_report)
+            immutable_database=args.immutable_database, provenance_report=args.provenance_report,
+            allow_partial=args.allow_partial)
         print(json.dumps(result, indent=2, sort_keys=True))
         return 0
     except (ValueError, OSError, sqlite3.Error, KeyError) as error:

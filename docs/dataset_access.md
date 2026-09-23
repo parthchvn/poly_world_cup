@@ -1,6 +1,12 @@
 # Open and query the collected dataset
 
-The primary download is `world_cup_corpus.tar.gz`. Extract it into a new directory:
+A completed-traversal release is named `world_cup_corpus.tar.gz`. An explicitly
+incomplete checkpoint is named **`world_cup_partial_corpus.tar.gz`**; use that
+filename instead in the commands below. Its manifests state exactly which
+contracts exhausted and which paused. A partial checkpoint includes every saved
+observation, but uncollected pages remain missing.
+
+Extract the downloaded archive into a new directory:
 
 ```bash
 mkdir world_cup_corpus
@@ -204,3 +210,37 @@ upstream completeness and training readiness. No final output is written if a
 required consistency check fails. The readable overview and compact JSON can be
 published alongside the archives; they do not replace the per-file release hash
 manifest.
+
+
+## Explicitly incomplete checkpoints
+
+Normal export still requires exhausted traversals for every registry contract.
+If collection is interrupted, `--allow-partial` permits a clearly labeled
+checkpoint only when all **104 fixtures and 312 contract manifests** are present,
+every manifest is either `paused` or `exhausted`, and a passing provenance report
+verifies every saved page. SQLite page hashes, exact observation counts, news
+catalog equality, and body-exclusion checks remain mandatory.
+
+```bash
+python scripts/export_corpus.py \
+  --database data/full/attribution.sqlite \
+  --archive-news data/news_archive/news_archive.jsonl \
+  --provenance-report data/full/raw_provenance_report.json \
+  --output data/releases/2026-world-cup-partial \
+  --immutable-database --allow-partial --dry-run
+```
+
+Remove `--dry-run` only after the inputs are finalized. The resulting archives
+are `world_cup_partial_corpus.tar.gz` and, when requested with `--raw-trades`,
+`trade_partial_provenance.tar.gz`. The outer release manifest and both inner
+manifests have `partial=true` and exact paused/exhausted counts. Their READMEs
+start with an **INCOMPLETE CHECKPOINT** notice. Partial export requires a passing
+provenance report with an explicit registry condition universe; verifying saved
+pages does not certify the uncollected part of the history. A missing manifest,
+a failed/unknown state, or inconsistent counts still blocks export.
+
+The September 23 interrupted collection recorded **293 exhausted contracts and
+19 paused contracts**. Those statuses describe the captured checkpoint, not
+completion of the user's full-history request. It remains unsuitable for SFT or
+for inferring no-trade labels. The full-completion overview generator retains
+its stricter gates and does not certify an incomplete checkpoint as complete.
