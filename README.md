@@ -45,12 +45,16 @@ See [checkpoint coverage](reports/collection_checkpoint.json),
 [attribution counts](reports/attribution_checkpoint.json),
 [raw provenance verification](reports/provenance_checkpoint.json), and
 [archive coverage](reports/news_archive_checkpoint.json).
-The downloadable checkpoint uses `world_cup_partial_corpus.tar.gz` and
+Open [one context example](reports/context_preview.json) to inspect the observation,
+prior tournament wallet executions, and temporally gated news fields directly.
+Prepared checkpoint archives are `world_cup_partial_corpus.tar.gz` and
 `trade_partial_provenance.tar.gz`; [access and resume instructions](docs/dataset_access.md)
 describe the formats. Downloads are split into five `world_cup_data.part*` files
 and four `trade_sources.part*` files to meet the per-file download limit.
 [Release checksums](reports/release_checkpoint.json) cover every part and both
-reassembled archives. `--allow-partial` is required to export such a checkpoint;
+reassembled archives. Large-file upload completion is unconfirmed after a
+timeout; the prepared files are not yet a verified published download.
+`--allow-partial` is required to export such a checkpoint;
 the normal complete-release checks remain strict.
 
 **Initial live validation:** 104/104 fixtures mapped; 312 binary result contracts;
