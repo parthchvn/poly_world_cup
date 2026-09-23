@@ -47,6 +47,8 @@ See [checkpoint coverage](reports/collection_checkpoint.json),
 [archive coverage](reports/news_archive_checkpoint.json).
 Open [one context example](reports/context_preview.json) to inspect the observation,
 prior tournament wallet executions, and temporally gated news fields directly.
+For a separate subset retaining wallet-market pairs with fewer than 20 saved
+observations, use the [wallet activity filter](docs/wallet_activity_filter.md).
 Prepared checkpoint archives are `world_cup_partial_corpus.tar.gz` and
 `trade_partial_provenance.tar.gz`; [access and resume instructions](docs/dataset_access.md)
 describe the formats. Downloads are split into five `world_cup_data.part*` files
