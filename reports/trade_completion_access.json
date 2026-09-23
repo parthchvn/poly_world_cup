@@ -1,0 +1,212 @@
+{
+  "api_probe": {
+    "http_status": 200,
+    "operation": "read_only_first_page_probe",
+    "requested_at_utc": "2026-09-23T10:56:42.723854Z",
+    "response_bytes": 971,
+    "status": "reachable",
+    "timeout_seconds": 20,
+    "url": "https://data-api.polymarket.com/v2/trades?condition=0xa7b5b123f9fd38f83fbe19773a5d04e38208b370ca66be27b9688155e7b5c60a&filter_amount=0.000001&filter_type=TOKENS&limit=1&taker_only=false"
+  },
+  "collection_completed": true,
+  "collection_in_progress": false,
+  "completion_report": "datasets/world_cup_2026_tournament_lt20_v2_evidence/completion_report.json",
+  "original_full_raw_capture_files_available": false,
+  "original_full_wallet_contract_count_ledger_available": true,
+  "registry_hash_matches_original_checkpoint": true,
+  "registry_recovered_from_original_cached_responses": true,
+  "registry_sha256": "cf45395a65fc140de93055c6b7ef4b30bbcf7b8970f898e37ac74dfed9da8561",
+  "replacement_contracts": [
+    {
+      "away_team": "Egypt",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xa7b5b123f9fd38f83fbe19773a5d04e38208b370ca66be27b9688155e7b5c60a",
+      "fixture_id": "espn:760509",
+      "home_team": "Argentina",
+      "old_captured_observations": 101000,
+      "old_cursor_available": false,
+      "selection": "argentina"
+    },
+    {
+      "away_team": "Cape Verde",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xb81d9a63be774f9c3db1b96af4d0e869128643a29c6eb922c0d8a20137880120",
+      "fixture_id": "espn:760500",
+      "home_team": "Argentina",
+      "old_captured_observations": 89000,
+      "old_cursor_available": false,
+      "selection": "argentina"
+    },
+    {
+      "away_team": "Morocco",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xc09537a0976d0927901432859fbb6dfe5d23d1d69bb4e8355253e7b142a44e83",
+      "fixture_id": "espn:760510",
+      "home_team": "France",
+      "old_captured_observations": 75000,
+      "old_cursor_available": false,
+      "selection": "france"
+    },
+    {
+      "away_team": "Congo DR",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xcaaa1338d38b5c614196c9a926dd84babc3984442f2ec9b937a16284a199ec3a",
+      "fixture_id": "espn:760435",
+      "home_team": "Portugal",
+      "old_captured_observations": 68000,
+      "old_cursor_available": false,
+      "selection": "portugal"
+    },
+    {
+      "away_team": "Paraguay",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xdac6e67bfc09e630711ceb1be0be8f19c472344ca4353b608cc3b9282e61ec95",
+      "fixture_id": "espn:760489",
+      "home_team": "Germany",
+      "old_captured_observations": 64000,
+      "old_cursor_available": false,
+      "selection": "germany"
+    },
+    {
+      "away_team": "Sweden",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xde92d563a6d742a4750c8c83a9c490ee5b02bd5d972a1765ab41c0f9095ef6c0",
+      "fixture_id": "espn:760447",
+      "home_team": "Netherlands",
+      "old_captured_observations": 58000,
+      "old_cursor_available": false,
+      "selection": "netherlands"
+    },
+    {
+      "away_team": "Congo DR",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xe120b5ac48c5e2abdfcb3e34be55567e2ae81caaa87a243e964814ca65e6667e",
+      "fixture_id": "espn:760459",
+      "home_team": "Colombia",
+      "old_captured_observations": 56000,
+      "old_cursor_available": false,
+      "selection": "colombia"
+    },
+    {
+      "away_team": "Sweden",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xe1bd581c13be7103749ca1a64d21230ed6693a162fc057d81e3d1e9237fc81f8",
+      "fixture_id": "espn:760471",
+      "home_team": "Japan",
+      "old_captured_observations": 58000,
+      "old_cursor_available": false,
+      "selection": "japan"
+    },
+    {
+      "away_team": "Spain",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xe322faca2a534900680db54e3a4349a61427d347b6f906d2eeb01f81ae1b082c",
+      "fixture_id": "espn:760479",
+      "home_team": "Uruguay",
+      "old_captured_observations": 54000,
+      "old_cursor_available": false,
+      "selection": "spain"
+    },
+    {
+      "away_team": "Germany",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xe690620297dfea974d20df84b4cf90460e46a26ec864353482717b90509a3c0b",
+      "fixture_id": "espn:760468",
+      "home_team": "Ecuador",
+      "old_captured_observations": 51000,
+      "old_cursor_available": false,
+      "selection": "germany"
+    },
+    {
+      "away_team": "Norway",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xe6f040d202cefefe47bdc9d192303905418223fec440f96eb2abe98f3b701bd4",
+      "fixture_id": "espn:760504",
+      "home_team": "Brazil",
+      "old_captured_observations": 53000,
+      "old_cursor_available": false,
+      "selection": "norway"
+    },
+    {
+      "away_team": "New Zealand",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xe70fd51f42e61fc309d8e57019a7b76c8dc7bd19b473351d56ff1e125ae0d9d4",
+      "fixture_id": "espn:760427",
+      "home_team": "Iran",
+      "old_captured_observations": 48000,
+      "old_cursor_available": false,
+      "selection": "iran"
+    },
+    {
+      "away_team": "Bosnia-Herzegovina",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xe9d96f957f3f5e4ffa0e920087edf967c4cc353e9d1ad0c2d7ae928b32b61cb0",
+      "fixture_id": "espn:760494",
+      "home_team": "United States",
+      "old_captured_observations": 53000,
+      "old_cursor_available": false,
+      "selection": "unitedstates"
+    },
+    {
+      "away_team": "Colombia",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xeb348b65a59bb2752d3dd10636d17de501df76a424e978e136d22e76d07c84e9",
+      "fixture_id": "espn:760508",
+      "home_team": "Switzerland",
+      "old_captured_observations": 42000,
+      "old_cursor_available": false,
+      "selection": "colombia"
+    },
+    {
+      "away_team": "Iran",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xebb200cb08bbe89c2523a345947d083a992e27cc479cf1b5568407751e026d2c",
+      "fixture_id": "espn:760451",
+      "home_team": "Belgium",
+      "old_captured_observations": 44000,
+      "old_cursor_available": false,
+      "selection": "belgium"
+    },
+    {
+      "away_team": "Egypt",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xf3a4ebc0e59aadc6c37a49f7e50c34233925d15868fbdef7a83c4da274e1dfb3",
+      "fixture_id": "espn:760499",
+      "home_team": "Australia",
+      "old_captured_observations": 42000,
+      "old_cursor_available": false,
+      "selection": "egypt"
+    },
+    {
+      "away_team": "Belgium",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xf5a0c2d5b6bf0a7b9899aaf4c6237b08e1dbf8d17430fac4de8468a6e2df2e0e",
+      "fixture_id": "espn:760507",
+      "home_team": "United States",
+      "old_captured_observations": 41000,
+      "old_cursor_available": false,
+      "selection": "unitedstates"
+    },
+    {
+      "away_team": "Japan",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xf95968b1334c35a5c17867680d783d1d592bb8648b014f7365d03e40e37c99fb",
+      "fixture_id": "espn:760487",
+      "home_team": "Brazil",
+      "old_captured_observations": 39000,
+      "old_cursor_available": false,
+      "selection": "brazil"
+    },
+    {
+      "away_team": "Ghana",
+      "collection_action": "new_exhaustive_API_capture_from_page_one",
+      "condition_id": "0xff1ec56e0e47033727e33deab740896fbf1c6bb8a2b0068efdba3d900c7ba7a2",
+      "fixture_id": "espn:760458",
+      "home_team": "England",
+      "old_captured_observations": 37000,
+      "old_cursor_available": false,
+      "selection": "england"
+    }
+  ],
+  "schema_version": 1
+}

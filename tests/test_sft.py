@@ -106,6 +106,21 @@ class SFTExportTests(unittest.TestCase):
         self.assertEqual([row["news_id"] for row in prompt["verified_tournament_news"]], ["earlier"])
         self.assertEqual(prompt["verified_fixture_news"][0]["verified_available_at_utc"], "2026-06-10T11:00:00Z")
 
+    def test_duplicate_headlines_do_not_displace_distinct_prior_context(self):
+        records = [news("distinct"), news("syndication-a", time="2026-06-10T11:10:00Z"),
+                   news("syndication-b", time="2026-06-10T11:20:00Z")]
+        records[1]["title"] = "World Cup TEAM news"
+        records[2]["title"] = "World Cup team   news"
+        self.build(records=records)
+        self.export(news_limit=2, deduplicate_headlines=True)
+        prompt = self.prompt(1)
+        self.assertEqual([row["news_id"] for row in prompt["verified_fixture_news"]],
+                         ["syndication-b", "distinct"])
+        contexts = self.load(self.output / "contexts.jsonl.gz")
+        self.assertTrue(all(row["eligible_item_count"] == 3 for row in contexts))
+        from scripts.validate_sft import validate_sft
+        self.assertEqual(validate_sft(self.output)["profile_examples_verified"], 2)
+
     def test_news_versions_change_only_after_verified_revision_and_link_availability(self):
         original = news("original", item="article")
         revision = news("revision", item="article", version=1, time="2026-06-10T13:00:00Z")

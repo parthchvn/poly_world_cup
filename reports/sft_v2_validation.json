@@ -1,0 +1,26 @@
+{
+  "artifact_checksums_verified": 154,
+  "audited_contracts": 312,
+  "audited_fixtures": 104,
+  "audited_source_targets": 979000,
+  "audited_wallets": 208296,
+  "context_states_verified": 1517,
+  "fixture_and_time_separation_verified": true,
+  "history_target_transaction_exclusion_verified": true,
+  "label_equality_verified": true,
+  "manifest_sha256": "974714266f8117f3493624502f885d67e051d32cde262bba3d6c0f6abf46ecf8",
+  "profile_examples_verified": 1922046,
+  "prompt_field_allowlist_verified": true,
+  "prospective_training_ready": false,
+  "quarantined_targets": 17977,
+  "source_completeness_certified": false,
+  "status": "passed",
+  "strict_timestamp_checks_verified": true,
+  "transaction_separation_verified": true,
+  "upstream_archive_bytes_revalidated": false,
+  "verified_rows_per_profile_by_split": {
+    "test": 164641,
+    "train": 535758,
+    "validation": 260624
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "chain_reconciliation_verified": false,
+  "distinct_wallet_count": 106719,
+  "duplicate_observation_id_groups": 0,
+  "expected_page_hashes_verified": true,
+  "expected_page_row_counts_verified": true,
+  "fixture_news_link_count": 20276,
+  "fixtures_with_observations": 19,
+  "historically_eligible_fixture_news_links": 90,
+  "historically_eligible_global_news_versions": 1173,
+  "holdings_reconstructed": false,
+  "interpretation": "Public-context relevance only; actor exposure and causation unknown",
+  "news_count": 4642,
+  "observation_count": 1464859,
+  "observations_with_verified_prior_global_news": 1464859,
+  "observations_with_verified_prior_news": 5422,
+  "query_time_semantics": "execution_block_timestamp_proxy_not_decision_time",
+  "rejected_historical_availability_claims": 0,
+  "schema_version": 2,
+  "source_completeness_certified": false,
+  "source_page_count": 1473,
+  "token_mapping_counts": {
+    "exact_current_registry_token": 1464859
+  },
+  "trade_amounts_semantics": "provider_reported_not_chain_reconciled",
+  "training_ready": false,
+  "wallet_history_scope": "tournament_only"
+}

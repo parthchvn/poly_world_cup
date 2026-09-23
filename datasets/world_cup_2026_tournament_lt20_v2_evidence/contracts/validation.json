@@ -1,0 +1,14 @@
+{
+  "earliest_contract_initialized_at_utc": "2026-04-06T22:20:35Z",
+  "gzip_bytes": 5678785,
+  "gzip_file_sha256": "a1f9efdc3be7016ea0148e385f357123c62c15ca28af99d16dc11e559f949945",
+  "latest_contract_initialized_at_utc": "2026-07-16T02:55:50Z",
+  "persisted_gzip_crc_checked": true,
+  "persisted_raw_and_gzip_records_equal": true,
+  "raw_bytes": 11848393,
+  "raw_file_sha256": "0a4e30fd383a07423ec0b2d16bebb301ac78b73f0ffbdac5d0d6c7882005a20b",
+  "status": "passed",
+  "validated_fixtures": 104,
+  "validated_records": 312,
+  "validated_tokens": 624
+}

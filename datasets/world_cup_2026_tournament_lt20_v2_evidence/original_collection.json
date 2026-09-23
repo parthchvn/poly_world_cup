@@ -1,0 +1,1157 @@
+{
+  "blocker": "Source requests began failing with proxy tunnel 403 Forbidden; remaining histories and archive recovery could not finish.",
+  "code_revision": "e9a532f5ee7a0dea425622547e75cf8658658a76",
+  "fixture_coverage": [
+    {
+      "away_team": "South Africa",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760415",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Mexico",
+      "kickoff_utc": "2026-06-11T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 117625
+    },
+    {
+      "away_team": "Czechia",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760414",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "South Korea",
+      "kickoff_utc": "2026-06-12T02:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 124313
+    },
+    {
+      "away_team": "Bosnia-Herzegovina",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760416",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Canada",
+      "kickoff_utc": "2026-06-12T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 137337
+    },
+    {
+      "away_team": "Paraguay",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760417",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "United States",
+      "kickoff_utc": "2026-06-13T01:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 152235
+    },
+    {
+      "away_team": "Switzerland",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760420",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Qatar",
+      "kickoff_utc": "2026-06-13T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 91614
+    },
+    {
+      "away_team": "Morocco",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760419",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Brazil",
+      "kickoff_utc": "2026-06-13T22:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 183720
+    },
+    {
+      "away_team": "Scotland",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760418",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Haiti",
+      "kickoff_utc": "2026-06-14T01:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 100380
+    },
+    {
+      "away_team": "T\u00fcrkiye",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760421",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Australia",
+      "kickoff_utc": "2026-06-14T04:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 93308
+    },
+    {
+      "away_team": "Cura\u00e7ao",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760422",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Germany",
+      "kickoff_utc": "2026-06-14T17:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 161805
+    },
+    {
+      "away_team": "Japan",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760425",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Netherlands",
+      "kickoff_utc": "2026-06-14T20:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 163819
+    },
+    {
+      "away_team": "Ecuador",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760423",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Ivory Coast",
+      "kickoff_utc": "2026-06-14T23:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 106523
+    },
+    {
+      "away_team": "Tunisia",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760424",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Sweden",
+      "kickoff_utc": "2026-06-15T02:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 89410
+    },
+    {
+      "away_team": "Cape Verde",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760428",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Spain",
+      "kickoff_utc": "2026-06-15T16:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 155174
+    },
+    {
+      "away_team": "Egypt",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760426",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Belgium",
+      "kickoff_utc": "2026-06-15T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 140500
+    },
+    {
+      "away_team": "Uruguay",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760429",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Saudi Arabia",
+      "kickoff_utc": "2026-06-15T22:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 114936
+    },
+    {
+      "away_team": "New Zealand",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760427",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Iran",
+      "kickoff_utc": "2026-06-16T01:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 107214
+    },
+    {
+      "away_team": "Senegal",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760432",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "France",
+      "kickoff_utc": "2026-06-16T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 171561
+    },
+    {
+      "away_team": "Norway",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760430",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Iraq",
+      "kickoff_utc": "2026-06-16T22:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 81190
+    },
+    {
+      "away_team": "Algeria",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760433",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Argentina",
+      "kickoff_utc": "2026-06-17T01:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 112366
+    },
+    {
+      "away_team": "Jordan",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760431",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Austria",
+      "kickoff_utc": "2026-06-17T04:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 90828
+    },
+    {
+      "away_team": "Congo DR",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760435",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Portugal",
+      "kickoff_utc": "2026-06-17T17:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 126432
+    },
+    {
+      "away_team": "Croatia",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760437",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "England",
+      "kickoff_utc": "2026-06-17T20:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 138660
+    },
+    {
+      "away_team": "Panama",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760434",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Ghana",
+      "kickoff_utc": "2026-06-17T23:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 99072
+    },
+    {
+      "away_team": "Colombia",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760436",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Uzbekistan",
+      "kickoff_utc": "2026-06-18T02:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 82950
+    },
+    {
+      "away_team": "South Africa",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760438",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Czechia",
+      "kickoff_utc": "2026-06-18T16:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 128066
+    },
+    {
+      "away_team": "Bosnia-Herzegovina",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760439",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Switzerland",
+      "kickoff_utc": "2026-06-18T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 85492
+    },
+    {
+      "away_team": "Qatar",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760440",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Canada",
+      "kickoff_utc": "2026-06-18T22:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 65143
+    },
+    {
+      "away_team": "South Korea",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760441",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Mexico",
+      "kickoff_utc": "2026-06-19T01:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 149159
+    },
+    {
+      "away_team": "Australia",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760442",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "United States",
+      "kickoff_utc": "2026-06-19T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 139833
+    },
+    {
+      "away_team": "Morocco",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760445",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Scotland",
+      "kickoff_utc": "2026-06-19T22:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 96841
+    },
+    {
+      "away_team": "Haiti",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760444",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Brazil",
+      "kickoff_utc": "2026-06-20T00:30:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 65441
+    },
+    {
+      "away_team": "Paraguay",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760443",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "T\u00fcrkiye",
+      "kickoff_utc": "2026-06-20T03:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 119213
+    },
+    {
+      "away_team": "Sweden",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760447",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Netherlands",
+      "kickoff_utc": "2026-06-20T17:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 102133
+    },
+    {
+      "away_team": "Ivory Coast",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760448",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Germany",
+      "kickoff_utc": "2026-06-20T20:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 189642
+    },
+    {
+      "away_team": "Cura\u00e7ao",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760446",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Ecuador",
+      "kickoff_utc": "2026-06-21T00:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 102094
+    },
+    {
+      "away_team": "Japan",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760449",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Tunisia",
+      "kickoff_utc": "2026-06-21T04:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 93367
+    },
+    {
+      "away_team": "Saudi Arabia",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760453",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Spain",
+      "kickoff_utc": "2026-06-21T16:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 66786
+    },
+    {
+      "away_team": "Iran",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760451",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Belgium",
+      "kickoff_utc": "2026-06-21T19:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 100759
+    },
+    {
+      "away_team": "Cape Verde",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760450",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Uruguay",
+      "kickoff_utc": "2026-06-21T22:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 127929
+    },
+    {
+      "away_team": "Egypt",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760452",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "New Zealand",
+      "kickoff_utc": "2026-06-22T01:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 92839
+    },
+    {
+      "away_team": "Austria",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760456",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Argentina",
+      "kickoff_utc": "2026-06-22T17:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 153070
+    },
+    {
+      "away_team": "Iraq",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760457",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "France",
+      "kickoff_utc": "2026-06-22T21:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 75796
+    },
+    {
+      "away_team": "Senegal",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760454",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Norway",
+      "kickoff_utc": "2026-06-23T00:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 124250
+    },
+    {
+      "away_team": "Algeria",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760455",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Jordan",
+      "kickoff_utc": "2026-06-23T03:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 107849
+    },
+    {
+      "away_team": "Uzbekistan",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760461",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Portugal",
+      "kickoff_utc": "2026-06-23T17:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 68578
+    },
+    {
+      "away_team": "Ghana",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760458",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "England",
+      "kickoff_utc": "2026-06-23T20:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 88154
+    },
+    {
+      "away_team": "Croatia",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760460",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Panama",
+      "kickoff_utc": "2026-06-23T23:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 90838
+    },
+    {
+      "away_team": "Congo DR",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760459",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Colombia",
+      "kickoff_utc": "2026-06-24T02:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 94733
+    },
+    {
+      "away_team": "Qatar",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760462",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Bosnia-Herzegovina",
+      "kickoff_utc": "2026-06-24T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 63348
+    },
+    {
+      "away_team": "Canada",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760463",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Switzerland",
+      "kickoff_utc": "2026-06-24T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 102214
+    },
+    {
+      "away_team": "Haiti",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760464",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Morocco",
+      "kickoff_utc": "2026-06-24T22:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 90079
+    },
+    {
+      "away_team": "Brazil",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760465",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Scotland",
+      "kickoff_utc": "2026-06-24T22:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 69213
+    },
+    {
+      "away_team": "South Korea",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760466",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "South Africa",
+      "kickoff_utc": "2026-06-25T01:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 101075
+    },
+    {
+      "away_team": "Mexico",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760467",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Czechia",
+      "kickoff_utc": "2026-06-25T01:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 104057
+    },
+    {
+      "away_team": "Germany",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760468",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Ecuador",
+      "kickoff_utc": "2026-06-25T20:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 125000
+    },
+    {
+      "away_team": "Ivory Coast",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760473",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Cura\u00e7ao",
+      "kickoff_utc": "2026-06-25T20:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 49393
+    },
+    {
+      "away_team": "Sweden",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760471",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Japan",
+      "kickoff_utc": "2026-06-25T23:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 115571
+    },
+    {
+      "away_team": "Netherlands",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760472",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Tunisia",
+      "kickoff_utc": "2026-06-25T23:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 44380
+    },
+    {
+      "away_team": "Australia",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760469",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Paraguay",
+      "kickoff_utc": "2026-06-26T02:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 60061
+    },
+    {
+      "away_team": "United States",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760470",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "T\u00fcrkiye",
+      "kickoff_utc": "2026-06-26T02:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 187533
+    },
+    {
+      "away_team": "Iraq",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760474",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Senegal",
+      "kickoff_utc": "2026-06-26T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 38235
+    },
+    {
+      "away_team": "France",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760475",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Norway",
+      "kickoff_utc": "2026-06-26T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 128819
+    },
+    {
+      "away_team": "Saudi Arabia",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760478",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Cape Verde",
+      "kickoff_utc": "2026-06-27T00:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 81626
+    },
+    {
+      "away_team": "Spain",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760479",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Uruguay",
+      "kickoff_utc": "2026-06-27T00:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 87751
+    },
+    {
+      "away_team": "Iran",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760476",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Egypt",
+      "kickoff_utc": "2026-06-27T03:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 101174
+    },
+    {
+      "away_team": "Belgium",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760477",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "New Zealand",
+      "kickoff_utc": "2026-06-27T03:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 43435
+    },
+    {
+      "away_team": "Ghana",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760480",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Croatia",
+      "kickoff_utc": "2026-06-27T21:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 92872
+    },
+    {
+      "away_team": "England",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760485",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Panama",
+      "kickoff_utc": "2026-06-27T21:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 56299
+    },
+    {
+      "away_team": "Portugal",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760481",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Colombia",
+      "kickoff_utc": "2026-06-27T23:30:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 140033
+    },
+    {
+      "away_team": "Uzbekistan",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760482",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Congo DR",
+      "kickoff_utc": "2026-06-27T23:30:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 73182
+    },
+    {
+      "away_team": "Argentina",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760483",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Jordan",
+      "kickoff_utc": "2026-06-28T02:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 62179
+    },
+    {
+      "away_team": "Austria",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760484",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Algeria",
+      "kickoff_utc": "2026-06-28T02:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 101807
+    },
+    {
+      "away_team": "Canada",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760486",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "South Africa",
+      "kickoff_utc": "2026-06-28T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 106903
+    },
+    {
+      "away_team": "Japan",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760487",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Brazil",
+      "kickoff_utc": "2026-06-29T17:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 118980
+    },
+    {
+      "away_team": "Paraguay",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760489",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Germany",
+      "kickoff_utc": "2026-06-29T20:30:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 111996
+    },
+    {
+      "away_team": "Morocco",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760488",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Netherlands",
+      "kickoff_utc": "2026-06-30T01:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 107594
+    },
+    {
+      "away_team": "Norway",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760490",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Ivory Coast",
+      "kickoff_utc": "2026-06-30T17:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 132867
+    },
+    {
+      "away_team": "Sweden",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760492",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "France",
+      "kickoff_utc": "2026-06-30T21:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 87847
+    },
+    {
+      "away_team": "Ecuador",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760491",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Mexico",
+      "kickoff_utc": "2026-07-01T02:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 104740
+    },
+    {
+      "away_team": "Congo DR",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760495",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "England",
+      "kickoff_utc": "2026-07-01T16:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 154354
+    },
+    {
+      "away_team": "Senegal",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760493",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Belgium",
+      "kickoff_utc": "2026-07-01T20:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 132311
+    },
+    {
+      "away_team": "Bosnia-Herzegovina",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760494",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "United States",
+      "kickoff_utc": "2026-07-02T00:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 88157
+    },
+    {
+      "away_team": "Austria",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760497",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Spain",
+      "kickoff_utc": "2026-07-02T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 84965
+    },
+    {
+      "away_team": "Croatia",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760496",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Portugal",
+      "kickoff_utc": "2026-07-02T23:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 165957
+    },
+    {
+      "away_team": "Algeria",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760498",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Switzerland",
+      "kickoff_utc": "2026-07-03T03:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 70875
+    },
+    {
+      "away_team": "Egypt",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760499",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Australia",
+      "kickoff_utc": "2026-07-03T18:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 95827
+    },
+    {
+      "away_team": "Cape Verde",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760500",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Argentina",
+      "kickoff_utc": "2026-07-03T22:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 179640
+    },
+    {
+      "away_team": "Ghana",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760501",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Colombia",
+      "kickoff_utc": "2026-07-04T01:30:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 70049
+    },
+    {
+      "away_team": "Morocco",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760502",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Canada",
+      "kickoff_utc": "2026-07-04T17:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 126697
+    },
+    {
+      "away_team": "France",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760503",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Paraguay",
+      "kickoff_utc": "2026-07-04T21:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 107973
+    },
+    {
+      "away_team": "Norway",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760504",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Brazil",
+      "kickoff_utc": "2026-07-05T20:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 157617
+    },
+    {
+      "away_team": "England",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760505",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Mexico",
+      "kickoff_utc": "2026-07-06T01:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 180809
+    },
+    {
+      "away_team": "Spain",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760506",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Portugal",
+      "kickoff_utc": "2026-07-06T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 153549
+    },
+    {
+      "away_team": "Belgium",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760507",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "United States",
+      "kickoff_utc": "2026-07-07T00:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 104976
+    },
+    {
+      "away_team": "Egypt",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760509",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Argentina",
+      "kickoff_utc": "2026-07-07T16:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 209086
+    },
+    {
+      "away_team": "Colombia",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760508",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Switzerland",
+      "kickoff_utc": "2026-07-07T20:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 97294
+    },
+    {
+      "away_team": "Morocco",
+      "exhausted_contracts": 2,
+      "fixture_id": "espn:760510",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "France",
+      "kickoff_utc": "2026-07-09T20:00:00Z",
+      "paused_contracts": 1,
+      "saved_observations": 141362
+    },
+    {
+      "away_team": "Belgium",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760511",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Spain",
+      "kickoff_utc": "2026-07-10T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 181553
+    },
+    {
+      "away_team": "England",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760512",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Norway",
+      "kickoff_utc": "2026-07-11T21:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 213721
+    },
+    {
+      "away_team": "Switzerland",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760513",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Argentina",
+      "kickoff_utc": "2026-07-12T01:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 163097
+    },
+    {
+      "away_team": "Spain",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760514",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "France",
+      "kickoff_utc": "2026-07-14T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 177205
+    },
+    {
+      "away_team": "Argentina",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760515",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "England",
+      "kickoff_utc": "2026-07-15T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 173156
+    },
+    {
+      "away_team": "England",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760516",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "France",
+      "kickoff_utc": "2026-07-18T21:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 134369
+    },
+    {
+      "away_team": "Argentina",
+      "exhausted_contracts": 3,
+      "fixture_id": "espn:760517",
+      "fixture_metadata_feature_eligible": false,
+      "home_team": "Spain",
+      "kickoff_utc": "2026-07-19T19:00:00Z",
+      "paused_contracts": 0,
+      "saved_observations": 132745
+    }
+  ],
+  "generated_at_utc": "2026-09-23T02:21:17.983547+00:00",
+  "integrity": {
+    "all_saved_pages_replayed_from_raw_captures": true,
+    "input_sha256": {
+      "archive": "df8fb7efa5eae256f5ab86bac644142a73677ce68525164634b7891e5bcd9e39",
+      "attribution": "57d027869bda34118fb6667d8a8b427844a52d1af4496b78c400bc1df299fb52",
+      "batch": "0dd9c8b837a391507d83c3e46c5bc3b8fd00756bd6b3955fd1a1add8f6b62e67",
+      "news": "4df08abc3ee332b29b5cc80b3b5e5524a14cfe8c338d3984c1c1c357e009754e",
+      "probe": "54b945b7af6600f0cec4b84a71c2a2b3e10c9e5f064addeb18e13da27c0af2e0",
+      "provenance": "a1360f38dce91644093ae1f04c75374fc48298bf0b556576cede5bbb901f75eb",
+      "receipts": "85308987dc22dd15f4f2c6e1aa294b9cd3c95f0f0ea15a0eb24127c5cf0bcebd",
+      "registry": "cf45395a65fc140de93055c6b7ef4b30bbcf7b8970f898e37ac74dfed9da8561"
+    },
+    "sqlite_hashes_and_row_counts_match_verified_pages": true,
+    "verified_conditions": 312
+  },
+  "limitations": [
+    "Nineteen API histories are unfinished; completed API queries also do not certify on-chain completeness.",
+    "Current news dates and fixture metadata are retrospective; only archive-verified versions pass historical context gates.",
+    "News relevance does not establish actor exposure, private beliefs, or causation.",
+    "Wallet history covers tournament contracts only; holdings and decision times are not reconstructed.",
+    "Source quantities remain provider-reported; canonical log identities and the earlier V1 amount discrepancy remain unresolved."
+  ],
+  "news": {
+    "actor_exposure_verified": false,
+    "archive_statuses": {
+      "capture_found_replay_unverified": 235,
+      "error": 8,
+      "no_capture_found": 157,
+      "not_processed_network_blocked": 460,
+      "verified_headline": 1891
+    },
+    "complete_news_coverage": false,
+    "current_metadata_versions": 2751,
+    "eligible_fixture_news_links": 90,
+    "eligible_global_news_versions": 1173,
+    "full_article_text_included": false,
+    "metadata_publication_claims_in_study_window": 2291,
+    "observations_with_verified_prior_fixture_news": 9175,
+    "observations_with_verified_prior_global_news": 11858584,
+    "providers": [
+      "ESPN",
+      "Internet Archive"
+    ],
+    "recovery_completed": false,
+    "verified_archived_headlines": 1891
+  },
+  "partial": true,
+  "reconciliation": {
+    "earlier_probe_status_counts": {
+      "ambiguous_multiple_log_candidates": 1,
+      "amount_or_price_mismatch": 1
+    },
+    "full_history_reconciled": false,
+    "late_market_fixture_sample_count": 104,
+    "late_market_status_counts": {
+      "ambiguous_multiple_log_candidates": 87,
+      "matched_single_log_candidate": 17
+    }
+  },
+  "schema_version": 1,
+  "scope": {
+    "contracts": 312,
+    "fixtures": 104,
+    "market_type": "primary regulation-time match-result binary contracts",
+    "tokens": 624,
+    "year": 2026
+  },
+  "status": "partial_source_access_blocked",
+  "trades": {
+    "contract_status_counts": {
+      "exhausted": 293,
+      "paused": 19
+    },
+    "count_semantics": "wallet-side API observations, not unique canonical fills or human decisions",
+    "distinct_wallets": 252612,
+    "duplicate_observation_id_groups": 0,
+    "earliest_saved_block_timestamp": "2026-04-07T06:13:53Z",
+    "latest_saved_block_timestamp": "2026-07-19T22:53:52Z",
+    "provider_amounts_chain_reconciled": false,
+    "requested_minimum_size_tokens": "0.000001",
+    "saved_observations": 11858584,
+    "source_completeness_certified": false,
+    "source_pages": 12007,
+    "taker_only": false,
+    "token_mapping_counts": {
+      "exact_current_registry_token": 11858584
+    }
+  },
+  "training_ready": false,
+  "unfinished_condition_ids": [
+    "0xa7b5b123f9fd38f83fbe19773a5d04e38208b370ca66be27b9688155e7b5c60a",
+    "0xb81d9a63be774f9c3db1b96af4d0e869128643a29c6eb922c0d8a20137880120",
+    "0xc09537a0976d0927901432859fbb6dfe5d23d1d69bb4e8355253e7b142a44e83",
+    "0xcaaa1338d38b5c614196c9a926dd84babc3984442f2ec9b937a16284a199ec3a",
+    "0xdac6e67bfc09e630711ceb1be0be8f19c472344ca4353b608cc3b9282e61ec95",
+    "0xde92d563a6d742a4750c8c83a9c490ee5b02bd5d972a1765ab41c0f9095ef6c0",
+    "0xe120b5ac48c5e2abdfcb3e34be55567e2ae81caaa87a243e964814ca65e6667e",
+    "0xe1bd581c13be7103749ca1a64d21230ed6693a162fc057d81e3d1e9237fc81f8",
+    "0xe322faca2a534900680db54e3a4349a61427d347b6f906d2eeb01f81ae1b082c",
+    "0xe690620297dfea974d20df84b4cf90460e46a26ec864353482717b90509a3c0b",
+    "0xe6f040d202cefefe47bdc9d192303905418223fec440f96eb2abe98f3b701bd4",
+    "0xe70fd51f42e61fc309d8e57019a7b76c8dc7bd19b473351d56ff1e125ae0d9d4",
+    "0xe9d96f957f3f5e4ffa0e920087edf967c4cc353e9d1ad0c2d7ae928b32b61cb0",
+    "0xeb348b65a59bb2752d3dd10636d17de501df76a424e978e136d22e76d07c84e9",
+    "0xebb200cb08bbe89c2523a345947d083a992e27cc479cf1b5568407751e026d2c",
+    "0xf3a4ebc0e59aadc6c37a49f7e50c34233925d15868fbdef7a83c4da274e1dfb3",
+    "0xf5a0c2d5b6bf0a7b9899aaf4c6237b08e1dbf8d17430fac4de8468a6e2df2e0e",
+    "0xf95968b1334c35a5c17867680d783d1d592bb8648b014f7365d03e40e37c99fb",
+    "0xff1ec56e0e47033727e33deab740896fbf1c6bb8a2b0068efdba3d900c7ba7a2"
+  ]
+}

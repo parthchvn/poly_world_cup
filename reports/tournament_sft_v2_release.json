@@ -1,0 +1,48 @@
+{
+  "created_at_utc": "2026-09-23T12:17:55.110998+00:00",
+  "dataset_path": "datasets/world_cup_2026_tournament_lt20_v2",
+  "retrospective_sft_ready": true,
+  "readiness_scope": "Conditional captured-API-observation SFT for the retrospective tournament-wide under-20 cohort",
+  "prospective_training_ready": false,
+  "model_specific_training_smoke_test_run": false,
+  "fixtures": 104,
+  "contracts": 312,
+  "outcome_tokens": 624,
+  "api_traversals_exhausted": 312,
+  "full_captured_observations": 12250443,
+  "full_captured_wallets": 255921,
+  "retained_observations": 979000,
+  "retained_wallets": 208296,
+  "targets_per_profile": 961023,
+  "split_targets_per_profile": {
+    "test": 164641,
+    "train": 535758,
+    "validation": 260624
+  },
+  "quarantined_observations": 17977,
+  "direct_news_fixture_coverage": 104,
+  "targets_with_prior_direct_news": 773253,
+  "targets_with_prior_direct_news_fraction": 0.8046144577184937,
+  "targets_with_historical_contract_context": 961023,
+  "compressed_sft_bytes": 1906962554,
+  "unit_tests_passed": 355,
+  "manifest_sha256": "974714266f8117f3493624502f885d67e051d32cde262bba3d6c0f6abf46ecf8",
+  "evidence_package_manifest_sha256": "1b211758827241b4e515a8789470ad7dc1e0911a0fc42594e3378c5fc30978de",
+  "reports": {
+    "sft_v2_validation.json": "e17bd43e19704e53908411d4e442bf4371613c04e1ca035bf42c28d7b267efb3",
+    "tournament_sft_v2_completion.json": "945761d74014dcb3844debc4aefc30ca7ad448ccb1386ebf98735b0684937b7b",
+    "sft_v2_code_validation.json": "e8e3b19f87a2a43fa19bf6774df7073f7c193a2546f37b53f48b9fa47c3eb6b2",
+    "sft_v2_input_preservation.json": "dc9209d4e731ea7530d243d0a552f4b7e8b4a89bfd7a5da81ff56e66bb94628f",
+    "tournament_news_v2_refresh.json": "c9808c7044f9634b63c29fb53e4d17c5fd7e0f7fa733b0d032b2b352610cbf10"
+  },
+  "original_data_unchanged": true,
+  "limitations": [
+    "API exhaustion is not canonical-chain completeness",
+    "News discovery is sampled; not every target has direct-match news",
+    "Public relevance does not establish actor exposure or causality",
+    "Entire-period activity selection is retrospective; wallet identity and market-maker status are unverified",
+    "Execution labels are provider-reported; execution time is not verified order-decision time",
+    "Prior execution availability is an exploratory proxy; private beliefs and holdings are not inferred"
+  ],
+  "updated_at_utc": "2026-09-23T12:25:11.975358+00:00"
+}

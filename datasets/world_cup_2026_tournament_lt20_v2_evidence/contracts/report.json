@@ -1,0 +1,16 @@
+{
+  "complete": true,
+  "contract_count": 312,
+  "current_vs_initial_question_differences": [],
+  "fixture_count": 104,
+  "limitations": [
+    "RPC is trusted for canonical chain data; this is not a consensus proof",
+    "Initial metadata does not certify later rule clarifications or actor exposure",
+    "Current Gamma metadata used only to discover candidate IDs, independently checked on chain"
+  ],
+  "rpc_url": "https://polygon.gateway.tenderly.co",
+  "schema_version": 1,
+  "snapshot_block_number": 94304335,
+  "source_code_url": "https://github.com/Polymarket/neg-risk-ctf-adapter/blob/f78b35b0863b4308a431ca307d06f49b2ea65e78/src/NegRiskAdapter.sol",
+  "token_count": 624
+}

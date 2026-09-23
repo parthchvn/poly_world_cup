@@ -1,0 +1,16 @@
+{
+  "catalog_unchanged": true,
+  "contract_count": 312,
+  "contracts_with_exact_initial_resolution_clause": 312,
+  "distinct_clauses": [
+    {
+      "characters": 102,
+      "clause": "This market refers only to the outcome within the first 90 minutes of regular play plus stoppage time.",
+      "contracts": 312
+    }
+  ],
+  "later_clarifications_certified": false,
+  "source": "validated_initial_on_chain_question_metadata",
+  "source_catalog_sha256": "0a4e30fd383a07423ec0b2d16bebb301ac78b73f0ffbdac5d0d6c7882005a20b",
+  "status": "passed"
+}

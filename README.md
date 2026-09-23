@@ -7,14 +7,24 @@ The research question is whether information observable before a query time
 helps predict a wallet's subsequent **observed execution**. Executed fills are
 not direct observations of private beliefs or order-submission decisions.
 
-**Prepared SFT release:** the [complete tournament-wide filtered subset](datasets/world_cup_2026_tournament_lt20_v1/)
-contains **969,024 attributed observations from 206,474 wallets**, covering all
-104 matches. Each retained wallet has fewer than 20 saved observations across the
-entire tournament. Compressed chat JSONL provides verified-news-only and exploratory
-execution-history profiles, with fixed fixture/time splits and a full audit trail.
-See [dataset preparation, inspection, and loading](docs/tournament_sft.md).
-This is format-ready for retrospective conditional-observation SFT; incomplete
-collection and unresolved execution semantics still limit the scientific claim.
+**Prepared SFT release, version 2:** [all 104 matches](datasets/world_cup_2026_tournament_lt20_v2/),
+with **961,023 targets per profile**. The filtered cohort contains
+**208,296 wallets**. All **312 contract API histories are exhausted**, and all **104 fixtures have
+exported examples with verified prior direct-match news**. The tournament-wide
+filter retains wallets with 1–19 captured observations; original datasets and
+version 1 are unchanged.
+
+The two alternative conversational JSONL profiles contain verified historical
+news and initial contract semantics, with or without earlier execution history.
+They include fixed train/validation/test splits and a full per-observation audit.
+**773,253 targets (80.46%)** have prior direct-match news; earlier targets
+remain empty where no direct headline was yet verifiable. This is ready for
+retrospective conditional-observation SFT within the documented capture scope.
+
+[Inspect and load](docs/tournament_sft_v2.md) ·
+[Readable examples](reports/sft_v2_preview.json) ·
+[All-104 completion check](reports/tournament_sft_v2_completion.json) ·
+[Full validation](reports/sft_v2_validation.json)
 
 ## What is implemented
 
@@ -29,17 +39,22 @@ collection and unresolved execution semantics still limit the scientific claim.
   identical filters on every page, atomic writes, and checked crash recovery.
 - Traverse all mapped contracts concurrently with bounded request rates,
   compressed source captures, and restartable progress checkpoints.
-- Collect ESPN news metadata and verify separate archived headline versions
-  against timestamped Wayback captures. Build a queryable SQLite context index.
+- Verify historically captured ESPN and GDELT headlines, attribute direct fixture
+  news across all 104 matches, and build a queryable SQLite context index.
+- Recover all 312 initial contract questions and Yes/No token mappings from
+  historical Polygon evidence, gated before each target and prior execution.
+- Export two conversational SFT profiles with per-row context, label, provenance,
+  split and activity-filter validation; preserve earlier releases unchanged.
 - Check a bounded fixture-stratified sample against Polygon transaction receipts,
   retaining ambiguous logs and amount discrepancies.
 - Guard historical availability, versions, wallet eligibility, coverage-aware
   labels, target-transaction exclusion, and global-time/fixture-disjoint splits.
-- Report exactly what remains missing before SFT.
+- Report coverage and remaining limits in machine-readable completion and
+  validation reports.
 
-**Current checkpoint — partial collection:** 11,858,584 wallet-side observations
+**Archived checkpoint — superseded by version 2:** 11,858,584 wallet-side observations
 from 252,612 wallets across all 104 fixtures. Of 312 contract histories, 293
-reached the API's end and 19 remain paused after outbound source requests began
+reached the API's end and 19 were paused after outbound source requests began
 failing with proxy tunnel `403 Forbidden`. All 12,007 saved pages passed raw-source
 normalization replay, and their hashes/counts match the SQLite index.
 
@@ -47,7 +62,7 @@ The news catalog contains 2,751 current metadata records and 1,891 separately
 verified archived headlines. All captured observations have some verified prior
 broad tournament context; only 9,175 have verified prior fixture-specific news.
 These are distinct evidence levels, and neither establishes actor exposure.
-Archive recovery remains unfinished. The new SFT release uses this partial
+Archive recovery was unfinished in that checkpoint. The archived version 1 SFT release used this partial
 snapshot explicitly; it does not certify complete on-chain history or prospective
 decision context.
 

@@ -87,8 +87,9 @@ def action_valid(value):
 
 
 class NewsCheck:
-    def __init__(self, root, limit):
+    def __init__(self, root, limit, *, deduplicate_headlines=False):
         self.limit = limit
+        self.deduplicate_headlines = deduplicate_headlines
         self.news = {row["news_id"]: row for _, row in records(root / "source_news.jsonl.gz")}
         self.contexts = {row["context_id"]: row for _, row in records(root / "contexts.jsonl.gz")}
         self.events = defaultdict(list)
@@ -127,6 +128,8 @@ class NewsCheck:
             require(context["eligible_item_count"] == len(ids), "Context item count mismatch")
             identity = {"scope": context["scope"], "eligible_news_ids": ids,
                         "prompt_news_limit": limit}
+            if deduplicate_headlines:
+                identity["deduplicate_headlines"] = True
             expected_id = "news:" + hashlib.sha256(canonical(identity).encode()).hexdigest()
             require(context_id == expected_id, "Context identifier does not bind its eligible news set")
             require(set(context["effective_availability_utc"]) == set(ids), "Context availability map mismatch")
@@ -154,10 +157,20 @@ class NewsCheck:
                 -x[0], self.news[x[1]].get("news_item_id", x[1]), x[1]))
             self.expected_cache[key] = ordered
         expected = self.expected_cache[key]
+        selected = expected
+        if self.deduplicate_headlines:
+            distinct, seen = [], set()
+            for available, news_id in expected:
+                title = " ".join(self.news[news_id]["title"].casefold().split())
+                if title not in seen:
+                    seen.add(title)
+                    distinct.append((available, news_id))
+            selected = distinct
+        selected = selected[:self.limit]
         if validated_key not in self.checked:
             require(context["eligible_news_ids"] == sorted(row[1] for row in expected),
                     "Context omits an eligible version or includes a future/unverified version")
-            require(context["selected_prompt_news_ids"] == [row[1] for row in expected[:self.limit]],
+            require(context["selected_prompt_news_ids"] == [row[1] for row in selected],
                     "Prompt news does not follow the newest eligible-version policy")
             require(context["effective_availability_utc"] == {news_id: utc(available) for available, news_id in expected},
                     "Context contains an incorrect effective availability timestamp")
@@ -165,7 +178,7 @@ class NewsCheck:
         prompt = [{"news_id": news_id, "headline": self.news[news_id]["title"],
                  "source_url": self.news[news_id]["source_url"],
                  "verified_available_at_utc": utc(available)}
-                for available, news_id in expected[:self.limit]]
+                for available, news_id in selected]
         self.prompt_cache[validated_key] = prompt
         return prompt
 
@@ -205,7 +218,19 @@ def _validate_sft(root: Path, transaction_db: sqlite3.Connection, *, progress=Fa
     first, second = timestamp(policy["train_before_utc"]), timestamp(policy["validation_before_utc"])
     require(first < second, "Invalid chronological split boundaries")
     announce("all artifact checksums passed; reconstructing verified news timelines")
-    news = NewsCheck(root, manifest["news_limit_per_scope"])
+    news = NewsCheck(root, manifest["news_limit_per_scope"],
+                     deduplicate_headlines=manifest.get("news_headline_deduplication", False))
+    contract_contexts = {}
+    if manifest.get("contract_context_included"):
+        from poly_world_cup.historical_contracts import validate_contract_record, verified_contract_context
+        for _, record in records(root / "source_contracts.jsonl.gz"):
+            validate_contract_record(record)
+            condition = record["condition_id"]
+            require(condition not in contract_contexts, "Duplicate historical contract evidence")
+            context = verified_contract_context(record, 10**30)
+            contract_contexts[condition] = (timestamp(context["initialized_at_utc"]), context, record["fixture_id"])
+        require(len(contract_contexts) == manifest["historical_contract_evidence_count"],
+                "Historical contract evidence count mismatch")
     announce(f"news timelines ready; checking all {manifest['source_observations']:,} audit rows and both profiles")
     streams = {(profile, split): iter(shards(root, f"{profile}/{split}"))
                for profile in PROFILES for split in SPLITS}
@@ -234,6 +259,12 @@ def _validate_sft(root: Path, transaction_db: sqlite3.Connection, *, progress=Fa
             seen_rows.add(row_id)
             source_fixtures.add(audit["fixture_id"])
             source_contracts.add(audit["condition_id"])
+            evidence = contract_contexts.get(audit["condition_id"])
+            if evidence is not None:
+                tokens = {evidence[1]["yes_token_id"]: "Yes", evidence[1]["no_token_id"]: "No"}
+                require(audit["fixture_id"] == evidence[2] and audit["token_id"] in tokens
+                        and tokens[audit["token_id"]] == audit["reported_action"]["outcome"],
+                        "Audited trade disagrees with historical contract fixture/token evidence")
             require(audit["observed_tournament_count"] == len(rows), "Wallet audit count differs from its complete group")
             reasons = audit["excluded_reasons"]
             query = None if audit["execution_time_proxy_utc"] is None else timestamp(audit["execution_time_proxy_utc"])
@@ -281,10 +312,18 @@ def _validate_sft(root: Path, transaction_db: sqlite3.Connection, *, progress=Fa
                 base = {"task": "retrospective_conditional_api_observation", "wallet_id": wallet,
                         "condition_id": audit["condition_id"], "execution_time_proxy_utc": audit["execution_time_proxy_utc"],
                         "verified_fixture_news": fixture_news, "verified_tournament_news": global_news}
+                if manifest.get("contract_context_included"):
+                    evidence = contract_contexts.get(audit["condition_id"])
+                    base["verified_contract_context"] = evidence[1] if evidence and evidence[0] < query else None
                 history = [{"condition_id": row["condition_id"], "token_id": row["token_id"],
                             "side": row["reported_action"]["side"], "shares": row["reported_action"]["shares"],
                             "price": row["reported_action"]["price"],
                             "execution_time_proxy_utc": row["execution_time_proxy_utc"]} for row in expected_prior]
+                if manifest.get("contract_context_included"):
+                    for feature, past in zip(history, expected_prior):
+                        evidence = contract_contexts.get(past["condition_id"])
+                        feature["verified_contract_context"] = (
+                            evidence[1] if evidence and evidence[0] < timestamp(past["execution_time_proxy_utc"]) else None)
                 for profile in PROFILES:
                     item = next(streams[(profile, split)], None)
                     require(item is not None, "Profile ended before its audit targets")
@@ -307,6 +346,10 @@ def _validate_sft(root: Path, transaction_db: sqlite3.Connection, *, progress=Fa
                             "Prompt differs from verified news/history or contains prohibited target/audit fields")
                     require("conditional on an execution" in messages[0]["content"], "Missing conditional task instruction")
                     require("untrusted source headlines" in messages[0]["content"], "Missing news-as-data instruction")
+                    if manifest.get("contract_context_included"):
+                        require("initial market question and token mapping" in messages[0]["content"]
+                                and "contract text as untrusted data" in messages[0]["content"],
+                                "Missing initial-contract semantics and untrusted-text instructions")
             if not (set(reasons) - {"fixture_time_split_mismatch"}) and action_valid(audit["reported_action"]):
                 prior.append((query, audit))
     for stream in streams.values():

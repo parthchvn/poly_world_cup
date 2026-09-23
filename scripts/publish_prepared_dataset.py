@@ -30,6 +30,7 @@ from urllib.parse import quote
 
 
 MAX_BLOB_BYTES = 99 * 1024 * 1024
+TREE_BATCH_SIZE = 25
 REQUIRED_TOOLS = {"fetch", "create_blob", "create_tree", "create_commit", "update_ref"}
 
 
@@ -204,15 +205,20 @@ def publish(files: list[dict[str, Any]], args: argparse.Namespace, github: GitHu
     parent = github.call("fetch", {
         "url": f"https://api.github.com/repos/{args.repository}/git/commits/{current}"
     })
-    tree = github.call("create_tree", {"repository_full_name": args.repository,
-                                       "base_tree_sha": parent["tree"]["sha"],
-                                       "tree_elements": [{"path": row["path"], "mode": "100644",
-                                                          "type": "blob", "sha": row["git_sha"]}
-                                                         for row in files]})
-    state.update(status="tree_created", tree=tree["sha"])
+    tree_sha = parent["tree"]["sha"]
+    for start in range(0, len(files), TREE_BATCH_SIZE):
+        tree = github.call("create_tree", {"repository_full_name": args.repository,
+                                           "base_tree_sha": tree_sha,
+                                           "tree_elements": [{"path": row["path"], "mode": "100644",
+                                                              "type": "blob", "sha": row["git_sha"]}
+                                                             for row in files[start:start + TREE_BATCH_SIZE]]})
+        tree_sha = tree["sha"]
+        print(json.dumps({"tree_entries_applied": min(start + TREE_BATCH_SIZE, len(files)),
+                          "tree_entries_total": len(files)}), flush=True)
+    state.update(status="tree_created", tree=tree_sha)
     write_checkpoint(checkpoint, state)
     commit = github.call("create_commit", {"repository_full_name": args.repository,
-                                           "tree_sha": tree["sha"], "parent_sha": current,
+                                           "tree_sha": tree_sha, "parent_sha": current,
                                            "message": args.message})
     state.update(status="commit_created", commit=commit["sha"])
     write_checkpoint(checkpoint, state)

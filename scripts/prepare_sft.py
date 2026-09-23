@@ -18,12 +18,16 @@ def main() -> None:
     parser.add_argument("--split-policy", type=Path, required=True)
     parser.add_argument("--shard-rows", type=int, default=20_000)
     parser.add_argument("--news-limit", type=int, default=8)
+    parser.add_argument("--deduplicate-headlines", action="store_true",
+                        help="Fill the bounded prompt with distinct headlines; preserve all source evidence")
     parser.add_argument("--allow-partial", action="store_true",
                         help="Explicitly permit the incomplete captured corpus; readiness flags remain false")
     args = parser.parse_args()
     policy = json.loads(args.split_policy.read_text(encoding="utf-8"))
     report = export_sft(args.database, args.output, policy, shard_rows=args.shard_rows,
-                        news_limit=args.news_limit, allow_partial=args.allow_partial)
+                        news_limit=args.news_limit, allow_partial=args.allow_partial,
+                        deduplicate_headlines=args.deduplicate_headlines,
+                        progress=lambda message: print(message, file=sys.stderr, flush=True))
     print(json.dumps(report, indent=2, sort_keys=True, allow_nan=False))
 
 
