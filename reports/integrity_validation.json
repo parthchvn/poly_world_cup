@@ -1,0 +1,88 @@
+{
+  "change": "Verify saved collections before including them in audit observation totals.",
+  "existing_capture_revalidation": {
+    "conditions_with_invalid_manifests": 0,
+    "conditions_with_verified_manifests": 1,
+    "conditions_without_manifests": 311,
+    "contract_count": 312,
+    "fixture_count": 104,
+    "integrity_scope": "Observation totals include only committed normalized pages whose hashes, counts, timestamps, and cursor chains verify. Raw HTTP bodies and source completeness are not certified.",
+    "manifest_status_counts": {
+      "paused": 1
+    },
+    "new_network_collection": false,
+    "observation_count": 200,
+    "page_hashes": [
+      {
+        "body_sha256": "39657ac6f9a483ef6dfd2e9e380304431455ae73959ada0526be91292bb961a2",
+        "normalized_sha256": "7debf1b1b3fa8b574c51c192d283136918ce3f6f710aca2f87f12cebbf9d1945",
+        "row_count": 100
+      },
+      {
+        "body_sha256": "4de685971c01ac836e4234109956aad260a37a83764e4d6cd3aa08683b9cb628",
+        "normalized_sha256": "957b01ae834570cde34a5e9f2d85ede63e4a1d4b66f32fb14a6fe4f860817520",
+        "row_count": 100
+      }
+    ],
+    "registry_sha256": "cf45395a65fc140de93055c6b7ef4b30bbcf7b8970f898e37ac74dfed9da8561",
+    "sft_ready": false,
+    "structural_audit_passed": true
+  },
+  "regression_tests": {
+    "additional_cases": [
+      "read-only verification preserves duplicate observations",
+      "missing page",
+      "corrupt page",
+      "false totals",
+      "malformed manifest",
+      "changed filters",
+      "invalid cursor chain",
+      "case-equivalent duplicate condition",
+      "invalid condition path",
+      "CLI failure with saved diagnostic"
+    ],
+    "command": "python -m unittest discover -s tests -v",
+    "errors": 0,
+    "failures": 0,
+    "passed": 68,
+    "python": "3.12.14"
+  },
+  "remaining_training_blockers": [
+    {
+      "code": "UNINGESTED_CONDITIONS",
+      "detail": "No local ingestion manifest for 311 of 312 conditions."
+    },
+    {
+      "code": "EXECUTION_IDENTITY",
+      "detail": "Reconcile wallet-side observations to canonical executions and verified maker/taker roles; API rows lack log/order IDs."
+    },
+    {
+      "code": "HISTORICAL_AVAILABILITY",
+      "detail": "Establish historical availability and versions of news, market state, fixture metadata, and prior activity."
+    },
+    {
+      "code": "SOURCE_COVERAGE",
+      "detail": "Independently establish label coverage; API exhaustion and filtered observations do not prove full trade history."
+    },
+    {
+      "code": "HISTORICAL_UNIVERSE",
+      "detail": "Construct checkpoint cohorts from global past activity or explicitly restrict to already observed tournament participants."
+    },
+    {
+      "code": "INVENTORY",
+      "detail": "Reconcile initial balances, transfers, splits, merges, redemptions, and fills; retain unknowns until established."
+    },
+    {
+      "code": "SPLIT_AND_BASELINES",
+      "detail": "Freeze fixture-disjoint temporal splits, build baselines, and run context ablations before SFT."
+    }
+  ],
+  "reproduced_before_fix": {
+    "manifest_claimed_rows": 999999,
+    "page_files_present": 0,
+    "structural_audit_passed": true
+  },
+  "research_assessment": "A pipeline for observed wallet executions is implemented. Historical feature validity and label coverage require additional evidence; no SFT performance claim or training run is made.",
+  "reviewed_base_commit": "3f6193a7fd52a5ac5e9aae9b1f683233c850a23e",
+  "validated_at_utc": "2026-09-23T00:51:20.649955Z"
+}

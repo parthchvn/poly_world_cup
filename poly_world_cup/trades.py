@@ -298,6 +298,35 @@ def _commit_page(state: dict, page: dict, manifest_path: Path) -> None:
     _atomic_json(manifest_path, state)
 
 
+def _query_parameters(condition_id: str, limit: int) -> dict:
+    if not isinstance(condition_id, str) or not HEX_32.fullmatch(condition_id):
+        raise TradeIngestionError("condition_id must be a 32-byte 0x-prefixed hex string")
+    if type(limit) is not int or not 1 <= limit <= 1000:
+        raise TradeIngestionError("limit must be an integer between 1 and 1000")
+    return {"condition": condition_id.lower(), "limit": limit, "taker_only": "false",
+            "filter_type": "TOKENS", "filter_amount": "0.01"}
+
+
+def validate_collection(output_dir: Path, *, condition_id: str) -> dict:
+    """Read and verify an existing collection without HTTP calls or mutations.
+
+    Check the supported query parameters, cursor chain, normalized page hashes,
+    row counts, and timestamp summaries using the same verifier as resume.
+    Uncommitted recovery pages are excluded until ingestion commits them.
+    This verifies local integrity, not source truth or historical completeness.
+    """
+    # Validate before constructing any path from the condition identifier.
+    _query_parameters(condition_id, 1)
+    condition_id = condition_id.lower()
+    path = Path(output_dir) / condition_id / "manifest.json"
+    try:
+        state = json.loads(path.read_text())
+        parameters = _query_parameters(condition_id, state["parameters"]["limit"])
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        raise TradeIngestionError("Cannot validate collection manifest") from exc
+    return _load_manifest(path, condition_id, parameters)
+
+
 def ingest_condition(client: Any, *, condition_id: str, output_dir: Path,
                      limit: int = 1000, max_pages: int | None = None) -> dict:
     """Collect one condition, resumably; return its durable manifest.
@@ -313,15 +342,10 @@ def ingest_condition(client: Any, *, condition_id: str, output_dir: Path,
     metadata are durable before the manifest is advanced. Invalid source pages
     raise TradeIngestionError without committing partial observations.
     """
-    if not isinstance(condition_id, str) or not HEX_32.fullmatch(condition_id):
-        raise TradeIngestionError("condition_id must be a 32-byte 0x-prefixed hex string")
-    if type(limit) is not int or not 1 <= limit <= 1000:
-        raise TradeIngestionError("limit must be an integer between 1 and 1000")
+    parameters = _query_parameters(condition_id, limit)
     if max_pages is not None and (type(max_pages) is not int or max_pages < 1):
         raise TradeIngestionError("max_pages must be a positive integer or None")
     condition_id = condition_id.lower()
-    parameters = {"condition": condition_id, "limit": limit, "taker_only": "false",
-                  "filter_type": "TOKENS", "filter_amount": "0.01"}
     directory = Path(output_dir) / condition_id
     pages_dir = directory / "pages"
     pages_dir.mkdir(parents=True, exist_ok=True)

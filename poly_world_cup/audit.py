@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-import json
 from collections import Counter
 from pathlib import Path
+
+from .trades import HEX_32, TradeIngestionError, validate_collection
 
 
 def audit_registry(registry: dict, trades_root: Path | None = None) -> dict:
@@ -17,8 +18,12 @@ def audit_registry(registry: dict, trades_root: Path | None = None) -> dict:
     if any(not value for value in fixture_ids) or len(set(fixture_ids)) != len(fixture_ids):
         errors.append("Fixture IDs must be present and unique")
     condition_ids = [row.get("condition_id") for row in contracts]
-    if any(not value for value in condition_ids) or len(set(condition_ids)) != len(condition_ids):
-        errors.append("Condition IDs must be present and unique")
+    valid_condition_ids = [value.lower() for value in condition_ids
+                           if isinstance(value, str) and HEX_32.fullmatch(value)]
+    if len(valid_condition_ids) != len(condition_ids):
+        errors.append("Condition IDs must be 32-byte 0x-prefixed hex strings")
+    if len(set(valid_condition_ids)) != len(valid_condition_ids):
+        errors.append("Condition IDs must be unique after case normalization")
     for row in contracts:
         if row.get("fixture_id") not in fixture_ids:
             errors.append(f"Orphan contract: {row.get('condition_id')}")
@@ -34,14 +39,18 @@ def audit_registry(registry: dict, trades_root: Path | None = None) -> dict:
 
     manifests = []
     missing = []
-    for condition_id in sorted(value for value in condition_ids if value):
-        path = Path(trades_root) / condition_id.lower() / "manifest.json" if trades_root else None
+    invalid = []
+    for condition_id in sorted(set(valid_condition_ids)):
+        path = Path(trades_root) / condition_id / "manifest.json" if trades_root else None
         if path is None or not path.exists():
             missing.append(condition_id)
             continue
-        manifest = json.loads(path.read_text())
-        if manifest.get("condition_id") != condition_id.lower():
-            errors.append(f"Manifest condition does not match its directory: {path}")
+        try:
+            manifest = validate_collection(Path(trades_root), condition_id=condition_id)
+        except TradeIngestionError as exc:
+            invalid.append({"condition_id": condition_id, "reason": str(exc)})
+            errors.append(f"Invalid collection for {condition_id}: {exc}")
+            continue
         manifests.append(manifest)
 
     # These require independent evidence/implementation. Changing a manifest's
@@ -56,6 +65,8 @@ def audit_registry(registry: dict, trades_root: Path | None = None) -> dict:
     ]
     if missing:
         blockers.insert(0, {"code": "UNINGESTED_CONDITIONS", "detail": f"No local ingestion manifest for {len(missing)} of {len(condition_ids)} conditions."})
+    if invalid:
+        blockers.insert(0, {"code": "COLLECTION_INTEGRITY", "detail": f"{len(invalid)} collections failed integrity checks and are excluded from observation totals."})
     mapping_counts = dict(sorted(Counter(row.get("mapping_status", "unknown") for row in fixtures).items()))
     if any(status != "matched" for status in mapping_counts):
         blockers.insert(0, {"code": "FIXTURE_MAPPING", "detail": f"Review fixture mapping statuses: {mapping_counts}"})
@@ -65,7 +76,10 @@ def audit_registry(registry: dict, trades_root: Path | None = None) -> dict:
         "fixture_mapping_status_counts": mapping_counts,
         "discovery_warnings": source_report.get("warnings", []),
         "discovery_failures": source_report.get("failures", []),
-        "conditions_with_manifests": len(manifests),
+        "conditions_with_manifests": len(manifests) + len(invalid),
+        "conditions_with_verified_manifests": len(manifests),
+        "conditions_with_invalid_manifests": len(invalid),
+        "invalid_collections": invalid,
         "conditions_with_observations": sum(manifest.get("row_count", 0) > 0 for manifest in manifests),
         "observation_count": sum(manifest.get("row_count", 0) for manifest in manifests),
         "manifest_status_counts": dict(sorted(Counter(manifest.get("api_traversal_status", "unknown") for manifest in manifests).items())),
@@ -78,4 +92,5 @@ def audit_registry(registry: dict, trades_root: Path | None = None) -> dict:
         "sft_ready": False,
         "blockers": blockers,
         "note": "This is a collection-foundation audit, not a scientific validity certificate. No training examples are exported.",
+        "integrity_scope": "Observation totals include only committed normalized pages whose hashes, counts, timestamps, and cursor chains verify. Raw HTTP bodies and source completeness are not certified.",
     }

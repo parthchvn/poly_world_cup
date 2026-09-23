@@ -62,6 +62,13 @@ It returns exit code 2 for incomplete mapping while retaining the report.
 Audit returns 2 for structural mapping errors. A structurally valid audit
 still has `sft_ready: false`; check that field and its blockers.
 
+Audit also verifies each collection's committed page hashes, counts,
+timestamps, filters, and cursor chain. Missing or corrupt pages cause exit 2
+and are excluded from observation totals. `conditions_with_manifests` counts
+files found; `conditions_with_verified_manifests` counts collections that pass
+these integrity checks. This does not certify the source's historical coverage.
+See the [follow-up integrity review](reports/integrity_validation.json).
+
 For API traversal over **every mapped condition**, use a separate run directory:
 
 ```bash

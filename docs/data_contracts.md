@@ -105,6 +105,22 @@ run verifies hashes and cursor continuity, recovers an interrupted page commit,
 and rejects changed filters or inconsistent state. A failed request leaves
 already committed pages intact. One POSIX writer is allowed per condition.
 
+`validate_collection(output_dir, condition_id=...)` performs read-only local
+verification with the same page and manifest checks used on resume. The audit
+uses this verifier rather than trusting manifest totals. It validates the
+supported query filters independently of the manifest's own assertions.
+Missing pages, bad checksums, inconsistent summaries, and malformed manifests
+are reported in `invalid_collections` and cause CLI exit 2. Only verified
+collections contribute to observation counts; identical legitimate rows are
+still preserved. Uncommitted recovery pages are not counted. Malformed
+condition IDs are rejected before path lookup, and case-equivalent condition
+IDs cannot cause a collection to be counted twice.
+
+Local integrity and source coverage remain separate. The verifier checks
+normalized files against their committed journal. It does not authenticate the
+upstream source, verify raw HTTP bodies, prove absence of missing executions,
+or promote a collection to `training_coverage_certified=true`.
+
 ## Prerequisites for a training row
 
 For a row `(context B, observed target A)`, persist at least:
