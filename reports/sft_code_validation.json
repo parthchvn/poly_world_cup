@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "command": "python -m unittest discover -s tests",
+  "tests_run": 248,
+  "tests_passed": 248,
+  "suites": [
+    "existing collection, reconciliation, and attribution tests",
+    "tournament-wide filter regression tests",
+    "SFT exporter leakage and quarantine tests",
+    "SFT validator tampering tests",
+    "GitHub publisher safeguards",
+    "gzip CRC, row-count, and post-close corruption publication gates"
+  ],
+  "model_training_executed": false,
+  "model_tokenizer_validation_executed": false,
+  "upstream_news_archive_bytes_revalidated": false
+}

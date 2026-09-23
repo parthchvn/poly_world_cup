@@ -7,6 +7,15 @@ The research question is whether information observable before a query time
 helps predict a wallet's subsequent **observed execution**. Executed fills are
 not direct observations of private beliefs or order-submission decisions.
 
+**Prepared SFT release:** the [complete tournament-wide filtered subset](datasets/world_cup_2026_tournament_lt20_v1/)
+contains **969,024 attributed observations from 206,474 wallets**, covering all
+104 matches. Each retained wallet has fewer than 20 saved observations across the
+entire tournament. Compressed chat JSONL provides verified-news-only and exploratory
+execution-history profiles, with fixed fixture/time splits and a full audit trail.
+See [dataset preparation, inspection, and loading](docs/tournament_sft.md).
+This is format-ready for retrospective conditional-observation SFT; incomplete
+collection and unresolved execution semantics still limit the scientific claim.
+
 ## What is implemented
 
 - Discover the complete fixture universe from ESPN and map the corresponding
@@ -38,8 +47,9 @@ The news catalog contains 2,751 current metadata records and 1,891 separately
 verified archived headlines. All captured observations have some verified prior
 broad tournament context; only 9,175 have verified prior fixture-specific news.
 These are distinct evidence levels, and neither establishes actor exposure.
-Archive recovery remains unfinished. No SFT-ready or complete on-chain-history
-claim is made.
+Archive recovery remains unfinished. The new SFT release uses this partial
+snapshot explicitly; it does not certify complete on-chain history or prospective
+decision context.
 
 See [checkpoint coverage](reports/collection_checkpoint.json),
 [attribution counts](reports/attribution_checkpoint.json),
@@ -143,10 +153,11 @@ and [receipt checks](docs/reconciliation.md).
 For downloaded data, follow [opening and querying the corpus](docs/dataset_access.md).
 
 Raw responses, observations, and local caches live under ignored `data/`.
-The committed reports contain identifiers, coverage summaries, hashes, and
-timestamps; wallet-level data and profile fields are not committed.
+The prepared release under `datasets/` includes the requested filtered wallet
+observations, news metadata, and chat examples. Original source captures remain
+outside Git; reports preserve their coverage summaries, hashes, and timestamps.
 
-## Why this is not yet an SFT dataset
+## Limits of the original research target
 
 | Issue | Implemented behavior / required next evidence |
 | --- | --- |
@@ -177,9 +188,9 @@ bundles, inventory balances, or complete negative windows are inferred here.
 2. **Reconstruct historical context:** global prior wallet activity,
    position-changing events, dated market state, and versioned news. Resolve
    kickoff discrepancies and unknown opening-time evidence.
-3. **Build examples:** first implement the explicitly defined execution target
-   in [the study plan](docs/study_plan.md); apply temporal guards, preserve
-   censoring/missingness, and freeze splits before model fitting.
+3. **Extend prepared examples:** the [retrospective SFT profiles](docs/tournament_sft.md)
+   now implement an explicitly limited conditional-observation target. Upgrade
+   these only as canonical execution and historical availability evidence improves.
 4. **Establish baselines, then SFT:** evaluate history-only and market-only
    models, add sourced news, and test whether an LLM improves held-out results.
 5. **Interpret the model:** perform controlled interventions only after

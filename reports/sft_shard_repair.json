@@ -1,0 +1,57 @@
+{
+  "all_available_decompressed_prefix_bytes_preserved": true,
+  "all_rebuilt_streams_crc_and_row_count_verified": true,
+  "original_source_datasets_modified": false,
+  "reason": "Four gzip streams were truncated before their footer; the cause was not established. Stored hashes matched the incomplete files, so hashing alone did not detect this.",
+  "reconstruction_source": "intact audit actions/history IDs and intact source news/context catalogs",
+  "shards": [
+    {
+      "bytes": 8454769,
+      "original_bytes": 8410202,
+      "original_complete_rows": 19878,
+      "original_sha256": "31e19b6508150f33400e24db9709ad563c9e98c93599b322fd14042ed2d58f2d",
+      "path": "verified_news_only/train/part-00019.jsonl.gz",
+      "preserved_prefix_bytes": 73768694,
+      "preserved_prefix_matches": true,
+      "reconstructed_rows": 20000,
+      "sha256": "b83fe3219861ea43666c4f8123dbbacca8ce9c738e68249e700c2d7adf9c4446"
+    },
+    {
+      "bytes": 9979741,
+      "original_bytes": 9961273,
+      "original_complete_rows": 19964,
+      "original_sha256": "755a4a1df0afe77ab3e9b901a04fa7f6e25e5553244a80d56ead5bdf28fcf292",
+      "path": "execution_history_proxy/train/part-00023.jsonl.gz",
+      "preserved_prefix_bytes": 102237918,
+      "preserved_prefix_matches": true,
+      "reconstructed_rows": 20000,
+      "sha256": "f902eefb04fa9621821f7a5e1cf11e1fc36833328a7088f7b829478a6df2ad5d"
+    },
+    {
+      "bytes": 9965662,
+      "original_bytes": 9874016,
+      "original_complete_rows": 19797,
+      "original_sha256": "bca80918ac2dbeb639d9c6d1337b7fa35fb1b4170a34f72d68bf9ec4d38188ec",
+      "path": "execution_history_proxy/train/part-00019.jsonl.gz",
+      "preserved_prefix_bytes": 101533790,
+      "preserved_prefix_matches": true,
+      "reconstructed_rows": 20000,
+      "sha256": "b06ec29889ce16fec3de4235f6b5cb5d15258ce9b64b186fe1c6bbff14828f2d"
+    },
+    {
+      "bytes": 9950395,
+      "original_bytes": 9896839,
+      "original_complete_rows": 19880,
+      "original_sha256": "4302f7c6f5d9469361a45ba710296f79dd3dfc2257906e58a9f5844772722f90",
+      "path": "execution_history_proxy/train/part-00026.jsonl.gz",
+      "preserved_prefix_bytes": 101800404,
+      "preserved_prefix_matches": true,
+      "reconstructed_rows": 20000,
+      "sha256": "2ee465957eb8e7e29ec61c82a74e034060d959dc820a6ccfc425ad1ef7ac290c"
+    }
+  ],
+  "status": "reconstructed_and_full_dataset_validation_passed",
+  "validated_manifest_sha256": "933986603cff38ba875abc8ee2f1b378dbfb6ac2db0c318b54e092282e0dcb07",
+  "validation_report": "reports/sft_validation.json",
+  "validation_report_sha256": "84c729aafd15b02197c791cb2c69c67fa0960c523123276f82ae95f7838984b8"
+}
