@@ -1,0 +1,157 @@
+{
+  "artifacts": [
+    {
+      "bytes": 2311497310,
+      "file": "world_cup_partial_corpus.tar.gz",
+      "sha256": "80d683acbd2e5bb4c45dd9953b36d418fc0f3e6e7adbc5b2e46ac71bc5aca69c"
+    },
+    {
+      "bytes": 1751478424,
+      "file": "trade_partial_provenance.tar.gz",
+      "sha256": "2e99d325bd7ad4772ebc84d1680b4bcb10afae996db5115c74e609f6696d3d54"
+    }
+  ],
+  "counts": {
+    "conditions": 312,
+    "database_report": {
+      "api_traversals_exhausted": 293,
+      "archive_recovery_completed": false,
+      "chain_reconciliation_verified": false,
+      "distinct_wallet_count": 252612,
+      "duplicate_observation_id_groups": 0,
+      "expected_page_hashes_verified": true,
+      "expected_page_row_counts_verified": true,
+      "fixture_news_link_count": 20276,
+      "fixtures_with_observations": 104,
+      "historically_eligible_fixture_news_links": 90,
+      "historically_eligible_global_news_versions": 1173,
+      "holdings_reconstructed": false,
+      "incomplete_reason": "Outbound source requests rejected with proxy tunnel 403 Forbidden",
+      "input_news_sha256": {
+        "data/news/news.jsonl": "e5727d89ba3b0441154952851eccd54f01a06ea1800d6e2e3c7a97866065f9de",
+        "data/news_archive/news_archive.jsonl": "fcaa831572405d5ed1ec61c54d098734341f24805282dbdd59caf3d6ac8a1542"
+      },
+      "interpretation": "Public-context relevance only; actor exposure and causation unknown",
+      "news_count": 4642,
+      "observation_count": 11858584,
+      "observations_with_verified_prior_global_news": 11858584,
+      "observations_with_verified_prior_news": 9175,
+      "partial_api_collection": true,
+      "partial_collection_allowed": true,
+      "provenance_snapshot_verified": true,
+      "query_time_semantics": "execution_block_timestamp_proxy_not_decision_time",
+      "registry_condition_count": 312,
+      "rejected_historical_availability_claims": 0,
+      "schema_version": 2,
+      "source_completeness_certified": false,
+      "source_page_count": 12007,
+      "token_mapping_counts": {
+        "exact_current_registry_token": 11858584
+      },
+      "trade_amounts_semantics": "provider_reported_not_chain_reconciled",
+      "training_ready": false,
+      "wallet_history_scope": "tournament_only"
+    },
+    "manifest_status_counts": {
+      "exhausted": 293,
+      "paused": 19
+    },
+    "news_versions": 4642,
+    "partial": true,
+    "partial_collection_allowed": true,
+    "raw_provenance_checked": true,
+    "source_completeness_certified": false,
+    "source_pages": 12007,
+    "trade_observations": 11858584,
+    "training_ready": false
+  },
+  "disk_estimate": {
+    "compression_ratio_assumed": null,
+    "estimated_extra_disk_required_bytes": 13274191402,
+    "immutable_database_requested": true,
+    "manifest_status_counts": {
+      "exhausted": 293,
+      "paused": 19
+    },
+    "normalized_input_bytes": 9415474057,
+    "partial": true,
+    "partial_collection_allowed": true,
+    "raw_trade_export_requested": true,
+    "raw_trade_input_bytes": 1778888588
+  },
+  "format_version": 1,
+  "manifest_status_counts": {
+    "exhausted": 293,
+    "paused": 19
+  },
+  "news_full_text_included": false,
+  "partial": true,
+  "partial_collection_allowed": true,
+  "training_ready": false,
+  "download_parts": [
+    {
+      "archive": "world_cup_partial_corpus.tar.gz",
+      "part": 1,
+      "file": "world_cup_data.part01",
+      "bytes": 500000000,
+      "sha256": "4f279704f3848e7911bd32bcbf752a0b9a9504192f686ab0b1f97333abb16ed9"
+    },
+    {
+      "archive": "world_cup_partial_corpus.tar.gz",
+      "part": 2,
+      "file": "world_cup_data.part02",
+      "bytes": 500000000,
+      "sha256": "cc426f674358164eb76a64e33221ed150ddf034f48690858e8e30bbe1c76e225"
+    },
+    {
+      "archive": "world_cup_partial_corpus.tar.gz",
+      "part": 3,
+      "file": "world_cup_data.part03",
+      "bytes": 500000000,
+      "sha256": "b5352356a2b2c5384139b1f60aa14bfd90a9742248626a6364a2ae5c7506221b"
+    },
+    {
+      "archive": "world_cup_partial_corpus.tar.gz",
+      "part": 4,
+      "file": "world_cup_data.part04",
+      "bytes": 500000000,
+      "sha256": "62e2048342c09f8001ad26cc8fdf8288f1caa1503f3667351ca4385f9ada456b"
+    },
+    {
+      "archive": "world_cup_partial_corpus.tar.gz",
+      "part": 5,
+      "file": "world_cup_data.part05",
+      "bytes": 311497310,
+      "sha256": "399808557f9db6fb633a53339cc8c789d765e4b6258f702c9bc7abd6049e665b"
+    },
+    {
+      "archive": "trade_partial_provenance.tar.gz",
+      "part": 1,
+      "file": "trade_sources.part01",
+      "bytes": 500000000,
+      "sha256": "f311217f10eaa1a6a27e638f8bf24838074e6a8f416b520b6897a915635c484d"
+    },
+    {
+      "archive": "trade_partial_provenance.tar.gz",
+      "part": 2,
+      "file": "trade_sources.part02",
+      "bytes": 500000000,
+      "sha256": "0634eafbc57e82f50fe419f9096edba83118f1dd6e829e8595292eba88f1da80"
+    },
+    {
+      "archive": "trade_partial_provenance.tar.gz",
+      "part": 3,
+      "file": "trade_sources.part03",
+      "bytes": 500000000,
+      "sha256": "249c42a4e9fe91ad81bfead973841f3e1edff43aa084524ee694eb1d7a88f892"
+    },
+    {
+      "archive": "trade_partial_provenance.tar.gz",
+      "part": 4,
+      "file": "trade_sources.part04",
+      "bytes": 251478424,
+      "sha256": "f8df68da41c6a2789c958cddabe41bf632d60af69a488cef55f01838bdffd6bb"
+    }
+  ],
+  "download_file_limit_bytes": 536870912
+}
