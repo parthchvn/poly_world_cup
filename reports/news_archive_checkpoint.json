@@ -1,0 +1,113 @@
+{
+  "completed_articles": 2291,
+  "content_scope": "first_verified_headline_among_bounded_capture_candidates",
+  "exact_lookup_candidate_limit": 3,
+  "fixture_links_verified": 90,
+  "global_request_interval_seconds": 1.0,
+  "historical_coverage_complete": false,
+  "index_prefix_queries": [
+    {
+      "candidate_urls": 1,
+      "prefix": "www.espn.com/espn/story/_/id/47",
+      "response_limit_reached": false,
+      "rows": 458
+    },
+    {
+      "candidate_urls": 64,
+      "prefix": "www.espn.com/espn/story/_/id/48",
+      "response_limit_reached": false,
+      "rows": 680
+    },
+    {
+      "candidate_urls": 159,
+      "prefix": "www.espn.com/espn/story/_/id/49",
+      "response_limit_reached": false,
+      "rows": 286
+    },
+    {
+      "candidate_urls": 2,
+      "prefix": "www.espn.com/football/story/_/id/48",
+      "response_limit_reached": false,
+      "rows": 853
+    },
+    {
+      "candidate_urls": 1,
+      "prefix": "www.espn.com/football/story/_/id/49",
+      "response_limit_reached": false,
+      "rows": 147
+    },
+    {
+      "candidate_urls": 1,
+      "prefix": "www.espn.com/soccer/report/_/gameId/401",
+      "response_limit_reached": false,
+      "rows": 231
+    },
+    {
+      "candidate_urls": 103,
+      "prefix": "www.espn.com/soccer/report/_/gameId/760",
+      "response_limit_reached": false,
+      "rows": 139
+    },
+    {
+      "candidate_urls": 2,
+      "prefix": "www.espn.com/soccer/story/_/id/40",
+      "response_limit_reached": false,
+      "rows": 557
+    },
+    {
+      "candidate_urls": 1,
+      "prefix": "www.espn.com/soccer/story/_/id/44",
+      "response_limit_reached": false,
+      "rows": 174
+    },
+    {
+      "candidate_urls": 2,
+      "prefix": "www.espn.com/soccer/story/_/id/46",
+      "response_limit_reached": false,
+      "rows": 544
+    },
+    {
+      "candidate_urls": 55,
+      "prefix": "www.espn.com/soccer/story/_/id/47",
+      "response_limit_reached": false,
+      "rows": 4116
+    },
+    {
+      "candidate_urls": 526,
+      "prefix": "www.espn.com/soccer/story/_/id/48",
+      "response_limit_reached": false,
+      "rows": 6972
+    },
+    {
+      "candidate_urls": 1350,
+      "prefix": "www.espn.com/soccer/story/_/id/49",
+      "response_limit_reached": false,
+      "rows": 2454
+    }
+  ],
+  "lookup_cutoff": "20260720235959",
+  "lookup_start": "20260101",
+  "offline_cached_evidence_revalidated": true,
+  "offline_checked_catalog_entries": 2751,
+  "partial": true,
+  "prefix_capture_collapse": "urlkey",
+  "raw_html_in_export": false,
+  "recovery_completed": false,
+  "requested_articles": 2751,
+  "requested_metadata_outside_study_window": 460,
+  "requested_metadata_within_study_window": 2291,
+  "source_access_blocker": "Outbound proxy tunnel returned 403 Forbidden",
+  "status": "partial_source_access_blocked",
+  "statuses": {
+    "capture_found_replay_unverified": 235,
+    "error": 8,
+    "no_capture_found": 157,
+    "not_processed_network_blocked": 460,
+    "verified_headline": 1891
+  },
+  "unique_input_urls": 2751,
+  "verified_at_utc": "2026-09-23T02:01:15.948320+00:00",
+  "verified_global_tournament_headlines": 1173,
+  "verified_headline_versions": 1891,
+  "workers": 16
+}

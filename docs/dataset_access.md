@@ -223,9 +223,9 @@ catalog equality, and body-exclusion checks remain mandatory.
 
 ```bash
 python scripts/export_corpus.py \
-  --database data/full/attribution.sqlite \
+  --database data/full/partial_attribution.sqlite \
   --archive-news data/news_archive/news_archive.jsonl \
-  --provenance-report data/full/raw_provenance_report.json \
+  --provenance-report data/full/provenance_report.json \
   --output data/releases/2026-world-cup-partial \
   --immutable-database --allow-partial --dry-run
 ```

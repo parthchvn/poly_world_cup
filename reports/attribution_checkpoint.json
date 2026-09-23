@@ -1,0 +1,39 @@
+{
+  "api_traversals_exhausted": 293,
+  "archive_recovery_completed": false,
+  "chain_reconciliation_verified": false,
+  "distinct_wallet_count": 252612,
+  "duplicate_observation_id_groups": 0,
+  "expected_page_hashes_verified": true,
+  "expected_page_row_counts_verified": true,
+  "fixture_news_link_count": 20276,
+  "fixtures_with_observations": 104,
+  "historically_eligible_fixture_news_links": 90,
+  "historically_eligible_global_news_versions": 1173,
+  "holdings_reconstructed": false,
+  "incomplete_reason": "Outbound source requests rejected with proxy tunnel 403 Forbidden",
+  "input_news_sha256": {
+    "data/news/news.jsonl": "e5727d89ba3b0441154952851eccd54f01a06ea1800d6e2e3c7a97866065f9de",
+    "data/news_archive/news_archive.jsonl": "fcaa831572405d5ed1ec61c54d098734341f24805282dbdd59caf3d6ac8a1542"
+  },
+  "interpretation": "Public-context relevance only; actor exposure and causation unknown",
+  "news_count": 4642,
+  "observation_count": 11858584,
+  "observations_with_verified_prior_global_news": 11858584,
+  "observations_with_verified_prior_news": 9175,
+  "partial_api_collection": true,
+  "partial_collection_allowed": true,
+  "provenance_snapshot_verified": true,
+  "query_time_semantics": "execution_block_timestamp_proxy_not_decision_time",
+  "registry_condition_count": 312,
+  "rejected_historical_availability_claims": 0,
+  "schema_version": 2,
+  "source_completeness_certified": false,
+  "source_page_count": 12007,
+  "token_mapping_counts": {
+    "exact_current_registry_token": 11858584
+  },
+  "trade_amounts_semantics": "provider_reported_not_chain_reconciled",
+  "training_ready": false,
+  "wallet_history_scope": "tournament_only"
+}
