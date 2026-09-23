@@ -300,7 +300,7 @@ def render_readme(summary: dict) -> str:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     defaults = {"registry": "data/registry/registry.json", "batch": "data/full/trades/batch_progress.json",
-        "provenance": "data/full/raw_provenance_report.json", "attribution": "data/full/attribution_report.json",
+        "provenance": "data/full/provenance_report.json", "attribution": "data/full/attribution_report.json",
         "news_coverage": "data/news/coverage.json", "archive_report": "data/news_archive/report.json",
         "current_news": "data/news/news.jsonl", "archived_news": "data/news_archive/news_archive.jsonl",
         "receipt_sample": "data/full/reconciliation/sample_report.json", "earlier_probe": "data/full/reconciliation_probe/report.json"}
