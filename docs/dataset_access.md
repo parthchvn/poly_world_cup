@@ -214,6 +214,18 @@ manifest.
 
 ## Explicitly incomplete checkpoints
 
+The September 23 checkpoint downloads are split into five dataset parts and four
+optional trade-source parts. Put each set in the same directory, then reassemble:
+
+```bash
+cat world_cup_data.part01 world_cup_data.part02 world_cup_data.part03 world_cup_data.part04 world_cup_data.part05 > world_cup_partial_corpus.tar.gz
+cat trade_sources.part01 trade_sources.part02 trade_sources.part03 trade_sources.part04 > trade_partial_provenance.tar.gz
+```
+
+Check part and archive hashes against [the release manifest](../reports/release_checkpoint.json).
+Extract the dataset archive to open `attribution.sqlite`; the trade-source archive
+is needed for raw-response auditing and resuming collection.
+
 Normal export still requires exhausted traversals for every registry contract.
 If collection is interrupted, `--allow-partial` permits a clearly labeled
 checkpoint only when all **104 fixtures and 312 contract manifests** are present,

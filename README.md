@@ -47,7 +47,10 @@ See [checkpoint coverage](reports/collection_checkpoint.json),
 [archive coverage](reports/news_archive_checkpoint.json).
 The downloadable checkpoint uses `world_cup_partial_corpus.tar.gz` and
 `trade_partial_provenance.tar.gz`; [access and resume instructions](docs/dataset_access.md)
-describe the formats. `--allow-partial` is required to export such a checkpoint;
+describe the formats. Downloads are split into five `world_cup_data.part*` files
+and four `trade_sources.part*` files to meet the per-file download limit.
+[Release checksums](reports/release_checkpoint.json) cover every part and both
+reassembled archives. `--allow-partial` is required to export such a checkpoint;
 the normal complete-release checks remain strict.
 
 **Initial live validation:** 104/104 fixtures mapped; 312 binary result contracts;
