@@ -56,6 +56,20 @@ not a hash of the entire database file.
 
 ## View the filtered rows
 
+The prepared download is split into two files to meet the per-file download
+limit. Download both into the same folder, then run:
+
+```bash
+cat world_cup_lt20.part01 world_cup_lt20.part02 > world_cup_lt20.zip
+unzip world_cup_lt20.zip
+```
+
+The ZIP includes the SQLite database, count report, instructions, and a small
+preview. [Download checksums](../reports/wallet_activity_downloads.json) identify
+the exact files. You can also view [20 selected rows](../reports/wallet_activity_preview.jsonl)
+directly in the repository. After extracting, use `world_cup_lt20.sqlite` in the
+example below; a locally generated copy uses the shown `data/filtered/` path.
+
 ```python
 import sqlite3
 
