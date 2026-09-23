@@ -101,6 +101,48 @@ class PublisherTests(unittest.TestCase):
             publisher.publish(publisher.load_files(self.file_list), self.args, github)
         self.assertEqual([name for name, _ in github.calls], ["create_blob"])
 
+    def test_tree_batches_chain_cumulatively_before_single_final_commit(self):
+        class CumulativeGitHub(FakeGitHub):
+            def __init__(self):
+                super().__init__()
+                self.trees = {"b" * 40: {"existing.txt": "existing-blob"}}
+                self.created_trees = []
+
+            def call(self, name, arguments):
+                if name == "create_tree":
+                    self.calls.append((name, arguments))
+                    contents = dict(self.trees[arguments["base_tree_sha"]])
+                    contents.update({row["path"]: row["sha"] for row in arguments["tree_elements"]})
+                    sha = f"{len(self.created_trees) + 1:040x}"
+                    self.trees[sha] = contents
+                    self.created_trees.append(sha)
+                    return {"sha": sha}
+                return super().call(name, arguments)
+
+        self.write_list([{"path": f"datasets/example/part-{index:03d}.gz", "local_path": "shard.gz"}
+                         for index in range(53)])
+        files = publisher.load_files(self.file_list)
+        github = CumulativeGitHub()
+        self.assertEqual(publisher.publish(files, self.args, github), "d" * 40)
+        trees = [args for name, args in github.calls if name == "create_tree"]
+        self.assertEqual([len(args["tree_elements"]) for args in trees], [25, 25, 3])
+        self.assertEqual([args["base_tree_sha"] for args in trees],
+                         ["b" * 40, *github.created_trees[:-1]])
+        self.assertEqual([row["path"] for args in trees for row in args["tree_elements"]],
+                         [row["path"] for row in files])
+        final_sha = github.created_trees[-1]
+        self.assertEqual(github.trees[final_sha], {
+            "existing.txt": "existing-blob", **{row["path"]: row["git_sha"] for row in files}
+        })
+        writes = [(name, args) for name, args in github.calls
+                  if name in ("create_tree", "create_commit", "update_ref")]
+        self.assertEqual([name for name, _ in writes],
+                         ["create_tree"] * 3 + ["create_commit", "update_ref"])
+        self.assertEqual(writes[-2][1]["tree_sha"], final_sha)
+        self.assertEqual(writes[-2][1]["parent_sha"], self.args.expected_head)
+        self.assertEqual(writes[-1][1]["sha"], "d" * 40)
+        self.assertFalse(writes[-1][1]["force"])
+
     def test_rejects_stale_branch_without_writes(self):
         github = FakeGitHub()
         github.current = "e" * 40

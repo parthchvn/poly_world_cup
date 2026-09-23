@@ -1,5 +1,7 @@
 # Tournament-wide filtered SFT release
 
+> This guide describes the archived version 1 release. Use the [version 2 guide](tournament_sft_v2.md) for completed API traversals and direct-news coverage across all 104 fixtures.
+
 The prepared files are in
 [`datasets/world_cup_2026_tournament_lt20_v1`](../datasets/world_cup_2026_tournament_lt20_v1/).
 They cover the captured corpus for all **104 World Cup matches**, represented by
