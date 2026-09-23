@@ -28,6 +28,28 @@ not direct observations of private beliefs or order-submission decisions.
   labels, target-transaction exclusion, and global-time/fixture-disjoint splits.
 - Report exactly what remains missing before SFT.
 
+**Current checkpoint — partial collection:** 11,858,584 wallet-side observations
+from 252,612 wallets across all 104 fixtures. Of 312 contract histories, 293
+reached the API's end and 19 remain paused after outbound source requests began
+failing with proxy tunnel `403 Forbidden`. All 12,007 saved pages passed raw-source
+normalization replay, and their hashes/counts match the SQLite index.
+
+The news catalog contains 2,751 current metadata records and 1,891 separately
+verified archived headlines. All captured observations have some verified prior
+broad tournament context; only 9,175 have verified prior fixture-specific news.
+These are distinct evidence levels, and neither establishes actor exposure.
+Archive recovery remains unfinished. No SFT-ready or complete on-chain-history
+claim is made.
+
+See [checkpoint coverage](reports/collection_checkpoint.json),
+[attribution counts](reports/attribution_checkpoint.json),
+[raw provenance verification](reports/provenance_checkpoint.json), and
+[archive coverage](reports/news_archive_checkpoint.json).
+The downloadable checkpoint uses `world_cup_partial_corpus.tar.gz` and
+`trade_partial_provenance.tar.gz`; [access and resume instructions](docs/dataset_access.md)
+describe the formats. `--allow-partial` is required to export such a checkpoint;
+the normal complete-release checks remain strict.
+
 **Initial live validation:** 104/104 fixtures mapped; 312 binary result contracts;
 624 tokens. Two kickoff discrepancies are flagged. A bounded trade smoke run
 collected 200 observations across two pages for one condition. This validates
