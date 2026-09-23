@@ -156,7 +156,10 @@ def archive_version(article: dict, capture: dict, replay: dict) -> dict:
         fixture_links.append(link)
     return {
         "news_id": news_id, "news_item_id": item_id, "version_rank": 0,
-        "source": "wayback_espn", "source_article_id": article_id,
+        "source": "wayback_espn", "source_provider": "ESPN via Internet Archive", "source_article_id": article_id,
+        "content_type": "archived_headline", "historical_text_version_status": "verified_archived_headline",
+        "version_order_historically_verified": False, "actor_exposure_verified": False, "causal_attribution": False,
+        "full_article_text_collected_in_export": False,
         "source_url": capture["original"], "title": replay["headline"],
         "description": None, "body": None,
         "fixture_ids": sorted(candidates), "fixture_links": fixture_links,
@@ -408,6 +411,9 @@ class ArchiveCollector:
         write_jsonl(self.output_dir / "news_archive.jsonl", versions)
         report = {"unique_input_urls": len(unique), "requested_articles": len(selected), "completed_articles": sum(statuses.values()), "statuses": statuses,
                   "workers": self.workers, "global_request_interval_seconds": self.interval,
+                  "requested_metadata_within_study_window": sum(row.get("within_study_window") is True for row in selected),
+                  "requested_metadata_outside_study_window": sum(row.get("within_study_window") is False for row in selected),
+                  "requested_metadata_window_unknown": sum(row.get("within_study_window") not in (True, False) for row in selected),
                   "index_prefix_queries": self.prefix_statuses,
                   "verified_headline_versions": len(versions),
                   "verified_global_tournament_headlines": sum(row.get("context_scope") == "tournament" for row in versions),

@@ -114,6 +114,14 @@ class ExportCorpusTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "news content differs"):
             self.export()
 
+    def test_duplicate_manifest_page_is_rejected(self):
+        self.manifest["pages"] *= 2
+        self.manifest["page_count"] = 2
+        self.manifest["row_count"] = 6
+        self.manifest_path.write_text(json.dumps(self.manifest))
+        with self.assertRaisesRegex(ValueError, "repeats a normalized page"):
+            self.export()
+
     def test_unsafe_page_path_is_rejected(self):
         self.manifest["pages"][0]["file"] = "../../outside.jsonl"
         self.manifest_path.write_text(json.dumps(self.manifest))

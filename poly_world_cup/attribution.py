@@ -192,17 +192,51 @@ def _create_schema(db: sqlite3.Connection) -> None:
     """)
 
 
+def _normalized_page_expectations(values: Mapping[Path | str, Any] | None, *,
+                                  kind: str) -> dict[Path, Any] | None:
+    if values is None:
+        return None
+    if not isinstance(values, Mapping):
+        raise ValueError(f"Expected page {kind} must be a path-keyed mapping")
+    result = {}
+    for supplied_path, value in values.items():
+        path = Path(supplied_path).resolve()
+        if path in result:
+            raise ValueError(f"Duplicate resolved path in expected page {kind}: {path}")
+        if kind == "hashes":
+            if not isinstance(value, str) or not _SHA256.fullmatch(value):
+                raise ValueError(f"Expected page hash must be lowercase SHA-256: {path}")
+        elif type(value) is not int or value < 0:
+            raise ValueError(f"Expected page row count must be a nonnegative integer: {path}")
+        result[path] = value
+    return result
+
+
 def build_attribution_index(*, registry: Mapping[str, Any], trade_pages: Iterable[Path],
-                            news_records: Iterable[Mapping[str, Any]], output_path: Path) -> dict:
+                            news_records: Iterable[Mapping[str, Any]], output_path: Path,
+                            expected_page_hashes: Mapping[Path | str, str] | None = None,
+                            expected_page_row_counts: Mapping[Path | str, int] | None = None) -> dict:
     """Stream normalized JSONL[.gz] pages into an atomically replaced SQLite index.
 
     The caller must supply the exact committed pages from audited collection
     manifests. This function records their uncompressed checksums but cannot
     certify completeness or compare them to an omitted manifest. It retains
     every input observation, including equal economic fields or observation IDs.
+    Optional expected_page_hashes / expected_page_row_counts bind this build to
+    the exact pages of an independently verified manifest snapshot. Each supplied
+    mapping must name exactly the input page set, using resolved paths. Hashes
+    cover uncompressed JSONL bytes. The already-streamed digest and row count are
+    checked before publishing; any mismatch preserves the previous database.
+    These expectations do not themselves establish source truth or completeness.
     News volume is held in memory; trade volume is streamed to disk.
     """
     fixtures, contracts = _contract_index(registry)
+    expected_hashes = _normalized_page_expectations(expected_page_hashes, kind="hashes")
+    expected_counts = _normalized_page_expectations(expected_page_row_counts, kind="row counts")
+    if (expected_hashes is not None and expected_counts is not None
+            and expected_hashes.keys() != expected_counts.keys()):
+        raise ValueError("Expected page hashes and row counts name different path sets")
+    observed_paths: set[Path] = set()
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     fd, temporary = tempfile.mkstemp(prefix=f".{output_path.name}.", suffix=".tmp",
@@ -296,6 +330,10 @@ def build_attribution_index(*, registry: Mapping[str, Any], trade_pages: Iterabl
         mapping_counts: Counter[str] = Counter()
         for supplied_path in trade_pages:
             path = Path(supplied_path).resolve()
+            for kind, expected in (("hash", expected_hashes), ("row count", expected_counts)):
+                if expected is not None and path not in expected:
+                    raise ValueError(f"Missing expected page {kind}: {path}")
+            observed_paths.add(path)
             digest = hashlib.sha256()
             cursor = db.execute("INSERT INTO source_pages(path,uncompressed_sha256,row_count) VALUES(?,?,0)",
                                 (str(path), "pending"))
@@ -341,8 +379,16 @@ def build_attribution_index(*, registry: Mapping[str, Any], trade_pages: Iterabl
                     page_count += 1
                     count += 1
                     mapping_counts[status] += 1
+            checksum = digest.hexdigest()
+            if expected_hashes is not None and checksum != expected_hashes[path]:
+                raise ValueError(f"Page checksum differs from verified expectation: {path}")
+            if expected_counts is not None and page_count != expected_counts[path]:
+                raise ValueError(f"Page row count differs from verified expectation: {path}")
             db.execute("UPDATE source_pages SET uncompressed_sha256=?,row_count=? WHERE source_page_id=?",
-                       (digest.hexdigest(), page_count, page_id))
+                       (checksum, page_count, page_id))
+        for kind, expected in (("hashes", expected_hashes), ("row counts", expected_counts)):
+            if expected is not None and observed_paths != expected.keys():
+                raise ValueError(f"Expected page {kind} contain paths absent from input")
         db.executescript("""
             CREATE INDEX trades_wallet_time ON trades(wallet,query_us);
             CREATE INDEX trades_fixture_time ON trades(fixture_id,query_us);
@@ -352,6 +398,8 @@ def build_attribution_index(*, registry: Mapping[str, Any], trade_pages: Iterabl
         """)
         report = {
             "schema_version": SCHEMA_VERSION,
+            "expected_page_hashes_verified": expected_hashes is not None,
+            "expected_page_row_counts_verified": expected_counts is not None,
             "observation_count": count,
             "source_page_count": db.execute("SELECT COUNT(*) FROM source_pages").fetchone()[0],
             "distinct_wallet_count": db.execute("SELECT COUNT(DISTINCT wallet) FROM trades").fetchone()[0],

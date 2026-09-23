@@ -109,6 +109,7 @@ prefixes while keeping verified historical news separate from retrospective
 candidate links. See [attribution semantics](docs/attribution.md),
 [news sources](docs/news_sources.md), [archive verification](docs/news_archive.md),
 and [receipt checks](docs/reconciliation.md).
+For downloaded data, follow [opening and querying the corpus](docs/dataset_access.md).
 
 Raw responses, observations, and local caches live under ignored `data/`.
 The committed reports contain identifiers, coverage summaries, hashes, and
