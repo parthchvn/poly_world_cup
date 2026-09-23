@@ -1,0 +1,2143 @@
+{
+  "description": "One browsing example from the partial tournament checkpoint; not a training-ready example or a representative sample.",
+  "source_checkpoint": "reports/collection_checkpoint.json",
+  "collection_partial": true,
+  "training_ready": false,
+  "sample": {
+    "collection_partial": true,
+    "context": {
+      "actor_exposure_verified": false,
+      "causal_attribution": false,
+      "chain_reconciliation_verified": false,
+      "decision_time_verified": false,
+      "global_context_direct_fixture_relevance_verified": false,
+      "global_public_context_display_truncated": true,
+      "holdings": null,
+      "registry_metadata_feature_eligible": false,
+      "retrospective_news_candidates": [
+        {
+          "actor_exposure_verified": false,
+          "availability_evidence": [],
+          "availability_upper_utc": null,
+          "captured_at_utc": "2026-09-23T01:06:03.693700Z",
+          "causal_attribution": false,
+          "collection_origins": [
+            "league_archive"
+          ],
+          "content_type": "Story",
+          "context_scope": "fixture_or_team",
+          "direct_fixture_ids": [],
+          "feature_eligible": false,
+          "fixture_ids": [
+            "espn:760414",
+            "espn:760416",
+            "espn:760421",
+            "espn:760424",
+            "espn:760438",
+            "espn:760439",
+            "espn:760443",
+            "espn:760447",
+            "espn:760462",
+            "espn:760467",
+            "espn:760470",
+            "espn:760471",
+            "espn:760492",
+            "espn:760494"
+          ],
+          "fixture_links": [
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=450"
+              ],
+              "fixture_id": "espn:760414",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=452"
+              ],
+              "fixture_id": "espn:760416",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=465"
+              ],
+              "fixture_id": "espn:760421",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=466"
+              ],
+              "fixture_id": "espn:760424",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=450"
+              ],
+              "fixture_id": "espn:760438",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=452"
+              ],
+              "fixture_id": "espn:760439",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=465"
+              ],
+              "fixture_id": "espn:760443",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=466"
+              ],
+              "fixture_id": "espn:760447",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=452"
+              ],
+              "fixture_id": "espn:760462",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=450"
+              ],
+              "fixture_id": "espn:760467",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=465"
+              ],
+              "fixture_id": "espn:760470",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=466"
+              ],
+              "fixture_id": "espn:760471",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=466"
+              ],
+              "fixture_id": "espn:760492",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=452"
+              ],
+              "fixture_id": "espn:760494",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            }
+          ],
+          "full_article_text_collected_in_export": false,
+          "historical_availability_verified": false,
+          "historical_content_sha256": null,
+          "historical_text_version_status": "unverified_current_capture",
+          "metadata_sha256": "1a07f436d8ee9abc7bde8f88785d70babfe51310f204eaf04d982e27afc0eea6",
+          "modified_at_utc": "2026-04-01T15:22:16Z",
+          "news_id": "espn:48342734:1a07f436d8ee9abc",
+          "news_item_id": "espn:48342734",
+          "originally_posted_at_utc": "2026-03-31T22:02:00Z",
+          "publication_precision": "second",
+          "published_at_raw": "2026-04-01T15:22:16Z",
+          "published_at_utc": "2026-04-01T15:22:16Z",
+          "source_article_id": "48342734",
+          "source_game_id": null,
+          "source_provenance": [
+            {
+              "body_sha256": "dd05a0522f75b13d1d9a45823a1955b0ba574518478c6e3d6193d00129d44b1d",
+              "historical_availability_verified": false,
+              "retrieved_at": "2026-09-23T01:06:03.693700Z",
+              "url": "https://content.core.api.espn.com/v1/sports/soccer/fifa.world/news?limit=50&offset=2250"
+            }
+          ],
+          "source_provider": "ESPN",
+          "source_team_ids": [
+            "162",
+            "21479",
+            "450",
+            "452",
+            "465",
+            "466",
+            "471",
+            "479"
+          ],
+          "source_url": "https://www.espn.com/soccer/story/_/id/48342734/2026-world-cup-european-playoffs-live-updates-highlights-reaction",
+          "title": "2026 World Cup European playoffs recap: Bosnia deny Italy of World Cup for the third time",
+          "tournament_category": true,
+          "version_order_historically_verified": false,
+          "version_rank": 0,
+          "within_study_window": true
+        },
+        {
+          "actor_exposure_verified": false,
+          "availability_evidence": [],
+          "availability_upper_utc": null,
+          "captured_at_utc": "2026-09-23T01:06:03.693700Z",
+          "causal_attribution": false,
+          "collection_origins": [
+            "league_archive"
+          ],
+          "content_type": "Story",
+          "context_scope": "fixture_or_team",
+          "direct_fixture_ids": [],
+          "feature_eligible": false,
+          "fixture_ids": [
+            "espn:760414",
+            "espn:760415",
+            "espn:760416",
+            "espn:760417",
+            "espn:760418",
+            "espn:760419",
+            "espn:760420",
+            "espn:760421",
+            "espn:760422",
+            "espn:760423",
+            "espn:760424",
+            "espn:760425",
+            "espn:760426",
+            "espn:760427",
+            "espn:760428",
+            "espn:760429",
+            "espn:760430",
+            "espn:760431",
+            "espn:760432",
+            "espn:760433",
+            "espn:760434",
+            "espn:760435",
+            "espn:760436",
+            "espn:760437",
+            "espn:760438",
+            "espn:760439",
+            "espn:760440",
+            "espn:760441",
+            "espn:760442",
+            "espn:760443",
+            "espn:760444",
+            "espn:760445",
+            "espn:760446",
+            "espn:760447",
+            "espn:760448",
+            "espn:760449",
+            "espn:760450",
+            "espn:760451",
+            "espn:760452",
+            "espn:760453",
+            "espn:760454",
+            "espn:760455",
+            "espn:760456",
+            "espn:760457",
+            "espn:760458",
+            "espn:760459",
+            "espn:760460",
+            "espn:760461",
+            "espn:760462",
+            "espn:760463",
+            "espn:760464",
+            "espn:760465",
+            "espn:760466",
+            "espn:760467",
+            "espn:760468",
+            "espn:760469",
+            "espn:760470",
+            "espn:760471",
+            "espn:760472",
+            "espn:760473",
+            "espn:760474",
+            "espn:760475",
+            "espn:760476",
+            "espn:760477",
+            "espn:760478",
+            "espn:760479",
+            "espn:760480",
+            "espn:760481",
+            "espn:760482",
+            "espn:760483",
+            "espn:760484",
+            "espn:760485",
+            "espn:760486",
+            "espn:760487",
+            "espn:760488",
+            "espn:760489",
+            "espn:760490",
+            "espn:760491",
+            "espn:760492",
+            "espn:760493",
+            "espn:760494",
+            "espn:760495",
+            "espn:760496",
+            "espn:760497",
+            "espn:760498",
+            "espn:760499",
+            "espn:760500",
+            "espn:760501",
+            "espn:760502"
+          ],
+          "fixture_links": [
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=450",
+                "ESPN category.teamId=451"
+              ],
+              "fixture_id": "espn:760414",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=203",
+                "ESPN category.teamId=467"
+              ],
+              "fixture_id": "espn:760415",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=206",
+                "ESPN category.teamId=452"
+              ],
+              "fixture_id": "espn:760416",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=210",
+                "ESPN category.teamId=660"
+              ],
+              "fixture_id": "espn:760417",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2654",
+                "ESPN category.teamId=580"
+              ],
+              "fixture_id": "espn:760418",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=205",
+                "ESPN category.teamId=2869"
+              ],
+              "fixture_id": "espn:760419",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=4398",
+                "ESPN category.teamId=475"
+              ],
+              "fixture_id": "espn:760420",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=465",
+                "ESPN category.teamId=628"
+              ],
+              "fixture_id": "espn:760421",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=11678",
+                "ESPN category.teamId=481"
+              ],
+              "fixture_id": "espn:760422",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=209",
+                "ESPN category.teamId=4789"
+              ],
+              "fixture_id": "espn:760423",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=466",
+                "ESPN category.teamId=659"
+              ],
+              "fixture_id": "espn:760424",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=449",
+                "ESPN category.teamId=627"
+              ],
+              "fixture_id": "espn:760425",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2620",
+                "ESPN category.teamId=459"
+              ],
+              "fixture_id": "espn:760426",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2666",
+                "ESPN category.teamId=469"
+              ],
+              "fixture_id": "espn:760427",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=164",
+                "ESPN category.teamId=2597"
+              ],
+              "fixture_id": "espn:760428",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=212",
+                "ESPN category.teamId=655"
+              ],
+              "fixture_id": "espn:760429",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=4375",
+                "ESPN category.teamId=464"
+              ],
+              "fixture_id": "espn:760430",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2917",
+                "ESPN category.teamId=474"
+              ],
+              "fixture_id": "espn:760431",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=478",
+                "ESPN category.teamId=654"
+              ],
+              "fixture_id": "espn:760432",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=202",
+                "ESPN category.teamId=624"
+              ],
+              "fixture_id": "espn:760433",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2659",
+                "ESPN category.teamId=4469"
+              ],
+              "fixture_id": "espn:760434",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2850",
+                "ESPN category.teamId=482"
+              ],
+              "fixture_id": "espn:760435",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=208",
+                "ESPN category.teamId=2570"
+              ],
+              "fixture_id": "espn:760436",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=448",
+                "ESPN category.teamId=477"
+              ],
+              "fixture_id": "espn:760437",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=450",
+                "ESPN category.teamId=467"
+              ],
+              "fixture_id": "espn:760438",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=452",
+                "ESPN category.teamId=475"
+              ],
+              "fixture_id": "espn:760439",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=206",
+                "ESPN category.teamId=4398"
+              ],
+              "fixture_id": "espn:760440",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=203",
+                "ESPN category.teamId=451"
+              ],
+              "fixture_id": "espn:760441",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=628",
+                "ESPN category.teamId=660"
+              ],
+              "fixture_id": "espn:760442",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=210",
+                "ESPN category.teamId=465"
+              ],
+              "fixture_id": "espn:760443",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=205",
+                "ESPN category.teamId=2654"
+              ],
+              "fixture_id": "espn:760444",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2869",
+                "ESPN category.teamId=580"
+              ],
+              "fixture_id": "espn:760445",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=11678",
+                "ESPN category.teamId=209"
+              ],
+              "fixture_id": "espn:760446",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=449",
+                "ESPN category.teamId=466"
+              ],
+              "fixture_id": "espn:760447",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=4789",
+                "ESPN category.teamId=481"
+              ],
+              "fixture_id": "espn:760448",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=627",
+                "ESPN category.teamId=659"
+              ],
+              "fixture_id": "espn:760449",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=212",
+                "ESPN category.teamId=2597"
+              ],
+              "fixture_id": "espn:760450",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=459",
+                "ESPN category.teamId=469"
+              ],
+              "fixture_id": "espn:760451",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2620",
+                "ESPN category.teamId=2666"
+              ],
+              "fixture_id": "espn:760452",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=164",
+                "ESPN category.teamId=655"
+              ],
+              "fixture_id": "espn:760453",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=464",
+                "ESPN category.teamId=654"
+              ],
+              "fixture_id": "espn:760454",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2917",
+                "ESPN category.teamId=624"
+              ],
+              "fixture_id": "espn:760455",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=202",
+                "ESPN category.teamId=474"
+              ],
+              "fixture_id": "espn:760456",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=4375",
+                "ESPN category.teamId=478"
+              ],
+              "fixture_id": "espn:760457",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=4469",
+                "ESPN category.teamId=448"
+              ],
+              "fixture_id": "espn:760458",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=208",
+                "ESPN category.teamId=2850"
+              ],
+              "fixture_id": "espn:760459",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2659",
+                "ESPN category.teamId=477"
+              ],
+              "fixture_id": "espn:760460",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2570",
+                "ESPN category.teamId=482"
+              ],
+              "fixture_id": "espn:760461",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=4398",
+                "ESPN category.teamId=452"
+              ],
+              "fixture_id": "espn:760462",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=206",
+                "ESPN category.teamId=475"
+              ],
+              "fixture_id": "espn:760463",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2654",
+                "ESPN category.teamId=2869"
+              ],
+              "fixture_id": "espn:760464",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=205",
+                "ESPN category.teamId=580"
+              ],
+              "fixture_id": "espn:760465",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=451",
+                "ESPN category.teamId=467"
+              ],
+              "fixture_id": "espn:760466",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=203",
+                "ESPN category.teamId=450"
+              ],
+              "fixture_id": "espn:760467",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=209",
+                "ESPN category.teamId=481"
+              ],
+              "fixture_id": "espn:760468",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=210",
+                "ESPN category.teamId=628"
+              ],
+              "fixture_id": "espn:760469",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=465",
+                "ESPN category.teamId=660"
+              ],
+              "fixture_id": "espn:760470",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=466",
+                "ESPN category.teamId=627"
+              ],
+              "fixture_id": "espn:760471",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=449",
+                "ESPN category.teamId=659"
+              ],
+              "fixture_id": "espn:760472",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=11678",
+                "ESPN category.teamId=4789"
+              ],
+              "fixture_id": "espn:760473",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=4375",
+                "ESPN category.teamId=654"
+              ],
+              "fixture_id": "espn:760474",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=464",
+                "ESPN category.teamId=478"
+              ],
+              "fixture_id": "espn:760475",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2620",
+                "ESPN category.teamId=469"
+              ],
+              "fixture_id": "espn:760476",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2666",
+                "ESPN category.teamId=459"
+              ],
+              "fixture_id": "espn:760477",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2597",
+                "ESPN category.teamId=655"
+              ],
+              "fixture_id": "espn:760478",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=164",
+                "ESPN category.teamId=212"
+              ],
+              "fixture_id": "espn:760479",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=4469",
+                "ESPN category.teamId=477"
+              ],
+              "fixture_id": "espn:760480",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=208",
+                "ESPN category.teamId=482"
+              ],
+              "fixture_id": "espn:760481",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2570",
+                "ESPN category.teamId=2850"
+              ],
+              "fixture_id": "espn:760482",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=202",
+                "ESPN category.teamId=2917"
+              ],
+              "fixture_id": "espn:760483",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=474",
+                "ESPN category.teamId=624"
+              ],
+              "fixture_id": "espn:760484",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2659",
+                "ESPN category.teamId=448"
+              ],
+              "fixture_id": "espn:760485",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=206",
+                "ESPN category.teamId=467"
+              ],
+              "fixture_id": "espn:760486",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=205",
+                "ESPN category.teamId=627"
+              ],
+              "fixture_id": "espn:760487",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2869",
+                "ESPN category.teamId=449"
+              ],
+              "fixture_id": "espn:760488",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=210",
+                "ESPN category.teamId=481"
+              ],
+              "fixture_id": "espn:760489",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=464",
+                "ESPN category.teamId=4789"
+              ],
+              "fixture_id": "espn:760490",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=203",
+                "ESPN category.teamId=209"
+              ],
+              "fixture_id": "espn:760491",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=466",
+                "ESPN category.teamId=478"
+              ],
+              "fixture_id": "espn:760492",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=459",
+                "ESPN category.teamId=654"
+              ],
+              "fixture_id": "espn:760493",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=452",
+                "ESPN category.teamId=660"
+              ],
+              "fixture_id": "espn:760494",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2850",
+                "ESPN category.teamId=448"
+              ],
+              "fixture_id": "espn:760495",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=477",
+                "ESPN category.teamId=482"
+              ],
+              "fixture_id": "espn:760496",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=164",
+                "ESPN category.teamId=474"
+              ],
+              "fixture_id": "espn:760497",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=475",
+                "ESPN category.teamId=624"
+              ],
+              "fixture_id": "espn:760498",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2620",
+                "ESPN category.teamId=628"
+              ],
+              "fixture_id": "espn:760499",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=202",
+                "ESPN category.teamId=2597"
+              ],
+              "fixture_id": "espn:760500",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=208",
+                "ESPN category.teamId=4469"
+              ],
+              "fixture_id": "espn:760501",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=206",
+                "ESPN category.teamId=2869"
+              ],
+              "fixture_id": "espn:760502",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            }
+          ],
+          "full_article_text_collected_in_export": false,
+          "historical_availability_verified": false,
+          "historical_content_sha256": null,
+          "historical_text_version_status": "unverified_current_capture",
+          "metadata_sha256": "abfb6b0c459a82f131972161cff922ba1fbe494008256caac2b1e8a2bad7a52d",
+          "modified_at_utc": "2026-04-01T12:13:02Z",
+          "news_id": "espn:47136531:abfb6b0c459a82f1",
+          "news_item_id": "espn:47136531",
+          "originally_posted_at_utc": "2026-04-01T09:00:00Z",
+          "publication_precision": "second",
+          "published_at_raw": "2026-04-01T12:13:02Z",
+          "published_at_utc": "2026-04-01T12:13:02Z",
+          "source_article_id": "47136531",
+          "source_game_id": null,
+          "source_provenance": [
+            {
+              "body_sha256": "dd05a0522f75b13d1d9a45823a1955b0ba574518478c6e3d6193d00129d44b1d",
+              "historical_availability_verified": false,
+              "retrieved_at": "2026-09-23T01:06:03.693700Z",
+              "url": "https://content.core.api.espn.com/v1/sports/soccer/fifa.world/news?limit=50&offset=2250"
+            }
+          ],
+          "source_provider": "ESPN",
+          "source_team_ids": [
+            "11678",
+            "164",
+            "202",
+            "203",
+            "205",
+            "206",
+            "208",
+            "209",
+            "210",
+            "212",
+            "2570",
+            "2597",
+            "2620",
+            "2654",
+            "2659",
+            "2666",
+            "2850",
+            "2869",
+            "2917",
+            "4375",
+            "4398",
+            "4469",
+            "448",
+            "449",
+            "450",
+            "451",
+            "452",
+            "459",
+            "464",
+            "465",
+            "466",
+            "467",
+            "469",
+            "474",
+            "475",
+            "477",
+            "478",
+            "4789",
+            "481",
+            "482",
+            "580",
+            "624",
+            "627",
+            "628",
+            "654",
+            "655",
+            "659",
+            "660"
+          ],
+          "source_url": "https://www.espn.com/soccer/story/_/id/47136531/2026-world-cup-confirmed-teams-one-thing-know-analysis-predictions",
+          "title": "One thing to know about each of the 48 World Cup teams",
+          "tournament_category": true,
+          "version_order_historically_verified": false,
+          "version_rank": 0,
+          "within_study_window": true
+        },
+        {
+          "actor_exposure_verified": false,
+          "availability_evidence": [],
+          "availability_upper_utc": null,
+          "captured_at_utc": "2026-09-23T01:06:03.693700Z",
+          "causal_attribution": false,
+          "collection_origins": [
+            "league_archive"
+          ],
+          "content_type": "Story",
+          "context_scope": "fixture_or_team",
+          "direct_fixture_ids": [],
+          "feature_eligible": false,
+          "fixture_ids": [
+            "espn:760414",
+            "espn:760416",
+            "espn:760421",
+            "espn:760424",
+            "espn:760430",
+            "espn:760435",
+            "espn:760438",
+            "espn:760439",
+            "espn:760443",
+            "espn:760447",
+            "espn:760457",
+            "espn:760459",
+            "espn:760462",
+            "espn:760467",
+            "espn:760470",
+            "espn:760471",
+            "espn:760474",
+            "espn:760482",
+            "espn:760492",
+            "espn:760494",
+            "espn:760495"
+          ],
+          "fixture_links": [
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=450"
+              ],
+              "fixture_id": "espn:760414",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=452"
+              ],
+              "fixture_id": "espn:760416",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=465"
+              ],
+              "fixture_id": "espn:760421",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=466"
+              ],
+              "fixture_id": "espn:760424",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=4375"
+              ],
+              "fixture_id": "espn:760430",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2850"
+              ],
+              "fixture_id": "espn:760435",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=450"
+              ],
+              "fixture_id": "espn:760438",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=452"
+              ],
+              "fixture_id": "espn:760439",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=465"
+              ],
+              "fixture_id": "espn:760443",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=466"
+              ],
+              "fixture_id": "espn:760447",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=4375"
+              ],
+              "fixture_id": "espn:760457",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2850"
+              ],
+              "fixture_id": "espn:760459",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=452"
+              ],
+              "fixture_id": "espn:760462",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=450"
+              ],
+              "fixture_id": "espn:760467",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=465"
+              ],
+              "fixture_id": "espn:760470",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=466"
+              ],
+              "fixture_id": "espn:760471",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=4375"
+              ],
+              "fixture_id": "espn:760474",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2850"
+              ],
+              "fixture_id": "espn:760482",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=466"
+              ],
+              "fixture_id": "espn:760492",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=452"
+              ],
+              "fixture_id": "espn:760494",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            },
+            {
+              "confidence": "medium",
+              "evidence": [
+                "ESPN category.teamId=2850"
+              ],
+              "fixture_id": "espn:760495",
+              "historical_link_verified": false,
+              "link_availability_upper_utc": null,
+              "relationship": "team_category_background",
+              "retrospective_link": true
+            }
+          ],
+          "full_article_text_collected_in_export": false,
+          "historical_availability_verified": false,
+          "historical_content_sha256": null,
+          "historical_text_version_status": "unverified_current_capture",
+          "metadata_sha256": "cde81931b755f9fc2988d737b33ec22429a5ab9ae32074c3d4b4ffd005ff6081",
+          "modified_at_utc": "2026-03-31T15:46:11Z",
+          "news_id": "espn:48334351:cde81931b755f9fc",
+          "news_item_id": "espn:48334351",
+          "originally_posted_at_utc": "2026-03-31T15:35:00Z",
+          "publication_precision": "second",
+          "published_at_raw": "2026-03-31T15:46:11Z",
+          "published_at_utc": "2026-03-31T15:46:11Z",
+          "source_article_id": "48334351",
+          "source_game_id": null,
+          "source_provenance": [
+            {
+              "body_sha256": "dd05a0522f75b13d1d9a45823a1955b0ba574518478c6e3d6193d00129d44b1d",
+              "historical_availability_verified": false,
+              "retrieved_at": "2026-09-23T01:06:03.693700Z",
+              "url": "https://content.core.api.espn.com/v1/sports/soccer/fifa.world/news?limit=50&offset=2250"
+            }
+          ],
+          "source_provider": "ESPN",
+          "source_team_ids": [
+            "1038",
+            "162",
+            "204",
+            "21479",
+            "2850",
+            "4375",
+            "450",
+            "452",
+            "465",
+            "466",
+            "471",
+            "479"
+          ],
+          "source_url": "https://www.espn.com/soccer/story/_/id/48334351/2026-world-cup-playoffs-claim-final-six-spots",
+          "title": "2026 World Cup playoffs: Who will claim the final six spots?",
+          "tournament_category": true,
+          "version_order_historically_verified": false,
+          "version_rank": 0,
+          "within_study_window": true
+        }
+      ],
+      "retrospective_prior_tournament_executions": [
+        {
+          "block_timestamp": "2026-05-10T07:00:09Z",
+          "condition_id": "0x293ed83ff451fbfd454eb09985f6707c5c33a30cf79ba98bf45ccf2fa553438f",
+          "fixture_id": "espn:760414",
+          "observation_id": "b6fb38a7caf863b3788bf87d34d486de1accdf6f65d1d91a0bc909c6ddee2f33",
+          "price": "0.66",
+          "shares": "5",
+          "side": "SELL",
+          "token_id": "68484243328569428588255043277797425895965411073244027845565817022786363564052",
+          "trade_row_id": 2588983,
+          "transaction_hash": "0x3b8fa6f8ead9ac5c52a74be60ac56ae62187d008da20eac77934aed7b4fcd87f"
+        },
+        {
+          "block_timestamp": "2026-05-09T19:31:13Z",
+          "condition_id": "0x293ed83ff451fbfd454eb09985f6707c5c33a30cf79ba98bf45ccf2fa553438f",
+          "fixture_id": "espn:760414",
+          "observation_id": "3d3ca2b504bb6f40d23c63d49760571fcf6e69ca46ad2204bf740f4123de8d08",
+          "price": "0.67",
+          "shares": "7.41",
+          "side": "BUY",
+          "token_id": "68484243328569428588255043277797425895965411073244027845565817022786363564052",
+          "trade_row_id": 2588986,
+          "transaction_hash": "0xf616a31afa0d963aa94a73a4f40fa3605ba77fd7de3329a61fab10f11c0b24f0"
+        },
+        {
+          "block_timestamp": "2026-05-09T07:18:41Z",
+          "condition_id": "0x293ed83ff451fbfd454eb09985f6707c5c33a30cf79ba98bf45ccf2fa553438f",
+          "fixture_id": "espn:760414",
+          "observation_id": "eeefaafba85ebe4b6e856ccfe88509e716cb8bd32bc05ebbba9ebaaa704dba7b",
+          "price": "0.6700002178",
+          "shares": "3.030302",
+          "side": "BUY",
+          "token_id": "68484243328569428588255043277797425895965411073244027845565817022786363564052",
+          "trade_row_id": 2588988,
+          "transaction_hash": "0x03ec74cece16f2a414b48ecb5e431c880a6f8f43d40cfa43906086d93d563ce2"
+        }
+      ],
+      "trade": {
+        "block_timestamp": "2026-05-11T07:00:09Z",
+        "condition_id": "0x293ed83ff451fbfd454eb09985f6707c5c33a30cf79ba98bf45ccf2fa553438f",
+        "context_state_id": "0f5a3553e20dd55462f39aceb07990fa9d37ea1880f2a896219a172d24310619",
+        "eligible_context_event_count": 0,
+        "fixture_id": "espn:760414",
+        "global_context_state_id": "d727884f2478f29cb5b629b3a703276db31932303650bd334cbb2c96cf32dc89",
+        "global_eligible_context_event_count": 166,
+        "observation_id": "91824996b95209eabd7d2069cca2da501a53d36c357370f0a3225a82de9c10f7",
+        "price": "0.64",
+        "query_us": 1778482809000000,
+        "retrospective_candidate_count": 7,
+        "selection": "czechia",
+        "shares": "5.44",
+        "side": "SELL",
+        "source_line": 872,
+        "source_page_id": 2624,
+        "token_id": "68484243328569428588255043277797425895965411073244027845565817022786363564052",
+        "token_mapping_status": "exact_current_registry_token",
+        "token_outcome": "No",
+        "trade_row_id": 2588979,
+        "transaction_hash": "0xe66c35ce4293cc880a31a9966037717a4bbba79ae3d8eda40294578af059bf72",
+        "wallet": "0xc992fc6c30d67308b2f4ba82e4f075a8d5a77994"
+      },
+      "trade_amounts_semantics": "provider_reported_not_chain_reconciled",
+      "training_ready": false,
+      "verified_global_public_context": [
+        {
+          "actor_exposure_verified": false,
+          "archive_capture_timestamp": "20260511010230",
+          "archive_cdx_digest": "NL6U454725QHLSBATZF7N72Q3UB4Z7EU",
+          "archive_url": "https://web.archive.org/web/20260511010230id_/https://www.espn.com/soccer/story/_/id/48716793/katy-perry-headline-us-world-cup-opening-ceremony",
+          "availability_evidence": [
+            {
+              "captured_at_utc": "2026-05-11T01:02:30Z",
+              "content_sha256": "1278968495726a68be1637d728509810f39b11d6ffbde64608ea7125b3eba725",
+              "kind": "archive_snapshot",
+              "source_url": "https://web.archive.org/web/20260511010230id_/https://www.espn.com/soccer/story/_/id/48716793/katy-perry-headline-us-world-cup-opening-ceremony"
+            }
+          ],
+          "availability_upper_utc": "2026-05-11T01:02:30Z",
+          "body": null,
+          "causal_attribution": false,
+          "content_type": "archived_headline",
+          "context_scope": "tournament",
+          "current_news_id": "espn:48716793:b947280d84f155bc",
+          "description": null,
+          "evidence_scope": "archived_headline_only",
+          "fixture_ids": [],
+          "fixture_links": [],
+          "full_article_text_collected_in_export": false,
+          "historical_availability_verified": true,
+          "historical_content_sha256": "1278968495726a68be1637d728509810f39b11d6ffbde64608ea7125b3eba725",
+          "historical_text_version_status": "verified_archived_headline",
+          "historical_tournament_scope_verified": true,
+          "news_id": "wayback:e036726cfac6bb6a248118d5",
+          "news_item_id": "espn:48716793:archived-headline",
+          "publisher_publication_time_claim": "2026-05-09T03:09:41Z",
+          "raw_html_in_export": false,
+          "retrieved_at_utc": "2026-09-23T01:22:04.190429Z",
+          "source": "wayback_espn",
+          "source_article_id": "48716793",
+          "source_provider": "ESPN via Internet Archive",
+          "source_url": "https://www.espn.com/soccer/story/_/id/48716793/katy-perry-headline-us-world-cup-opening-ceremony",
+          "title": "Katy Perry to headline U.S. World Cup opening ceremony",
+          "tournament_scope_availability_evidence": [
+            {
+              "captured_at_utc": "2026-05-11T01:02:30Z",
+              "content_sha256": "1278968495726a68be1637d728509810f39b11d6ffbde64608ea7125b3eba725",
+              "kind": "archive_snapshot",
+              "source_url": "https://web.archive.org/web/20260511010230id_/https://www.espn.com/soccer/story/_/id/48716793/katy-perry-headline-us-world-cup-opening-ceremony"
+            }
+          ],
+          "tournament_scope_availability_upper_utc": "2026-05-11T01:02:30Z",
+          "version_order_historically_verified": false,
+          "version_rank": 0
+        },
+        {
+          "actor_exposure_verified": false,
+          "archive_capture_timestamp": "20260510143120",
+          "archive_cdx_digest": "NTOROYBCZDAKRF5HH3NDMH7HH6CI47BV",
+          "archive_url": "https://web.archive.org/web/20260510143120id_/https://www.espn.com/soccer/story/_/id/48716037/fifa-waives-otamendi-caicedo-one-game-bans-world-cup-openers",
+          "availability_evidence": [
+            {
+              "captured_at_utc": "2026-05-10T14:31:20Z",
+              "content_sha256": "4420d211fe33b9cdc917077a04d86deca94ec92a46c7290b1e57018fe9ce40b7",
+              "kind": "archive_snapshot",
+              "source_url": "https://web.archive.org/web/20260510143120id_/https://www.espn.com/soccer/story/_/id/48716037/fifa-waives-otamendi-caicedo-one-game-bans-world-cup-openers"
+            }
+          ],
+          "availability_upper_utc": "2026-05-10T14:31:20Z",
+          "body": null,
+          "causal_attribution": false,
+          "content_type": "archived_headline",
+          "context_scope": "tournament",
+          "current_news_id": "espn:48716037:ddf3e81b6994755b",
+          "description": null,
+          "evidence_scope": "archived_headline_only",
+          "fixture_ids": [
+            "espn:760423",
+            "espn:760433",
+            "espn:760446",
+            "espn:760456",
+            "espn:760468",
+            "espn:760483",
+            "espn:760491",
+            "espn:760500",
+            "espn:760509",
+            "espn:760513",
+            "espn:760515",
+            "espn:760517"
+          ],
+          "fixture_links": [
+            {
+              "fixture_id": "espn:760423",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760433",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760446",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760456",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760468",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760483",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760491",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760500",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760509",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760513",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760515",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760517",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            }
+          ],
+          "full_article_text_collected_in_export": false,
+          "historical_availability_verified": true,
+          "historical_content_sha256": "4420d211fe33b9cdc917077a04d86deca94ec92a46c7290b1e57018fe9ce40b7",
+          "historical_text_version_status": "verified_archived_headline",
+          "historical_tournament_scope_verified": true,
+          "news_id": "wayback:193e8ad5fc3bbeea2a276773",
+          "news_item_id": "espn:48716037:archived-headline",
+          "publisher_publication_time_claim": "2026-05-09T00:30:57Z",
+          "raw_html_in_export": false,
+          "retrieved_at_utc": "2026-09-23T01:22:03.908610Z",
+          "source": "wayback_espn",
+          "source_article_id": "48716037",
+          "source_provider": "ESPN via Internet Archive",
+          "source_url": "https://www.espn.com/soccer/story/_/id/48716037/fifa-waives-otamendi-caicedo-one-game-bans-world-cup-openers",
+          "title": "FIFA waives Otamendi, Caicedo one-game bans for World Cup openers",
+          "tournament_scope_availability_evidence": [
+            {
+              "captured_at_utc": "2026-05-10T14:31:20Z",
+              "content_sha256": "4420d211fe33b9cdc917077a04d86deca94ec92a46c7290b1e57018fe9ce40b7",
+              "kind": "archive_snapshot",
+              "source_url": "https://web.archive.org/web/20260510143120id_/https://www.espn.com/soccer/story/_/id/48716037/fifa-waives-otamendi-caicedo-one-game-bans-world-cup-openers"
+            }
+          ],
+          "tournament_scope_availability_upper_utc": "2026-05-10T14:31:20Z",
+          "version_order_historically_verified": false,
+          "version_rank": 0
+        },
+        {
+          "actor_exposure_verified": false,
+          "archive_capture_timestamp": "20260509072725",
+          "archive_cdx_digest": "GQH6KDOAUCQIQUKV5JISH4QBLS7SL5EX",
+          "archive_url": "https://web.archive.org/web/20260509072725id_/https://www.espn.com/soccer/story/_/id/48711535/canada-alphonso-davies-injured-month-world-cup-bayern-munich",
+          "availability_evidence": [
+            {
+              "captured_at_utc": "2026-05-09T07:27:25Z",
+              "content_sha256": "237878171de0610824e7e8ec6b2f263f17f1159e4ac5e411641885fd930f0f59",
+              "kind": "archive_snapshot",
+              "source_url": "https://web.archive.org/web/20260509072725id_/https://www.espn.com/soccer/story/_/id/48711535/canada-alphonso-davies-injured-month-world-cup-bayern-munich"
+            }
+          ],
+          "availability_upper_utc": "2026-05-09T07:27:25Z",
+          "body": null,
+          "causal_attribution": false,
+          "content_type": "archived_headline",
+          "context_scope": "tournament",
+          "current_news_id": "espn:48711535:8d022edb1b3d88a9",
+          "description": null,
+          "evidence_scope": "archived_headline_only",
+          "fixture_ids": [
+            "espn:760416",
+            "espn:760440",
+            "espn:760463",
+            "espn:760486",
+            "espn:760502"
+          ],
+          "fixture_links": [
+            {
+              "fixture_id": "espn:760416",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760440",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760463",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760486",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            },
+            {
+              "fixture_id": "espn:760502",
+              "historical_link_verified": false,
+              "relevance_basis": "current_metadata_candidate_only"
+            }
+          ],
+          "full_article_text_collected_in_export": false,
+          "historical_availability_verified": true,
+          "historical_content_sha256": "237878171de0610824e7e8ec6b2f263f17f1159e4ac5e411641885fd930f0f59",
+          "historical_text_version_status": "verified_archived_headline",
+          "historical_tournament_scope_verified": true,
+          "news_id": "wayback:7ff92c1bb2de4aae249ff9e5",
+          "news_item_id": "espn:48711535:archived-headline",
+          "publisher_publication_time_claim": "2026-05-08T12:55:14Z",
+          "raw_html_in_export": false,
+          "retrieved_at_utc": "2026-09-23T01:22:03.976495Z",
+          "source": "wayback_espn",
+          "source_article_id": "48711535",
+          "source_provider": "ESPN via Internet Archive",
+          "source_url": "https://www.espn.com/soccer/story/_/id/48711535/canada-alphonso-davies-injured-month-world-cup-bayern-munich",
+          "title": "Canada's Alphonso Davies injured a month before World Cup - Bayern Munich",
+          "tournament_scope_availability_evidence": [
+            {
+              "captured_at_utc": "2026-05-09T07:27:25Z",
+              "content_sha256": "237878171de0610824e7e8ec6b2f263f17f1159e4ac5e411641885fd930f0f59",
+              "kind": "archive_snapshot",
+              "source_url": "https://web.archive.org/web/20260509072725id_/https://www.espn.com/soccer/story/_/id/48711535/canada-alphonso-davies-injured-month-world-cup-bayern-munich"
+            }
+          ],
+          "tournament_scope_availability_upper_utc": "2026-05-09T07:27:25Z",
+          "version_order_historically_verified": false,
+          "version_rank": 0
+        }
+      ],
+      "verified_global_public_context_item_count": 166,
+      "verified_public_context_at_execution_proxy": [],
+      "wallet_history_feature_eligible": false,
+      "wallet_history_scope": "tournament_only"
+    },
+    "incomplete_contract_histories": 19,
+    "sampling_strata": [
+      "at_or_after_time_midpoint"
+    ]
+  }
+}

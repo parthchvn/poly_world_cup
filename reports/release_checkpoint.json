@@ -153,5 +153,9 @@
       "sha256": "f8df68da41c6a2789c958cddabe41bf632d60af69a488cef55f01838bdffd6bb"
     }
   ],
-  "download_file_limit_bytes": 536870912
+  "download_file_limit_bytes": 536870912,
+  "delivery": {
+    "status": "upload_completion_unconfirmed",
+    "reason": "Upload request timed out. Subsequent file metadata checks did not confirm the generated downloads."
+  }
 }
