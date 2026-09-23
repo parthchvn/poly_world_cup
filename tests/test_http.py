@@ -1,4 +1,5 @@
 import hashlib
+import gzip
 import json
 import tempfile
 import unittest
@@ -26,6 +27,16 @@ class Response:
 
 
 class HttpTests(unittest.TestCase):
+    def test_compressed_capture_replays_exact_bytes_and_decimals(self):
+        body = b'{"size": 0.12345678901234567890123456789}'
+        with tempfile.TemporaryDirectory() as folder, patch("poly_world_cup.http.urlopen", return_value=Response(body)) as fetch:
+            first = HttpClient(Path(folder), compress=True).get_json("https://example.org/feed")
+            second = HttpClient(Path(folder)).get_json("https://example.org/feed")
+            self.assertEqual(fetch.call_count, 1)
+            self.assertEqual(first.data, second.data)
+            self.assertEqual(first.retrieved_at, second.retrieved_at)
+            self.assertEqual(gzip.decompress((Path(folder) / "bodies" / f"{first.body_sha256}.json.gz").read_bytes()), body)
+
     def test_replay_retains_capture_time_and_exact_body(self):
         body = b'{"price": 0.12345678901234567890123456789, "rows": []}'
         with tempfile.TemporaryDirectory() as folder, patch("poly_world_cup.http.urlopen", return_value=Response(body)) as fetch:

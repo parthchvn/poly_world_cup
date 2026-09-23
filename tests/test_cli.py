@@ -18,6 +18,35 @@ class CliTests(unittest.TestCase):
             self.assertEqual(exit_code, 2)
             self.assertEqual(json.loads((Path(folder) / "registry.json").read_text()), result)
 
+    def test_news_source_errors_return_failure_but_absent_recaps_do_not(self):
+        with tempfile.TemporaryDirectory() as folder:
+            registry = Path(folder) / "registry.json"
+            registry.write_text("{}")
+            for errors, expected in [([{"error": "source unavailable"}], 2), ([], 0)]:
+                with self.subTest(errors=errors), patch("poly_world_cup.news.collect_news", return_value={
+                    "errors": errors, "summary_articles_missing": ["espn:123"]
+                }), contextlib.redirect_stdout(io.StringIO()):
+                    self.assertEqual(main(["collect-news", "--registry", str(registry),
+                                           "--cache", folder, "--output", folder]), expected)
+
+    def test_partial_or_corrupt_trades_do_not_reach_attribution_builder(self):
+        with tempfile.TemporaryDirectory() as folder:
+            registry = Path(folder) / "registry.json"
+            registry.write_text("{}")
+            for corrupt, allow_partial in [(False, False), (True, False), (True, True)]:
+                audit = {"structural_audit_passed": not corrupt,
+                         "structural_errors": ["corrupt page"] if corrupt else [],
+                         "conditions_without_manifests": 1, "manifest_status_counts": {"exhausted": 311},
+                         "contract_count": 312}
+                with self.subTest(corrupt=corrupt, allow_partial=allow_partial), patch(
+                    "poly_world_cup.cli.audit_registry", return_value=audit
+                ), patch("poly_world_cup.attribution.build_attribution_index") as builder, contextlib.redirect_stderr(io.StringIO()):
+                    args = ["attribute", "--registry", str(registry)]
+                    if allow_partial:
+                        args.append("--allow-partial")
+                    self.assertEqual(main(args), 2)
+                    builder.assert_not_called()
+
 
 if __name__ == "__main__":
     unittest.main()
