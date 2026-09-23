@@ -7,7 +7,6 @@ Raw trade provenance is optional and always written to a separate archive.
 from __future__ import annotations
 
 import argparse
-from collections import Counter
 from datetime import datetime, timezone
 import gzip
 import hashlib
@@ -87,6 +86,8 @@ def _manifests(registry: dict, trades_root: Path) -> list[tuple[Path, dict]]:
         pages = item.get("pages", [])
         if item.get("page_count") != len(pages) or item.get("row_count") != sum(p["row_count"] for p in pages):
             raise ValueError("Manifest page/row totals disagree")
+        if len({page["file"] for page in pages}) != len(pages):
+            raise ValueError("Manifest repeats a normalized page")
         for page in pages:
             relative = _safe_relative(page["file"])
             _regular(path.parent / relative)
@@ -116,7 +117,10 @@ def _verify_database(db: sqlite3.Connection, manifests, news_records: dict[str, 
     expected_pages = {}
     for manifest_path, manifest in manifests:
         for page in manifest["pages"]:
-            expected_pages[str((manifest_path.parent / page["file"]).resolve())] = (page["normalized_sha256"], page["row_count"])
+            identity = str((manifest_path.parent / page["file"]).resolve())
+            if identity in expected_pages:
+                raise ValueError("Multiple manifests reference the same source page")
+            expected_pages[identity] = (page["normalized_sha256"], page["row_count"])
     actual_pages = {path: (sha, count) for path, sha, count in db.execute("SELECT path,uncompressed_sha256,row_count FROM source_pages")}
     if actual_pages != expected_pages:
         raise ValueError("SQLite source pages do not match every committed manifest page")
@@ -274,7 +278,7 @@ def export_corpus(*, database: Path, registry: Path, news: Path, archived_news: 
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, destination)
             return destination
-        staged_registry = copy(registry, "registry.json")
+        copy(registry, "registry.json")
         catalogs = [copy(news, "news/news.jsonl")]
         for index, path in enumerate(archived_news):
             catalogs.append(copy(path, f"news/archived_headlines_{index:02d}.jsonl"))

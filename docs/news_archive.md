@@ -49,6 +49,13 @@ versions, not a complete article-revision archive. Lookup errors, missing captur
 and failed replay verification remain explicit statuses. `historical_coverage_complete`
 is always false. Changing the lookup cutoff creates distinct lookup checkpoints.
 
+The final archive pass queries every URL in the current candidate catalog,
+including metadata with publication claims outside the study window. An article
+updated after the tournament might still have a valid earlier capture. Historical
+eligibility therefore follows capture evidence rather than today's publication
+date. This does not remove retrospective catalog selection bias: deleted or
+unlisted articles may still be missing.
+
 ## Scope of attribution
 
 An archived report/preview URL containing the exact ESPN `gameId` can establish

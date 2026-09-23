@@ -1,4 +1,5 @@
 import gzip
+import hashlib
 import json
 from pathlib import Path
 import sqlite3
@@ -284,6 +285,72 @@ class AttributionTests(unittest.TestCase):
         context = read_trade_context(self.output, 1)
         self.assertEqual(context["trade"]["global_eligible_context_event_count"], 0)
         self.assertEqual(context["verified_global_public_context"], [])
+
+    def test_expected_uncompressed_hash_and_count_work_for_gzip(self):
+        self.build(compressed=True)
+        page = self.directory / "trades.jsonl.gz"
+        digest = hashlib.sha256(gzip.decompress(page.read_bytes())).hexdigest()
+        report = build_attribution_index(registry=REGISTRY, trade_pages=[page], news_records=[],
+            output_path=self.output, expected_page_hashes={str(page): digest},
+            expected_page_row_counts={page: 1})
+        self.assertTrue(report["expected_page_hashes_verified"])
+        self.assertTrue(report["expected_page_row_counts_verified"])
+        self.assertFalse(report["source_completeness_certified"])
+
+    def test_valid_json_tampering_fails_expected_hash_and_preserves_database(self):
+        self.build()
+        old_database = self.output.read_bytes()
+        page = self.directory / "trades.jsonl"
+        digest = hashlib.sha256(page.read_bytes()).hexdigest()
+        altered = observation(price="0.5")
+        page.write_text(json.dumps(altered) + "\n")
+        with self.assertRaisesRegex(ValueError, "checksum differs"):
+            build_attribution_index(registry=REGISTRY, trade_pages=[page], news_records=[],
+                output_path=self.output, expected_page_hashes={page: digest})
+        self.assertEqual(self.output.read_bytes(), old_database)
+        self.assertEqual(read_trade_context(self.output, 1)["trade"]["price"], "0.12345678")
+
+    def test_expected_page_path_sets_must_match_exactly(self):
+        self.build()
+        old_database = self.output.read_bytes()
+        page = self.directory / "trades.jsonl"
+        digest = hashlib.sha256(page.read_bytes()).hexdigest()
+        for expected in ({}, {page: digest, self.directory / "extra.jsonl": digest}):
+            with self.subTest(expected=expected), self.assertRaises(ValueError):
+                build_attribution_index(registry=REGISTRY, trade_pages=[page], news_records=[],
+                    output_path=self.output, expected_page_hashes=expected)
+            self.assertEqual(self.output.read_bytes(), old_database)
+
+    def test_expected_count_failure_keeps_old_database(self):
+        self.build()
+        old_database = self.output.read_bytes()
+        page = self.directory / "trades.jsonl"
+        with self.assertRaisesRegex(ValueError, "row count differs"):
+            build_attribution_index(registry=REGISTRY, trade_pages=[page], news_records=[],
+                output_path=self.output, expected_page_row_counts={page: 2})
+        self.assertEqual(self.output.read_bytes(), old_database)
+
+    def test_hash_and_count_expectation_path_sets_must_agree(self):
+        self.build()
+        old_database = self.output.read_bytes()
+        page = self.directory / "trades.jsonl"
+        with self.assertRaisesRegex(ValueError, "different path sets"):
+            build_attribution_index(registry=REGISTRY, trade_pages=[page], news_records=[],
+                output_path=self.output, expected_page_hashes={page: "a" * 64},
+                expected_page_row_counts={})
+        self.assertEqual(self.output.read_bytes(), old_database)
+
+    def test_expectation_aliases_and_invalid_values_rejected(self):
+        self.build()
+        page = self.directory / "trades.jsonl"
+        for hashes in ({page: "not-a-hash"}, {page: "a" * 64, str(page): "a" * 64}):
+            with self.subTest(hashes=hashes), self.assertRaises(ValueError):
+                build_attribution_index(registry=REGISTRY, trade_pages=[page], news_records=[],
+                    output_path=self.output, expected_page_hashes=hashes)
+        for count in (True, -1, "1"):
+            with self.subTest(count=count), self.assertRaises(ValueError):
+                build_attribution_index(registry=REGISTRY, trade_pages=[page], news_records=[],
+                    output_path=self.output, expected_page_row_counts={page: count})
 
     def test_read_unknown_trade_does_not_create_database(self):
         nonexistent = self.directory / "missing.sqlite"

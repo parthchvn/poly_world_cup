@@ -150,7 +150,7 @@ Estimate disk use without copying data:
 python scripts/export_corpus.py \
   --database data/full/attribution.sqlite \
   --archive-news data/news_archive/news_archive.jsonl \
-  --provenance-report data/full/raw_provenance_report.json \
+  --provenance-report data/full/provenance_report.json \
   --report data/full/attribution_report.json \
   --report data/news/coverage.json \
   --report data/news_archive/report.json \
@@ -179,3 +179,28 @@ complete exchange history, human decision timing, or an absence of trading in a
 gap. The corpus is not yet SFT-ready: reconciliation, complete activity/holdings
 state, label coverage, historical context selection, and baseline evaluation
 remain separate requirements.
+
+## Generate the final collection overview
+
+After all collection, provenance, attribution, archive, and receipt-report inputs
+are finalized, produce a compact overview without scanning the trade database:
+
+```bash
+python scripts/summarize_collection.py \
+  --output reports/tournament_collection.json \
+  --readme data/releases/2026-world-cup/DATASET_README.md
+```
+
+Optionally add `--code-revision FULL_GIT_SHA` for the exact code revision used.
+The command checks the 104-fixture/312-contract universe, condition identities,
+all exhausted/validated statuses, and matching observation/page totals across
+batch, provenance, and attribution reports. It also compares the news catalogs
+with their reports and includes the earlier diagnostic receipt probe, so a prior
+mismatch is not lost behind a newer sample. Inputs are identified by SHA256.
+
+The JSON includes exact observed date bounds, the requested trade-size filter,
+one coverage row per fixture, source limitations, and explicit false flags for
+upstream completeness and training readiness. No final output is written if a
+required consistency check fails. The readable overview and compact JSON can be
+published alongside the archives; they do not replace the per-file release hash
+manifest.

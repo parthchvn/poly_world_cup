@@ -167,7 +167,8 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "archive-news":
             from .news_archive import ArchiveCollector
             records = [json.loads(line) for line in args.news.read_text().splitlines() if line.strip()]
-            records = [row for row in records if row.get("within_study_window")]
+            # Current publication claims can reflect later republication. The
+            # historical capture cutoff, not that claim, bounds availability.
             report = ArchiveCollector(args.output, cutoff=args.cutoff, start=args.start,
                                       workers=args.workers).collect(records, max_articles=args.max_articles)
             print(json.dumps(report, indent=2, sort_keys=True))

@@ -36,6 +36,18 @@ V1 smoke check found a quantity discrepancy and preserved it as a mismatch.
 Reruns archive the previous report under `runs/` before replacing the current
 report, so prior mismatches remain inspectable if sample selection changes.
 
+The separate April 9 diagnostic transaction
+`0x96858f8b2dff012bb872ac54f3d40cad1dbade0f09ed02835d95c985bee2a5c8`
+has an API size of `1.029060` shares. Its aggregate V1 event records `1.030900`
+gross shares and `0.003188` in its fee field. Two observed ERC-1155 transfers to
+the same wallet for the same token, at log indices 1615 and 1620, contain
+`1.027712` and `0.002268` shares, respectively: `1.029980` shares in total.
+The role of the additional transfer and the remaining `0.000920` difference
+from the API quantity are unresolved. The sample does not impose a correction
+formula or classify that additional transfer's purpose. This early diagnostic
+is separate from the 104-fixture late-market sample and supports no estimate of
+the overall dataset's error rate.
+
 The separate trade batch collector permits up to 64 workers to overlap network
 latency. Its global logical-request pacing remains independent of the worker
 count; increasing workers does not raise that configured request rate. HTTP

@@ -47,6 +47,17 @@ class CliTests(unittest.TestCase):
                     self.assertEqual(main(args), 2)
                     builder.assert_not_called()
 
+    def test_archive_uses_capture_window_not_current_publication_claim(self):
+        with tempfile.TemporaryDirectory() as folder:
+            news = Path(folder) / "news.jsonl"
+            records = [{"news_item_id": "republished", "within_study_window": False},
+                       {"news_item_id": "dated_in_window", "within_study_window": True}]
+            news.write_text("\n".join(json.dumps(row) for row in records) + "\n")
+            with patch("poly_world_cup.news_archive.ArchiveCollector") as collector, contextlib.redirect_stdout(io.StringIO()):
+                collector.return_value.collect.return_value = {}
+                self.assertEqual(main(["archive-news", "--news", str(news), "--output", folder]), 0)
+                self.assertEqual(collector.return_value.collect.call_args.args[0], records)
+
 
 if __name__ == "__main__":
     unittest.main()

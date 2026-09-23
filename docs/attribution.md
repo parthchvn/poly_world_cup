@@ -193,6 +193,37 @@ records the observed bytes; a bare page iterable does not provide a manifest
 against which to validate completeness. A failed rebuild leaves the previous
 database unchanged. A successful rebuild atomically replaces it.
 
+For a large corpus whose raw provenance and normalized pages were already
+verified, the builder can bind its existing streaming pass to that verified
+snapshot instead of parsing all pages in a second preliminary audit:
+
+```python
+report = build_attribution_index(
+    registry=registry,
+    trade_pages=verified_page_paths,
+    news_records=news_records,
+    output_path=Path("data/full/attribution.sqlite"),
+    expected_page_hashes=verified_uncompressed_sha256_by_path,
+    expected_page_row_counts=verified_row_count_by_path,
+)
+```
+
+These optional mappings use `Path` or string keys, resolved to absolute paths.
+Each mapping must name exactly the supplied input pages; hash and count maps
+must also agree. Duplicate aliases, missing or extra expected paths, invalid
+hashes/counts, changed page bytes, and row-count mismatches fail before replacing
+the previous database. Hashes cover **uncompressed** JSONL, including original
+line endings. The report records `expected_page_hashes_verified` and
+`expected_page_row_counts_verified`; neither flag certifies source completeness.
+
+Expectations must come from the exact manifests bound to the successful
+provenance verification report. Check each current manifest's SHA-256 against
+that report before constructing the page list and expectations. Computing new
+expectations from unverified current pages would only compare a file with
+itself and does not substitute for validation. The caller remains responsible
+for including all intended conditions and their complete committed page lists.
+Omitting the optional arguments preserves the ordinary API behavior.
+
 A SQL viewer can open the database directly. For example:
 
 ```sql
