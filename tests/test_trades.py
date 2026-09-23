@@ -1,5 +1,6 @@
 """Behavioral regression tests for incomplete and ambiguous API trade history."""
 import hashlib
+import gzip
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -8,7 +9,7 @@ import unittest
 from unittest.mock import patch
 from urllib.parse import urlencode
 
-from poly_world_cup.trades import API_URL, TradeIngestionError, ingest_condition
+from poly_world_cup.trades import API_URL, TradeIngestionError, ingest_condition, validate_collection
 
 CONDITION = "0x" + "a" * 64
 WALLET = "0x" + "b" * 40
@@ -44,6 +45,24 @@ class Client:
 
 
 class TradesTest(unittest.TestCase):
+    def test_requested_microfill_threshold_is_recorded_and_immutable_on_resume(self):
+        client = Client([page([trade(size="0.000001")])])
+        state = self.collect(client, minimum_size="0.000001")
+        self.assertEqual(client.calls[0][1]["filter_amount"], "0.000001")
+        self.assertEqual(state["minimum_size_filter"]["amount"], "0.000001")
+        self.assertEqual(validate_collection(self.output, condition_id=CONDITION), state)
+        with self.assertRaises(TradeIngestionError):
+            self.collect(Client([]), minimum_size="0.01")
+
+    def test_compressed_pages_resume_and_verify_without_losing_rows(self):
+        first = self.collect(Client([page([trade(), trade()], "next")]), max_pages=1, compress=True)
+        path = self.output / CONDITION / first["pages"][0]["file"]
+        self.assertTrue(path.name.endswith(".jsonl.gz"))
+        self.assertEqual(len(gzip.decompress(path.read_bytes()).splitlines()), 2)
+        final = self.collect(Client([page([trade(timestamp=1779999900)])]), compress=False)
+        self.assertEqual(final["row_count"], 3)
+        self.assertEqual(validate_collection(self.output, condition_id=CONDITION), final)
+
     def setUp(self):
         self.temp = TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

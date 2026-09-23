@@ -4,15 +4,19 @@
 
 | Layer | Current output | Interpretation |
 | --- | --- | --- |
-| Source capture | `data/cache/bodies/<sha256>.json` | Exact bytes returned by a public endpoint |
+| Source capture | `data/cache/bodies/<sha256>.json[.gz]` | Exact bytes returned by a public endpoint, optionally gzip stored |
 | Capture provenance | `captures/<hash>.json` | Request URL, retrieval timestamp, selected response headers, body hash |
 | Cache index | `requests/<url-hash>.json` | Latest locally captured response for this exact canonical URL |
 | Fixture registry | `data/registry/fixtures.jsonl` | All 104 fixture identities, mappings, current schedule claims, uncertainty flags |
 | Contract registry | `data/registry/contracts.jsonl` | Actual condition IDs, outcome-token pairing, exact rules text |
-| Observed fills | `data/trades/<condition>/pages/*.jsonl` | API observations with provenance; not canonical executions |
+| Observed fills | `data/trades/<condition>/pages/*.jsonl[.gz]` | API observations with provenance; not canonical executions |
 | Ingestion state | `data/trades/<condition>/manifest.json` | Durable cursor chain, hashes, row counts, traversal state, limitations |
 | Audit | `data/audit.json` | Registry structure, local ingestion progress, remaining SFT blockers |
-| Historical features / labels | Not implemented | Require the evidence gates below |
+| News metadata | `data/news/news.jsonl` | Current metadata and retrospective candidate fixture links |
+| Archived headlines | `data/news_archive/news_archive.jsonl` | Separately verified headline versions, available no earlier than capture |
+| Context index | `data/full/attribution.sqlite` | Observations, news, source pages, and strictly prior context prefixes |
+| Receipt sample | `data/full/reconciliation/sample_report.json` | Bounded log-compatibility checks; no full-chain coverage certification |
+| Historical training labels | Not implemented | Require the evidence gates below |
 
 `schema_version` is included in source-derived records. Raw body hashes are
 provenance references; a hash alone does not make source bytes available.
@@ -77,6 +81,10 @@ it does not deduplicate by transaction hash or row contents. Observation IDs
 cannot reconcile independent captures. Later chain reconciliation must retain
 the distinction between raw-event and wallet-side identity.
 
+The `size` and `price` fields preserve provider-reported values. Sampled receipts
+can have multiple compatible logs or differing gross/net amounts; this stage
+does not silently replace API values or promote them to reconciled labels.
+
 The HTTP client parses fractional JSON numbers as `Decimal`; normalization
 emits decimal strings. Exact original numeric spelling is retained in raw
 bytes. Never pass monetary amounts through a binary float transformation.
@@ -86,9 +94,11 @@ bytes. Never pass monetary amounts through a binary float transformation.
 - V2 returns `{data, pagination}`, using opaque cursors.
 - Cursor requests must repeat the condition, page limit, and all filters.
 - `taker_only=false` requests both sides but does not add an explicit role field.
-- The chosen `TOKENS` threshold is 0.01. The documented default is 0.01, and
-  setting zero still selects the default. Smaller positive thresholds were
-  not validated in this implementation.
+- The initial smoke run requested a `TOKENS` threshold of 0.01. Tournament
+  collection requests 0.000001, accepted by live requests. The documented
+  default is 0.01, and setting zero still selects the default. An accepted
+  smaller positive threshold does not independently establish provider behavior
+  or complete coverage. The actual request is fixed in every manifest.
 - `start` and `end` apply to wallet queries, not condition/event queries. The
   condition history shape uses a fixed three-year window. The unfiltered
   global feed has a much shorter window and is not a substitute for a full
@@ -121,6 +131,19 @@ normalized files against their committed journal. It does not authenticate the
 upstream source, verify raw HTTP bodies, prove absence of missing executions,
 or promote a collection to `training_coverage_certified=true`.
 
+For a release, `python -m poly_world_cup verify-provenance` additionally checks
+immutable raw capture metadata and raw bytes, verifies every request/cursor,
+and replays normalization to match each committed page hash. Its explicit
+registry condition set detects missing collections. A successful provenance
+check establishes local consistency with captured source responses, not the
+source's completeness or truth.
+
+The batch collector stores raw responses and normalized pages compressed by
+default. Both raw-body and normalized-page hashes describe **uncompressed**
+bytes. Capture metadata records the raw storage compression, and the reader
+also supports existing plain JSON/JSONL files. Compression changes storage,
+not numeric precision, observation IDs, or pagination semantics.
+
 ## Prerequisites for a training row
 
 For a row `(context B, observed target A)`, persist at least:
@@ -151,5 +174,7 @@ completeness. Capture hashes and timestamps are in the live validation report.
 - [ESPN 2026 World Cup scoreboard](https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=2026&limit=1000)
 - [Polymarket CTF Exchange v2 source](https://github.com/Polymarket/ctf-exchange-v2)
 
-The exchange code is a starting point for the next reconciliation stage; this
-commit does not implement its event decoding or certify a migration boundary.
+The bounded receipt adapter decodes pinned V1/V2 `OrderFilled` ABIs and reports
+compatible log candidates without resolving ambiguous aggregate paths. It
+does not certify a migration boundary or complete canonical event coverage;
+see [receipt checks](reconciliation.md).

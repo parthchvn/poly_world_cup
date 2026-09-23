@@ -18,11 +18,17 @@ not direct observations of private beliefs or order-submission decisions.
   capture timestamps. Preserve decimal prices and sizes without a float round trip.
 - Collect wallet-side trade observations using resumable Data API v2 cursors,
   identical filters on every page, atomic writes, and checked crash recovery.
+- Traverse all mapped contracts concurrently with bounded request rates,
+  compressed source captures, and restartable progress checkpoints.
+- Collect ESPN news metadata and verify separate archived headline versions
+  against timestamped Wayback captures. Build a queryable SQLite context index.
+- Check a bounded fixture-stratified sample against Polygon transaction receipts,
+  retaining ambiguous logs and amount discrepancies.
 - Guard historical availability, versions, wallet eligibility, coverage-aware
   labels, target-transaction exclusion, and global-time/fixture-disjoint splits.
 - Report exactly what remains missing before SFT.
 
-**Live validation:** 104/104 fixtures mapped; 312 binary result contracts;
+**Initial live validation:** 104/104 fixtures mapped; 312 binary result contracts;
 624 tokens. Two kickoff discrepancies are flagged. A bounded trade smoke run
 collected 200 observations across two pages for one condition. This validates
 the collector, not the completeness of tournament trading history.
@@ -69,19 +75,40 @@ files found; `conditions_with_verified_manifests` counts collections that pass
 these integrity checks. This does not certify the source's historical coverage.
 See the [follow-up integrity review](reports/integrity_validation.json).
 
-For API traversal over **every mapped condition**, use a separate run directory:
+For API traversal over **every mapped condition**, use the batch collector:
 
 ```bash
-python -m poly_world_cup ingest \
-  --registry data/registry/registry.json --all-pages --limit 1000 \
-  --output data/full/trades --cache data/full/cache
+python -m poly_world_cup collect-tournament \
+  --workers 12 --requests-per-second 4 --minimum-size 0.000001
 ```
 
 Repeat the same command to resume. Keep the same page limit and filters for a
 run. `--max-pages` limits *additional* pages per condition in each invocation.
-An exhausted traversal stays exhausted; use a new output **and cache** directory
-for an independent later capture. Use one process per cache directory.
-Full traversal was **not** performed in the initial commit.
+The progress file is `data/full/trades/batch_progress.json`. An exhausted
+traversal stays exhausted; use new output **and cache** directories for an
+independent later capture. The batch runner creates a cache per condition and
+prevents concurrent writers to the same run.
+
+Collect and verify news, then build the context index:
+
+```bash
+python -m poly_world_cup collect-news \
+  --window-start 2026-01-01T00:00:00Z --window-end 2026-07-20T23:59:59Z
+python -m poly_world_cup archive-news
+python -m poly_world_cup reconcile-sample
+python -m poly_world_cup verify-provenance
+python -m poly_world_cup attribute \
+  --archive-news data/news_archive/news_archive.jsonl
+python -m poly_world_cup inspect-context --row 1
+```
+
+The attribution command audits every committed trade page and requires all
+312 traversals to be exhausted. `--allow-partial` explicitly permits an
+incomplete preview. The index joins observations to fixtures and wallet
+prefixes while keeping verified historical news separate from retrospective
+candidate links. See [attribution semantics](docs/attribution.md),
+[news sources](docs/news_sources.md), [archive verification](docs/news_archive.md),
+and [receipt checks](docs/reconciliation.md).
 
 Raw responses, observations, and local caches live under ignored `data/`.
 The committed reports contain identifiers, coverage summaries, hashes, and
@@ -101,14 +128,18 @@ timestamps; wallet-level data and profile fields are not committed.
 | Fills do not reveal beliefs | Source-grounded background first; inferred beliefs are an optional ablation. |
 
 Data API collection explicitly uses `taker_only=false` and
-`filter_type=TOKENS, filter_amount=0.01`. Consequently these are observations
-from a **filtered** API. Rows lack canonical log/order IDs and explicit
+`filter_type=TOKENS`. The initial smoke run requested `filter_amount=0.01`;
+the tournament collector requests `0.000001`. Each manifest fixes the actual
+threshold, and a resume rejects changed filters. A smaller accepted request
+does not prove the provider has no hidden floor or coverage gaps. Consequently
+these remain observations from a **filtered** API. Rows lack canonical log/order IDs and explicit
 maker/taker roles. Distinct rows that look identical are retained. No execution
 bundles, inventory balances, or complete negative windows are inferred here.
 
 ## Next steps, in order
 
-1. **Reconcile execution data:** collect all mapped conditions, inspect the
+1. **Reconcile execution data:** extend bounded receipt checks to canonical
+   event coverage across all mapped conditions, inspect the
    existing `trades.parquet` schema if available, and validate canonical
    event identity, wallet sides, exchange versions, amounts, and archive gaps.
 2. **Reconstruct historical context:** global prior wallet activity,
@@ -124,4 +155,4 @@ bundles, inventory balances, or complete negative windows are inferred here.
 
 See [data contracts and API caveats](docs/data_contracts.md) for exact field
 semantics. No training run or empirical forecasting claim is made by this
-first-stage implementation.
+collection and attribution implementation.

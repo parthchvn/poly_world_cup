@@ -7,6 +7,7 @@ replays retain the original capture timestamp. Run one writer per cache director
 from __future__ import annotations
 
 import hashlib
+import gzip
 import json
 import time
 from dataclasses import dataclass
@@ -45,11 +46,12 @@ def request_url(url: str, params: dict | None = None) -> str:
 
 
 class HttpClient:
-    def __init__(self, cache_dir: Path, refresh: bool = False, *, timeout: float = 30, retries: int = 3):
+    def __init__(self, cache_dir: Path, refresh: bool = False, *, timeout: float = 30, retries: int = 3, compress: bool = False):
         self.cache_dir = Path(cache_dir)
         self.refresh = refresh
         self.timeout = timeout
         self.retries = retries
+        self.compress = compress
         if retries < 0 or timeout <= 0:
             raise ValueError("retries must be nonnegative and timeout positive")
 
@@ -59,7 +61,11 @@ class HttpClient:
         index_path = self.cache_dir / "requests" / f"{key}.json"
         if index_path.exists() and not self.refresh:
             metadata = json.loads(index_path.read_text())
-            body = (self.cache_dir / "bodies" / f"{metadata['body_sha256']}.json").read_bytes()
+            compressed = metadata.get("body_compression") == "gzip"
+            suffix = ".json.gz" if compressed else ".json"
+            body = (self.cache_dir / "bodies" / f"{metadata['body_sha256']}{suffix}").read_bytes()
+            if compressed:
+                body = gzip.decompress(body)
             if metadata["url"] != full_url or hashlib.sha256(body).hexdigest() != metadata["body_sha256"]:
                 raise ValueError(f"Cache integrity failure: {index_path}")
             return FetchResult(json.loads(body, parse_float=Decimal), full_url, metadata["retrieved_at"], metadata["body_sha256"], True)
@@ -85,13 +91,15 @@ class HttpClient:
         data = json.loads(body, parse_float=Decimal)
         body_hash = hashlib.sha256(body).hexdigest()
         retrieved_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
-        body_path = self.cache_dir / "bodies" / f"{body_hash}.json"
+        suffix = ".json.gz" if self.compress else ".json"
+        body_path = self.cache_dir / "bodies" / f"{body_hash}{suffix}"
         if not body_path.exists():
-            atomic_write(body_path, body)
+            atomic_write(body_path, gzip.compress(body, compresslevel=6, mtime=0) if self.compress else body)
         metadata = {
             "url": full_url, "retrieved_at": retrieved_at, "body_sha256": body_hash,
             "response_headers": response_headers,
             "historical_availability_verified": False,
+            "body_compression": "gzip" if self.compress else None,
         }
         # Preserve every capture record even if a refresh replaces the request index.
         capture_hash = hashlib.sha256(json.dumps(metadata, sort_keys=True).encode()).hexdigest()

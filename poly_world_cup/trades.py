@@ -10,6 +10,7 @@ from contextlib import contextmanager
 from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation
 import hashlib
+import gzip
 import json
 import os
 from pathlib import Path
@@ -195,7 +196,7 @@ def _initial_manifest(condition_id: str, parameters: dict) -> dict:
         "training_coverage_certified": False,
         "canonical_fill_identity_available": False,
         "history_window": "API condition query: fixed three years before retrieval",
-        "minimum_size_filter": {"type": "TOKENS", "amount": "0.01"},
+        "minimum_size_filter": {"type": "TOKENS", "amount": parameters["filter_amount"]},
         "coverage_limitations": [
             "API excludes trades smaller than the minimum size filter",
             "API exhaustion does not establish archive completeness or zero trading",
@@ -220,7 +221,7 @@ def _validate_saved_page(page: dict, directory: Path, *, index: int,
     if (page["page_index"] != index or page["requested_cursor"] != cursor
             or page["condition_id"] != condition_id
             or page["parameters"] != parameters
-            or page["file"] != f"pages/{stem}.jsonl"):
+            or page["file"] not in {f"pages/{stem}.jsonl", f"pages/{stem}.jsonl.gz"}):
         raise TradeIngestionError("Saved page does not match its manifest or cursor chain")
     if type(page["has_more"]) is not bool:
         raise TradeIngestionError("Invalid saved has_more")
@@ -232,6 +233,8 @@ def _validate_saved_page(page: dict, directory: Path, *, index: int,
     elif next_cursor is not None:
         raise TradeIngestionError("Saved terminal page has a next_cursor")
     content = (directory / page["file"]).read_bytes()
+    if page["file"].endswith(".gz"):
+        content = gzip.decompress(content)
     if _digest(content) != page["normalized_sha256"]:
         raise TradeIngestionError("Committed normalized page checksum mismatch")
     rows = [json.loads(line) for line in content.splitlines()]
@@ -253,6 +256,7 @@ def _load_manifest(path: Path, condition_id: str, parameters: dict) -> dict:
                 or state["condition_id"] != condition_id
                 or state["api_url"] != API_URL
                 or state["parameters"] != parameters
+                or state["minimum_size_filter"] != {"type": "TOKENS", "amount": parameters["filter_amount"]}
                 or state["training_coverage_certified"] is not False
                 or state["api_traversal_status"] not in ("paused", "exhausted")
                 or not isinstance(state["pages"], list)
@@ -298,13 +302,13 @@ def _commit_page(state: dict, page: dict, manifest_path: Path) -> None:
     _atomic_json(manifest_path, state)
 
 
-def _query_parameters(condition_id: str, limit: int) -> dict:
+def _query_parameters(condition_id: str, limit: int, minimum_size: str = "0.01") -> dict:
     if not isinstance(condition_id, str) or not HEX_32.fullmatch(condition_id):
         raise TradeIngestionError("condition_id must be a 32-byte 0x-prefixed hex string")
     if type(limit) is not int or not 1 <= limit <= 1000:
         raise TradeIngestionError("limit must be an integer between 1 and 1000")
     return {"condition": condition_id.lower(), "limit": limit, "taker_only": "false",
-            "filter_type": "TOKENS", "filter_amount": "0.01"}
+            "filter_type": "TOKENS", "filter_amount": _decimal_string(minimum_size, "minimum_size", positive=True)}
 
 
 def validate_collection(output_dir: Path, *, condition_id: str) -> dict:
@@ -321,14 +325,15 @@ def validate_collection(output_dir: Path, *, condition_id: str) -> dict:
     path = Path(output_dir) / condition_id / "manifest.json"
     try:
         state = json.loads(path.read_text())
-        parameters = _query_parameters(condition_id, state["parameters"]["limit"])
+        parameters = _query_parameters(condition_id, state["parameters"]["limit"], state["minimum_size_filter"]["amount"])
     except (OSError, ValueError, KeyError, TypeError) as exc:
         raise TradeIngestionError("Cannot validate collection manifest") from exc
     return _load_manifest(path, condition_id, parameters)
 
 
 def ingest_condition(client: Any, *, condition_id: str, output_dir: Path,
-                     limit: int = 1000, max_pages: int | None = None) -> dict:
+                     limit: int = 1000, max_pages: int | None = None,
+                     compress: bool = False, minimum_size: str = "0.01") -> dict:
     """Collect one condition, resumably; return its durable manifest.
 
     ``max_pages`` limits pages committed in this invocation (including recovered
@@ -342,7 +347,7 @@ def ingest_condition(client: Any, *, condition_id: str, output_dir: Path,
     metadata are durable before the manifest is advanced. Invalid source pages
     raise TradeIngestionError without committing partial observations.
     """
-    parameters = _query_parameters(condition_id, limit)
+    parameters = _query_parameters(condition_id, limit, minimum_size)
     if max_pages is not None and (type(max_pages) is not int or max_pages < 1):
         raise TradeIngestionError("max_pages must be a positive integer or None")
     condition_id = condition_id.lower()
@@ -364,7 +369,7 @@ def ingest_condition(client: Any, *, condition_id: str, output_dir: Path,
             index = state["page_count"]
             stem = _page_stem(index, cursor)
             metadata_path = pages_dir / f"{stem}.json"
-            page_path = pages_dir / f"{stem}.jsonl"
+            page_path = pages_dir / (f"{stem}.jsonl.gz" if compress else f"{stem}.jsonl")
             if metadata_path.exists():
                 # A validated page survived a crash before its manifest commit.
                 try:
@@ -391,7 +396,7 @@ def ingest_condition(client: Any, *, condition_id: str, output_dir: Path,
                     "page_index": index,
                     "condition_id": condition_id,
                     "parameters": parameters,
-                    "file": f"pages/{stem}.jsonl",
+                    "file": f"pages/{page_path.name}",
                     "normalized_sha256": _digest(content),
                     "row_count": len(rows),
                     "requested_cursor": cursor,
@@ -403,7 +408,7 @@ def ingest_condition(client: Any, *, condition_id: str, output_dir: Path,
                     "earliest_block_timestamp": min(timestamps) if timestamps else None,
                     "latest_block_timestamp": max(timestamps) if timestamps else None,
                 }
-                _atomic_write(page_path, content)
+                _atomic_write(page_path, gzip.compress(content, compresslevel=6, mtime=0) if compress else content)
                 _atomic_json(metadata_path, page)
             _commit_page(state, page, manifest_path)
             committed += 1
