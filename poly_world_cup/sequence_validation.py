@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 from bisect import bisect_left
-from collections import Counter, defaultdict
+from collections import Counter, defaultdict, deque
+from concurrent.futures import ProcessPoolExecutor
+from dataclasses import asdict
 from decimal import Decimal, InvalidOperation
 import gzip
 import hashlib
@@ -11,6 +13,7 @@ import json
 from pathlib import Path, PurePosixPath
 import sqlite3
 import math
+import multiprocessing
 
 from .actor_sequences import SequencePolicy, SYSTEM, PROFILE_SYSTEM
 
@@ -287,7 +290,89 @@ def validate_actor_chunks(chunks, actor, prior, expected, profile, split, catalo
     require(next(expected, None) is None, "Actor prediction windows or trade targets omitted")
 
 
-def validate_sequences(dataset_root, source_path, evidence_root, *, progress=print):
+def _bounded_ordered_results(executor, function, iterable, max_pending):
+    """Keep at most ``max_pending`` submitted batches, preserving source order.
+
+    ProcessPoolExecutor.map eagerly consumes an iterable on supported Python
+    versions. An explicit queue keeps both source rows and conversation payloads
+    bounded instead of materializing a tournament-wide list of actor jobs.
+    """
+    require(type(max_pending) is int and max_pending > 0, "Invalid pending batch limit")
+    source, pending = iter(iterable), deque()
+    try:
+        for _ in range(max_pending):
+            try:
+                item = next(source)
+            except StopIteration:
+                break
+            pending.append(executor.submit(function, item))
+        while pending:
+            yield pending.popleft().result()
+            try:
+                item = next(source)
+            except StopIteration:
+                continue
+            pending.append(executor.submit(function, item))
+    finally:
+        for future in pending:
+            future.cancel()
+
+
+_WORKER_VALIDATION = None
+
+
+def _validation_worker_init(catalog, policy_dict, splits, coverage, profile, split):
+    """Receive the parent's validated evidence snapshot once per spawned worker.
+
+    Passing the catalog through spawn preserves exactly the context already
+    compared with the published audit catalog. Workers never reopen evidence
+    files whose contents could change after the parent's validation.
+    """
+    global _WORKER_VALIDATION
+    policy = SequencePolicy(**policy_dict)
+    _WORKER_VALIDATION = (catalog, policy, splits, coverage, profile, split)
+
+
+def _validate_actor_batch(batch):
+    """Independently reconcile bounded actor jobs; return additive audit totals."""
+    require(_WORKER_VALIDATION is not None, "Validation worker is not initialized")
+    catalog, policy, splits, coverage, profile, split = _WORKER_VALIDATION
+    expected_counts, counts, token_histogram = Counter(), Counter(), Counter()
+    fixture_counts = defaultdict(Counter)
+    for actor, raw, chunks in batch:
+        normalized = normalize_source(raw, catalog, splits)
+        invalid = {r["condition_id"] for r in normalized if set(r["errors"])-{"fixture_time_split_mismatch"}}
+        prior = [r for r in normalized if r["history_split"] == split and not(set(r["errors"])-{"fixture_time_split_mismatch"})]
+        expected = expected_turns(actor, prior, invalid, profile, split, splits, coverage, policy, expected_counts)
+        validate_actor_chunks(chunks, actor, prior, expected, profile, split, catalog, policy,
+                              counts, fixture_counts, token_histogram)
+    return expected_counts, counts, dict(fixture_counts), token_histogram
+
+
+def _actor_validation_batches(db, policy, groups, batch_size=4):
+    """Materialize only a few actors while the parent verifies row ordering.
+
+    Reading ``groups`` invokes the parent's index-entry callback. The index
+    digest therefore retains exactly the serial file order, independent of
+    worker completion order. Actors with no exported chunks are still submitted
+    so workers detect missing targets and missing trailing prediction windows.
+    """
+    group, batch = next(groups, None), []
+    for actor, raw in source_actors(db, policy):
+        require(group is None or group[0] >= actor, "Unknown or unordered exported actor")
+        chunks = list(group[1]) if group is not None and group[0] == actor else []
+        if group is not None and group[0] == actor:
+            group = next(groups, None)
+        batch.append((actor, raw, chunks))
+        if len(batch) == batch_size:
+            yield batch
+            batch = []
+    require(group is None, "Extra output actors")
+    if batch:
+        yield batch
+
+
+def validate_sequences(dataset_root, source_path, evidence_root, *, progress=print, workers=1):
     """Validate every release row against source-selected observations.
 
     A selected-cohort source is acceptable only when every eligible actor/market
@@ -295,6 +380,7 @@ def validate_sequences(dataset_root, source_path, evidence_root, *, progress=pri
     are recomputed from that narrower observed cohort, never asserted to be
     full-source bounds. Exact tokenizer recount is a separate same-manifest pass.
     """
+    require(type(workers) is int and 1 <= workers <= 32, "Source validation workers must be an integer from 1 to 32")
     root, source = Path(dataset_root).resolve(), Path(source_path).resolve()
     before = source.stat()
     identity = (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns)
@@ -396,19 +482,37 @@ def validate_sequences(dataset_root, source_path, evidence_root, *, progress=pri
         for profile in PROFILES:
             for split in SPLITS:
                 groups = iter(groupby(records(root,profile+"/"+split,index_entry),lambda r:r["actor_id"]))
-                group = next(groups,None)
                 counts = Counter()
-                for actor, raw in source_actors(db, policy):
-                    normalized = normalize_source(raw,catalog,splits)
-                    invalid = {r["condition_id"] for r in normalized if set(r["errors"])-{"fixture_time_split_mismatch"}}
-                    prior = [r for r in normalized if r["history_split"] == split and not(set(r["errors"])-{"fixture_time_split_mismatch"})]
-                    require(group is None or group[0] >= actor, "Unknown or unordered exported actor")
-                    chunks = group[1] if group is not None and group[0] == actor else []
-                    expected = expected_turns(actor,prior,invalid,profile,split,splits,coverage,policy,expected_counts)
-                    validate_actor_chunks(chunks,actor,prior,expected,profile,split,catalog,policy,counts,fixture_counts,token_histogram)
-                    if group is not None and group[0] == actor:
-                        group = next(groups,None)
-                require(group is None, "Extra output actors")
+                if workers == 1:
+                    group = next(groups,None)
+                    for actor, raw in source_actors(db, policy):
+                        normalized = normalize_source(raw,catalog,splits)
+                        invalid = {r["condition_id"] for r in normalized if set(r["errors"])-{"fixture_time_split_mismatch"}}
+                        prior = [r for r in normalized if r["history_split"] == split and not(set(r["errors"])-{"fixture_time_split_mismatch"})]
+                        require(group is None or group[0] >= actor, "Unknown or unordered exported actor")
+                        chunks = group[1] if group is not None and group[0] == actor else []
+                        expected = expected_turns(actor,prior,invalid,profile,split,splits,coverage,policy,expected_counts)
+                        validate_actor_chunks(chunks,actor,prior,expected,profile,split,catalog,policy,counts,fixture_counts,token_histogram)
+                        if group is not None and group[0] == actor:
+                            group = next(groups,None)
+                    require(group is None, "Extra output actors")
+                else:
+                    batches = _actor_validation_batches(db, policy, groups)
+                    completed_batches = 0
+                    with ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context("spawn"),
+                            initializer=_validation_worker_init,
+                            initargs=(catalog, asdict(policy), splits, coverage, profile, split)) as executor:
+                        for expected_delta, counts_delta, fixture_delta, histogram_delta in _bounded_ordered_results(
+                                executor, _validate_actor_batch, batches, workers*2):
+                            expected_counts.update(expected_delta)
+                            counts.update(counts_delta)
+                            token_histogram.update(histogram_delta)
+                            for fixture, delta in fixture_delta.items():
+                                fixture_counts[fixture].update(delta)
+                            completed_batches += 1
+                            if completed_batches % 1250 == 0:
+                                progress(f"Source validation {profile}/{split}: "
+                                         f"{completed_batches*4:,} actors / {counts['target_turns']:,} turns")
                 profiles[profile][split] = dict(counts)
                 for key in ("conversations","target_turns","tokens","long_context_sequences"):
                     require(counts[key] == manifest["profiles"][profile][split].get(key,0), "Manifest profile totals mismatch")

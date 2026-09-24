@@ -12,12 +12,23 @@ from poly_world_cup.sequence_token_validation import recount_tokens,attach_token
 
 
 def validate_release(args,progress=print):
+    def checked(name,operation):
+        try:
+            return operation()
+        except Exception as error:
+            # The executor may still be draining its independent check. Expose
+            # the failure immediately so monitoring can stop the full release.
+            progress(f"{name} FAILED: {type(error).__name__}: {error}")
+            raise
+    def source_check():
+        return validate_sequences(args.dataset,args.source,args.evidence,progress=progress,
+            workers=getattr(args,"source_workers",1))
     if not args.tokenizer:
-        return validate_sequences(args.dataset,args.source,args.evidence,progress=progress)
+        return checked("Structural/source validation",source_check)
     with ThreadPoolExecutor(max_workers=1,thread_name_prefix="token-coordinator") as coordinator:
-        future = coordinator.submit(recount_tokens,args.dataset,args.tokenizer,args.chat_template,
-            workers=args.token_workers,progress=progress,receipt_cache=getattr(args,"token_receipts",None))
-        structural = validate_sequences(args.dataset,args.source,args.evidence,progress=progress)
+        future = coordinator.submit(checked,"Token recount",lambda:recount_tokens(args.dataset,args.tokenizer,args.chat_template,
+            workers=args.token_workers,progress=progress,receipt_cache=getattr(args,"token_receipts",None)))
+        structural = checked("Structural/source validation",source_check)
         tokens = future.result()
     return attach_token_recount(structural,tokens)
 
@@ -29,6 +40,8 @@ def main():
     parser.add_argument("--tokenizer",type=Path)
     parser.add_argument("--chat-template",type=Path,default=Path(__file__).resolve().parents[1]/"configs/actor_sequence_chat_template.jinja")
     parser.add_argument("--token-workers",type=int,choices=range(1,33),default=7,metavar="1-32")
+    parser.add_argument("--source-workers",type=int,choices=range(1,33),default=1,metavar="1-32",
+        help="Bounded spawned actor validators; coordinate this with --token-workers to avoid oversubscription")
     parser.add_argument("--token-receipts",type=Path,help="Reuse independently recounted, hash-bound shard receipts stored outside the dataset")
     args = parser.parse_args()
     result = validate_release(args,progress=lambda text:print(text,flush=True))
