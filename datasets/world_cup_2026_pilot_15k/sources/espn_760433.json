@@ -1,0 +1,2460 @@
+{
+  "fixture_id": "espn:760433",
+  "espn_event_id": "760433",
+  "kickoff": "2026-06-17T01:00:00Z",
+  "target_end_exclusive": "2026-06-17T02:59:59Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760433",
+    "source_body_sha256": "8903980c5ea542f2943796241dab752df6bb4041849cd7a2b66f420e56690e90",
+    "captured_at_utc": "2026-09-24T22:46:54.465225Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49535627",
+      "time": "2026-06-17T01:02:41Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-17T01:02:41Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        }
+      }
+    },
+    {
+      "event_id": "49535632",
+      "time": "2026-06-17T01:03:17Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Enzo Fernández, Anis Hadj Moussa.",
+      "provider_wallclock": "2026-06-17T01:03:17Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "35.0",
+          "displayValue": "1'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Enzo Fernández"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Anis Hadj Moussa"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49535682",
+      "time": "2026-06-17T01:05:45Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Argentina. Players involved: Facundo Medina.",
+      "provider_wallclock": "2026-06-17T01:05:45Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "184.0",
+          "displayValue": "4'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Facundo Medina"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49535714",
+      "time": "2026-06-17T01:07:22Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Argentina. Players involved: Lautaro Martínez.",
+      "provider_wallclock": "2026-06-17T01:07:22Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "281.0",
+          "displayValue": "5'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lautaro Martínez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49535755",
+      "time": "2026-06-17T01:10:06Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Algeria. Players involved: Ibrahim Maza.",
+      "provider_wallclock": "2026-06-17T01:10:06Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "445.0",
+          "displayValue": "8'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ibrahim Maza"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49535759",
+      "time": "2026-06-17T01:10:09Z",
+      "type": "deleted-after-review",
+      "text": "Event: Deleted After Review. Team: Algeria. Players involved: Farès Chaïbi, Ibrahim Maza.",
+      "provider_wallclock": "2026-06-17T01:10:09Z",
+      "facts": {
+        "type": {
+          "id": "175",
+          "text": "Deleted After Review",
+          "type": "deleted-after-review"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "447.0",
+          "displayValue": "8'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Farès Chaïbi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ibrahim Maza"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49535762",
+      "time": "2026-06-17T01:11:02Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Algeria.",
+      "provider_wallclock": "2026-06-17T01:11:02Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "500.0",
+          "displayValue": "9'"
+        },
+        "team": {
+          "id": "624",
+          "displayName": "Algeria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49535763",
+      "time": "2026-06-17T01:11:02Z",
+      "type": "var---referee-decision-cancelled",
+      "text": "Event: VAR - Referee decision cancelled. Team: Algeria. Players involved: Farès Chaïbi.",
+      "provider_wallclock": "2026-06-17T01:11:02Z",
+      "facts": {
+        "type": {
+          "id": "172",
+          "text": "VAR - Referee decision cancelled",
+          "type": "var---referee-decision-cancelled"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "500.0",
+          "displayValue": "9'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Farès Chaïbi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49535764",
+      "time": "2026-06-17T01:11:09Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Algeria.",
+      "provider_wallclock": "2026-06-17T01:11:09Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "507.0",
+          "displayValue": "9'"
+        },
+        "team": {
+          "id": "624",
+          "displayName": "Algeria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49535793",
+      "time": "2026-06-17T01:12:26Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Lautaro Martínez, Aïssa Mandi.",
+      "provider_wallclock": "2026-06-17T01:12:26Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "585.0",
+          "displayValue": "10'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lautaro Martínez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Aïssa Mandi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49535801",
+      "time": "2026-06-17T01:13:11Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Gonzalo Montiel, Rayan Aït-Nouri.",
+      "provider_wallclock": "2026-06-17T01:13:11Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "630.0",
+          "displayValue": "11'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gonzalo Montiel"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Rayan Aït-Nouri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49535916",
+      "time": "2026-06-17T01:19:21Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Argentina. Players involved: Lionel Messi, Rodrigo De Paul.",
+      "provider_wallclock": "2026-06-17T01:19:21Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "999.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lionel Messi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Rodrigo De Paul"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536042",
+      "time": "2026-06-17T01:26:57Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Argentina.",
+      "provider_wallclock": "2026-06-17T01:26:57Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1456.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        }
+      }
+    },
+    {
+      "event_id": "49536041",
+      "time": "2026-06-17T01:26:58Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Algeria.",
+      "provider_wallclock": "2026-06-17T01:26:58Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1456.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "id": "624",
+          "displayName": "Algeria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49536044",
+      "time": "2026-06-17T01:29:53Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Algeria.",
+      "provider_wallclock": "2026-06-17T01:29:53Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1631.0",
+          "displayValue": "28'"
+        },
+        "team": {
+          "id": "624",
+          "displayName": "Algeria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49536045",
+      "time": "2026-06-17T01:29:53Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Argentina.",
+      "provider_wallclock": "2026-06-17T01:29:53Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1631.0",
+          "displayValue": "28'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        }
+      }
+    },
+    {
+      "event_id": "49536125",
+      "time": "2026-06-17T01:33:31Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Lionel Messi, Aïssa Mandi.",
+      "provider_wallclock": "2026-06-17T01:33:31Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1849.0",
+          "displayValue": "31'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lionel Messi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Aïssa Mandi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536166",
+      "time": "2026-06-17T01:36:28Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Algeria. Players involved: Amine Gouiri, Alexis Mac Allister.",
+      "provider_wallclock": "2026-06-17T01:36:28Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2027.0",
+          "displayValue": "34'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Amine Gouiri"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alexis Mac Allister"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536190",
+      "time": "2026-06-17T01:38:08Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Algeria. Players involved: Rafik Belghali, Thiago Almada.",
+      "provider_wallclock": "2026-06-17T01:38:08Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2126.0",
+          "displayValue": "36'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Rafik Belghali"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Thiago Almada"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536357",
+      "time": "2026-06-17T01:38:54Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Argentina. Players involved: Lionel Messi.",
+      "provider_wallclock": "2026-06-17T01:38:54Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2173.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lionel Messi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536204",
+      "time": "2026-06-17T01:38:57Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Facundo Medina, Aïssa Mandi.",
+      "provider_wallclock": "2026-06-17T01:38:57Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2175.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Facundo Medina"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Aïssa Mandi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536229",
+      "time": "2026-06-17T01:41:11Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Argentina. Players involved: Lionel Messi.",
+      "provider_wallclock": "2026-06-17T01:41:11Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2310.0",
+          "displayValue": "39'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lionel Messi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536254",
+      "time": "2026-06-17T01:42:42Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Algeria.",
+      "provider_wallclock": "2026-06-17T01:42:42Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2400.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        }
+      }
+    },
+    {
+      "event_id": "49536260",
+      "time": "2026-06-17T01:43:09Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Algeria. Players involved: Farès Chaïbi, Hicham Boudaoui.",
+      "provider_wallclock": "2026-06-17T01:43:09Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2427.0",
+          "displayValue": "41'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Farès Chaïbi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hicham Boudaoui"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536272",
+      "time": "2026-06-17T01:44:04Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Argentina. Players involved: Thiago Almada, Enzo Fernández.",
+      "provider_wallclock": "2026-06-17T01:44:04Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2483.0",
+          "displayValue": "42'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Thiago Almada"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Enzo Fernández"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536289",
+      "time": "2026-06-17T01:45:18Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Alexis Mac Allister, Ibrahim Maza.",
+      "provider_wallclock": "2026-06-17T01:45:18Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2556.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alexis Mac Allister"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ibrahim Maza"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536302",
+      "time": "2026-06-17T01:45:57Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Algeria. Players involved: Farès Chaïbi, Aïssa Mandi.",
+      "provider_wallclock": "2026-06-17T01:45:57Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2595.0",
+          "displayValue": "44'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Farès Chaïbi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Aïssa Mandi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536326",
+      "time": "2026-06-17T01:47:08Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Algeria. Players involved: Farès Chaïbi, Anis Hadj Moussa.",
+      "provider_wallclock": "2026-06-17T01:47:08Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2666.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Farès Chaïbi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Anis Hadj Moussa"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536330",
+      "time": "2026-06-17T01:47:36Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Lautaro Martínez, Ramy Bensebaini.",
+      "provider_wallclock": "2026-06-17T01:47:36Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2694.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lautaro Martínez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ramy Bensebaini"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536344",
+      "time": "2026-06-17T01:48:13Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Algeria.",
+      "provider_wallclock": "2026-06-17T01:48:13Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+1'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        }
+      }
+    },
+    {
+      "event_id": "49536399",
+      "time": "2026-06-17T01:50:53Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Algeria. Players involved: Anis Hadj Moussa, Rafik Belghali.",
+      "provider_wallclock": "2026-06-17T01:50:53Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Anis Hadj Moussa"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Rafik Belghali"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536402",
+      "time": "2026-06-17T01:51:12Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Algeria. Players involved: Rafik Belghali, Thiago Almada.",
+      "provider_wallclock": "2026-06-17T01:51:12Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Rafik Belghali"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Thiago Almada"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536405",
+      "time": "2026-06-17T01:52:04Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Argentina. Players involved: Alexis Mac Allister, Lionel Messi.",
+      "provider_wallclock": "2026-06-17T01:52:04Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+5'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alexis Mac Allister"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lionel Messi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536407",
+      "time": "2026-06-17T01:52:07Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-17T01:52:07Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+5'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49536411",
+      "time": "2026-06-17T02:08:08Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Argentina. Players involved: Nahuel Molina, Gonzalo Montiel.",
+      "provider_wallclock": "2026-06-17T02:08:08Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nahuel Molina"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Gonzalo Montiel"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536414",
+      "time": "2026-06-17T02:08:25Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-17T02:08:25Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        }
+      }
+    },
+    {
+      "event_id": "49536473",
+      "time": "2026-06-17T02:10:55Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Algeria. Players involved: Hicham Boudaoui, Lionel Messi.",
+      "provider_wallclock": "2026-06-17T02:10:55Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2849.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Hicham Boudaoui"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lionel Messi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536532",
+      "time": "2026-06-17T02:13:36Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Argentina. Players involved: Lionel Messi, Nahuel Molina.",
+      "provider_wallclock": "2026-06-17T02:13:36Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3010.0",
+          "displayValue": "51'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lionel Messi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nahuel Molina"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536536",
+      "time": "2026-06-17T02:14:09Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Cristian Romero, Ibrahim Maza.",
+      "provider_wallclock": "2026-06-17T02:14:09Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3043.0",
+          "displayValue": "51'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Cristian Romero"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ibrahim Maza"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536581",
+      "time": "2026-06-17T02:16:34Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Argentina. Players involved: Lautaro Martínez, Lionel Messi.",
+      "provider_wallclock": "2026-06-17T02:16:34Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3188.0",
+          "displayValue": "54'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lautaro Martínez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lionel Messi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536592",
+      "time": "2026-06-17T02:17:42Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Cristian Romero, Amine Gouiri.",
+      "provider_wallclock": "2026-06-17T02:17:42Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3256.0",
+          "displayValue": "55'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Cristian Romero"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Amine Gouiri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536596",
+      "time": "2026-06-17T02:18:18Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Argentina. Players involved: Nico González, Thiago Almada.",
+      "provider_wallclock": "2026-06-17T02:18:18Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3293.0",
+          "displayValue": "55'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nico González"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Thiago Almada"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536593",
+      "time": "2026-06-17T02:18:20Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Argentina. Players involved: Julián Álvarez, Lautaro Martínez.",
+      "provider_wallclock": "2026-06-17T02:18:20Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3294.0",
+          "displayValue": "55'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Julián Álvarez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lautaro Martínez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536639",
+      "time": "2026-06-17T02:20:18Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Algeria. Players involved: Ibrahim Maza, Farès Chaïbi.",
+      "provider_wallclock": "2026-06-17T02:20:18Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3412.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ibrahim Maza"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Farès Chaïbi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536670",
+      "time": "2026-06-17T02:21:58Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Argentina.",
+      "provider_wallclock": "2026-06-17T02:21:58Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3513.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        }
+      }
+    },
+    {
+      "event_id": "49536681",
+      "time": "2026-06-17T02:23:07Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Argentina. Players involved: Alexis Mac Allister.",
+      "provider_wallclock": "2026-06-17T02:23:07Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3581.0",
+          "displayValue": "60'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alexis Mac Allister"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536682",
+      "time": "2026-06-17T02:23:08Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Argentina. Players involved: Lionel Messi.",
+      "provider_wallclock": "2026-06-17T02:23:08Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3582.0",
+          "displayValue": "60'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lionel Messi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536725",
+      "time": "2026-06-17T02:26:25Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Algeria. Players involved: Hicham Boudaoui, Enzo Fernández.",
+      "provider_wallclock": "2026-06-17T02:26:25Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3779.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Hicham Boudaoui"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Enzo Fernández"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536726",
+      "time": "2026-06-17T02:26:45Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Algeria. Players involved: Houssem Aouar, Hicham Boudaoui.",
+      "provider_wallclock": "2026-06-17T02:26:45Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3799.0",
+          "displayValue": "64'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Houssem Aouar"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hicham Boudaoui"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536727",
+      "time": "2026-06-17T02:26:53Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Algeria. Players involved: Mohamed Amoura, Amine Gouiri.",
+      "provider_wallclock": "2026-06-17T02:26:53Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3807.0",
+          "displayValue": "64'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Amoura"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Amine Gouiri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536728",
+      "time": "2026-06-17T02:27:01Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Algeria. Players involved: Riyad Mahrez, Anis Hadj Moussa.",
+      "provider_wallclock": "2026-06-17T02:27:01Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3815.0",
+          "displayValue": "64'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Riyad Mahrez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Anis Hadj Moussa"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536737",
+      "time": "2026-06-17T02:27:20Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Algeria. Players involved: Mohamed Amoura, Cristian Romero.",
+      "provider_wallclock": "2026-06-17T02:27:20Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3834.0",
+          "displayValue": "64'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Amoura"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Cristian Romero"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536768",
+      "time": "2026-06-17T02:28:36Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Argentina. Players involved: Lionel Messi, Alexis Mac Allister.",
+      "provider_wallclock": "2026-06-17T02:28:36Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3911.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lionel Messi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alexis Mac Allister"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536765",
+      "time": "2026-06-17T02:28:39Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Argentina.",
+      "provider_wallclock": "2026-06-17T02:28:39Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3913.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        }
+      }
+    },
+    {
+      "event_id": "49536825",
+      "time": "2026-06-17T02:31:50Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Algeria. Players involved: Houssem Aouar, Mohamed Amoura.",
+      "provider_wallclock": "2026-06-17T02:31:50Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4105.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Houssem Aouar"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohamed Amoura"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536827",
+      "time": "2026-06-17T02:31:58Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Algeria.",
+      "provider_wallclock": "2026-06-17T02:31:58Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4112.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "id": "624",
+          "displayName": "Algeria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49536828",
+      "time": "2026-06-17T02:31:58Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Argentina.",
+      "provider_wallclock": "2026-06-17T02:31:58Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4112.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        }
+      }
+    },
+    {
+      "event_id": "49536830",
+      "time": "2026-06-17T02:34:22Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Argentina.",
+      "provider_wallclock": "2026-06-17T02:34:22Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4257.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        }
+      }
+    },
+    {
+      "event_id": "49536829",
+      "time": "2026-06-17T02:34:23Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Algeria.",
+      "provider_wallclock": "2026-06-17T02:34:23Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4257.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "id": "624",
+          "displayName": "Algeria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49536901",
+      "time": "2026-06-17T02:37:47Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Algeria. Players involved: Farès Chaïbi, Rodrigo De Paul.",
+      "provider_wallclock": "2026-06-17T02:37:47Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4461.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Farès Chaïbi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Rodrigo De Paul"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536917",
+      "time": "2026-06-17T02:39:03Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Argentina. Players involved: Lionel Messi, Nico González.",
+      "provider_wallclock": "2026-06-17T02:39:03Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4538.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lionel Messi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nico González"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536941",
+      "time": "2026-06-17T02:41:21Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Algeria.",
+      "provider_wallclock": "2026-06-17T02:41:21Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4675.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        }
+      }
+    },
+    {
+      "event_id": "49536943",
+      "time": "2026-06-17T02:41:22Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Argentina.",
+      "provider_wallclock": "2026-06-17T02:41:22Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4675.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "id": "202",
+          "displayName": "Argentina"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49536944",
+      "time": "2026-06-17T02:41:50Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Algeria.",
+      "provider_wallclock": "2026-06-17T02:41:50Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4704.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        }
+      }
+    },
+    {
+      "event_id": "49536945",
+      "time": "2026-06-17T02:41:50Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Argentina.",
+      "provider_wallclock": "2026-06-17T02:41:50Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4704.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "id": "202",
+          "displayName": "Argentina"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49536946",
+      "time": "2026-06-17T02:42:27Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Argentina. Players involved: Nico Paz, Lionel Messi.",
+      "provider_wallclock": "2026-06-17T02:42:27Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4741.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nico Paz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lionel Messi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536948",
+      "time": "2026-06-17T02:42:31Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Argentina. Players involved: Nicolás Otamendi, Cristian Romero.",
+      "provider_wallclock": "2026-06-17T02:42:31Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4746.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nicolás Otamendi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Cristian Romero"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536974",
+      "time": "2026-06-17T02:44:23Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Algeria. Players involved: Adil Boulbina, Nabil Bentaleb.",
+      "provider_wallclock": "2026-06-17T02:44:23Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4858.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Adil Boulbina"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nabil Bentaleb"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536973",
+      "time": "2026-06-17T02:44:52Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Algeria. Players involved: Ramiz Zerrouki, Nabil Bentaleb.",
+      "provider_wallclock": "2026-06-17T02:44:52Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4886.0",
+          "displayValue": "82'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ramiz Zerrouki"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nabil Bentaleb"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536985",
+      "time": "2026-06-17T02:45:43Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Facundo Medina, Riyad Mahrez.",
+      "provider_wallclock": "2026-06-17T02:45:43Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4937.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Facundo Medina"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Riyad Mahrez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49536994",
+      "time": "2026-06-17T02:46:13Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Julián Álvarez, Aïssa Mandi.",
+      "provider_wallclock": "2026-06-17T02:46:13Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4968.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Julián Álvarez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Aïssa Mandi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537027",
+      "time": "2026-06-17T02:47:42Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Alexis Mac Allister, Houssem Aouar.",
+      "provider_wallclock": "2026-06-17T02:47:42Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5056.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alexis Mac Allister"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Houssem Aouar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537047",
+      "time": "2026-06-17T02:48:52Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Algeria. Players involved: Riyad Mahrez.",
+      "provider_wallclock": "2026-06-17T02:48:52Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5126.0",
+          "displayValue": "86'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Riyad Mahrez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537245",
+      "time": "2026-06-17T02:57:41Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Argentina. Players involved: Nico Paz, Ramy Bensebaini.",
+      "provider_wallclock": "2026-06-17T02:57:41Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+5'"
+        },
+        "team": {
+          "displayName": "Argentina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nico Paz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ramy Bensebaini"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537260",
+      "time": "2026-06-17T02:58:57Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Algeria. Players involved: Rayan Aït-Nouri.",
+      "provider_wallclock": "2026-06-17T02:58:57Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+6'"
+        },
+        "team": {
+          "displayName": "Algeria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Rayan Aït-Nouri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537261",
+      "time": "2026-06-17T02:59:59Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-17T02:59:59Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+7'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 6
+  }
+}

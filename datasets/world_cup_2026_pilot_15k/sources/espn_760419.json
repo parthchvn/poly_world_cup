@@ -1,0 +1,3299 @@
+{
+  "fixture_id": "espn:760419",
+  "espn_event_id": "760419",
+  "kickoff": "2026-06-13T22:00:00Z",
+  "target_end_exclusive": "2026-06-14T00:05:27Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760419",
+    "source_body_sha256": "0220418c857ba8f6723879abb79836582f6219ad383d7638c07237446a2fca50",
+    "captured_at_utc": "2026-09-24T22:46:41.824674Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49497127",
+      "time": "2026-06-13T22:04:24Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-13T22:04:24Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        }
+      }
+    },
+    {
+      "event_id": "49497154",
+      "time": "2026-06-13T22:05:27Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Douglas Santos, Brahim Díaz.",
+      "provider_wallclock": "2026-06-13T22:05:27Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "64.0",
+          "displayValue": "2'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Douglas Santos"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Brahim Díaz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497220",
+      "time": "2026-06-13T22:06:58Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Roger Ibañez, Bilal El Khannouss.",
+      "provider_wallclock": "2026-06-13T22:06:58Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "155.0",
+          "displayValue": "3'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Roger Ibañez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Bilal El Khannouss"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497277",
+      "time": "2026-06-13T22:09:32Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Morocco. Players involved: Brahim Díaz, Achraf Hakimi.",
+      "provider_wallclock": "2026-06-13T22:09:32Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "308.0",
+          "displayValue": "6'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brahim Díaz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497312",
+      "time": "2026-06-13T22:10:10Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Morocco. Players involved: Neil El Aynaoui, Azzedine Ounahi.",
+      "provider_wallclock": "2026-06-13T22:10:10Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "347.0",
+          "displayValue": "6'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Neil El Aynaoui"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Azzedine Ounahi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497326",
+      "time": "2026-06-13T22:10:42Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Morocco. Players involved: Bilal El Khannouss, Achraf Hakimi.",
+      "provider_wallclock": "2026-06-13T22:10:42Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "379.0",
+          "displayValue": "7'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Bilal El Khannouss"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497324",
+      "time": "2026-06-13T22:10:57Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Morocco. Players involved: Achraf Hakimi, Azzedine Ounahi.",
+      "provider_wallclock": "2026-06-13T22:10:57Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "393.0",
+          "displayValue": "7'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Azzedine Ounahi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497418",
+      "time": "2026-06-13T22:12:45Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Brazil. Players involved: Raphinha, Casemiro.",
+      "provider_wallclock": "2026-06-13T22:12:45Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "501.0",
+          "displayValue": "9'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Raphinha"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Casemiro"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497447",
+      "time": "2026-06-13T22:13:05Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Morocco. Players involved: Brahim Díaz, Bilal El Khannouss.",
+      "provider_wallclock": "2026-06-13T22:13:05Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "521.0",
+          "displayValue": "9'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brahim Díaz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Bilal El Khannouss"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497446",
+      "time": "2026-06-13T22:13:10Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Achraf Hakimi, Gabriel Magalhães.",
+      "provider_wallclock": "2026-06-13T22:13:10Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "526.0",
+          "displayValue": "9'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Gabriel Magalhães"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497461",
+      "time": "2026-06-13T22:14:22Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Neil El Aynaoui, Casemiro.",
+      "provider_wallclock": "2026-06-13T22:14:22Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "598.0",
+          "displayValue": "10'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Neil El Aynaoui"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Casemiro"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497522",
+      "time": "2026-06-13T22:15:06Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Morocco. Players involved: Ismael Saibari, Neil El Aynaoui.",
+      "provider_wallclock": "2026-06-13T22:15:06Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "642.0",
+          "displayValue": "11'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ismael Saibari"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Neil El Aynaoui"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497530",
+      "time": "2026-06-13T22:16:03Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Ayyoub Bouaddi, Bruno Guimarães.",
+      "provider_wallclock": "2026-06-13T22:16:03Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "700.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ayyoub Bouaddi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Bruno Guimarães"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497560",
+      "time": "2026-06-13T22:16:47Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Ismael Saibari, Roger Ibañez.",
+      "provider_wallclock": "2026-06-13T22:16:47Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "743.0",
+          "displayValue": "13'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ismael Saibari"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Roger Ibañez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497581",
+      "time": "2026-06-13T22:17:30Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Brazil. Players involved: Igor Thiago.",
+      "provider_wallclock": "2026-06-13T22:17:30Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "786.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Igor Thiago"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497639",
+      "time": "2026-06-13T22:19:23Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Igor Thiago, Neil El Aynaoui.",
+      "provider_wallclock": "2026-06-13T22:19:23Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "900.0",
+          "displayValue": "15'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Igor Thiago"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Neil El Aynaoui"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497742",
+      "time": "2026-06-13T22:22:41Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T22:22:41Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1097.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        }
+      }
+    },
+    {
+      "event_id": "49497757",
+      "time": "2026-06-13T22:23:46Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Brazil. Players involved: Lucas Paquetá, Vinícius Júnior.",
+      "provider_wallclock": "2026-06-13T22:23:46Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1162.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lucas Paquetá"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Vinícius Júnior"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497769",
+      "time": "2026-06-13T22:24:39Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Morocco. Players involved: Ismael Saibari, Brahim Díaz.",
+      "provider_wallclock": "2026-06-13T22:24:39Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1215.0",
+          "displayValue": "21'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ismael Saibari"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Brahim Díaz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497782",
+      "time": "2026-06-13T22:26:47Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T22:26:47Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1344.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        }
+      }
+    },
+    {
+      "event_id": "49497789",
+      "time": "2026-06-13T22:26:48Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Morocco.",
+      "provider_wallclock": "2026-06-13T22:26:48Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1344.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "id": "2869",
+          "displayName": "Morocco"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49497793",
+      "time": "2026-06-13T22:29:38Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T22:29:38Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1515.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        }
+      }
+    },
+    {
+      "event_id": "49497792",
+      "time": "2026-06-13T22:29:39Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Morocco.",
+      "provider_wallclock": "2026-06-13T22:29:39Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1515.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "id": "2869",
+          "displayName": "Morocco"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49497802",
+      "time": "2026-06-13T22:30:17Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Achraf Hakimi, Vinícius Júnior.",
+      "provider_wallclock": "2026-06-13T22:30:17Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1553.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Vinícius Júnior"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497830",
+      "time": "2026-06-13T22:31:06Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Morocco. Players involved: Achraf Hakimi, Bilal El Khannouss.",
+      "provider_wallclock": "2026-06-13T22:31:06Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1602.0",
+          "displayValue": "27'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Bilal El Khannouss"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497842",
+      "time": "2026-06-13T22:32:31Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Douglas Santos, Brahim Díaz.",
+      "provider_wallclock": "2026-06-13T22:32:31Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1688.0",
+          "displayValue": "29'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Douglas Santos"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Brahim Díaz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497854",
+      "time": "2026-06-13T22:33:17Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Morocco. Players involved: Neil El Aynaoui, Achraf Hakimi.",
+      "provider_wallclock": "2026-06-13T22:33:17Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1733.0",
+          "displayValue": "29'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Neil El Aynaoui"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497855",
+      "time": "2026-06-13T22:33:26Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Morocco. Players involved: Ismael Saibari, Brahim Díaz.",
+      "provider_wallclock": "2026-06-13T22:33:26Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1743.0",
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ismael Saibari"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Brahim Díaz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497880",
+      "time": "2026-06-13T22:33:32Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Morocco. Players involved: Brahim Díaz.",
+      "provider_wallclock": "2026-06-13T22:33:32Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1748.0",
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brahim Díaz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497879",
+      "time": "2026-06-13T22:34:26Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Morocco. Players involved: Achraf Hakimi.",
+      "provider_wallclock": "2026-06-13T22:34:26Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1802.0",
+          "displayValue": "31'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497900",
+      "time": "2026-06-13T22:35:45Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Brazil. Players involved: Vinícius Júnior, Bruno Guimarães.",
+      "provider_wallclock": "2026-06-13T22:35:45Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1881.0",
+          "displayValue": "32'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Vinícius Júnior"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Bruno Guimarães"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497919",
+      "time": "2026-06-13T22:37:59Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Vinícius Júnior, Achraf Hakimi.",
+      "provider_wallclock": "2026-06-13T22:37:59Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2015.0",
+          "displayValue": "34'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Vinícius Júnior"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497970",
+      "time": "2026-06-13T22:41:06Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Casemiro, Neil El Aynaoui.",
+      "provider_wallclock": "2026-06-13T22:41:06Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2203.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Casemiro"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Neil El Aynaoui"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497971",
+      "time": "2026-06-13T22:41:12Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Brazil. Players involved: Casemiro.",
+      "provider_wallclock": "2026-06-13T22:41:12Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2208.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Casemiro"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49497999",
+      "time": "2026-06-13T22:42:38Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Neil El Aynaoui, Lucas Paquetá.",
+      "provider_wallclock": "2026-06-13T22:42:38Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2294.0",
+          "displayValue": "39'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Neil El Aynaoui"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lucas Paquetá"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498109",
+      "time": "2026-06-13T22:45:55Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Neil El Aynaoui, Lucas Paquetá.",
+      "provider_wallclock": "2026-06-13T22:45:55Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2491.0",
+          "displayValue": "42'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Neil El Aynaoui"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lucas Paquetá"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498186",
+      "time": "2026-06-13T22:47:07Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Roger Ibañez, Brahim Díaz.",
+      "provider_wallclock": "2026-06-13T22:47:07Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2563.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Roger Ibañez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Brahim Díaz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498187",
+      "time": "2026-06-13T22:47:14Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Brazil. Players involved: Roger Ibañez.",
+      "provider_wallclock": "2026-06-13T22:47:14Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2570.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Roger Ibañez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498239",
+      "time": "2026-06-13T22:48:32Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Bilal El Khannouss, Raphinha.",
+      "provider_wallclock": "2026-06-13T22:48:32Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2648.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Bilal El Khannouss"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Raphinha"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498282",
+      "time": "2026-06-13T22:50:43Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Brazil. Players involved: Lucas Paquetá, Douglas Santos.",
+      "provider_wallclock": "2026-06-13T22:50:43Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+2'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lucas Paquetá"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Douglas Santos"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498280",
+      "time": "2026-06-13T22:50:44Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T22:50:44Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+2'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        }
+      }
+    },
+    {
+      "event_id": "49498329",
+      "time": "2026-06-13T22:51:29Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Brazil. Players involved: Marquinhos, Raphinha.",
+      "provider_wallclock": "2026-06-13T22:51:29Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+3'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marquinhos"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Raphinha"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498362",
+      "time": "2026-06-13T22:52:33Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Lucas Paquetá, Achraf Hakimi.",
+      "provider_wallclock": "2026-06-13T22:52:33Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lucas Paquetá"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498389",
+      "time": "2026-06-13T22:53:25Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-13T22:53:25Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+5'"
+        }
+      }
+    },
+    {
+      "event_id": "49498686",
+      "time": "2026-06-13T23:09:25Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Brazil. Players involved: Danilo, Roger Ibañez.",
+      "provider_wallclock": "2026-06-13T23:09:25Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Danilo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Roger Ibañez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498687",
+      "time": "2026-06-13T23:09:25Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Brazil. Players involved: Fabinho, Casemiro.",
+      "provider_wallclock": "2026-06-13T23:09:25Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Fabinho"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Casemiro"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498729",
+      "time": "2026-06-13T23:10:09Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-13T23:10:09Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        }
+      }
+    },
+    {
+      "event_id": "49498691",
+      "time": "2026-06-13T23:10:21Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Brazil. Players involved: Bruno Guimarães.",
+      "provider_wallclock": "2026-06-13T23:10:21Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2711.0",
+          "displayValue": "46'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Bruno Guimarães"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498751",
+      "time": "2026-06-13T23:11:20Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T23:11:20Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2771.0",
+          "displayValue": "47'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        }
+      }
+    },
+    {
+      "event_id": "49499074",
+      "time": "2026-06-13T23:12:16Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Brazil. Players involved: Marquinhos, Raphinha.",
+      "provider_wallclock": "2026-06-13T23:12:16Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2827.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marquinhos"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Raphinha"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498769",
+      "time": "2026-06-13T23:12:19Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T23:12:19Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2830.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        }
+      }
+    },
+    {
+      "event_id": "49498817",
+      "time": "2026-06-13T23:13:34Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Bruno Guimarães, Achraf Hakimi.",
+      "provider_wallclock": "2026-06-13T23:13:34Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2905.0",
+          "displayValue": "49'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Bruno Guimarães"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49498967",
+      "time": "2026-06-13T23:17:06Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Brazil. Players involved: Igor Thiago, Lucas Paquetá.",
+      "provider_wallclock": "2026-06-13T23:17:06Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3117.0",
+          "displayValue": "52'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Igor Thiago"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lucas Paquetá"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499013",
+      "time": "2026-06-13T23:18:45Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Fabinho, Achraf Hakimi.",
+      "provider_wallclock": "2026-06-13T23:18:45Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3216.0",
+          "displayValue": "54'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Fabinho"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499056",
+      "time": "2026-06-13T23:20:18Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Bilal El Khannouss, Lucas Paquetá.",
+      "provider_wallclock": "2026-06-13T23:20:18Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3309.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Bilal El Khannouss"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lucas Paquetá"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499083",
+      "time": "2026-06-13T23:21:47Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Igor Thiago, Neil El Aynaoui.",
+      "provider_wallclock": "2026-06-13T23:21:47Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3397.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Igor Thiago"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Neil El Aynaoui"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499129",
+      "time": "2026-06-13T23:23:07Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Noussair Mazraoui, Raphinha.",
+      "provider_wallclock": "2026-06-13T23:23:07Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3478.0",
+          "displayValue": "58'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Noussair Mazraoui"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Raphinha"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499206",
+      "time": "2026-06-13T23:25:34Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Vinícius Júnior, Ayyoub Bouaddi.",
+      "provider_wallclock": "2026-06-13T23:25:34Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3625.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Vinícius Júnior"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ayyoub Bouaddi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499209",
+      "time": "2026-06-13T23:26:03Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Brazil. Players involved: Matheus Cunha, Lucas Paquetá.",
+      "provider_wallclock": "2026-06-13T23:26:03Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3654.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Matheus Cunha"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lucas Paquetá"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499255",
+      "time": "2026-06-13T23:26:16Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Brazil. Players involved: Luiz Henrique, Igor Thiago.",
+      "provider_wallclock": "2026-06-13T23:26:16Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3666.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Luiz Henrique"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Igor Thiago"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499298",
+      "time": "2026-06-13T23:27:51Z",
+      "type": "ball-touch",
+      "text": "Event: Ball touch. Team: Brazil. Players involved: Bruno Guimarães.",
+      "provider_wallclock": "2026-06-13T23:27:51Z",
+      "facts": {
+        "type": {
+          "id": "177",
+          "text": "Ball touch",
+          "type": "ball-touch"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3762.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Bruno Guimarães"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499301",
+      "time": "2026-06-13T23:27:51Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Ismael Saibari, Bruno Guimarães.",
+      "provider_wallclock": "2026-06-13T23:27:51Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3762.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ismael Saibari"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Bruno Guimarães"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499329",
+      "time": "2026-06-13T23:29:27Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Morocco. Players involved: Samir El Mourabet, Azzedine Ounahi.",
+      "provider_wallclock": "2026-06-13T23:29:27Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3857.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Samir El Mourabet"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Azzedine Ounahi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499327",
+      "time": "2026-06-13T23:29:50Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Morocco. Players involved: Chemsdine Talbi, Brahim Díaz.",
+      "provider_wallclock": "2026-06-13T23:29:50Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3880.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Chemsdine Talbi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Brahim Díaz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499367",
+      "time": "2026-06-13T23:30:37Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Noussair Mazraoui, Luiz Henrique.",
+      "provider_wallclock": "2026-06-13T23:30:37Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3928.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Noussair Mazraoui"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Luiz Henrique"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499394",
+      "time": "2026-06-13T23:32:14Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Gabriel Magalhães, Ismael Saibari.",
+      "provider_wallclock": "2026-06-13T23:32:14Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4025.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gabriel Magalhães"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ismael Saibari"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499455",
+      "time": "2026-06-13T23:32:36Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T23:32:36Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4047.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        }
+      }
+    },
+    {
+      "event_id": "49499454",
+      "time": "2026-06-13T23:32:37Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Morocco.",
+      "provider_wallclock": "2026-06-13T23:32:37Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4047.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "id": "2869",
+          "displayName": "Morocco"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49499470",
+      "time": "2026-06-13T23:35:00Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T23:35:00Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4191.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        }
+      }
+    },
+    {
+      "event_id": "49499469",
+      "time": "2026-06-13T23:35:01Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Morocco.",
+      "provider_wallclock": "2026-06-13T23:35:01Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4191.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "id": "2869",
+          "displayName": "Morocco"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49499500",
+      "time": "2026-06-13T23:36:34Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Morocco. Players involved: Noussair Mazraoui.",
+      "provider_wallclock": "2026-06-13T23:36:34Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4285.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Noussair Mazraoui"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499536",
+      "time": "2026-06-13T23:38:18Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Fabinho, Achraf Hakimi.",
+      "provider_wallclock": "2026-06-13T23:38:18Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4388.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Fabinho"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499638",
+      "time": "2026-06-13T23:42:51Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Brazil. Players involved: Raphinha, Vinícius Júnior.",
+      "provider_wallclock": "2026-06-13T23:42:51Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4662.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Raphinha"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Vinícius Júnior"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499641",
+      "time": "2026-06-13T23:43:00Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Morocco.",
+      "provider_wallclock": "2026-06-13T23:43:00Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4671.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        }
+      }
+    },
+    {
+      "event_id": "49499643",
+      "time": "2026-06-13T23:43:01Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T23:43:01Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4671.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "id": "205",
+          "displayName": "Brazil"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49499645",
+      "time": "2026-06-13T23:44:11Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Morocco. Players involved: Anass Salah-Eddine, Noussair Mazraoui.",
+      "provider_wallclock": "2026-06-13T23:44:11Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4741.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Anass Salah-Eddine"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Noussair Mazraoui"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499644",
+      "time": "2026-06-13T23:44:13Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Morocco. Players involved: Ayoube Amaimouni, Bilal El Khannouss.",
+      "provider_wallclock": "2026-06-13T23:44:13Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4744.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ayoube Amaimouni"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Bilal El Khannouss"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499647",
+      "time": "2026-06-13T23:44:37Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Brazil. Players involved: Danilo Santos, Bruno Guimarães.",
+      "provider_wallclock": "2026-06-13T23:44:37Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4767.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Danilo Santos"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Bruno Guimarães"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499646",
+      "time": "2026-06-13T23:44:39Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T23:44:39Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4770.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "id": "205",
+          "displayName": "Brazil"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49499648",
+      "time": "2026-06-13T23:44:39Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Morocco.",
+      "provider_wallclock": "2026-06-13T23:44:39Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4770.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        }
+      }
+    },
+    {
+      "event_id": "49499690",
+      "time": "2026-06-13T23:47:01Z",
+      "type": "var---referee-decision-cancelled",
+      "text": "Event: VAR - Referee decision cancelled. Team: Brazil. Players involved: Matheus Cunha.",
+      "provider_wallclock": "2026-06-13T23:47:01Z",
+      "facts": {
+        "type": {
+          "id": "172",
+          "text": "VAR - Referee decision cancelled",
+          "type": "var---referee-decision-cancelled"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4912.0",
+          "displayValue": "82'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Matheus Cunha"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499688",
+      "time": "2026-06-13T23:47:02Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T23:47:02Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4912.0",
+          "displayValue": "82'"
+        },
+        "team": {
+          "id": "205",
+          "displayName": "Brazil"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49499689",
+      "time": "2026-06-13T23:47:19Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T23:47:19Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4929.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "id": "205",
+          "displayName": "Brazil"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49499700",
+      "time": "2026-06-13T23:48:17Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Morocco.",
+      "provider_wallclock": "2026-06-13T23:48:17Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4988.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        }
+      }
+    },
+    {
+      "event_id": "49499701",
+      "time": "2026-06-13T23:48:18Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T23:48:18Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4988.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "id": "205",
+          "displayName": "Brazil"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49499703",
+      "time": "2026-06-13T23:50:03Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Morocco.",
+      "provider_wallclock": "2026-06-13T23:50:03Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5093.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        }
+      }
+    },
+    {
+      "event_id": "49499704",
+      "time": "2026-06-13T23:50:03Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T23:50:03Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5093.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "id": "205",
+          "displayName": "Brazil"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49499781",
+      "time": "2026-06-13T23:53:28Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Morocco. Players involved: Soufiane Rahimi, Ismael Saibari.",
+      "provider_wallclock": "2026-06-13T23:53:28Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5298.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Soufiane Rahimi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ismael Saibari"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499790",
+      "time": "2026-06-13T23:54:13Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Vinícius Júnior, Ayyoub Bouaddi.",
+      "provider_wallclock": "2026-06-13T23:54:13Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5344.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Vinícius Júnior"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ayyoub Bouaddi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499793",
+      "time": "2026-06-13T23:54:13Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Vinícius Júnior, Ayyoub Bouaddi.",
+      "provider_wallclock": "2026-06-13T23:54:13Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5344.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Vinícius Júnior"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ayyoub Bouaddi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499800",
+      "time": "2026-06-13T23:55:03Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Neil El Aynaoui, Matheus Cunha.",
+      "provider_wallclock": "2026-06-13T23:55:03Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5393.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Neil El Aynaoui"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Matheus Cunha"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499804",
+      "time": "2026-06-13T23:55:24Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Morocco. Players involved: Achraf Hakimi, Vinícius Júnior.",
+      "provider_wallclock": "2026-06-13T23:55:24Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+1'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Achraf Hakimi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Vinícius Júnior"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499812",
+      "time": "2026-06-13T23:55:56Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Brazil. Players involved: Danilo Santos, Raphinha.",
+      "provider_wallclock": "2026-06-13T23:55:56Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+1'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Danilo Santos"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Raphinha"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499824",
+      "time": "2026-06-13T23:56:29Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T23:56:29Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        }
+      }
+    },
+    {
+      "event_id": "49499833",
+      "time": "2026-06-13T23:57:27Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Brazil.",
+      "provider_wallclock": "2026-06-13T23:57:27Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        }
+      }
+    },
+    {
+      "event_id": "49499841",
+      "time": "2026-06-13T23:57:49Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Brazil. Players involved: Danilo Santos, Luiz Henrique.",
+      "provider_wallclock": "2026-06-13T23:57:49Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Danilo Santos"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Luiz Henrique"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499874",
+      "time": "2026-06-13T23:59:17Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Morocco.",
+      "provider_wallclock": "2026-06-13T23:59:17Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+5'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        }
+      }
+    },
+    {
+      "event_id": "49499900",
+      "time": "2026-06-14T00:01:19Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Brazil. Players involved: Fabinho, Samir El Mourabet.",
+      "provider_wallclock": "2026-06-14T00:01:19Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+7'"
+        },
+        "team": {
+          "displayName": "Brazil"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Fabinho"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Samir El Mourabet"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499936",
+      "time": "2026-06-14T00:03:41Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Morocco. Players involved: Neil El Aynaoui.",
+      "provider_wallclock": "2026-06-14T00:03:41Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+9'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Neil El Aynaoui"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499933",
+      "time": "2026-06-14T00:03:42Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Morocco. Players involved: Ayoube Amaimouni.",
+      "provider_wallclock": "2026-06-14T00:03:42Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+9'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ayoube Amaimouni"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49499932",
+      "time": "2026-06-14T00:03:44Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Morocco.",
+      "provider_wallclock": "2026-06-14T00:03:44Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+9'"
+        },
+        "team": {
+          "displayName": "Morocco"
+        }
+      }
+    },
+    {
+      "event_id": "49500007",
+      "time": "2026-06-14T00:05:27Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-14T00:05:27Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+12'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 5
+  }
+}

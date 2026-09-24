@@ -1,0 +1,2956 @@
+{
+  "fixture_id": "espn:760428",
+  "espn_event_id": "760428",
+  "kickoff": "2026-06-15T16:00:00Z",
+  "target_end_exclusive": "2026-06-15T17:56:33Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760428",
+    "source_body_sha256": "9208fcdf05b56eea611c8fd089382ac76bc73a4780eee24cb4b42ed9a3cfd29c",
+    "captured_at_utc": "2026-09-24T22:46:46.369244Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49521938",
+      "time": "2026-06-15T16:01:11Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-15T16:01:11Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        }
+      }
+    },
+    {
+      "event_id": "49521966",
+      "time": "2026-06-15T16:02:44Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Spain. Players involved: Marc Cucurella, Ryan Mendes.",
+      "provider_wallclock": "2026-06-15T16:02:44Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "93.0",
+          "displayValue": "2'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marc Cucurella"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ryan Mendes"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521986",
+      "time": "2026-06-15T16:04:15Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Spain.",
+      "provider_wallclock": "2026-06-15T16:04:15Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "183.0",
+          "displayValue": "4'"
+        },
+        "team": {
+          "id": "164",
+          "displayName": "Spain"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49521987",
+      "time": "2026-06-15T16:04:15Z",
+      "type": "var---referee-decision-cancelled",
+      "text": "Event: VAR - Referee decision cancelled. Team: Spain. Players involved: Ferran Torres.",
+      "provider_wallclock": "2026-06-15T16:04:15Z",
+      "facts": {
+        "type": {
+          "id": "172",
+          "text": "VAR - Referee decision cancelled",
+          "type": "var---referee-decision-cancelled"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "183.0",
+          "displayValue": "4'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ferran Torres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521988",
+      "time": "2026-06-15T16:04:16Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Spain.",
+      "provider_wallclock": "2026-06-15T16:04:16Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "184.0",
+          "displayValue": "4'"
+        },
+        "team": {
+          "id": "164",
+          "displayName": "Spain"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49522119",
+      "time": "2026-06-15T16:10:59Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Spain.",
+      "provider_wallclock": "2026-06-15T16:10:59Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "587.0",
+          "displayValue": "10'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49522195",
+      "time": "2026-06-15T16:15:16Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Spain. Players involved: Gavi.",
+      "provider_wallclock": "2026-06-15T16:15:16Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "844.0",
+          "displayValue": "15'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gavi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522217",
+      "time": "2026-06-15T16:16:07Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Spain. Players involved: Pedri.",
+      "provider_wallclock": "2026-06-15T16:16:07Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "895.0",
+          "displayValue": "15'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Pedri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522228",
+      "time": "2026-06-15T16:16:39Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Cape Verde. Players involved: Sidny Lopes Cabral, Marcos Llorente.",
+      "provider_wallclock": "2026-06-15T16:16:39Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "927.0",
+          "displayValue": "16'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sidny Lopes Cabral"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Marcos Llorente"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522229",
+      "time": "2026-06-15T16:16:44Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Cape Verde. Players involved: Sidny Lopes Cabral.",
+      "provider_wallclock": "2026-06-15T16:16:44Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "933.0",
+          "displayValue": "16'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sidny Lopes Cabral"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522299",
+      "time": "2026-06-15T16:20:08Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Spain. Players involved: Fabián Ruiz.",
+      "provider_wallclock": "2026-06-15T16:20:08Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1137.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Fabián Ruiz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522308",
+      "time": "2026-06-15T16:20:27Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Spain. Players involved: Pau Cubarsí, Rodri.",
+      "provider_wallclock": "2026-06-15T16:20:27Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1156.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Pau Cubarsí"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Rodri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522309",
+      "time": "2026-06-15T16:20:54Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Cape Verde. Players involved: Pico Lopes.",
+      "provider_wallclock": "2026-06-15T16:20:54Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1182.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Pico Lopes"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522345",
+      "time": "2026-06-15T16:22:48Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Cape Verde. Players involved: Diney Borges.",
+      "provider_wallclock": "2026-06-15T16:22:48Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1297.0",
+          "displayValue": "22'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Diney Borges"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522362",
+      "time": "2026-06-15T16:23:46Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Spain.",
+      "provider_wallclock": "2026-06-15T16:23:46Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1355.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49522361",
+      "time": "2026-06-15T16:23:47Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Cape Verde.",
+      "provider_wallclock": "2026-06-15T16:23:47Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1355.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "id": "2597",
+          "displayName": "Cape Verde"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49522363",
+      "time": "2026-06-15T16:26:41Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Spain.",
+      "provider_wallclock": "2026-06-15T16:26:41Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1530.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49522364",
+      "time": "2026-06-15T16:26:42Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Cape Verde.",
+      "provider_wallclock": "2026-06-15T16:26:42Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1530.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "id": "2597",
+          "displayName": "Cape Verde"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49522381",
+      "time": "2026-06-15T16:27:47Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Cape Verde. Players involved: Steven Moreira.",
+      "provider_wallclock": "2026-06-15T16:27:47Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1596.0",
+          "displayValue": "27'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Steven Moreira"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522413",
+      "time": "2026-06-15T16:29:27Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Spain. Players involved: Gavi, Marc Cucurella.",
+      "provider_wallclock": "2026-06-15T16:29:27Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1695.0",
+          "displayValue": "29'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gavi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Marc Cucurella"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522424",
+      "time": "2026-06-15T16:29:51Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Spain. Players involved: Marc Cucurella.",
+      "provider_wallclock": "2026-06-15T16:29:51Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1719.0",
+          "displayValue": "29'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marc Cucurella"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522493",
+      "time": "2026-06-15T16:33:46Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Cape Verde. Players involved: Kevin Pina.",
+      "provider_wallclock": "2026-06-15T16:33:46Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1954.0",
+          "displayValue": "33'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kevin Pina"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522507",
+      "time": "2026-06-15T16:34:45Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Spain. Players involved: Ferran Torres, Sidny Lopes Cabral.",
+      "provider_wallclock": "2026-06-15T16:34:45Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2013.0",
+          "displayValue": "34'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ferran Torres"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sidny Lopes Cabral"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522514",
+      "time": "2026-06-15T16:35:19Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Spain. Players involved: Ferran Torres, Sidny Lopes Cabral.",
+      "provider_wallclock": "2026-06-15T16:35:19Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2047.0",
+          "displayValue": "35'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ferran Torres"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sidny Lopes Cabral"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522526",
+      "time": "2026-06-15T16:35:58Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Cape Verde. Players involved: Dailon Livramento.",
+      "provider_wallclock": "2026-06-15T16:35:58Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2086.0",
+          "displayValue": "35'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Dailon Livramento"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522542",
+      "time": "2026-06-15T16:36:59Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Spain. Players involved: Pedri.",
+      "provider_wallclock": "2026-06-15T16:36:59Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2148.0",
+          "displayValue": "36'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Pedri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522550",
+      "time": "2026-06-15T16:37:37Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Spain. Players involved: Marcos Llorente, Dailon Livramento.",
+      "provider_wallclock": "2026-06-15T16:37:37Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2186.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marcos Llorente"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Dailon Livramento"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522554",
+      "time": "2026-06-15T16:38:14Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Cape Verde. Players involved: Jovane Cabral, Sidny Lopes Cabral.",
+      "provider_wallclock": "2026-06-15T16:38:14Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2222.0",
+          "displayValue": "38'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jovane Cabral"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sidny Lopes Cabral"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522609",
+      "time": "2026-06-15T16:40:00Z",
+      "type": "shot-hit-woodwork",
+      "text": "Event: Shot Hit Woodwork. Team: Spain. Players involved: Ferran Torres, Marc Cucurella.",
+      "provider_wallclock": "2026-06-15T16:40:00Z",
+      "facts": {
+        "type": {
+          "id": "136",
+          "text": "Shot Hit Woodwork",
+          "type": "shot-hit-woodwork"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2329.0",
+          "displayValue": "39'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ferran Torres"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Marc Cucurella"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522607",
+      "time": "2026-06-15T16:40:02Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Spain. Players involved: Mikel Oyarzabal, Ferran Torres.",
+      "provider_wallclock": "2026-06-15T16:40:02Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2331.0",
+          "displayValue": "39'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mikel Oyarzabal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ferran Torres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522606",
+      "time": "2026-06-15T16:40:05Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Spain.",
+      "provider_wallclock": "2026-06-15T16:40:05Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2333.0",
+          "displayValue": "39'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49522740",
+      "time": "2026-06-15T16:41:04Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Spain. Players involved: Ferran Torres, Pedri.",
+      "provider_wallclock": "2026-06-15T16:41:04Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2393.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ferran Torres"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Pedri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522623",
+      "time": "2026-06-15T16:41:16Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Spain. Players involved: Fabián Ruiz, Mikel Oyarzabal.",
+      "provider_wallclock": "2026-06-15T16:41:16Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2404.0",
+          "displayValue": "41'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Fabián Ruiz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mikel Oyarzabal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522675",
+      "time": "2026-06-15T16:44:07Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Spain. Players involved: Ferran Torres.",
+      "provider_wallclock": "2026-06-15T16:44:07Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2575.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ferran Torres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522699",
+      "time": "2026-06-15T16:45:42Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Spain. Players involved: Ferran Torres.",
+      "provider_wallclock": "2026-06-15T16:45:42Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2670.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ferran Torres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522734",
+      "time": "2026-06-15T16:47:40Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Spain.",
+      "provider_wallclock": "2026-06-15T16:47:40Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+2'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49522750",
+      "time": "2026-06-15T16:48:10Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Spain. Players involved: Aymeric Laporte.",
+      "provider_wallclock": "2026-06-15T16:48:10Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+2'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aymeric Laporte"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522738",
+      "time": "2026-06-15T16:48:14Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Spain.",
+      "provider_wallclock": "2026-06-15T16:48:14Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+3'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49522771",
+      "time": "2026-06-15T16:48:37Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Spain. Players involved: Rodri, Pedri.",
+      "provider_wallclock": "2026-06-15T16:48:37Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+3'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Rodri"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Pedri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522766",
+      "time": "2026-06-15T16:49:33Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Spain. Players involved: Mikel Oyarzabal, Marcos Llorente.",
+      "provider_wallclock": "2026-06-15T16:49:33Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mikel Oyarzabal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Marcos Llorente"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522769",
+      "time": "2026-06-15T16:50:15Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-15T16:50:15Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+5'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49522776",
+      "time": "2026-06-15T17:06:10Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-15T17:06:10Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49522834",
+      "time": "2026-06-15T17:08:54Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Spain. Players involved: Mikel Oyarzabal, Pedri.",
+      "provider_wallclock": "2026-06-15T17:08:54Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2865.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mikel Oyarzabal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Pedri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522836",
+      "time": "2026-06-15T17:09:00Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Spain. Players involved: Fabián Ruiz, Marcos Llorente.",
+      "provider_wallclock": "2026-06-15T17:09:00Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2870.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Fabián Ruiz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Marcos Llorente"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522897",
+      "time": "2026-06-15T17:11:32Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Spain. Players involved: Fabián Ruiz, Pedri.",
+      "provider_wallclock": "2026-06-15T17:11:32Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3022.0",
+          "displayValue": "51'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Fabián Ruiz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Pedri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522926",
+      "time": "2026-06-15T17:13:07Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Spain. Players involved: Gavi, Ryan Mendes.",
+      "provider_wallclock": "2026-06-15T17:13:07Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3117.0",
+          "displayValue": "52'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gavi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ryan Mendes"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49522980",
+      "time": "2026-06-15T17:17:08Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Spain. Players involved: Fabián Ruiz, Pedri.",
+      "provider_wallclock": "2026-06-15T17:17:08Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3358.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Fabián Ruiz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Pedri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523005",
+      "time": "2026-06-15T17:18:29Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Spain. Players involved: Aymeric Laporte, Rodri.",
+      "provider_wallclock": "2026-06-15T17:18:29Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3439.0",
+          "displayValue": "58'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aymeric Laporte"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Rodri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523015",
+      "time": "2026-06-15T17:19:12Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:19:12Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3482.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49523043",
+      "time": "2026-06-15T17:21:08Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:21:08Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3598.0",
+          "displayValue": "60'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49523044",
+      "time": "2026-06-15T17:21:40Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Cape Verde. Players involved: Willy Semedo, Jovane Cabral.",
+      "provider_wallclock": "2026-06-15T17:21:40Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3630.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Willy Semedo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jovane Cabral"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523045",
+      "time": "2026-06-15T17:21:45Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Cape Verde. Players involved: Deroy Duarte, Laros Duarte.",
+      "provider_wallclock": "2026-06-15T17:21:45Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3635.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Deroy Duarte"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Laros Duarte"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523046",
+      "time": "2026-06-15T17:21:50Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Cape Verde. Players involved: Nuno da Costa, Dailon Livramento.",
+      "provider_wallclock": "2026-06-15T17:21:50Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3641.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nuno da Costa"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Dailon Livramento"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523128",
+      "time": "2026-06-15T17:25:45Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:25:45Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3875.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49523129",
+      "time": "2026-06-15T17:25:45Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Cape Verde.",
+      "provider_wallclock": "2026-06-15T17:25:45Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3875.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "id": "2597",
+          "displayName": "Cape Verde"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49523131",
+      "time": "2026-06-15T17:26:07Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:26:07Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3897.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49523132",
+      "time": "2026-06-15T17:26:07Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Cape Verde.",
+      "provider_wallclock": "2026-06-15T17:26:07Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3897.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "id": "2597",
+          "displayName": "Cape Verde"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49523186",
+      "time": "2026-06-15T17:28:21Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:28:21Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4031.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49523191",
+      "time": "2026-06-15T17:28:49Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Spain. Players involved: Rodri, Vozinha.",
+      "provider_wallclock": "2026-06-15T17:28:49Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4059.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Rodri"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Vozinha"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523193",
+      "time": "2026-06-15T17:28:57Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:28:57Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4067.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49523192",
+      "time": "2026-06-15T17:28:58Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Cape Verde.",
+      "provider_wallclock": "2026-06-15T17:28:58Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4067.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "id": "2597",
+          "displayName": "Cape Verde"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49523195",
+      "time": "2026-06-15T17:31:25Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:31:25Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4216.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49523198",
+      "time": "2026-06-15T17:31:26Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Cape Verde.",
+      "provider_wallclock": "2026-06-15T17:31:26Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4216.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "id": "2597",
+          "displayName": "Cape Verde"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49523196",
+      "time": "2026-06-15T17:31:37Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Spain. Players involved: Mikel Merino, Fabián Ruiz.",
+      "provider_wallclock": "2026-06-15T17:31:37Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4227.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mikel Merino"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Fabián Ruiz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523197",
+      "time": "2026-06-15T17:31:49Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Spain. Players involved: Lamine Yamal, Gavi.",
+      "provider_wallclock": "2026-06-15T17:31:49Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4239.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lamine Yamal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Gavi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523236",
+      "time": "2026-06-15T17:33:49Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Spain. Players involved: Mikel Merino, Marcos Llorente.",
+      "provider_wallclock": "2026-06-15T17:33:49Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4359.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mikel Merino"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Marcos Llorente"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523279",
+      "time": "2026-06-15T17:35:32Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Spain. Players involved: Ferran Torres, Rodri.",
+      "provider_wallclock": "2026-06-15T17:35:32Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4462.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ferran Torres"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Rodri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523289",
+      "time": "2026-06-15T17:36:00Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Spain. Players involved: Mikel Merino, Kevin Pina.",
+      "provider_wallclock": "2026-06-15T17:36:00Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4490.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mikel Merino"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Kevin Pina"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523291",
+      "time": "2026-06-15T17:36:28Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Cape Verde. Players involved: João Paulo, Sidny Lopes Cabral.",
+      "provider_wallclock": "2026-06-15T17:36:28Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4518.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "João Paulo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sidny Lopes Cabral"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523334",
+      "time": "2026-06-15T17:38:19Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Spain. Players involved: Pedri, Mikel Merino.",
+      "provider_wallclock": "2026-06-15T17:38:19Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4630.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Pedri"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mikel Merino"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523361",
+      "time": "2026-06-15T17:39:19Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:39:19Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4690.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49523363",
+      "time": "2026-06-15T17:39:45Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Cape Verde. Players involved: Telmo Arcanjo, Jamiro Monteiro.",
+      "provider_wallclock": "2026-06-15T17:39:45Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4715.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Telmo Arcanjo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jamiro Monteiro"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523399",
+      "time": "2026-06-15T17:41:44Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Spain. Players involved: Dani Olmo, Ferran Torres.",
+      "provider_wallclock": "2026-06-15T17:41:44Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4834.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Dani Olmo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ferran Torres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523401",
+      "time": "2026-06-15T17:41:56Z",
+      "type": "var---referee-decision-cancelled",
+      "text": "Event: VAR - Referee decision cancelled. Team: Spain. Players involved: Lamine Yamal.",
+      "provider_wallclock": "2026-06-15T17:41:56Z",
+      "facts": {
+        "type": {
+          "id": "172",
+          "text": "VAR - Referee decision cancelled",
+          "type": "var---referee-decision-cancelled"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4846.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lamine Yamal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523400",
+      "time": "2026-06-15T17:41:57Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:41:57Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4846.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "id": "164",
+          "displayName": "Spain"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49523402",
+      "time": "2026-06-15T17:42:07Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:42:07Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4856.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "id": "164",
+          "displayName": "Spain"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49523452",
+      "time": "2026-06-15T17:43:09Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Spain. Players involved: Marc Cucurella, Mikel Merino.",
+      "provider_wallclock": "2026-06-15T17:43:09Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4920.0",
+          "displayValue": "82'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marc Cucurella"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mikel Merino"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523461",
+      "time": "2026-06-15T17:43:41Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Spain. Players involved: Lamine Yamal, João Paulo.",
+      "provider_wallclock": "2026-06-15T17:43:41Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4951.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lamine Yamal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "João Paulo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523509",
+      "time": "2026-06-15T17:45:57Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Spain. Players involved: Rodri.",
+      "provider_wallclock": "2026-06-15T17:45:57Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5087.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Rodri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523541",
+      "time": "2026-06-15T17:47:49Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Spain. Players involved: Nico Williams, Rodri.",
+      "provider_wallclock": "2026-06-15T17:47:49Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5199.0",
+          "displayValue": "87'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nico Williams"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Rodri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523557",
+      "time": "2026-06-15T17:48:38Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Spain. Players involved: Mikel Oyarzabal, Dani Olmo.",
+      "provider_wallclock": "2026-06-15T17:48:38Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5248.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mikel Oyarzabal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Dani Olmo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523556",
+      "time": "2026-06-15T17:48:39Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:48:39Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5249.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49523579",
+      "time": "2026-06-15T17:50:31Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Cape Verde. Players involved: Kevin Pina, Deroy Duarte.",
+      "provider_wallclock": "2026-06-15T17:50:31Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5361.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kevin Pina"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Deroy Duarte"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523580",
+      "time": "2026-06-15T17:50:34Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Cape Verde.",
+      "provider_wallclock": "2026-06-15T17:50:34Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5364.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        }
+      }
+    },
+    {
+      "event_id": "49523589",
+      "time": "2026-06-15T17:51:12Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Cape Verde. Players involved: Diney Borges, Telmo Arcanjo.",
+      "provider_wallclock": "2026-06-15T17:51:12Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+1'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Diney Borges"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Telmo Arcanjo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523599",
+      "time": "2026-06-15T17:51:54Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:51:54Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+1'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49523612",
+      "time": "2026-06-15T17:52:38Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Spain. Players involved: Lamine Yamal, Pau Cubarsí.",
+      "provider_wallclock": "2026-06-15T17:52:38Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lamine Yamal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Pau Cubarsí"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523627",
+      "time": "2026-06-15T17:53:38Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Spain. Players involved: Pedri, Nuno da Costa.",
+      "provider_wallclock": "2026-06-15T17:53:38Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Pedri"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nuno da Costa"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523628",
+      "time": "2026-06-15T17:53:43Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Spain. Players involved: Pedri.",
+      "provider_wallclock": "2026-06-15T17:53:43Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Pedri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523644",
+      "time": "2026-06-15T17:54:48Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Cape Verde. Players involved: Ryan Mendes, Telmo Arcanjo.",
+      "provider_wallclock": "2026-06-15T17:54:48Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "displayName": "Cape Verde"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ryan Mendes"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Telmo Arcanjo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523660",
+      "time": "2026-06-15T17:55:33Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Spain. Players involved: Lamine Yamal, Dani Olmo.",
+      "provider_wallclock": "2026-06-15T17:55:33Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+5'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lamine Yamal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Dani Olmo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523659",
+      "time": "2026-06-15T17:55:35Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Spain.",
+      "provider_wallclock": "2026-06-15T17:55:35Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+5'"
+        },
+        "team": {
+          "displayName": "Spain"
+        }
+      }
+    },
+    {
+      "event_id": "49523663",
+      "time": "2026-06-15T17:56:00Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Spain. Players involved: Mikel Oyarzabal, Lamine Yamal.",
+      "provider_wallclock": "2026-06-15T17:56:00Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+5'"
+        },
+        "team": {
+          "displayName": "Spain"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mikel Oyarzabal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lamine Yamal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523666",
+      "time": "2026-06-15T17:56:33Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-15T17:56:33Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+6'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 7
+  }
+}

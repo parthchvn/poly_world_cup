@@ -1,0 +1,603 @@
+{
+  "schema_version": 1,
+  "task": "conditional_captured_execution_prediction",
+  "seed": 20260924,
+  "counts": {
+    "train": {
+      "conversations": 6648,
+      "target_rows": 12000,
+      "executions": 12726,
+      "actors": 5792,
+      "first_target": "2026-06-11T19:00:01Z",
+      "last_target": "2026-06-15T03:57:31Z"
+    },
+    "validation": {
+      "conversations": 819,
+      "target_rows": 1500,
+      "executions": 1578,
+      "actors": 801,
+      "first_target": "2026-06-15T16:00:01Z",
+      "last_target": "2026-06-16T03:03:09Z"
+    },
+    "test": {
+      "conversations": 781,
+      "target_rows": 1500,
+      "executions": 1597,
+      "actors": 766,
+      "first_target": "2026-06-16T19:00:14Z",
+      "last_target": "2026-06-17T06:07:22Z"
+    }
+  },
+  "fixtures": [
+    {
+      "fixture_id": "espn:760415",
+      "title": "Mexico vs. South Africa",
+      "split": "train",
+      "market_ids": [
+        "1897034",
+        "1897035",
+        "1897036"
+      ],
+      "kickoff": "2026-06-11T19:00:00Z",
+      "target_end_exclusive": "2026-06-11T21:03:44Z",
+      "conversations": 570,
+      "target_rows": 1000,
+      "executions": 1058
+    },
+    {
+      "fixture_id": "espn:760414",
+      "title": "South Korea vs. Czechia",
+      "split": "train",
+      "market_ids": [
+        "1897037",
+        "1897038",
+        "1897039"
+      ],
+      "kickoff": "2026-06-12T02:00:00Z",
+      "target_end_exclusive": "2026-06-12T03:57:03Z",
+      "conversations": 568,
+      "target_rows": 1000,
+      "executions": 1054
+    },
+    {
+      "fixture_id": "espn:760416",
+      "title": "Canada vs. Bosnia-Herzegovina",
+      "split": "train",
+      "market_ids": [
+        "1897040",
+        "1897041",
+        "1897042"
+      ],
+      "kickoff": "2026-06-12T19:00:00Z",
+      "target_end_exclusive": "2026-06-12T20:57:45Z",
+      "conversations": 583,
+      "target_rows": 1000,
+      "executions": 1052
+    },
+    {
+      "fixture_id": "espn:760417",
+      "title": "United States vs. Paraguay",
+      "split": "train",
+      "market_ids": [
+        "1897043",
+        "1897044",
+        "1897045"
+      ],
+      "kickoff": "2026-06-13T01:00:00Z",
+      "target_end_exclusive": "2026-06-13T03:02:50Z",
+      "conversations": 527,
+      "target_rows": 1000,
+      "executions": 1080
+    },
+    {
+      "fixture_id": "espn:760420",
+      "title": "Qatar vs. Switzerland",
+      "split": "train",
+      "market_ids": [
+        "1897046",
+        "1897047",
+        "1897048"
+      ],
+      "kickoff": "2026-06-13T19:00:00Z",
+      "target_end_exclusive": "2026-06-13T21:04:40Z",
+      "conversations": 512,
+      "target_rows": 1000,
+      "executions": 1112
+    },
+    {
+      "fixture_id": "espn:760419",
+      "title": "Brazil vs. Morocco",
+      "split": "train",
+      "market_ids": [
+        "1897049",
+        "1897050",
+        "1897051"
+      ],
+      "kickoff": "2026-06-13T22:00:00Z",
+      "target_end_exclusive": "2026-06-14T00:05:27Z",
+      "conversations": 568,
+      "target_rows": 1000,
+      "executions": 1044
+    },
+    {
+      "fixture_id": "espn:760418",
+      "title": "Haiti vs. Scotland",
+      "split": "train",
+      "market_ids": [
+        "1897052",
+        "1897053",
+        "1897054"
+      ],
+      "kickoff": "2026-06-14T01:00:00Z",
+      "target_end_exclusive": "2026-06-14T03:02:23Z",
+      "conversations": 597,
+      "target_rows": 1000,
+      "executions": 1048
+    },
+    {
+      "fixture_id": "espn:760421",
+      "title": "Australia vs. Türkiye",
+      "split": "train",
+      "market_ids": [
+        "1897055",
+        "1897056",
+        "1897057"
+      ],
+      "kickoff": "2026-06-14T04:00:00Z",
+      "target_end_exclusive": "2026-06-14T05:56:47Z",
+      "conversations": 567,
+      "target_rows": 1000,
+      "executions": 1035
+    },
+    {
+      "fixture_id": "espn:760422",
+      "title": "Germany vs. Curaçao",
+      "split": "train",
+      "market_ids": [
+        "1897058",
+        "1897059",
+        "1897060"
+      ],
+      "kickoff": "2026-06-14T17:00:00Z",
+      "target_end_exclusive": "2026-06-14T18:58:53Z",
+      "conversations": 549,
+      "target_rows": 1000,
+      "executions": 1092
+    },
+    {
+      "fixture_id": "espn:760425",
+      "title": "Netherlands vs. Japan",
+      "split": "train",
+      "market_ids": [
+        "1897061",
+        "1897062",
+        "1897063"
+      ],
+      "kickoff": "2026-06-14T20:00:00Z",
+      "target_end_exclusive": "2026-06-14T21:55:29Z",
+      "conversations": 511,
+      "target_rows": 1000,
+      "executions": 1058
+    },
+    {
+      "fixture_id": "espn:760423",
+      "title": "Ivory Coast vs. Ecuador",
+      "split": "train",
+      "market_ids": [
+        "1897064",
+        "1897065",
+        "1897066"
+      ],
+      "kickoff": "2026-06-14T23:00:00Z",
+      "target_end_exclusive": "2026-06-15T01:04:45Z",
+      "conversations": 570,
+      "target_rows": 1000,
+      "executions": 1046
+    },
+    {
+      "fixture_id": "espn:760424",
+      "title": "Sweden vs. Tunisia",
+      "split": "train",
+      "market_ids": [
+        "1897067",
+        "1897068",
+        "1897069"
+      ],
+      "kickoff": "2026-06-15T02:00:00Z",
+      "target_end_exclusive": "2026-06-15T03:57:34Z",
+      "conversations": 526,
+      "target_rows": 1000,
+      "executions": 1047
+    },
+    {
+      "fixture_id": "espn:760428",
+      "title": "Spain vs. Cape Verde",
+      "split": "validation",
+      "market_ids": [
+        "1897070",
+        "1897071",
+        "1897072"
+      ],
+      "kickoff": "2026-06-15T16:00:00Z",
+      "target_end_exclusive": "2026-06-15T17:56:33Z",
+      "conversations": 211,
+      "target_rows": 375,
+      "executions": 386
+    },
+    {
+      "fixture_id": "espn:760426",
+      "title": "Belgium vs. Egypt",
+      "split": "validation",
+      "market_ids": [
+        "1897073",
+        "1897074",
+        "1897075"
+      ],
+      "kickoff": "2026-06-15T19:00:00Z",
+      "target_end_exclusive": "2026-06-15T20:57:41Z",
+      "conversations": 209,
+      "target_rows": 375,
+      "executions": 392
+    },
+    {
+      "fixture_id": "espn:760429",
+      "title": "Saudi Arabia vs. Uruguay",
+      "split": "validation",
+      "market_ids": [
+        "1897076",
+        "1897077",
+        "1897078"
+      ],
+      "kickoff": "2026-06-15T22:00:00Z",
+      "target_end_exclusive": "2026-06-16T00:04:24Z",
+      "conversations": 198,
+      "target_rows": 375,
+      "executions": 404
+    },
+    {
+      "fixture_id": "espn:760427",
+      "title": "Iran vs. New Zealand",
+      "split": "validation",
+      "market_ids": [
+        "1897079",
+        "1897080",
+        "1897081"
+      ],
+      "kickoff": "2026-06-16T01:00:00Z",
+      "target_end_exclusive": "2026-06-16T03:03:14Z",
+      "conversations": 201,
+      "target_rows": 375,
+      "executions": 396
+    },
+    {
+      "fixture_id": "espn:760432",
+      "title": "France vs. Senegal",
+      "split": "test",
+      "market_ids": [
+        "1897082",
+        "1897083",
+        "1897084"
+      ],
+      "kickoff": "2026-06-16T19:00:00Z",
+      "target_end_exclusive": "2026-06-16T21:03:57Z",
+      "conversations": 199,
+      "target_rows": 375,
+      "executions": 406
+    },
+    {
+      "fixture_id": "espn:760430",
+      "title": "Iraq vs. Norway",
+      "split": "test",
+      "market_ids": [
+        "1897085",
+        "1897086",
+        "1897087"
+      ],
+      "kickoff": "2026-06-16T22:00:00Z",
+      "target_end_exclusive": "2026-06-17T00:00:30Z",
+      "conversations": 173,
+      "target_rows": 375,
+      "executions": 397
+    },
+    {
+      "fixture_id": "espn:760433",
+      "title": "Argentina vs. Algeria",
+      "split": "test",
+      "market_ids": [
+        "1897088",
+        "1897089",
+        "1897090"
+      ],
+      "kickoff": "2026-06-17T01:00:00Z",
+      "target_end_exclusive": "2026-06-17T02:59:59Z",
+      "conversations": 231,
+      "target_rows": 375,
+      "executions": 392
+    },
+    {
+      "fixture_id": "espn:760431",
+      "title": "Austria vs. Jordan",
+      "split": "test",
+      "market_ids": [
+        "1897091",
+        "1897092",
+        "1897093"
+      ],
+      "kickoff": "2026-06-17T04:00:00Z",
+      "target_end_exclusive": "2026-06-17T06:08:02Z",
+      "conversations": 178,
+      "target_rows": 375,
+      "executions": 402
+    }
+  ],
+  "max_target_rows": 15000,
+  "row_definition": "A target row is one assistant turn grouping this actor-contract's equal-time captured executions. One JSONL line is a complete actor-contract conversation.",
+  "source": {
+    "path": "/workspace/scratch/329be6515bcc/poly_world_cup_repo/data/sequence_v3_recovery/source.sqlite",
+    "bytes": 3980079104,
+    "metadata": {
+      "archive_recovery": {
+        "archive_bytes": 3352584192,
+        "archive_manifest_sha256": "b7105d92881b6318ea9f86e9bc8f67657db76835b18c4abbbd8f3c060f6b98cb",
+        "archive_path": "/workspace/scratch/329be6515bcc/recovered_source/original_filtered/world_cup_lt20.sqlite",
+        "archive_sha256": "98a0f7db2685c459a60c90766e2d4edbf32e314e27a6b600121495e57cb28bcd",
+        "inherited_observation_count": 3467060,
+        "provenance_scope": "inherited_normalized_archive_not_new_raw_replay"
+      },
+      "canonical_fill_identity_available": false,
+      "capture_time_semantics": "Inherited condition capture timestamps unknown; source verification time is not substituted.",
+      "condition_count": 312,
+      "coverage_bound_scope": "selected_cohort_observed_interval",
+      "filter_scope": [
+        "wallet",
+        "condition_id"
+      ],
+      "finished_at_utc": "2026-09-24T12:53:36.814772Z",
+      "fixture_count": 104,
+      "full_ledger": {
+        "files": [
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00001.jsonl.gz",
+            "sha256": "4f620ed11f6ddd0ffb461cd75cab30b3b01979a1cb5a979bbaa98f4e27899d29"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00002.jsonl.gz",
+            "sha256": "0a565813a759c3f53b0bb5ff4d1412b4b516b9a39dd7687c58b930e207aa453f"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00003.jsonl.gz",
+            "sha256": "4c0fb7fc9fc0854eea87bf45d476f0d5581e3c012fedbafebdacc2f73373c961"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00004.jsonl.gz",
+            "sha256": "b78492536a553b312df54897f823fba69adc7624ab8f1a0fcc6909d08e14ca61"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00005.jsonl.gz",
+            "sha256": "422b437ac841800bf77ffab1b0a2902212a2fdd162de5e880f2c831da63214d7"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00006.jsonl.gz",
+            "sha256": "5aba530189e75f245f6e142d8aef2229b85f3354ce54e3b8e77260902d5976b6"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00007.jsonl.gz",
+            "sha256": "27f2193a0dadcb936312bff15c64cc951757b098e6134f3d30d6a53a41951424"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00008.jsonl.gz",
+            "sha256": "98865bd4052255560da7e98c531d49523f86588768745993d16a6e7d65c1782f"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00009.jsonl.gz",
+            "sha256": "1f778131b0b794914603c4d6a9ad552ca8b3efaa007d07b0182d943c3a8e73d6"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00010.jsonl.gz",
+            "sha256": "4d094ea24b3eb4fb82172edd70265a2839fe87f94622e998b7f1604ac4fd969d"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00011.jsonl.gz",
+            "sha256": "8c1e969349cfb3b22798b940952af466e94e8b6ae17c2ed94a6a3fa86104e9d2"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00012.jsonl.gz",
+            "sha256": "29169e71740228541cc49c6c8509a4a49c970c2a81c6f7f7073c4ebf3ecc6134"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00013.jsonl.gz",
+            "sha256": "c0d4c15ca8799423d0ab3705e99d7653169752e64e93f54da39ce4cfe2f25fa9"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00014.jsonl.gz",
+            "sha256": "50091886110b6ea0c679fc6ce5466f058379ada1b9337259eb82ec05aa5d8ff4"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00015.jsonl.gz",
+            "sha256": "1511f6e93e1c0300c3301410321847f788765989ef6a8e201be45af6255bfb3f"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00016.jsonl.gz",
+            "sha256": "b81a7af6ec5f68443d2d6cd474fd14510ed6482936aac4d4be1bf2e480c9da81"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00017.jsonl.gz",
+            "sha256": "4a41a9136b5f532dcd1499de1f4467aaa1c6fedfd7c06f6aab110795bf4b761e"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00018.jsonl.gz",
+            "sha256": "0032056140655c4b36fa4169827e6db5a34b703ac9db6905de143a45038222bb"
+          },
+          {
+            "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00019.jsonl.gz",
+            "sha256": "6aa39b8a89e7a8c31d01faed2917ce11b1bfb2b5de9b0811bedcd186fbf5a970"
+          }
+        ],
+        "observation_count": 12250443,
+        "pair_count": 2259806
+      },
+      "limitations": [
+        "API observations are not canonical fills or deliberate decisions",
+        "The <=20 selection is retrospective per binary contract, not proof of market-maker status",
+        "Only selected actor-contract histories are present; excluded actor-contract histories are absent",
+        "Coverage endpoints are narrower selected-cohort observations, not full-condition endpoints",
+        "API exhaustion is not chain completeness; trades below 0.000001 tokens are excluded"
+      ],
+      "maximum_observations_inclusive": 20,
+      "minimum_size_tokens": "0.000001",
+      "raw_replayed_replacement_contracts": 19,
+      "schema_version": 3,
+      "selected_observation_count": 3974200,
+      "selected_pair_count": 2206158,
+      "selected_pair_counts_exactly_match_full_ledger": true,
+      "selected_wallet_count": 255438,
+      "source_completeness_certified": false,
+      "source_page_semantics": "Inherited ledger includes unused and superseded references; only fresh page entries are newly raw-replayed.",
+      "source_scope": "selected_cohort_with_full_count_ledger",
+      "training_coverage_certified": false
+    },
+    "registry_sha256": "cf45395a65fc140de93055c6b7ef4b30bbcf7b8970f898e37ac74dfed9da8561",
+    "initial_contract_catalog_sha256": "33bb1cfa9877ecb4f2c1433602dc7ad92654979a5488ba8c8ac64940af2f782d"
+  },
+  "selection": {
+    "max_full_market_actor_observations_inclusive": 20,
+    "count_scope": "full captured actor-binary-contract history",
+    "sequence_sampling": "deterministic seeded round-robin over three contracts; complete in-window actor-contract sequences; sampling independent of side/outcome/shares/price; retrospective eligibility and sequence-length budgeting use full-capture activity",
+    "target_scope": "First 20 fixtures; scheduled kickoff inclusive to explicit end of regular time exclusive, capped at kickoff+3h.",
+    "partition": "First 12 chronological fixtures train, next4 validation, next4 test. Entire fixtures and all their contracts assigned together.",
+    "prior_history": "Only same actor and contract observations strictly earlier than first target. Later targets see earlier assistant turns.",
+    "news": "Only ESPN event facts with provider wallclock strictly earlier than target; incremental after first prompt."
+  },
+  "limitations": [
+    "Pilot artifact checks only; previous whole-tournament validation has not been resumed.",
+    "This predicts recorded attributes conditional on execution, not trade occurrence or NO_TRADE.",
+    "Retrospective low-activity cohort: full-capture future activity affects eligibility and sequence-length budgeting.",
+    "Event wallclock is not verified historical publication or actor exposure. Captures made retrospectively may contain corrections.",
+    "Captured observations are not certified canonical fills or complete on-chain history.",
+    "The <=20 activity filter does not establish that wallets are humans or exclude every market maker.",
+    "Wallets may occur in different splits, but fixture contexts and actor-contract histories do not cross split boundaries.",
+    "Only match-time behavior is targeted; no pre-match news articles are included.",
+    "Base model release/training cutoff must be checked separately for contamination.",
+    "Default generation length/context capacity must be measured with the exact training tokenizer before training.",
+    "Evaluation with true earlier assistant answers conditions on observed history; it is not autonomous rollout evaluation."
+  ],
+  "artifacts": {
+    "README.md": {
+      "bytes": 4068,
+      "sha256": "ddc4c63ed35b52ac767a4a47b9b027a9f7b175ccb7a7c13fae4eaeb33e41286d"
+    },
+    "audit.jsonl.gz": {
+      "bytes": 1510225,
+      "sha256": "24dd8bacdbf4dc811864f0fbd58c2d99707e797b400421298094fbd94ed0c8ff"
+    },
+    "sources/espn_760414.json": {
+      "bytes": 68213,
+      "sha256": "c6e99728cc82bfbfa7a907ce87e84275bfa020446fdd6b14aeae441c5882ac58"
+    },
+    "sources/espn_760415.json": {
+      "bytes": 69775,
+      "sha256": "0c86ff3ed29937a0b90b52b4b42bc83254db72ed94593296b4215938579e8ed2"
+    },
+    "sources/espn_760416.json": {
+      "bytes": 82105,
+      "sha256": "ecdba7e7e345c770cad6267d022873475f3ad7da4ec8bdab02768d8fd134a67f"
+    },
+    "sources/espn_760417.json": {
+      "bytes": 86190,
+      "sha256": "aa158d234591ee7bd78bd2403387fe936b81cd6d7b2d5483c7a7c906814f1c2a"
+    },
+    "sources/espn_760418.json": {
+      "bytes": 87426,
+      "sha256": "1caa97c92eaf88478ac00b178049f2c0d765fcc8fbe32c8b37eef72eea5d5e5e"
+    },
+    "sources/espn_760419.json": {
+      "bytes": 78698,
+      "sha256": "48673290b79d20ab5a7b7dc096ab7ccc09782aa79a49b4df51868385315c20bc"
+    },
+    "sources/espn_760420.json": {
+      "bytes": 83319,
+      "sha256": "af670b03289fd18cf7d772ad5772b14c36a98ff9eab9fddfd7209aa4f5a041ad"
+    },
+    "sources/espn_760421.json": {
+      "bytes": 82218,
+      "sha256": "d4a126c58e0b5cbcdab08e8281cbeb4faf7659a4d2de3274013244794332931c"
+    },
+    "sources/espn_760422.json": {
+      "bytes": 73471,
+      "sha256": "0ce5de4560a62875f0e672b989330f9b99859274327561d79278324e35c83461"
+    },
+    "sources/espn_760423.json": {
+      "bytes": 73598,
+      "sha256": "612b5e68ddd015a8cadab872db7162f17fe3af227f90b0104d46b67e4166fdfd"
+    },
+    "sources/espn_760424.json": {
+      "bytes": 64993,
+      "sha256": "54190647840a018d2f369ca4ebac6dc35f78ef6b612d74f606ea6e949c68a1ee"
+    },
+    "sources/espn_760425.json": {
+      "bytes": 61901,
+      "sha256": "e56445fc30f3ae5934ed364e6f810aad189c16e4cfecccb380f6c9d48ffe9561"
+    },
+    "sources/espn_760426.json": {
+      "bytes": 77574,
+      "sha256": "97c5549ca55fd5c53c4708321053cfcefea56d340733f74279ea3b34a97e0ea0"
+    },
+    "sources/espn_760427.json": {
+      "bytes": 70663,
+      "sha256": "8507f789a27d8f42507b4f69167aa8d1f12811fff22c89b75415ead51f8d62fc"
+    },
+    "sources/espn_760428.json": {
+      "bytes": 70782,
+      "sha256": "95fb031e2b1e1b9ea2adc06c7de659bc558e16fc07933a6415f50d91d1970f83"
+    },
+    "sources/espn_760429.json": {
+      "bytes": 80228,
+      "sha256": "d669c396398052c693fe677b03a31f986b98a376dd318dd34cbc0ecd2a40b90b"
+    },
+    "sources/espn_760430.json": {
+      "bytes": 69870,
+      "sha256": "dc24ed016247428436fd56cbffd4818967bc2a53a51d0378e7a23e7d3c3d4e4b"
+    },
+    "sources/espn_760431.json": {
+      "bytes": 72612,
+      "sha256": "fbdb698e386e00db84029930223727ea58ebff27ab0042882201b678db71f3ca"
+    },
+    "sources/espn_760432.json": {
+      "bytes": 56138,
+      "sha256": "4270851145803bd7bfec2759f0495c0794ce816b1d7a3670ae27f55a5c164c14"
+    },
+    "sources/espn_760433.json": {
+      "bytes": 59102,
+      "sha256": "a59e8b2d7d4f2e6e54431f30d2f7ee86b43d6e9b70445bbe694f957818ed68a5"
+    },
+    "test.jsonl.gz": {
+      "bytes": 169405,
+      "sha256": "16cc370c8fa9f71b76f2fee9a02e6eed864c5479c1ee43edbd87b7c9e3227340"
+    },
+    "train.jsonl.gz": {
+      "bytes": 1578751,
+      "sha256": "f0bbf1bd5a4c0e18c5cd3afde6430e4a9b5af3252641f252f1374fcdc83c76be"
+    },
+    "validation.jsonl.gz": {
+      "bytes": 204513,
+      "sha256": "648ab6486a1cd0a0546354fb1fe18fd6c57bf029e674e5c6e6fb40a8234efabb"
+    }
+  },
+  "model_training_performed": false,
+  "actual_target_time_separation": [
+    {
+      "earlier_split": "train",
+      "later_split": "validation",
+      "earlier_last_target": "2026-06-15T03:57:31Z",
+      "later_first_target": "2026-06-15T16:00:01Z",
+      "strictly_separated": true
+    },
+    {
+      "earlier_split": "validation",
+      "later_split": "test",
+      "earlier_last_target": "2026-06-16T03:03:09Z",
+      "later_first_target": "2026-06-16T19:00:14Z",
+      "strictly_separated": true
+    }
+  ]
+}

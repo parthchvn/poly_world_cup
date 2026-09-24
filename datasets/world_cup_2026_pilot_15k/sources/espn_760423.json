@@ -1,0 +1,3060 @@
+{
+  "fixture_id": "espn:760423",
+  "espn_event_id": "760423",
+  "kickoff": "2026-06-14T23:00:00Z",
+  "target_end_exclusive": "2026-06-15T01:04:45Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760423",
+    "source_body_sha256": "1062381408c7f788c2b5307e2a82e12ff768a6c80bb1e7b7ab6a9748f82f8403",
+    "captured_at_utc": "2026-09-24T22:46:46.530585Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49517319",
+      "time": "2026-06-14T23:03:28Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-14T23:03:28Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        }
+      }
+    },
+    {
+      "event_id": "49517333",
+      "time": "2026-06-14T23:04:41Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ivory Coast. Players involved: Wilfried Singo, Enner Valencia.",
+      "provider_wallclock": "2026-06-14T23:04:41Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "73.0",
+          "displayValue": "2'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Wilfried Singo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Enner Valencia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49517362",
+      "time": "2026-06-14T23:04:41Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ivory Coast. Players involved: Wilfried Singo, Enner Valencia.",
+      "provider_wallclock": "2026-06-14T23:04:41Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "73.0",
+          "displayValue": "2'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Wilfried Singo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Enner Valencia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49517360",
+      "time": "2026-06-14T23:05:20Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Ecuador. Players involved: Moisés Caicedo, Gonzalo Plata.",
+      "provider_wallclock": "2026-06-14T23:05:20Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "112.0",
+          "displayValue": "2'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Moisés Caicedo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Gonzalo Plata"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49517395",
+      "time": "2026-06-14T23:06:40Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ivory Coast. Players involved: Franck Kessié, Enner Valencia.",
+      "provider_wallclock": "2026-06-14T23:06:40Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "192.0",
+          "displayValue": "4'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Franck Kessié"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Enner Valencia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49517536",
+      "time": "2026-06-14T23:10:37Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Enner Valencia, Franck Kessié.",
+      "provider_wallclock": "2026-06-14T23:10:37Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "429.0",
+          "displayValue": "8'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Enner Valencia"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Franck Kessié"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49517866",
+      "time": "2026-06-14T23:16:31Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Ecuador. Players involved: John Yeboah, Alan Franco.",
+      "provider_wallclock": "2026-06-14T23:16:31Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "782.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "John Yeboah"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alan Franco"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518047",
+      "time": "2026-06-14T23:18:44Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Ivory Coast. Players involved: Seko Fofana, Yan Diomande.",
+      "provider_wallclock": "2026-06-14T23:18:44Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "916.0",
+          "displayValue": "16'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Seko Fofana"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Yan Diomande"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518175",
+      "time": "2026-06-14T23:21:02Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Ivory Coast. Players involved: Elye Wahi, Yan Diomande.",
+      "provider_wallclock": "2026-06-14T23:21:02Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1054.0",
+          "displayValue": "18'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Elye Wahi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Yan Diomande"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518190",
+      "time": "2026-06-14T23:21:41Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Ivory Coast.",
+      "provider_wallclock": "2026-06-14T23:21:41Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1093.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        }
+      }
+    },
+    {
+      "event_id": "49518201",
+      "time": "2026-06-14T23:22:35Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Ivory Coast.",
+      "provider_wallclock": "2026-06-14T23:22:35Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1147.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "id": "4789",
+          "displayName": "Ivory Coast"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49518202",
+      "time": "2026-06-14T23:22:35Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Ecuador.",
+      "provider_wallclock": "2026-06-14T23:22:35Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1147.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        }
+      }
+    },
+    {
+      "event_id": "49518236",
+      "time": "2026-06-14T23:23:19Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Ecuador.",
+      "provider_wallclock": "2026-06-14T23:23:19Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1191.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        }
+      }
+    },
+    {
+      "event_id": "49518235",
+      "time": "2026-06-14T23:23:20Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Ivory Coast.",
+      "provider_wallclock": "2026-06-14T23:23:20Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1191.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "id": "4789",
+          "displayName": "Ivory Coast"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49518383",
+      "time": "2026-06-14T23:25:07Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ivory Coast. Players involved: Wilfried Singo, Enner Valencia.",
+      "provider_wallclock": "2026-06-14T23:25:07Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1299.0",
+          "displayValue": "22'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Wilfried Singo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Enner Valencia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518468",
+      "time": "2026-06-14T23:26:26Z",
+      "type": "shot-hit-woodwork",
+      "text": "Event: Shot Hit Woodwork. Team: Ecuador. Players involved: John Yeboah.",
+      "provider_wallclock": "2026-06-14T23:26:26Z",
+      "facts": {
+        "type": {
+          "id": "136",
+          "text": "Shot Hit Woodwork",
+          "type": "shot-hit-woodwork"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1378.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "John Yeboah"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518502",
+      "time": "2026-06-14T23:26:49Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Ecuador. Players involved: Alan Minda.",
+      "provider_wallclock": "2026-06-14T23:26:49Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1401.0",
+          "displayValue": "24'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alan Minda"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518503",
+      "time": "2026-06-14T23:26:58Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Ivory Coast.",
+      "provider_wallclock": "2026-06-14T23:26:58Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1410.0",
+          "displayValue": "24'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        }
+      }
+    },
+    {
+      "event_id": "49518508",
+      "time": "2026-06-14T23:26:59Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Ecuador.",
+      "provider_wallclock": "2026-06-14T23:26:59Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1410.0",
+          "displayValue": "24'"
+        },
+        "team": {
+          "id": "209",
+          "displayName": "Ecuador"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49518597",
+      "time": "2026-06-14T23:30:17Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Ivory Coast.",
+      "provider_wallclock": "2026-06-14T23:30:17Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1609.0",
+          "displayValue": "27'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        }
+      }
+    },
+    {
+      "event_id": "49518598",
+      "time": "2026-06-14T23:30:18Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Ecuador.",
+      "provider_wallclock": "2026-06-14T23:30:18Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1609.0",
+          "displayValue": "27'"
+        },
+        "team": {
+          "id": "209",
+          "displayName": "Ecuador"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49518658",
+      "time": "2026-06-14T23:31:02Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ivory Coast. Players involved: Seko Fofana, Moisés Caicedo.",
+      "provider_wallclock": "2026-06-14T23:31:02Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1654.0",
+          "displayValue": "28'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Seko Fofana"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Moisés Caicedo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518659",
+      "time": "2026-06-14T23:31:04Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Ivory Coast. Players involved: Seko Fofana.",
+      "provider_wallclock": "2026-06-14T23:31:04Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1655.0",
+          "displayValue": "28'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Seko Fofana"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518753",
+      "time": "2026-06-14T23:32:58Z",
+      "type": "shot-hit-woodwork",
+      "text": "Event: Shot Hit Woodwork. Team: Ecuador. Players involved: Alan Minda, Pedro Vite.",
+      "provider_wallclock": "2026-06-14T23:32:58Z",
+      "facts": {
+        "type": {
+          "id": "136",
+          "text": "Shot Hit Woodwork",
+          "type": "shot-hit-woodwork"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1769.0",
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alan Minda"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Pedro Vite"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518758",
+      "time": "2026-06-14T23:33:20Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Ecuador. Players involved: John Yeboah, Moisés Caicedo.",
+      "provider_wallclock": "2026-06-14T23:33:20Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1792.0",
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "John Yeboah"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Moisés Caicedo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518856",
+      "time": "2026-06-14T23:36:02Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Ivory Coast. Players involved: Seko Fofana, Franck Kessié.",
+      "provider_wallclock": "2026-06-14T23:36:02Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1954.0",
+          "displayValue": "33'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Seko Fofana"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Franck Kessié"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518937",
+      "time": "2026-06-14T23:37:57Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Ivory Coast. Players involved: Nicolas Pépé, Yan Diomande.",
+      "provider_wallclock": "2026-06-14T23:37:57Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2069.0",
+          "displayValue": "35'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nicolas Pépé"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Yan Diomande"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518978",
+      "time": "2026-06-14T23:39:30Z",
+      "type": "dispossessed",
+      "text": "Event: Dispossessed. Team: Ivory Coast. Players involved: Guela Doué.",
+      "provider_wallclock": "2026-06-14T23:39:30Z",
+      "facts": {
+        "type": {
+          "id": "196",
+          "text": "Dispossessed",
+          "type": "dispossessed"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2162.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Guela Doué"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49518980",
+      "time": "2026-06-14T23:39:30Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Enner Valencia, Guela Doué.",
+      "provider_wallclock": "2026-06-14T23:39:30Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2162.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Enner Valencia"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Guela Doué"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519001",
+      "time": "2026-06-14T23:40:12Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ivory Coast. Players involved: Guela Doué, Alan Minda.",
+      "provider_wallclock": "2026-06-14T23:40:12Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2204.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Guela Doué"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alan Minda"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519003",
+      "time": "2026-06-14T23:40:12Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ivory Coast. Players involved: Guela Doué, Alan Minda.",
+      "provider_wallclock": "2026-06-14T23:40:12Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2204.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Guela Doué"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alan Minda"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519019",
+      "time": "2026-06-14T23:41:17Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ivory Coast. Players involved: Franck Kessié, Piero Hincapié.",
+      "provider_wallclock": "2026-06-14T23:41:17Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2269.0",
+          "displayValue": "38'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Franck Kessié"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Piero Hincapié"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519020",
+      "time": "2026-06-14T23:41:18Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Ivory Coast. Players involved: Franck Kessié.",
+      "provider_wallclock": "2026-06-14T23:41:18Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2270.0",
+          "displayValue": "38'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Franck Kessié"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519054",
+      "time": "2026-06-14T23:42:56Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ivory Coast. Players involved: Guela Doué, Enner Valencia.",
+      "provider_wallclock": "2026-06-14T23:42:56Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2368.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Guela Doué"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Enner Valencia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519088",
+      "time": "2026-06-14T23:43:14Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Ivory Coast. Players involved: Guela Doué.",
+      "provider_wallclock": "2026-06-14T23:43:14Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2386.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Guela Doué"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519103",
+      "time": "2026-06-14T23:44:19Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Piero Hincapié, Guela Doué.",
+      "provider_wallclock": "2026-06-14T23:44:19Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2451.0",
+          "displayValue": "41'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Piero Hincapié"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Guela Doué"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519355",
+      "time": "2026-06-14T23:49:35Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Ivory Coast.",
+      "provider_wallclock": "2026-06-14T23:49:35Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+2'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        }
+      }
+    },
+    {
+      "event_id": "49519379",
+      "time": "2026-06-14T23:50:23Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Ivory Coast. Players involved: Wilfried Singo, Guela Doué.",
+      "provider_wallclock": "2026-06-14T23:50:23Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+2'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Wilfried Singo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Guela Doué"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519424",
+      "time": "2026-06-14T23:51:00Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Ivory Coast. Players involved: Nicolas Pépé, Yan Diomande.",
+      "provider_wallclock": "2026-06-14T23:51:00Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+3'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nicolas Pépé"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Yan Diomande"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519434",
+      "time": "2026-06-14T23:51:47Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ivory Coast. Players involved: Franck Kessié, Moisés Caicedo.",
+      "provider_wallclock": "2026-06-14T23:51:47Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Franck Kessié"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Moisés Caicedo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519448",
+      "time": "2026-06-14T23:52:35Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-14T23:52:35Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+5'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49519725",
+      "time": "2026-06-15T00:10:29Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-15T00:10:29Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49519742",
+      "time": "2026-06-15T00:11:18Z",
+      "type": "shot-hit-woodwork",
+      "text": "Event: Shot Hit Woodwork. Team: Ecuador. Players involved: Enner Valencia, Gonzalo Plata.",
+      "provider_wallclock": "2026-06-15T00:11:18Z",
+      "facts": {
+        "type": {
+          "id": "136",
+          "text": "Shot Hit Woodwork",
+          "type": "shot-hit-woodwork"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2748.0",
+          "displayValue": "46'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Enner Valencia"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Gonzalo Plata"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519776",
+      "time": "2026-06-15T00:13:06Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Alan Franco, Bazoumana Touré.",
+      "provider_wallclock": "2026-06-15T00:13:06Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2857.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alan Franco"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Bazoumana Touré"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519814",
+      "time": "2026-06-15T00:14:46Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Ivory Coast. Players involved: Yan Diomande, Seko Fofana.",
+      "provider_wallclock": "2026-06-15T00:14:46Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2956.0",
+          "displayValue": "50'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Yan Diomande"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Seko Fofana"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519870",
+      "time": "2026-06-15T00:17:06Z",
+      "type": "shot-hit-woodwork",
+      "text": "Event: Shot Hit Woodwork. Team: Ivory Coast. Players involved: Elye Wahi, Yan Diomande.",
+      "provider_wallclock": "2026-06-15T00:17:06Z",
+      "facts": {
+        "type": {
+          "id": "136",
+          "text": "Shot Hit Woodwork",
+          "type": "shot-hit-woodwork"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3096.0",
+          "displayValue": "52'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Elye Wahi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Yan Diomande"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519889",
+      "time": "2026-06-15T00:18:06Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Ivory Coast. Players involved: Seko Fofana, Guela Doué.",
+      "provider_wallclock": "2026-06-15T00:18:06Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3156.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Seko Fofana"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Guela Doué"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519944",
+      "time": "2026-06-15T00:20:30Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Ecuador. Players involved: Pedro Vite, Gonzalo Plata.",
+      "provider_wallclock": "2026-06-15T00:20:30Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3300.0",
+          "displayValue": "55'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Pedro Vite"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Gonzalo Plata"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519946",
+      "time": "2026-06-15T00:21:02Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Ecuador. Players involved: Nilson Angulo, Alan Minda.",
+      "provider_wallclock": "2026-06-15T00:21:02Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3332.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nilson Angulo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alan Minda"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519948",
+      "time": "2026-06-15T00:21:18Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Ivory Coast. Players involved: Ange-Yoan Bonny, Elye Wahi.",
+      "provider_wallclock": "2026-06-15T00:21:18Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3349.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ange-Yoan Bonny"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Elye Wahi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519950",
+      "time": "2026-06-15T00:21:20Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Ivory Coast. Players involved: Amad Diallo, Bazoumana Touré.",
+      "provider_wallclock": "2026-06-15T00:21:20Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3350.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Amad Diallo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Bazoumana Touré"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519955",
+      "time": "2026-06-15T00:21:50Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Alan Franco, Yan Diomande.",
+      "provider_wallclock": "2026-06-15T00:21:50Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3381.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alan Franco"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Yan Diomande"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49519983",
+      "time": "2026-06-15T00:23:03Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Ivory Coast. Players involved: Yan Diomande.",
+      "provider_wallclock": "2026-06-15T00:23:03Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3453.0",
+          "displayValue": "58'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Yan Diomande"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520024",
+      "time": "2026-06-15T00:25:03Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Ivory Coast.",
+      "provider_wallclock": "2026-06-15T00:25:03Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3574.0",
+          "displayValue": "60'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        }
+      }
+    },
+    {
+      "event_id": "49520028",
+      "time": "2026-06-15T00:25:30Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Ivory Coast. Players involved: Seko Fofana, Yan Diomande.",
+      "provider_wallclock": "2026-06-15T00:25:30Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3600.0",
+          "displayValue": "60'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Seko Fofana"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Yan Diomande"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520043",
+      "time": "2026-06-15T00:26:50Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Alan Franco, Yan Diomande.",
+      "provider_wallclock": "2026-06-15T00:26:50Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3680.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alan Franco"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Yan Diomande"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520046",
+      "time": "2026-06-15T00:27:14Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Ecuador. Players involved: Jackson Porozo, Alan Franco.",
+      "provider_wallclock": "2026-06-15T00:27:14Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3705.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jackson Porozo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alan Franco"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520045",
+      "time": "2026-06-15T00:27:16Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Ecuador. Players involved: Ángelo Preciado, John Yeboah.",
+      "provider_wallclock": "2026-06-15T00:27:16Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3706.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ángelo Preciado"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "John Yeboah"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520048",
+      "time": "2026-06-15T00:27:59Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Jackson Porozo, Ange-Yoan Bonny.",
+      "provider_wallclock": "2026-06-15T00:27:59Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3750.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jackson Porozo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ange-Yoan Bonny"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520143",
+      "time": "2026-06-15T00:33:21Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Ecuador. Players involved: Gonzalo Plata, Ángelo Preciado.",
+      "provider_wallclock": "2026-06-15T00:33:21Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4072.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gonzalo Plata"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ángelo Preciado"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520149",
+      "time": "2026-06-15T00:33:50Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Ecuador.",
+      "provider_wallclock": "2026-06-15T00:33:50Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4101.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        }
+      }
+    },
+    {
+      "event_id": "49520150",
+      "time": "2026-06-15T00:33:51Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Ivory Coast.",
+      "provider_wallclock": "2026-06-15T00:33:51Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4101.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "id": "4789",
+          "displayName": "Ivory Coast"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49520157",
+      "time": "2026-06-15T00:36:50Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Ivory Coast.",
+      "provider_wallclock": "2026-06-15T00:36:50Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4280.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "id": "4789",
+          "displayName": "Ivory Coast"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49520158",
+      "time": "2026-06-15T00:36:50Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Ecuador.",
+      "provider_wallclock": "2026-06-15T00:36:50Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4280.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        }
+      }
+    },
+    {
+      "event_id": "49520171",
+      "time": "2026-06-15T00:37:34Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Ecuador.",
+      "provider_wallclock": "2026-06-15T00:37:34Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4324.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        }
+      }
+    },
+    {
+      "event_id": "49520175",
+      "time": "2026-06-15T00:38:13Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Jackson Porozo, Ange-Yoan Bonny.",
+      "provider_wallclock": "2026-06-15T00:38:13Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4364.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jackson Porozo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ange-Yoan Bonny"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520176",
+      "time": "2026-06-15T00:38:15Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Ecuador. Players involved: Jackson Porozo.",
+      "provider_wallclock": "2026-06-15T00:38:15Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4365.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jackson Porozo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520250",
+      "time": "2026-06-15T00:42:02Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Ivory Coast. Players involved: Ibrahim Sangaré, Seko Fofana.",
+      "provider_wallclock": "2026-06-15T00:42:02Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4592.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ibrahim Sangaré"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Seko Fofana"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520249",
+      "time": "2026-06-15T00:42:10Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Ivory Coast. Players involved: Christ Inao Oulaï, Nicolas Pépé.",
+      "provider_wallclock": "2026-06-15T00:42:10Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4600.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Christ Inao Oulaï"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nicolas Pépé"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520251",
+      "time": "2026-06-15T00:42:21Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Ecuador. Players involved: Kevin Rodríguez, Enner Valencia.",
+      "provider_wallclock": "2026-06-15T00:42:21Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4611.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kevin Rodríguez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Enner Valencia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520272",
+      "time": "2026-06-15T00:43:30Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Nilson Angulo, Christ Inao Oulaï.",
+      "provider_wallclock": "2026-06-15T00:43:30Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4681.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nilson Angulo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Christ Inao Oulaï"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520290",
+      "time": "2026-06-15T00:44:22Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Ivory Coast. Players involved: Christ Inao Oulaï.",
+      "provider_wallclock": "2026-06-15T00:44:22Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4733.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Christ Inao Oulaï"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520315",
+      "time": "2026-06-15T00:45:43Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Moisés Caicedo, Franck Kessié.",
+      "provider_wallclock": "2026-06-15T00:45:43Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4814.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Moisés Caicedo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Franck Kessié"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520354",
+      "time": "2026-06-15T00:48:00Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Ivory Coast. Players involved: Ghislain Konan.",
+      "provider_wallclock": "2026-06-15T00:48:00Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4951.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ghislain Konan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520356",
+      "time": "2026-06-15T00:48:19Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Ecuador.",
+      "provider_wallclock": "2026-06-15T00:48:19Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4970.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        }
+      }
+    },
+    {
+      "event_id": "49520357",
+      "time": "2026-06-15T00:48:20Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Ivory Coast.",
+      "provider_wallclock": "2026-06-15T00:48:20Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4970.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "id": "4789",
+          "displayName": "Ivory Coast"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49520358",
+      "time": "2026-06-15T00:49:07Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Ecuador.",
+      "provider_wallclock": "2026-06-15T00:49:07Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5017.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        }
+      }
+    },
+    {
+      "event_id": "49520359",
+      "time": "2026-06-15T00:49:07Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Ivory Coast.",
+      "provider_wallclock": "2026-06-15T00:49:07Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5017.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "id": "4789",
+          "displayName": "Ivory Coast"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49520375",
+      "time": "2026-06-15T00:50:00Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Gonzalo Plata, Ibrahim Sangaré.",
+      "provider_wallclock": "2026-06-15T00:50:00Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5071.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gonzalo Plata"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ibrahim Sangaré"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520389",
+      "time": "2026-06-15T00:50:53Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ivory Coast. Players involved: Guela Doué, Nilson Angulo.",
+      "provider_wallclock": "2026-06-15T00:50:53Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5124.0",
+          "displayValue": "86'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Guela Doué"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nilson Angulo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520394",
+      "time": "2026-06-15T00:52:11Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Ecuador. Players involved: Joel Ordóñez, Moisés Caicedo.",
+      "provider_wallclock": "2026-06-15T00:52:11Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5201.0",
+          "displayValue": "87'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Joel Ordóñez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Moisés Caicedo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520397",
+      "time": "2026-06-15T00:52:13Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Ecuador.",
+      "provider_wallclock": "2026-06-15T00:52:13Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5203.0",
+          "displayValue": "87'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        }
+      }
+    },
+    {
+      "event_id": "49520405",
+      "time": "2026-06-15T00:53:06Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Ecuador. Players involved: Joel Ordóñez, Nilson Angulo.",
+      "provider_wallclock": "2026-06-15T00:53:06Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5256.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Joel Ordóñez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nilson Angulo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520412",
+      "time": "2026-06-15T00:53:50Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Ivory Coast. Players involved: Odilon Kossounou, Guela Doué.",
+      "provider_wallclock": "2026-06-15T00:53:50Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5300.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Odilon Kossounou"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Guela Doué"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520440",
+      "time": "2026-06-15T00:55:02Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Ivory Coast. Players involved: Amad Diallo, Wilfried Singo.",
+      "provider_wallclock": "2026-06-15T00:55:02Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5372.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Amad Diallo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Wilfried Singo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520450",
+      "time": "2026-06-15T00:57:16Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Moisés Caicedo, Christ Inao Oulaï.",
+      "provider_wallclock": "2026-06-15T00:57:16Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Moisés Caicedo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Christ Inao Oulaï"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520459",
+      "time": "2026-06-15T00:58:08Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Ecuador. Players involved: Nilson Angulo, Wilfried Singo.",
+      "provider_wallclock": "2026-06-15T00:58:08Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nilson Angulo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Wilfried Singo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520478",
+      "time": "2026-06-15T00:59:18Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Ivory Coast. Players involved: Amad Diallo, Ghislain Konan.",
+      "provider_wallclock": "2026-06-15T00:59:18Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Amad Diallo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ghislain Konan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520492",
+      "time": "2026-06-15T01:00:02Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Ecuador.",
+      "provider_wallclock": "2026-06-15T01:00:02Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+5'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        }
+      }
+    },
+    {
+      "event_id": "49520497",
+      "time": "2026-06-15T01:00:46Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Ecuador.",
+      "provider_wallclock": "2026-06-15T01:00:46Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+6'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        }
+      }
+    },
+    {
+      "event_id": "49520533",
+      "time": "2026-06-15T01:02:20Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Ivory Coast. Players involved: Christ Inao Oulaï, Amad Diallo.",
+      "provider_wallclock": "2026-06-15T01:02:20Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+7'"
+        },
+        "team": {
+          "displayName": "Ivory Coast"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Christ Inao Oulaï"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Amad Diallo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520545",
+      "time": "2026-06-15T01:03:08Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Ecuador.",
+      "provider_wallclock": "2026-06-15T01:03:08Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+8'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        }
+      }
+    },
+    {
+      "event_id": "49520553",
+      "time": "2026-06-15T01:03:56Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Ecuador. Players involved: Piero Hincapié, Moisés Caicedo.",
+      "provider_wallclock": "2026-06-15T01:03:56Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+9'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Piero Hincapié"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Moisés Caicedo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520550",
+      "time": "2026-06-15T01:03:59Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Ecuador.",
+      "provider_wallclock": "2026-06-15T01:03:59Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+9'"
+        },
+        "team": {
+          "displayName": "Ecuador"
+        }
+      }
+    },
+    {
+      "event_id": "49520551",
+      "time": "2026-06-15T01:04:45Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-15T01:04:45Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+9'"
+        }
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 6
+  }
+}

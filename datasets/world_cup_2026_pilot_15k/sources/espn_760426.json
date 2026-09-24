@@ -1,0 +1,3250 @@
+{
+  "fixture_id": "espn:760426",
+  "espn_event_id": "760426",
+  "kickoff": "2026-06-15T19:00:00Z",
+  "target_end_exclusive": "2026-06-15T20:57:41Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760426",
+    "source_body_sha256": "f64bc9b19f4bfc85568b622ac72f60088aa54f4402d8e9d2d8c6df5133307877",
+    "captured_at_utc": "2026-09-24T22:46:50.552160Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49523674",
+      "time": "2026-06-15T19:00:34Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-15T19:00:34Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49523676",
+      "time": "2026-06-15T19:00:56Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Amadou Onana, Emam Ashour.",
+      "provider_wallclock": "2026-06-15T19:00:56Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "23.0",
+          "displayValue": "1'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Amadou Onana"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Emam Ashour"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523754",
+      "time": "2026-06-15T19:05:31Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Egypt. Players involved: Mohamed Salah.",
+      "provider_wallclock": "2026-06-15T19:05:31Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "297.0",
+          "displayValue": "5'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Salah"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523784",
+      "time": "2026-06-15T19:06:20Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Belgium. Players involved: Leandro Trossard, Kevin De Bruyne.",
+      "provider_wallclock": "2026-06-15T19:06:20Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "347.0",
+          "displayValue": "6'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Leandro Trossard"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Kevin De Bruyne"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523793",
+      "time": "2026-06-15T19:06:50Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Belgium. Players involved: Kevin De Bruyne, Youri Tielemans.",
+      "provider_wallclock": "2026-06-15T19:06:50Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "377.0",
+          "displayValue": "7'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kevin De Bruyne"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Youri Tielemans"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523798",
+      "time": "2026-06-15T19:07:24Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Nathan Ngoy, Omar Marmoush.",
+      "provider_wallclock": "2026-06-15T19:07:24Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "411.0",
+          "displayValue": "7'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nathan Ngoy"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Omar Marmoush"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523816",
+      "time": "2026-06-15T19:08:42Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Mohamed Salah, Amadou Onana.",
+      "provider_wallclock": "2026-06-15T19:08:42Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "489.0",
+          "displayValue": "9'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Salah"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Amadou Onana"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523901",
+      "time": "2026-06-15T19:12:04Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Belgium.",
+      "provider_wallclock": "2026-06-15T19:12:04Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "690.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "id": "459",
+          "displayName": "Belgium"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49523903",
+      "time": "2026-06-15T19:12:09Z",
+      "type": "var---referee-decision-cancelled",
+      "text": "Event: VAR - Referee decision cancelled. Team: Belgium. Players involved: Charles De Ketelaere.",
+      "provider_wallclock": "2026-06-15T19:12:09Z",
+      "facts": {
+        "type": {
+          "id": "172",
+          "text": "VAR - Referee decision cancelled",
+          "type": "var---referee-decision-cancelled"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "695.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Charles De Ketelaere"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523904",
+      "time": "2026-06-15T19:12:24Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Belgium.",
+      "provider_wallclock": "2026-06-15T19:12:24Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "710.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "id": "459",
+          "displayName": "Belgium"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49523902",
+      "time": "2026-06-15T19:12:56Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Marawan Attia, Nathan Ngoy.",
+      "provider_wallclock": "2026-06-15T19:12:56Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "743.0",
+          "displayValue": "13'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marawan Attia"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nathan Ngoy"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523906",
+      "time": "2026-06-15T19:12:58Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Egypt. Players involved: Marawan Attia.",
+      "provider_wallclock": "2026-06-15T19:12:58Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "745.0",
+          "displayValue": "13'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marawan Attia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523925",
+      "time": "2026-06-15T19:14:18Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Timothy Castagne, Mohamed Salah.",
+      "provider_wallclock": "2026-06-15T19:14:18Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "824.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Timothy Castagne"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohamed Salah"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523926",
+      "time": "2026-06-15T19:14:23Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Belgium. Players involved: Timothy Castagne.",
+      "provider_wallclock": "2026-06-15T19:14:23Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "830.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Timothy Castagne"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49523976",
+      "time": "2026-06-15T19:17:29Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Brandon Mechele, Mohamed Salah.",
+      "provider_wallclock": "2026-06-15T19:17:29Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1016.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brandon Mechele"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohamed Salah"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524007",
+      "time": "2026-06-15T19:19:08Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Belgium. Players involved: Thomas Meunier.",
+      "provider_wallclock": "2026-06-15T19:19:08Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1115.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Thomas Meunier"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524019",
+      "time": "2026-06-15T19:19:36Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Egypt. Players involved: Emam Ashour, Mohamed Salah.",
+      "provider_wallclock": "2026-06-15T19:19:36Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1142.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Emam Ashour"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohamed Salah"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524054",
+      "time": "2026-06-15T19:22:14Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Brandon Mechele, Mohamed Salah.",
+      "provider_wallclock": "2026-06-15T19:22:14Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1301.0",
+          "displayValue": "22'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brandon Mechele"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohamed Salah"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524056",
+      "time": "2026-06-15T19:22:21Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Egypt.",
+      "provider_wallclock": "2026-06-15T19:22:21Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1308.0",
+          "displayValue": "22'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        }
+      }
+    },
+    {
+      "event_id": "49524055",
+      "time": "2026-06-15T19:22:22Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Belgium.",
+      "provider_wallclock": "2026-06-15T19:22:22Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1308.0",
+          "displayValue": "22'"
+        },
+        "team": {
+          "id": "459",
+          "displayName": "Belgium"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49524057",
+      "time": "2026-06-15T19:25:16Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Belgium.",
+      "provider_wallclock": "2026-06-15T19:25:16Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1482.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "id": "459",
+          "displayName": "Belgium"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49524058",
+      "time": "2026-06-15T19:25:16Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Egypt.",
+      "provider_wallclock": "2026-06-15T19:25:16Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1482.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        }
+      }
+    },
+    {
+      "event_id": "49524108",
+      "time": "2026-06-15T19:27:58Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Thomas Meunier, Emam Ashour.",
+      "provider_wallclock": "2026-06-15T19:27:58Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1644.0",
+          "displayValue": "28'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Thomas Meunier"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Emam Ashour"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524162",
+      "time": "2026-06-15T19:31:12Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Belgium. Players involved: Youri Tielemans, Timothy Castagne.",
+      "provider_wallclock": "2026-06-15T19:31:12Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1838.0",
+          "displayValue": "31'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Youri Tielemans"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Timothy Castagne"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524195",
+      "time": "2026-06-15T19:33:17Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Egypt. Players involved: Mostafa Zico, Marawan Attia.",
+      "provider_wallclock": "2026-06-15T19:33:17Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1963.0",
+          "displayValue": "33'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mostafa Zico"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Marawan Attia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524194",
+      "time": "2026-06-15T19:33:18Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Egypt.",
+      "provider_wallclock": "2026-06-15T19:33:18Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1964.0",
+          "displayValue": "33'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        }
+      }
+    },
+    {
+      "event_id": "49524201",
+      "time": "2026-06-15T19:33:54Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Ahmed Fatouh, Jérémy Doku.",
+      "provider_wallclock": "2026-06-15T19:33:54Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2000.0",
+          "displayValue": "34'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ahmed Fatouh"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jérémy Doku"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524202",
+      "time": "2026-06-15T19:33:57Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Egypt. Players involved: Ahmed Fatouh.",
+      "provider_wallclock": "2026-06-15T19:33:57Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2004.0",
+          "displayValue": "34'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ahmed Fatouh"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524258",
+      "time": "2026-06-15T19:36:57Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Youri Tielemans, Hamdy Fathy.",
+      "provider_wallclock": "2026-06-15T19:36:57Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2183.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Youri Tielemans"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hamdy Fathy"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524293",
+      "time": "2026-06-15T19:38:29Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Belgium. Players involved: Leandro Trossard, Jérémy Doku.",
+      "provider_wallclock": "2026-06-15T19:38:29Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2275.0",
+          "displayValue": "38'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Leandro Trossard"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jérémy Doku"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524297",
+      "time": "2026-06-15T19:39:05Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Belgium. Players involved: Leandro Trossard, Kevin De Bruyne.",
+      "provider_wallclock": "2026-06-15T19:39:05Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2312.0",
+          "displayValue": "39'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Leandro Trossard"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Kevin De Bruyne"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524296",
+      "time": "2026-06-15T19:39:15Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Mohanad Lashin, Leandro Trossard.",
+      "provider_wallclock": "2026-06-15T19:39:15Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2322.0",
+          "displayValue": "39'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohanad Lashin"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Leandro Trossard"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524308",
+      "time": "2026-06-15T19:40:04Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Thomas Meunier, Emam Ashour.",
+      "provider_wallclock": "2026-06-15T19:40:04Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2370.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Thomas Meunier"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Emam Ashour"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524366",
+      "time": "2026-06-15T19:43:03Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Belgium. Players involved: Kevin De Bruyne, Leandro Trossard.",
+      "provider_wallclock": "2026-06-15T19:43:03Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2550.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kevin De Bruyne"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Leandro Trossard"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524367",
+      "time": "2026-06-15T19:43:35Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Marawan Attia, Amadou Onana.",
+      "provider_wallclock": "2026-06-15T19:43:35Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2581.0",
+          "displayValue": "44'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marawan Attia"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Amadou Onana"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524407",
+      "time": "2026-06-15T19:44:59Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Omar Marmoush, Amadou Onana.",
+      "provider_wallclock": "2026-06-15T19:44:59Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2665.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Omar Marmoush"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Amadou Onana"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524431",
+      "time": "2026-06-15T19:46:31Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Belgium. Players involved: Jérémy Doku, Charles De Ketelaere.",
+      "provider_wallclock": "2026-06-15T19:46:31Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+1'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jérémy Doku"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Charles De Ketelaere"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524453",
+      "time": "2026-06-15T19:47:55Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Thomas Meunier, Ahmed Fatouh.",
+      "provider_wallclock": "2026-06-15T19:47:55Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+3'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Thomas Meunier"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ahmed Fatouh"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524456",
+      "time": "2026-06-15T19:48:35Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Egypt. Players involved: Omar Marmoush.",
+      "provider_wallclock": "2026-06-15T19:48:35Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Omar Marmoush"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524458",
+      "time": "2026-06-15T19:48:37Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Egypt.",
+      "provider_wallclock": "2026-06-15T19:48:37Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        }
+      }
+    },
+    {
+      "event_id": "49524461",
+      "time": "2026-06-15T19:48:51Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Egypt.",
+      "provider_wallclock": "2026-06-15T19:48:51Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        }
+      }
+    },
+    {
+      "event_id": "49524470",
+      "time": "2026-06-15T19:49:23Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Egypt. Players involved: Mohamed Hany.",
+      "provider_wallclock": "2026-06-15T19:49:23Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Hany"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524468",
+      "time": "2026-06-15T19:49:28Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Egypt.",
+      "provider_wallclock": "2026-06-15T19:49:28Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        }
+      }
+    },
+    {
+      "event_id": "49524475",
+      "time": "2026-06-15T19:50:06Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-15T19:50:06Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+5'"
+        }
+      }
+    },
+    {
+      "event_id": "49524500",
+      "time": "2026-06-15T20:07:33Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-15T20:07:33Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49524527",
+      "time": "2026-06-15T20:08:46Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Hamdy Fathy, Jérémy Doku.",
+      "provider_wallclock": "2026-06-15T20:08:46Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2773.0",
+          "displayValue": "47'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Hamdy Fathy"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jérémy Doku"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524561",
+      "time": "2026-06-15T20:09:59Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Egypt. Players involved: Mostafa Zico.",
+      "provider_wallclock": "2026-06-15T20:09:59Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2846.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mostafa Zico"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524574",
+      "time": "2026-06-15T20:10:00Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Egypt. Players involved: Omar Marmoush, Mostafa Zico.",
+      "provider_wallclock": "2026-06-15T20:10:00Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2847.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Omar Marmoush"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mostafa Zico"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524580",
+      "time": "2026-06-15T20:11:57Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Omar Marmoush, Jérémy Doku.",
+      "provider_wallclock": "2026-06-15T20:11:57Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2964.0",
+          "displayValue": "50'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Omar Marmoush"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jérémy Doku"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524599",
+      "time": "2026-06-15T20:13:18Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Ahmed Fatouh, Youri Tielemans.",
+      "provider_wallclock": "2026-06-15T20:13:18Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3045.0",
+          "displayValue": "51'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ahmed Fatouh"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Youri Tielemans"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524609",
+      "time": "2026-06-15T20:13:49Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Marawan Attia, Jérémy Doku.",
+      "provider_wallclock": "2026-06-15T20:13:49Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3076.0",
+          "displayValue": "52'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marawan Attia"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jérémy Doku"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524615",
+      "time": "2026-06-15T20:15:19Z",
+      "type": "shot-hit-woodwork",
+      "text": "Event: Shot Hit Woodwork. Team: Belgium. Players involved: Kevin De Bruyne.",
+      "provider_wallclock": "2026-06-15T20:15:19Z",
+      "facts": {
+        "type": {
+          "id": "136",
+          "text": "Shot Hit Woodwork",
+          "type": "shot-hit-woodwork"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3166.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kevin De Bruyne"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524624",
+      "time": "2026-06-15T20:16:09Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Egypt.",
+      "provider_wallclock": "2026-06-15T20:16:09Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3216.0",
+          "displayValue": "54'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        }
+      }
+    },
+    {
+      "event_id": "49524647",
+      "time": "2026-06-15T20:17:28Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Egypt. Players involved: Mohamed Salah, Ahmed Fatouh.",
+      "provider_wallclock": "2026-06-15T20:17:28Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3295.0",
+          "displayValue": "55'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Salah"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ahmed Fatouh"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524673",
+      "time": "2026-06-15T20:17:32Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Egypt. Players involved: Emam Ashour.",
+      "provider_wallclock": "2026-06-15T20:17:32Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3299.0",
+          "displayValue": "55'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Emam Ashour"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524651",
+      "time": "2026-06-15T20:18:19Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Belgium. Players involved: Nicolas Raskin, Timothy Castagne.",
+      "provider_wallclock": "2026-06-15T20:18:19Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3346.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nicolas Raskin"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Timothy Castagne"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524650",
+      "time": "2026-06-15T20:18:21Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Belgium. Players involved: Maxim De Cuyper, Amadou Onana.",
+      "provider_wallclock": "2026-06-15T20:18:21Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3348.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Maxim De Cuyper"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Amadou Onana"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524683",
+      "time": "2026-06-15T20:19:03Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Egypt. Players involved: Marawan Attia, Emam Ashour.",
+      "provider_wallclock": "2026-06-15T20:19:03Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3390.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marawan Attia"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Emam Ashour"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524705",
+      "time": "2026-06-15T20:19:13Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Mohanad Lashin, Charles De Ketelaere.",
+      "provider_wallclock": "2026-06-15T20:19:13Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3400.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohanad Lashin"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Charles De Ketelaere"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524710",
+      "time": "2026-06-15T20:21:33Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Egypt. Players involved: Omar Marmoush, Mohamed Salah.",
+      "provider_wallclock": "2026-06-15T20:21:33Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3540.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Omar Marmoush"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohamed Salah"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524729",
+      "time": "2026-06-15T20:23:08Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Belgium.",
+      "provider_wallclock": "2026-06-15T20:23:08Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3636.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        }
+      }
+    },
+    {
+      "event_id": "49524737",
+      "time": "2026-06-15T20:23:40Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Belgium. Players involved: Youri Tielemans.",
+      "provider_wallclock": "2026-06-15T20:23:40Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3667.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Youri Tielemans"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524751",
+      "time": "2026-06-15T20:24:22Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Belgium. Players involved: Kevin De Bruyne, Thomas Meunier.",
+      "provider_wallclock": "2026-06-15T20:24:22Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3709.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kevin De Bruyne"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Thomas Meunier"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524757",
+      "time": "2026-06-15T20:24:42Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Mohamed Salah, Brandon Mechele.",
+      "provider_wallclock": "2026-06-15T20:24:42Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3730.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Salah"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Brandon Mechele"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524765",
+      "time": "2026-06-15T20:25:21Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Belgium.",
+      "provider_wallclock": "2026-06-15T20:25:21Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3768.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        }
+      }
+    },
+    {
+      "event_id": "49524770",
+      "time": "2026-06-15T20:25:43Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Nathan Ngoy, Mostafa Shoubir.",
+      "provider_wallclock": "2026-06-15T20:25:43Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3790.0",
+          "displayValue": "64'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nathan Ngoy"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mostafa Shoubir"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524779",
+      "time": "2026-06-15T20:26:38Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Egypt. Players involved: Omar Marmoush, Mohamed Salah.",
+      "provider_wallclock": "2026-06-15T20:26:38Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3845.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Omar Marmoush"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohamed Salah"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524782",
+      "time": "2026-06-15T20:26:41Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Egypt.",
+      "provider_wallclock": "2026-06-15T20:26:41Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3848.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        }
+      }
+    },
+    {
+      "event_id": "49524791",
+      "time": "2026-06-15T20:27:36Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Mohanad Lashin, Youri Tielemans.",
+      "provider_wallclock": "2026-06-15T20:27:36Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3903.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohanad Lashin"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Youri Tielemans"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524793",
+      "time": "2026-06-15T20:27:54Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Belgium. Players involved: Romelu Lukaku, Charles De Ketelaere.",
+      "provider_wallclock": "2026-06-15T20:27:54Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3922.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Romelu Lukaku"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Charles De Ketelaere"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524800",
+      "time": "2026-06-15T20:28:17Z",
+      "type": "own-goal",
+      "text": "Event: Own Goal. Team: Belgium. Players involved: Mohamed Hany.",
+      "provider_wallclock": "2026-06-15T20:28:17Z",
+      "facts": {
+        "type": {
+          "id": "97",
+          "text": "Own Goal",
+          "type": "own-goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3944.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Hany"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524799",
+      "time": "2026-06-15T20:29:19Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Belgium.",
+      "provider_wallclock": "2026-06-15T20:29:19Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4007.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        }
+      }
+    },
+    {
+      "event_id": "49524801",
+      "time": "2026-06-15T20:29:20Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Egypt.",
+      "provider_wallclock": "2026-06-15T20:29:20Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4007.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "id": "2620",
+          "displayName": "Egypt"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49524803",
+      "time": "2026-06-15T20:32:04Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Belgium.",
+      "provider_wallclock": "2026-06-15T20:32:04Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4171.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        }
+      }
+    },
+    {
+      "event_id": "49524810",
+      "time": "2026-06-15T20:32:04Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Egypt.",
+      "provider_wallclock": "2026-06-15T20:32:04Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4171.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "id": "2620",
+          "displayName": "Egypt"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49524809",
+      "time": "2026-06-15T20:32:43Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Egypt. Players involved: Ramy Rabia, Emam Ashour.",
+      "provider_wallclock": "2026-06-15T20:32:43Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4210.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ramy Rabia"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Emam Ashour"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524827",
+      "time": "2026-06-15T20:33:35Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Jérémy Doku, Mohanad Lashin.",
+      "provider_wallclock": "2026-06-15T20:33:35Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4262.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jérémy Doku"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohanad Lashin"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524847",
+      "time": "2026-06-15T20:34:41Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Belgium. Players involved: Thomas Meunier, Leandro Trossard.",
+      "provider_wallclock": "2026-06-15T20:34:41Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4328.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Thomas Meunier"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Leandro Trossard"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524877",
+      "time": "2026-06-15T20:35:56Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Maxim De Cuyper, Mostafa Zico.",
+      "provider_wallclock": "2026-06-15T20:35:56Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4404.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Maxim De Cuyper"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mostafa Zico"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524898",
+      "time": "2026-06-15T20:37:10Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Maxim De Cuyper, Mostafa Zico.",
+      "provider_wallclock": "2026-06-15T20:37:10Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4477.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Maxim De Cuyper"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mostafa Zico"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524907",
+      "time": "2026-06-15T20:37:13Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Belgium. Players involved: Maxim De Cuyper.",
+      "provider_wallclock": "2026-06-15T20:37:13Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4480.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Maxim De Cuyper"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524915",
+      "time": "2026-06-15T20:37:47Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Egypt. Players involved: Zizo, Mostafa Zico.",
+      "provider_wallclock": "2026-06-15T20:37:47Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4514.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Zizo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mostafa Zico"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524916",
+      "time": "2026-06-15T20:38:18Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Egypt. Players involved: Hamza Abdelkarim, Mohamed Salah.",
+      "provider_wallclock": "2026-06-15T20:38:18Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4545.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Hamza Abdelkarim"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohamed Salah"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524956",
+      "time": "2026-06-15T20:40:14Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Belgium. Players involved: Romelu Lukaku, Leandro Trossard.",
+      "provider_wallclock": "2026-06-15T20:40:14Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4662.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Romelu Lukaku"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Leandro Trossard"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524974",
+      "time": "2026-06-15T20:41:24Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Egypt. Players involved: Zizo, Hamdy Fathy.",
+      "provider_wallclock": "2026-06-15T20:41:24Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4731.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Zizo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hamdy Fathy"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49524991",
+      "time": "2026-06-15T20:42:21Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Belgium. Players involved: Thomas Meunier, Hamdy Fathy.",
+      "provider_wallclock": "2026-06-15T20:42:21Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4788.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Thomas Meunier"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hamdy Fathy"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49525005",
+      "time": "2026-06-15T20:43:18Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Mohamed Hany, Jérémy Doku.",
+      "provider_wallclock": "2026-06-15T20:43:18Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4845.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Hany"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jérémy Doku"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49525010",
+      "time": "2026-06-15T20:44:37Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Belgium. Players involved: Brandon Mechele, Youri Tielemans.",
+      "provider_wallclock": "2026-06-15T20:44:37Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4924.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brandon Mechele"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Youri Tielemans"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49525032",
+      "time": "2026-06-15T20:45:39Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Egypt.",
+      "provider_wallclock": "2026-06-15T20:45:39Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4986.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        }
+      }
+    },
+    {
+      "event_id": "49525045",
+      "time": "2026-06-15T20:46:20Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Egypt. Players involved: Omar Marmoush, Hamdy Fathy.",
+      "provider_wallclock": "2026-06-15T20:46:20Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5027.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Omar Marmoush"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hamdy Fathy"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49525062",
+      "time": "2026-06-15T20:47:42Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Belgium. Players involved: Matias Fernandez-Pardo, Jérémy Doku.",
+      "provider_wallclock": "2026-06-15T20:47:42Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5109.0",
+          "displayValue": "86'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Matias Fernandez-Pardo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jérémy Doku"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49525063",
+      "time": "2026-06-15T20:47:43Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Belgium. Players involved: Hans Vanaken, Kevin De Bruyne.",
+      "provider_wallclock": "2026-06-15T20:47:43Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5110.0",
+          "displayValue": "86'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Hans Vanaken"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Kevin De Bruyne"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49525078",
+      "time": "2026-06-15T20:48:58Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Belgium. Players involved: Romelu Lukaku, Nicolas Raskin.",
+      "provider_wallclock": "2026-06-15T20:48:58Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5185.0",
+          "displayValue": "87'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Romelu Lukaku"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nicolas Raskin"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49525086",
+      "time": "2026-06-15T20:50:27Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Egypt. Players involved: Karim Hafez, Ahmed Fatouh.",
+      "provider_wallclock": "2026-06-15T20:50:27Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5274.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Karim Hafez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ahmed Fatouh"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49525087",
+      "time": "2026-06-15T20:50:33Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Egypt. Players involved: Ibrahim Adel, Hamdy Fathy.",
+      "provider_wallclock": "2026-06-15T20:50:33Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5280.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ibrahim Adel"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hamdy Fathy"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49525127",
+      "time": "2026-06-15T20:52:08Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Egypt. Players involved: Mohamed Hany, Omar Marmoush.",
+      "provider_wallclock": "2026-06-15T20:52:08Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5375.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Hany"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Omar Marmoush"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49525196",
+      "time": "2026-06-15T20:55:32Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Egypt. Players involved: Zizo, Leandro Trossard.",
+      "provider_wallclock": "2026-06-15T20:55:32Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Egypt"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Zizo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Leandro Trossard"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49525199",
+      "time": "2026-06-15T20:56:29Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Belgium. Players involved: Brandon Mechele, Youri Tielemans.",
+      "provider_wallclock": "2026-06-15T20:56:29Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "displayName": "Belgium"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brandon Mechele"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Youri Tielemans"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49525213",
+      "time": "2026-06-15T20:57:41Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-15T20:57:41Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+6'"
+        }
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 6
+  }
+}

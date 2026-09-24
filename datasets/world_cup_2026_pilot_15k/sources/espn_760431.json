@@ -1,0 +1,3027 @@
+{
+  "fixture_id": "espn:760431",
+  "espn_event_id": "760431",
+  "kickoff": "2026-06-17T04:00:00Z",
+  "target_end_exclusive": "2026-06-17T06:08:02Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760431",
+    "source_body_sha256": "d100d3c670c0bb0a816ca5d96c43b2126e1784ed4d884aac8e2a588da77616fa",
+    "captured_at_utc": "2026-09-24T22:46:54.411909Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49537275",
+      "time": "2026-06-17T04:02:58Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-17T04:02:58Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49537302",
+      "time": "2026-06-17T04:04:29Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Jordan. Players involved: Ehsan Haddad, Nizar Al-Rashdan.",
+      "provider_wallclock": "2026-06-17T04:04:29Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "90.0",
+          "displayValue": "2'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ehsan Haddad"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nizar Al-Rashdan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537424",
+      "time": "2026-06-17T04:09:57Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Austria. Players involved: Konrad Laimer.",
+      "provider_wallclock": "2026-06-17T04:09:57Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "419.0",
+          "displayValue": "7'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Konrad Laimer"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537461",
+      "time": "2026-06-17T04:11:39Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Jordan. Players involved: Mousa Al-Tamari, Odeh Fakhoury.",
+      "provider_wallclock": "2026-06-17T04:11:39Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "521.0",
+          "displayValue": "9'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mousa Al-Tamari"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Odeh Fakhoury"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537514",
+      "time": "2026-06-17T04:13:30Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Austria. Players involved: David Alaba.",
+      "provider_wallclock": "2026-06-17T04:13:30Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "632.0",
+          "displayValue": "11'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "David Alaba"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537519",
+      "time": "2026-06-17T04:14:04Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Austria. Players involved: Phillipp Mwene.",
+      "provider_wallclock": "2026-06-17T04:14:04Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "666.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Phillipp Mwene"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537528",
+      "time": "2026-06-17T04:15:01Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Jordan. Players involved: Abdallah Nasib, Sasa Kalajdzic.",
+      "provider_wallclock": "2026-06-17T04:15:01Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "723.0",
+          "displayValue": "13'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Abdallah Nasib"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sasa Kalajdzic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537542",
+      "time": "2026-06-17T04:15:57Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Austria. Players involved: Xaver Schlager, Odeh Fakhoury.",
+      "provider_wallclock": "2026-06-17T04:15:57Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "779.0",
+          "displayValue": "13'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Xaver Schlager"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Odeh Fakhoury"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537589",
+      "time": "2026-06-17T04:18:27Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Austria.",
+      "provider_wallclock": "2026-06-17T04:18:27Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "928.0",
+          "displayValue": "16'"
+        },
+        "team": {
+          "displayName": "Austria"
+        }
+      }
+    },
+    {
+      "event_id": "49537595",
+      "time": "2026-06-17T04:19:11Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Austria. Players involved: Konrad Laimer, Mousa Al-Tamari.",
+      "provider_wallclock": "2026-06-17T04:19:11Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "972.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Konrad Laimer"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mousa Al-Tamari"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537599",
+      "time": "2026-06-17T04:19:28Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Jordan. Players involved: Odeh Fakhoury, Noor Al-Rawabdeh.",
+      "provider_wallclock": "2026-06-17T04:19:28Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "990.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Odeh Fakhoury"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Noor Al-Rawabdeh"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537597",
+      "time": "2026-06-17T04:19:30Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T04:19:30Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "991.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        }
+      }
+    },
+    {
+      "event_id": "49537624",
+      "time": "2026-06-17T04:21:35Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Austria. Players involved: Marcel Sabitzer, Sasa Kalajdzic.",
+      "provider_wallclock": "2026-06-17T04:21:35Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1116.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marcel Sabitzer"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sasa Kalajdzic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537627",
+      "time": "2026-06-17T04:21:36Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Austria. Players involved: Marcel Sabitzer.",
+      "provider_wallclock": "2026-06-17T04:21:36Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1117.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marcel Sabitzer"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537647",
+      "time": "2026-06-17T04:22:59Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Austria. Players involved: Romano Schmid, Xaver Schlager.",
+      "provider_wallclock": "2026-06-17T04:22:59Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1201.0",
+          "displayValue": "21'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Romano Schmid"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Xaver Schlager"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537653",
+      "time": "2026-06-17T04:24:23Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T04:24:23Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1284.0",
+          "displayValue": "22'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        }
+      }
+    },
+    {
+      "event_id": "49537667",
+      "time": "2026-06-17T04:24:53Z",
+      "type": "shot-hit-woodwork",
+      "text": "Event: Shot Hit Woodwork. Team: Jordan. Players involved: Ali Olwan, Mohannad Abu Taha.",
+      "provider_wallclock": "2026-06-17T04:24:53Z",
+      "facts": {
+        "type": {
+          "id": "136",
+          "text": "Shot Hit Woodwork",
+          "type": "shot-hit-woodwork"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1314.0",
+          "displayValue": "22'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Olwan"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohannad Abu Taha"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537668",
+      "time": "2026-06-17T04:25:38Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T04:25:38Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1360.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Austria"
+        }
+      }
+    },
+    {
+      "event_id": "49537669",
+      "time": "2026-06-17T04:25:39Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T04:25:39Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1360.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "id": "2917",
+          "displayName": "Jordan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49537673",
+      "time": "2026-06-17T04:28:45Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T04:28:45Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1547.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "displayName": "Austria"
+        }
+      }
+    },
+    {
+      "event_id": "49537672",
+      "time": "2026-06-17T04:28:46Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T04:28:46Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1547.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "id": "2917",
+          "displayName": "Jordan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49537741",
+      "time": "2026-06-17T04:32:26Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Austria. Players involved: Sasa Kalajdzic, Phillipp Mwene.",
+      "provider_wallclock": "2026-06-17T04:32:26Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1768.0",
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sasa Kalajdzic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Phillipp Mwene"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537794",
+      "time": "2026-06-17T04:35:10Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Austria. Players involved: Stefan Posch.",
+      "provider_wallclock": "2026-06-17T04:35:10Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1932.0",
+          "displayValue": "33'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Stefan Posch"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537833",
+      "time": "2026-06-17T04:36:53Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Jordan. Players involved: Ali Olwan, Ehsan Haddad.",
+      "provider_wallclock": "2026-06-17T04:36:53Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2034.0",
+          "displayValue": "34'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Olwan"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ehsan Haddad"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537838",
+      "time": "2026-06-17T04:36:55Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Jordan. Players involved: Mousa Al-Tamari.",
+      "provider_wallclock": "2026-06-17T04:36:55Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2036.0",
+          "displayValue": "34'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mousa Al-Tamari"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537860",
+      "time": "2026-06-17T04:39:27Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Austria. Players involved: Sasa Kalajdzic, Abdallah Nasib.",
+      "provider_wallclock": "2026-06-17T04:39:27Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2189.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sasa Kalajdzic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Abdallah Nasib"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537907",
+      "time": "2026-06-17T04:42:26Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Jordan. Players involved: Nizar Al-Rashdan, Sasa Kalajdzic.",
+      "provider_wallclock": "2026-06-17T04:42:26Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2368.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nizar Al-Rashdan"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sasa Kalajdzic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537909",
+      "time": "2026-06-17T04:42:26Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Jordan. Players involved: Nizar Al-Rashdan, Sasa Kalajdzic.",
+      "provider_wallclock": "2026-06-17T04:42:26Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2368.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nizar Al-Rashdan"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sasa Kalajdzic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537912",
+      "time": "2026-06-17T04:43:19Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Austria. Players involved: Xaver Schlager, Ehsan Haddad.",
+      "provider_wallclock": "2026-06-17T04:43:19Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2421.0",
+          "displayValue": "41'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Xaver Schlager"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ehsan Haddad"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537915",
+      "time": "2026-06-17T04:44:02Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Austria. Players involved: Phillipp Mwene, Ali Olwan.",
+      "provider_wallclock": "2026-06-17T04:44:02Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2463.0",
+          "displayValue": "42'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Phillipp Mwene"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ali Olwan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537918",
+      "time": "2026-06-17T04:44:40Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T04:44:40Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2501.0",
+          "displayValue": "42'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        }
+      }
+    },
+    {
+      "event_id": "49537928",
+      "time": "2026-06-17T04:45:47Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Austria. Players involved: Stefan Posch, Odeh Fakhoury.",
+      "provider_wallclock": "2026-06-17T04:45:47Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2569.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Stefan Posch"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Odeh Fakhoury"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537940",
+      "time": "2026-06-17T04:46:39Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Jordan. Players involved: Mousa Al-Tamari, Odeh Fakhoury.",
+      "provider_wallclock": "2026-06-17T04:46:39Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2620.0",
+          "displayValue": "44'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mousa Al-Tamari"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Odeh Fakhoury"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537974",
+      "time": "2026-06-17T04:48:18Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Jordan. Players involved: Mousa Al-Tamari, Ehsan Haddad.",
+      "provider_wallclock": "2026-06-17T04:48:18Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+1'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mousa Al-Tamari"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ehsan Haddad"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49537983",
+      "time": "2026-06-17T04:48:55Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Jordan. Players involved: Nizar Al-Rashdan, Nicolas Seiwald.",
+      "provider_wallclock": "2026-06-17T04:48:55Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+1'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nizar Al-Rashdan"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nicolas Seiwald"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538034",
+      "time": "2026-06-17T04:51:53Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Austria. Players involved: Sasa Kalajdzic, Marcel Sabitzer.",
+      "provider_wallclock": "2026-06-17T04:51:53Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sasa Kalajdzic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Marcel Sabitzer"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538036",
+      "time": "2026-06-17T04:52:02Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-17T04:52:02Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+5'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538041",
+      "time": "2026-06-17T05:09:20Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Austria. Players involved: Marko Arnautovic, Sasa Kalajdzic.",
+      "provider_wallclock": "2026-06-17T05:09:20Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marko Arnautovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sasa Kalajdzic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538048",
+      "time": "2026-06-17T05:10:11Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-17T05:10:11Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538122",
+      "time": "2026-06-17T05:14:20Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Jordan. Players involved: Ali Olwan, Noor Al-Rawabdeh.",
+      "provider_wallclock": "2026-06-17T05:14:20Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2949.0",
+          "displayValue": "50'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Olwan"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Noor Al-Rawabdeh"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538205",
+      "time": "2026-06-17T05:19:42Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Jordan. Players involved: Ali Olwan, Mousa Al-Tamari.",
+      "provider_wallclock": "2026-06-17T05:19:42Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3272.0",
+          "displayValue": "55'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Olwan"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mousa Al-Tamari"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538222",
+      "time": "2026-06-17T05:21:04Z",
+      "type": "ball-touch",
+      "text": "Event: Ball touch. Team: Austria. Players involved: Stefan Posch.",
+      "provider_wallclock": "2026-06-17T05:21:04Z",
+      "facts": {
+        "type": {
+          "id": "177",
+          "text": "Ball touch",
+          "type": "ball-touch"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3353.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Stefan Posch"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538223",
+      "time": "2026-06-17T05:21:04Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Jordan. Players involved: Mohannad Abu Taha, Stefan Posch.",
+      "provider_wallclock": "2026-06-17T05:21:04Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3353.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohannad Abu Taha"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Stefan Posch"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538262",
+      "time": "2026-06-17T05:22:59Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Jordan. Players involved: Mousa Al-Tamari, Marko Arnautovic.",
+      "provider_wallclock": "2026-06-17T05:22:59Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3468.0",
+          "displayValue": "58'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mousa Al-Tamari"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Marko Arnautovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538264",
+      "time": "2026-06-17T05:23:15Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Austria. Players involved: Paul Wanner, Phillipp Mwene.",
+      "provider_wallclock": "2026-06-17T05:23:15Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3485.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Paul Wanner"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Phillipp Mwene"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538266",
+      "time": "2026-06-17T05:23:29Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Austria. Players involved: Kevin Danso, David Alaba.",
+      "provider_wallclock": "2026-06-17T05:23:29Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3499.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kevin Danso"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "David Alaba"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538265",
+      "time": "2026-06-17T05:23:31Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Austria. Players involved: Carney Chukwuemeka, Xaver Schlager.",
+      "provider_wallclock": "2026-06-17T05:23:31Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3500.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Carney Chukwuemeka"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Xaver Schlager"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538273",
+      "time": "2026-06-17T05:24:07Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Jordan. Players involved: Nizar Al-Rashdan, Kevin Danso.",
+      "provider_wallclock": "2026-06-17T05:24:07Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3537.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nizar Al-Rashdan"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Kevin Danso"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538285",
+      "time": "2026-06-17T05:24:47Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Austria. Players involved: Stefan Posch, Marko Arnautovic.",
+      "provider_wallclock": "2026-06-17T05:24:47Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3577.0",
+          "displayValue": "60'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Stefan Posch"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Marko Arnautovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538292",
+      "time": "2026-06-17T05:25:14Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Austria. Players involved: Konrad Laimer, Ali Olwan.",
+      "provider_wallclock": "2026-06-17T05:25:14Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3603.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Konrad Laimer"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ali Olwan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538353",
+      "time": "2026-06-17T05:27:58Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Austria. Players involved: Carney Chukwuemeka, Romano Schmid.",
+      "provider_wallclock": "2026-06-17T05:27:58Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3767.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Carney Chukwuemeka"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Romano Schmid"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538355",
+      "time": "2026-06-17T05:28:05Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T05:28:05Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3774.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        }
+      }
+    },
+    {
+      "event_id": "49538356",
+      "time": "2026-06-17T05:28:05Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:28:05Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3774.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "id": "474",
+          "displayName": "Austria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538360",
+      "time": "2026-06-17T05:29:38Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:29:38Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3867.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "id": "474",
+          "displayName": "Austria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538361",
+      "time": "2026-06-17T05:29:38Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T05:29:38Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3867.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        }
+      }
+    },
+    {
+      "event_id": "49538387",
+      "time": "2026-06-17T05:30:17Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Jordan. Players involved: Noor Al-Rawabdeh.",
+      "provider_wallclock": "2026-06-17T05:30:17Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3907.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Noor Al-Rawabdeh"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538414",
+      "time": "2026-06-17T05:31:37Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:31:37Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3986.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "Austria"
+        }
+      }
+    },
+    {
+      "event_id": "49538425",
+      "time": "2026-06-17T05:32:03Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Austria. Players involved: Stefan Posch.",
+      "provider_wallclock": "2026-06-17T05:32:03Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4013.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Stefan Posch"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538420",
+      "time": "2026-06-17T05:32:04Z",
+      "type": "deleted-after-review",
+      "text": "Event: Deleted After Review. Team: Austria. Players involved: Marko Arnautovic, Stefan Posch.",
+      "provider_wallclock": "2026-06-17T05:32:04Z",
+      "facts": {
+        "type": {
+          "id": "175",
+          "text": "Deleted After Review",
+          "type": "deleted-after-review"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4013.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marko Arnautovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Stefan Posch"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538422",
+      "time": "2026-06-17T05:34:48Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:34:48Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4177.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "id": "474",
+          "displayName": "Austria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538423",
+      "time": "2026-06-17T05:34:48Z",
+      "type": "var---referee-decision-cancelled",
+      "text": "Event: VAR - Referee decision cancelled. Team: Austria. Players involved: Marko Arnautovic.",
+      "provider_wallclock": "2026-06-17T05:34:48Z",
+      "facts": {
+        "type": {
+          "id": "172",
+          "text": "VAR - Referee decision cancelled",
+          "type": "var---referee-decision-cancelled"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4177.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marko Arnautovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538424",
+      "time": "2026-06-17T05:35:59Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:35:59Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4248.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "id": "474",
+          "displayName": "Austria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538426",
+      "time": "2026-06-17T05:36:20Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Jordan. Players involved: Saleem Obaid, Mohammad Abualnadi.",
+      "provider_wallclock": "2026-06-17T05:36:20Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4269.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Saleem Obaid"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohammad Abualnadi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538427",
+      "time": "2026-06-17T05:36:29Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:36:29Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4278.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "Austria"
+        }
+      }
+    },
+    {
+      "event_id": "49538428",
+      "time": "2026-06-17T05:36:29Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T05:36:29Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4278.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "id": "2917",
+          "displayName": "Jordan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538429",
+      "time": "2026-06-17T05:39:47Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:39:47Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4476.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Austria"
+        }
+      }
+    },
+    {
+      "event_id": "49538430",
+      "time": "2026-06-17T05:39:47Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T05:39:47Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4476.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "id": "2917",
+          "displayName": "Jordan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538439",
+      "time": "2026-06-17T05:40:41Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:40:41Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4531.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Austria"
+        }
+      }
+    },
+    {
+      "event_id": "49538442",
+      "time": "2026-06-17T05:41:04Z",
+      "type": "own-goal",
+      "text": "Event: Own Goal. Team: Austria. Players involved: Yazan Al-Arab.",
+      "provider_wallclock": "2026-06-17T05:41:04Z",
+      "facts": {
+        "type": {
+          "id": "97",
+          "text": "Own Goal",
+          "type": "own-goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4553.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Yazan Al-Arab"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538447",
+      "time": "2026-06-17T05:41:49Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Austria. Players involved: Marcel Sabitzer.",
+      "provider_wallclock": "2026-06-17T05:41:49Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4598.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marcel Sabitzer"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538837",
+      "time": "2026-06-17T05:42:22Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T05:42:22Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4632.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        }
+      }
+    },
+    {
+      "event_id": "49538445",
+      "time": "2026-06-17T05:42:23Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:42:23Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4632.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "id": "474",
+          "displayName": "Austria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538838",
+      "time": "2026-06-17T05:42:45Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T05:42:45Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4655.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        }
+      }
+    },
+    {
+      "event_id": "49538448",
+      "time": "2026-06-17T05:42:46Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:42:46Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4655.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "id": "474",
+          "displayName": "Austria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538493",
+      "time": "2026-06-17T05:44:52Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Austria. Players involved: Nicolas Seiwald.",
+      "provider_wallclock": "2026-06-17T05:44:52Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4781.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nicolas Seiwald"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538497",
+      "time": "2026-06-17T05:45:53Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Jordan. Players involved: Saed Al-Rosan, Abdallah Nasib.",
+      "provider_wallclock": "2026-06-17T05:45:53Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4842.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Saed Al-Rosan"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Abdallah Nasib"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538498",
+      "time": "2026-06-17T05:46:09Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Jordan. Players involved: Mahmoud Al-Mardi, Ehsan Haddad.",
+      "provider_wallclock": "2026-06-17T05:46:09Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4859.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mahmoud Al-Mardi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ehsan Haddad"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538518",
+      "time": "2026-06-17T05:47:32Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Austria. Players involved: Patrick Wimmer, Romano Schmid.",
+      "provider_wallclock": "2026-06-17T05:47:32Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4941.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Patrick Wimmer"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Romano Schmid"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538564",
+      "time": "2026-06-17T05:49:33Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Austria. Players involved: Carney Chukwuemeka, Nizar Al-Rashdan.",
+      "provider_wallclock": "2026-06-17T05:49:33Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5063.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Carney Chukwuemeka"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nizar Al-Rashdan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538606",
+      "time": "2026-06-17T05:51:40Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:51:40Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5189.0",
+          "displayValue": "87'"
+        },
+        "team": {
+          "displayName": "Austria"
+        }
+      }
+    },
+    {
+      "event_id": "49538607",
+      "time": "2026-06-17T05:51:40Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T05:51:40Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5189.0",
+          "displayValue": "87'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        }
+      }
+    },
+    {
+      "event_id": "49538608",
+      "time": "2026-06-17T05:52:16Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Jordan. Players involved: Mohammad Al-Daoud, Mousa Al-Tamari.",
+      "provider_wallclock": "2026-06-17T05:52:16Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5226.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohammad Al-Daoud"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mousa Al-Tamari"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538610",
+      "time": "2026-06-17T05:53:14Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Jordan. Players involved: Ali Azaizeh, Odeh Fakhoury.",
+      "provider_wallclock": "2026-06-17T05:53:14Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5284.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Azaizeh"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Odeh Fakhoury"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538612",
+      "time": "2026-06-17T05:53:49Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:53:49Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5318.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "displayName": "Austria"
+        }
+      }
+    },
+    {
+      "event_id": "49538611",
+      "time": "2026-06-17T05:53:50Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Jordan.",
+      "provider_wallclock": "2026-06-17T05:53:50Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5318.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "id": "2917",
+          "displayName": "Jordan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538689",
+      "time": "2026-06-17T05:56:17Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Austria. Players involved: Marko Arnautovic.",
+      "provider_wallclock": "2026-06-17T05:56:17Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marko Arnautovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538699",
+      "time": "2026-06-17T05:57:05Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Austria. Players involved: Stefan Posch, Mohannad Abu Taha.",
+      "provider_wallclock": "2026-06-17T05:57:05Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Stefan Posch"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohannad Abu Taha"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538706",
+      "time": "2026-06-17T05:57:51Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Jordan. Players involved: Ali Azaizeh.",
+      "provider_wallclock": "2026-06-17T05:57:51Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Azaizeh"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538714",
+      "time": "2026-06-17T05:58:27Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Austria.",
+      "provider_wallclock": "2026-06-17T05:58:27Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "displayName": "Austria"
+        }
+      }
+    },
+    {
+      "event_id": "49538718",
+      "time": "2026-06-17T05:59:03Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Austria. Players involved: Konrad Laimer.",
+      "provider_wallclock": "2026-06-17T05:59:03Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Konrad Laimer"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538737",
+      "time": "2026-06-17T05:59:56Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Austria. Players involved: Nicolas Seiwald.",
+      "provider_wallclock": "2026-06-17T05:59:56Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+5'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nicolas Seiwald"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538823",
+      "time": "2026-06-17T06:03:57Z",
+      "type": "interception",
+      "text": "Event: Interception. Team: Jordan. Players involved: Saleem Obaid.",
+      "provider_wallclock": "2026-06-17T06:03:57Z",
+      "facts": {
+        "type": {
+          "id": "179",
+          "text": "Interception",
+          "type": "interception"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+9'"
+        },
+        "team": {
+          "displayName": "Jordan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Saleem Obaid"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538827",
+      "time": "2026-06-17T06:05:05Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T06:05:05Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+10'"
+        },
+        "team": {
+          "id": "474",
+          "displayName": "Austria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538828",
+      "time": "2026-06-17T06:05:05Z",
+      "type": "var---referee-decision-cancelled",
+      "text": "Event: VAR - Referee decision cancelled. Team: Austria. Players involved: Marko Arnautovic.",
+      "provider_wallclock": "2026-06-17T06:05:05Z",
+      "facts": {
+        "type": {
+          "id": "172",
+          "text": "VAR - Referee decision cancelled",
+          "type": "var---referee-decision-cancelled"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+10'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marko Arnautovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538830",
+      "time": "2026-06-17T06:06:21Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Austria.",
+      "provider_wallclock": "2026-06-17T06:06:21Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+12'"
+        },
+        "team": {
+          "id": "474",
+          "displayName": "Austria"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49538832",
+      "time": "2026-06-17T06:06:58Z",
+      "type": "penalty---scored",
+      "text": "Event: Penalty - Scored. Team: Austria. Players involved: Marko Arnautovic.",
+      "provider_wallclock": "2026-06-17T06:06:58Z",
+      "facts": {
+        "type": {
+          "id": "98",
+          "text": "Penalty - Scored",
+          "type": "penalty---scored"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+12'"
+        },
+        "team": {
+          "displayName": "Austria"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marko Arnautovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49538836",
+      "time": "2026-06-17T06:08:02Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-17T06:08:02Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+14'"
+        }
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 7
+  }
+}

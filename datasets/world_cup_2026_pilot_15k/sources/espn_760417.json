@@ -1,0 +1,3583 @@
+{
+  "fixture_id": "espn:760417",
+  "espn_event_id": "760417",
+  "kickoff": "2026-06-13T01:00:00Z",
+  "target_end_exclusive": "2026-06-13T03:02:50Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760417",
+    "source_body_sha256": "e0593424f5d14020cef8e40cb647decfdcf27c0e35c1e35a4be28a74ffe90440",
+    "captured_at_utc": "2026-09-24T22:46:36.646130Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49489579",
+      "time": "2026-06-13T01:02:14Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-13T01:02:14Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49489587",
+      "time": "2026-06-13T01:02:46Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Tyler Adams, Julio Enciso.",
+      "provider_wallclock": "2026-06-13T01:02:46Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "32.0",
+          "displayValue": "1'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tyler Adams"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Julio Enciso"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49489600",
+      "time": "2026-06-13T01:03:30Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Paraguay. Players involved: Diego Gómez, Antonio Sanabria.",
+      "provider_wallclock": "2026-06-13T01:03:30Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "76.0",
+          "displayValue": "2'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Diego Gómez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Antonio Sanabria"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49489610",
+      "time": "2026-06-13T01:04:42Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: United States. Players involved: Folarin Balogun, Weston McKennie.",
+      "provider_wallclock": "2026-06-13T01:04:42Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "148.0",
+          "displayValue": "3'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Folarin Balogun"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Weston McKennie"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49489618",
+      "time": "2026-06-13T01:05:03Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: United States. Players involved: Weston McKennie.",
+      "provider_wallclock": "2026-06-13T01:05:03Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "169.0",
+          "displayValue": "3'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Weston McKennie"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49489736",
+      "time": "2026-06-13T01:09:03Z",
+      "type": "own-goal",
+      "text": "Event: Own Goal. Team: United States. Players involved: Damián Bobadilla.",
+      "provider_wallclock": "2026-06-13T01:09:03Z",
+      "facts": {
+        "type": {
+          "id": "97",
+          "text": "Own Goal",
+          "type": "own-goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "408.0",
+          "displayValue": "7'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Damián Bobadilla"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49489743",
+      "time": "2026-06-13T01:10:26Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Andrés Cubas, Folarin Balogun.",
+      "provider_wallclock": "2026-06-13T01:10:26Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "492.0",
+          "displayValue": "9'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Andrés Cubas"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Folarin Balogun"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49489817",
+      "time": "2026-06-13T01:11:12Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Juan Jose Cáceres, Christian Pulisic.",
+      "provider_wallclock": "2026-06-13T01:11:12Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "538.0",
+          "displayValue": "9'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Juan Jose Cáceres"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Christian Pulisic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49489818",
+      "time": "2026-06-13T01:11:17Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Paraguay. Players involved: Juan Jose Cáceres.",
+      "provider_wallclock": "2026-06-13T01:11:17Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "542.0",
+          "displayValue": "10'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Juan Jose Cáceres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49489882",
+      "time": "2026-06-13T01:14:00Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Andrés Cubas, Malik Tillman.",
+      "provider_wallclock": "2026-06-13T01:14:00Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "706.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Andrés Cubas"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49489937",
+      "time": "2026-06-13T01:14:50Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T01:14:50Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "756.0",
+          "displayValue": "13'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49489938",
+      "time": "2026-06-13T01:14:51Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T01:14:51Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "756.0",
+          "displayValue": "13'"
+        },
+        "team": {
+          "id": "210",
+          "displayName": "Paraguay"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49489939",
+      "time": "2026-06-13T01:14:54Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T01:14:54Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "760.0",
+          "displayValue": "13'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49489940",
+      "time": "2026-06-13T01:14:55Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T01:14:55Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "760.0",
+          "displayValue": "13'"
+        },
+        "team": {
+          "id": "210",
+          "displayName": "Paraguay"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49489976",
+      "time": "2026-06-13T01:16:03Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Paraguay. Players involved: Julio Enciso, Miguel Almirón.",
+      "provider_wallclock": "2026-06-13T01:16:03Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "829.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Julio Enciso"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Miguel Almirón"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490048",
+      "time": "2026-06-13T01:18:07Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: United States.",
+      "provider_wallclock": "2026-06-13T01:18:07Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "953.0",
+          "displayValue": "16'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49490056",
+      "time": "2026-06-13T01:18:51Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Chris Richards, Omar Alderete.",
+      "provider_wallclock": "2026-06-13T01:18:51Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "996.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Chris Richards"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Omar Alderete"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490057",
+      "time": "2026-06-13T01:19:02Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T01:19:02Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1008.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49490058",
+      "time": "2026-06-13T01:19:02Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T01:19:02Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1008.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        }
+      }
+    },
+    {
+      "event_id": "49490060",
+      "time": "2026-06-13T01:20:20Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T01:20:20Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1086.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49490061",
+      "time": "2026-06-13T01:20:21Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T01:20:21Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1086.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "id": "210",
+          "displayName": "Paraguay"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49490138",
+      "time": "2026-06-13T01:21:33Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Juan Jose Cáceres, Folarin Balogun.",
+      "provider_wallclock": "2026-06-13T01:21:33Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1159.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Juan Jose Cáceres"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Folarin Balogun"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490258",
+      "time": "2026-06-13T01:25:57Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T01:25:57Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1423.0",
+          "displayValue": "24'"
+        },
+        "team": {
+          "id": "210",
+          "displayName": "Paraguay"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49490259",
+      "time": "2026-06-13T01:25:57Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T01:25:57Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1423.0",
+          "displayValue": "24'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49490305",
+      "time": "2026-06-13T01:29:14Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T01:29:14Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1620.0",
+          "displayValue": "27'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49490306",
+      "time": "2026-06-13T01:29:14Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T01:29:14Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1620.0",
+          "displayValue": "27'"
+        },
+        "team": {
+          "id": "210",
+          "displayName": "Paraguay"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49490339",
+      "time": "2026-06-13T01:29:51Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: United States. Players involved: Tyler Adams.",
+      "provider_wallclock": "2026-06-13T01:29:51Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1656.0",
+          "displayValue": "28'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tyler Adams"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490437",
+      "time": "2026-06-13T01:32:33Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: United States. Players involved: Folarin Balogun, Christian Pulisic.",
+      "provider_wallclock": "2026-06-13T01:32:33Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1819.0",
+          "displayValue": "31'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Folarin Balogun"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Christian Pulisic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490594",
+      "time": "2026-06-13T01:37:02Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: United States. Players involved: Folarin Balogun, Christian Pulisic.",
+      "provider_wallclock": "2026-06-13T01:37:02Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2088.0",
+          "displayValue": "35'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Folarin Balogun"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Christian Pulisic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490643",
+      "time": "2026-06-13T01:38:30Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: United States. Players involved: Malik Tillman.",
+      "provider_wallclock": "2026-06-13T01:38:30Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2176.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490642",
+      "time": "2026-06-13T01:38:33Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: United States.",
+      "provider_wallclock": "2026-06-13T01:38:33Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2179.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49490648",
+      "time": "2026-06-13T01:39:15Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: United States. Players involved: Chris Richards, Malik Tillman.",
+      "provider_wallclock": "2026-06-13T01:39:15Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2220.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Chris Richards"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490670",
+      "time": "2026-06-13T01:40:14Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Antonio Sanabria, Chris Richards.",
+      "provider_wallclock": "2026-06-13T01:40:14Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2280.0",
+          "displayValue": "38'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Antonio Sanabria"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Chris Richards"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490740",
+      "time": "2026-06-13T01:42:04Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Damián Bobadilla, Folarin Balogun.",
+      "provider_wallclock": "2026-06-13T01:42:04Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2390.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Damián Bobadilla"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Folarin Balogun"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490772",
+      "time": "2026-06-13T01:43:41Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Christian Pulisic, Juan Jose Cáceres.",
+      "provider_wallclock": "2026-06-13T01:43:41Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2487.0",
+          "displayValue": "42'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Christian Pulisic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Juan Jose Cáceres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490843",
+      "time": "2026-06-13T01:45:04Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: United States. Players involved: Malik Tillman.",
+      "provider_wallclock": "2026-06-13T01:45:04Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2570.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490888",
+      "time": "2026-06-13T01:46:21Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Chris Richards, Antonio Sanabria.",
+      "provider_wallclock": "2026-06-13T01:46:21Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2647.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Chris Richards"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Antonio Sanabria"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49490951",
+      "time": "2026-06-13T01:48:28Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Malik Tillman, Miguel Almirón.",
+      "provider_wallclock": "2026-06-13T01:48:28Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+2'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Miguel Almirón"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491046",
+      "time": "2026-06-13T01:51:16Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: United States. Players involved: Folarin Balogun, Malik Tillman.",
+      "provider_wallclock": "2026-06-13T01:51:16Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+5'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Folarin Balogun"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491075",
+      "time": "2026-06-13T01:52:28Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-13T01:52:28Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+6'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49491156",
+      "time": "2026-06-13T02:08:28Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Paraguay. Players involved: Maurício, Damián Bobadilla.",
+      "provider_wallclock": "2026-06-13T02:08:28Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Maurício"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Damián Bobadilla"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491157",
+      "time": "2026-06-13T02:08:28Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: United States. Players involved: Sebastian Berhalter, Christian Pulisic.",
+      "provider_wallclock": "2026-06-13T02:08:28Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sebastian Berhalter"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Christian Pulisic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491161",
+      "time": "2026-06-13T02:09:05Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-13T02:09:05Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        }
+      }
+    },
+    {
+      "event_id": "49491197",
+      "time": "2026-06-13T02:11:02Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: United States. Players involved: Folarin Balogun, Antonee Robinson.",
+      "provider_wallclock": "2026-06-13T02:11:02Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2816.0",
+          "displayValue": "47'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Folarin Balogun"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Antonee Robinson"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491213",
+      "time": "2026-06-13T02:11:50Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Paraguay. Players involved: Miguel Almirón.",
+      "provider_wallclock": "2026-06-13T02:11:50Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2864.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Miguel Almirón"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491212",
+      "time": "2026-06-13T02:11:58Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Gustavo Gómez, Folarin Balogun.",
+      "provider_wallclock": "2026-06-13T02:11:58Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2873.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gustavo Gómez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Folarin Balogun"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491221",
+      "time": "2026-06-13T02:12:32Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Paraguay. Players involved: Diego Gómez.",
+      "provider_wallclock": "2026-06-13T02:12:32Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2907.0",
+          "displayValue": "49'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Diego Gómez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491220",
+      "time": "2026-06-13T02:12:34Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T02:12:34Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2908.0",
+          "displayValue": "49'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        }
+      }
+    },
+    {
+      "event_id": "49491238",
+      "time": "2026-06-13T02:13:15Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Paraguay. Players involved: Diego Gómez, Miguel Almirón.",
+      "provider_wallclock": "2026-06-13T02:13:15Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2950.0",
+          "displayValue": "50'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Diego Gómez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Miguel Almirón"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491234",
+      "time": "2026-06-13T02:13:35Z",
+      "type": "take-on",
+      "text": "Event: Take On. Team: Paraguay. Players involved: Miguel Almirón.",
+      "provider_wallclock": "2026-06-13T02:13:35Z",
+      "facts": {
+        "type": {
+          "id": "178",
+          "text": "Take On",
+          "type": "take-on"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2970.0",
+          "displayValue": "50'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Miguel Almirón"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491243",
+      "time": "2026-06-13T02:14:50Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T02:14:50Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3045.0",
+          "displayValue": "51'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49491242",
+      "time": "2026-06-13T02:14:51Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T02:14:51Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3045.0",
+          "displayValue": "51'"
+        },
+        "team": {
+          "id": "210",
+          "displayName": "Paraguay"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49491246",
+      "time": "2026-06-13T02:15:28Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T02:15:28Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3083.0",
+          "displayValue": "52'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49491250",
+      "time": "2026-06-13T02:15:29Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T02:15:29Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3083.0",
+          "displayValue": "52'"
+        },
+        "team": {
+          "id": "210",
+          "displayName": "Paraguay"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49491247",
+      "time": "2026-06-13T02:15:31Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T02:15:31Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3086.0",
+          "displayValue": "52'"
+        },
+        "team": {
+          "id": "660",
+          "displayName": "United States"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49491249",
+      "time": "2026-06-13T02:15:31Z",
+      "type": "var---red-card-upgrade",
+      "text": "Event: VAR - (Red) Card Upgrade. Team: United States. Players involved: Tim Ream.",
+      "provider_wallclock": "2026-06-13T02:15:31Z",
+      "facts": {
+        "type": {
+          "id": "167",
+          "text": "VAR - (Red) Card Upgrade",
+          "type": "var---red-card-upgrade"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3086.0",
+          "displayValue": "52'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tim Ream"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491252",
+      "time": "2026-06-13T02:16:11Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Paraguay. Players involved: Miguel Almirón.",
+      "provider_wallclock": "2026-06-13T02:16:11Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3125.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Miguel Almirón"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491251",
+      "time": "2026-06-13T02:16:18Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T02:16:18Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3132.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "id": "660",
+          "displayName": "United States"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49491315",
+      "time": "2026-06-13T02:19:51Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Andrés Cubas, Tyler Adams.",
+      "provider_wallclock": "2026-06-13T02:19:51Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3346.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Andrés Cubas"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tyler Adams"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491335",
+      "time": "2026-06-13T02:20:40Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: United States. Players involved: Malik Tillman, Weston McKennie.",
+      "provider_wallclock": "2026-06-13T02:20:40Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3395.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Weston McKennie"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491334",
+      "time": "2026-06-13T02:21:04Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Chris Richards, Julio Enciso.",
+      "provider_wallclock": "2026-06-13T02:21:04Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3419.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Chris Richards"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Julio Enciso"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491357",
+      "time": "2026-06-13T02:22:06Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: United States.",
+      "provider_wallclock": "2026-06-13T02:22:06Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3481.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49491364",
+      "time": "2026-06-13T02:22:51Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Tyler Adams, Maurício.",
+      "provider_wallclock": "2026-06-13T02:22:51Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3525.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tyler Adams"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Maurício"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491365",
+      "time": "2026-06-13T02:22:57Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: United States. Players involved: Tyler Adams.",
+      "provider_wallclock": "2026-06-13T02:22:57Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3531.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tyler Adams"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491370",
+      "time": "2026-06-13T02:23:23Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Alex Freeman, Julio Enciso.",
+      "provider_wallclock": "2026-06-13T02:23:23Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3557.0",
+          "displayValue": "60'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alex Freeman"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Julio Enciso"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491389",
+      "time": "2026-06-13T02:24:15Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: United States. Players involved: Malik Tillman.",
+      "provider_wallclock": "2026-06-13T02:24:15Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3610.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491412",
+      "time": "2026-06-13T02:25:40Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Paraguay. Players involved: Alex Arce, Antonio Sanabria.",
+      "provider_wallclock": "2026-06-13T02:25:40Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3695.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alex Arce"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Antonio Sanabria"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491477",
+      "time": "2026-06-13T02:28:36Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Paraguay. Players involved: Julio Enciso, Júnior Alonso.",
+      "provider_wallclock": "2026-06-13T02:28:36Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3870.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Julio Enciso"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Júnior Alonso"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491475",
+      "time": "2026-06-13T02:28:45Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Paraguay. Players involved: Diego Gómez, Alex Arce.",
+      "provider_wallclock": "2026-06-13T02:28:45Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3879.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Diego Gómez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alex Arce"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491529",
+      "time": "2026-06-13T02:31:22Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T02:31:22Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4036.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49491530",
+      "time": "2026-06-13T02:31:22Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T02:31:22Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4036.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "id": "210",
+          "displayName": "Paraguay"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49491539",
+      "time": "2026-06-13T02:34:20Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T02:34:20Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4215.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49491538",
+      "time": "2026-06-13T02:34:21Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T02:34:21Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4215.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "id": "210",
+          "displayName": "Paraguay"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49491544",
+      "time": "2026-06-13T02:34:34Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Paraguay. Players involved: Miguel Almirón, Omar Alderete.",
+      "provider_wallclock": "2026-06-13T02:34:34Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4228.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Miguel Almirón"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Omar Alderete"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491545",
+      "time": "2026-06-13T02:34:40Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Juan Jose Cáceres, Malik Tillman.",
+      "provider_wallclock": "2026-06-13T02:34:40Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4234.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Juan Jose Cáceres"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491548",
+      "time": "2026-06-13T02:35:00Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T02:35:00Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4255.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49491547",
+      "time": "2026-06-13T02:35:01Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T02:35:01Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4255.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "id": "210",
+          "displayName": "Paraguay"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49491549",
+      "time": "2026-06-13T02:35:39Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T02:35:39Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4293.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "United States"
+        }
+      }
+    },
+    {
+      "event_id": "49491552",
+      "time": "2026-06-13T02:35:39Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T02:35:39Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4293.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "id": "210",
+          "displayName": "Paraguay"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49491550",
+      "time": "2026-06-13T02:35:43Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: United States. Players involved: Timothy Weah, Sergiño Dest.",
+      "provider_wallclock": "2026-06-13T02:35:43Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4298.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Timothy Weah"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sergiño Dest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491551",
+      "time": "2026-06-13T02:35:44Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: United States. Players involved: Ricardo Pepi, Folarin Balogun.",
+      "provider_wallclock": "2026-06-13T02:35:44Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4299.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ricardo Pepi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Folarin Balogun"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491554",
+      "time": "2026-06-13T02:36:10Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Antonee Robinson, Juan Jose Cáceres.",
+      "provider_wallclock": "2026-06-13T02:36:10Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4325.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Antonee Robinson"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Juan Jose Cáceres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491561",
+      "time": "2026-06-13T02:36:48Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Paraguay. Players involved: Maurício, Julio Enciso.",
+      "provider_wallclock": "2026-06-13T02:36:48Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4362.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Maurício"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Julio Enciso"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491577",
+      "time": "2026-06-13T02:38:15Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: United States. Players involved: Malik Tillman, Ricardo Pepi.",
+      "provider_wallclock": "2026-06-13T02:38:15Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4449.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ricardo Pepi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491616",
+      "time": "2026-06-13T02:40:18Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Andrés Cubas, Malik Tillman.",
+      "provider_wallclock": "2026-06-13T02:40:18Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4573.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Andrés Cubas"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491625",
+      "time": "2026-06-13T02:40:55Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: United States. Players involved: Timothy Weah, Malik Tillman.",
+      "provider_wallclock": "2026-06-13T02:40:55Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4609.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Timothy Weah"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491654",
+      "time": "2026-06-13T02:42:23Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Diego Gómez, Malik Tillman.",
+      "provider_wallclock": "2026-06-13T02:42:23Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4697.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Diego Gómez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491656",
+      "time": "2026-06-13T02:42:26Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Paraguay. Players involved: Diego Gómez.",
+      "provider_wallclock": "2026-06-13T02:42:26Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4700.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Diego Gómez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491657",
+      "time": "2026-06-13T02:42:53Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Paraguay. Players involved: Ramón Sosa, Miguel Almirón.",
+      "provider_wallclock": "2026-06-13T02:42:53Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4728.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ramón Sosa"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Miguel Almirón"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491658",
+      "time": "2026-06-13T02:43:00Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Paraguay. Players involved: Gustavo Velázquez, Juan Jose Cáceres.",
+      "provider_wallclock": "2026-06-13T02:43:00Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4735.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gustavo Velázquez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Juan Jose Cáceres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491659",
+      "time": "2026-06-13T02:43:56Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Paraguay. Players involved: Alejandro Romero Gamarra, Diego Gómez.",
+      "provider_wallclock": "2026-06-13T02:43:56Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4790.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alejandro Romero Gamarra"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Diego Gómez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491678",
+      "time": "2026-06-13T02:45:29Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: United States. Players involved: Giovanni Reyna, Malik Tillman.",
+      "provider_wallclock": "2026-06-13T02:45:29Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4883.0",
+          "displayValue": "82'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Giovanni Reyna"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Malik Tillman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491692",
+      "time": "2026-06-13T02:46:15Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Timothy Weah, Julio Enciso.",
+      "provider_wallclock": "2026-06-13T02:46:15Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4929.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Timothy Weah"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Julio Enciso"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491696",
+      "time": "2026-06-13T02:46:44Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Paraguay. Players involved: Julio Enciso.",
+      "provider_wallclock": "2026-06-13T02:46:44Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4958.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Julio Enciso"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491717",
+      "time": "2026-06-13T02:47:50Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Giovanni Reyna, Alejandro Romero Gamarra.",
+      "provider_wallclock": "2026-06-13T02:47:50Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5025.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Giovanni Reyna"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alejandro Romero Gamarra"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491757",
+      "time": "2026-06-13T02:49:25Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Ricardo Pepi, Ramón Sosa.",
+      "provider_wallclock": "2026-06-13T02:49:25Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5120.0",
+          "displayValue": "86'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ricardo Pepi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ramón Sosa"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491763",
+      "time": "2026-06-13T02:49:55Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Omar Alderete, Tyler Adams.",
+      "provider_wallclock": "2026-06-13T02:49:55Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5149.0",
+          "displayValue": "86'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Omar Alderete"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tyler Adams"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491786",
+      "time": "2026-06-13T02:51:25Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Alex Arce, Giovanni Reyna.",
+      "provider_wallclock": "2026-06-13T02:51:25Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5240.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alex Arce"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Giovanni Reyna"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491787",
+      "time": "2026-06-13T02:51:27Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Paraguay. Players involved: Alex Arce.",
+      "provider_wallclock": "2026-06-13T02:51:27Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5242.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alex Arce"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491793",
+      "time": "2026-06-13T02:52:08Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: United States. Players involved: Ricardo Pepi, Weston McKennie.",
+      "provider_wallclock": "2026-06-13T02:52:08Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5282.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ricardo Pepi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Weston McKennie"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491803",
+      "time": "2026-06-13T02:52:48Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: United States. Players involved: Timothy Weah, Júnior Alonso.",
+      "provider_wallclock": "2026-06-13T02:52:48Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5322.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Timothy Weah"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Júnior Alonso"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491818",
+      "time": "2026-06-13T02:53:35Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: United States. Players involved: Sebastian Berhalter.",
+      "provider_wallclock": "2026-06-13T02:53:35Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5370.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sebastian Berhalter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491828",
+      "time": "2026-06-13T02:54:08Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Andrés Cubas, Giovanni Reyna.",
+      "provider_wallclock": "2026-06-13T02:54:08Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+1'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Andrés Cubas"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Giovanni Reyna"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491856",
+      "time": "2026-06-13T02:56:10Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Júnior Alonso, Tyler Adams.",
+      "provider_wallclock": "2026-06-13T02:56:10Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Júnior Alonso"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tyler Adams"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491857",
+      "time": "2026-06-13T02:56:13Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Paraguay. Players involved: Júnior Alonso.",
+      "provider_wallclock": "2026-06-13T02:56:13Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Júnior Alonso"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491858",
+      "time": "2026-06-13T02:56:58Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T02:56:58Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        }
+      }
+    },
+    {
+      "event_id": "49491859",
+      "time": "2026-06-13T02:56:58Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T02:56:58Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "id": "660",
+          "displayName": "United States"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49491860",
+      "time": "2026-06-13T02:57:21Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: United States.",
+      "provider_wallclock": "2026-06-13T02:57:21Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "id": "660",
+          "displayName": "United States"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49491861",
+      "time": "2026-06-13T02:57:21Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Paraguay.",
+      "provider_wallclock": "2026-06-13T02:57:21Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        }
+      }
+    },
+    {
+      "event_id": "49491869",
+      "time": "2026-06-13T02:57:56Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Paraguay. Players involved: Alejandro Romero Gamarra, Sebastian Berhalter.",
+      "provider_wallclock": "2026-06-13T02:57:56Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "displayName": "Paraguay"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alejandro Romero Gamarra"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sebastian Berhalter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491911",
+      "time": "2026-06-13T03:00:14Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: United States. Players involved: Timothy Weah, Tyler Adams.",
+      "provider_wallclock": "2026-06-13T03:00:14Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+7'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Timothy Weah"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tyler Adams"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491938",
+      "time": "2026-06-13T03:01:26Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: United States. Players involved: Giovanni Reyna, Alex Freeman.",
+      "provider_wallclock": "2026-06-13T03:01:26Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+8'"
+        },
+        "team": {
+          "displayName": "United States"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Giovanni Reyna"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alex Freeman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49491940",
+      "time": "2026-06-13T03:02:50Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-13T03:02:50Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+9'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 7
+  }
+}

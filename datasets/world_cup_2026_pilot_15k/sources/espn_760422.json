@@ -1,0 +1,3066 @@
+{
+  "fixture_id": "espn:760422",
+  "espn_event_id": "760422",
+  "kickoff": "2026-06-14T17:00:00Z",
+  "target_end_exclusive": "2026-06-14T18:58:53Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760422",
+    "source_body_sha256": "a3e1ddfdb1c5580bd898d32111331dde8776491060cce00b7f51cb93bc570c0e",
+    "captured_at_utc": "2026-09-24T20:27:43.578134+00:00",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies.",
+    "scope": "Unique structured events returned in commentary and keyEvents; this is a saved historical capture.",
+    "local_snapshot": "data_sources/espn/fifa.world_760422.json.gz",
+    "local_snapshot_sha256": "49fc49a69aabc3a7096deb29f7365772039cdfc07861bd816c6c23784f3c92f7",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy"
+  },
+  "events": [
+    {
+      "event_id": "49506808",
+      "time": "2026-06-14T17:01:49Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-14T17:01:49Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 0.0,
+          "displayValue": ""
+        }
+      }
+    },
+    {
+      "event_id": "49506820",
+      "time": "2026-06-14T17:02:36Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Aleksandar Pavlovic, Tahith Chong.",
+      "provider_wallclock": "2026-06-14T17:02:36Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 47.0,
+          "displayValue": "1'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aleksandar Pavlovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tahith Chong"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49506879",
+      "time": "2026-06-14T17:03:59Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Aleksandar Pavlovic, Deveron Fonville.",
+      "provider_wallclock": "2026-06-14T17:03:59Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 130.0,
+          "displayValue": "3'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aleksandar Pavlovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Deveron Fonville"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49506937",
+      "time": "2026-06-14T17:06:01Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Curaçao. Players involved: Juninho Bacuna, Joshua Kimmich.",
+      "provider_wallclock": "2026-06-14T17:06:01Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 252.0,
+          "displayValue": "5'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Juninho Bacuna"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Joshua Kimmich"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49506990",
+      "time": "2026-06-14T17:06:54Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Germany. Players involved: Jamal Musiala, Nathaniel Brown.",
+      "provider_wallclock": "2026-06-14T17:06:54Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 304.0,
+          "displayValue": "6'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jamal Musiala"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nathaniel Brown"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49506991",
+      "time": "2026-06-14T17:07:07Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Germany. Players involved: Felix Nmecha, Florian Wirtz.",
+      "provider_wallclock": "2026-06-14T17:07:07Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 317.0,
+          "displayValue": "6'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Felix Nmecha"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Florian Wirtz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507011",
+      "time": "2026-06-14T17:08:35Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Germany. Players involved: Jamal Musiala.",
+      "provider_wallclock": "2026-06-14T17:08:35Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 405.0,
+          "displayValue": "7'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jamal Musiala"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507030",
+      "time": "2026-06-14T17:09:57Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Germany. Players involved: Felix Nmecha, Jamal Musiala.",
+      "provider_wallclock": "2026-06-14T17:09:57Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 488.0,
+          "displayValue": "9'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Felix Nmecha"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jamal Musiala"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507115",
+      "time": "2026-06-14T17:11:37Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Germany. Players involved: Florian Wirtz.",
+      "provider_wallclock": "2026-06-14T17:11:37Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 588.0,
+          "displayValue": "10'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Florian Wirtz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507141",
+      "time": "2026-06-14T17:12:10Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Germany. Players involved: Leroy Sané, Jamal Musiala.",
+      "provider_wallclock": "2026-06-14T17:12:10Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 621.0,
+          "displayValue": "11'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Leroy Sané"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jamal Musiala"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507172",
+      "time": "2026-06-14T17:13:31Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Germany. Players involved: Felix Nmecha, Aleksandar Pavlovic.",
+      "provider_wallclock": "2026-06-14T17:13:31Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 702.0,
+          "displayValue": "12'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Felix Nmecha"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Aleksandar Pavlovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507190",
+      "time": "2026-06-14T17:13:53Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Curaçao. Players involved: Jürgen Locadia, Joshua Kimmich.",
+      "provider_wallclock": "2026-06-14T17:13:53Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 723.0,
+          "displayValue": "13'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jürgen Locadia"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Joshua Kimmich"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507236",
+      "time": "2026-06-14T17:15:37Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Germany. Players involved: Florian Wirtz, Nathaniel Brown.",
+      "provider_wallclock": "2026-06-14T17:15:37Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 827.0,
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Florian Wirtz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nathaniel Brown"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507298",
+      "time": "2026-06-14T17:18:48Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Jonathan Tah, Jürgen Locadia.",
+      "provider_wallclock": "2026-06-14T17:18:48Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1019.0,
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jonathan Tah"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jürgen Locadia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507351",
+      "time": "2026-06-14T17:19:37Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Jamal Musiala, Tahith Chong.",
+      "provider_wallclock": "2026-06-14T17:19:37Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1067.0,
+          "displayValue": "18'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jamal Musiala"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tahith Chong"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507384",
+      "time": "2026-06-14T17:20:47Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Curaçao. Players involved: Leandro Bacuna, Sontje Hansen.",
+      "provider_wallclock": "2026-06-14T17:20:47Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1138.0,
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Leandro Bacuna"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sontje Hansen"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507405",
+      "time": "2026-06-14T17:22:10Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Felix Nmecha, Juninho Bacuna.",
+      "provider_wallclock": "2026-06-14T17:22:10Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1221.0,
+          "displayValue": "21'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Felix Nmecha"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Juninho Bacuna"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507416",
+      "time": "2026-06-14T17:22:33Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Curaçao. Players involved: Livano Comenencia.",
+      "provider_wallclock": "2026-06-14T17:22:33Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1244.0,
+          "displayValue": "21'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Livano Comenencia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507426",
+      "time": "2026-06-14T17:24:30Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Germany.",
+      "provider_wallclock": "2026-06-14T17:24:30Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1361.0,
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Germany"
+        }
+      }
+    },
+    {
+      "event_id": "49507427",
+      "time": "2026-06-14T17:24:31Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Curaçao.",
+      "provider_wallclock": "2026-06-14T17:24:31Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1361.0,
+          "displayValue": "23'"
+        },
+        "team": {
+          "id": "11678",
+          "displayName": "Curaçao"
+        }
+      }
+    },
+    {
+      "event_id": "49507431",
+      "time": "2026-06-14T17:26:33Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Curaçao.",
+      "provider_wallclock": "2026-06-14T17:26:33Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1483.0,
+          "displayValue": "25'"
+        },
+        "team": {
+          "id": "11678",
+          "displayName": "Curaçao"
+        }
+      }
+    },
+    {
+      "event_id": "49507432",
+      "time": "2026-06-14T17:26:33Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Germany.",
+      "provider_wallclock": "2026-06-14T17:26:33Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1483.0,
+          "displayValue": "25'"
+        },
+        "team": {
+          "displayName": "Germany"
+        }
+      }
+    },
+    {
+      "event_id": "49507451",
+      "time": "2026-06-14T17:28:22Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Curaçao. Players involved: Leandro Bacuna, Jamal Musiala.",
+      "provider_wallclock": "2026-06-14T17:28:22Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1592.0,
+          "displayValue": "27'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Leandro Bacuna"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jamal Musiala"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507455",
+      "time": "2026-06-14T17:29:03Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Germany. Players involved: Nico Schlotterbeck, Joshua Kimmich.",
+      "provider_wallclock": "2026-06-14T17:29:03Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1633.0,
+          "displayValue": "28'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nico Schlotterbeck"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Joshua Kimmich"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507454",
+      "time": "2026-06-14T17:29:05Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Germany.",
+      "provider_wallclock": "2026-06-14T17:29:05Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1635.0,
+          "displayValue": "28'"
+        },
+        "team": {
+          "displayName": "Germany"
+        }
+      }
+    },
+    {
+      "event_id": "49507471",
+      "time": "2026-06-14T17:30:08Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Germany.",
+      "provider_wallclock": "2026-06-14T17:30:08Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1699.0,
+          "displayValue": "29'"
+        },
+        "team": {
+          "displayName": "Germany"
+        }
+      }
+    },
+    {
+      "event_id": "49507491",
+      "time": "2026-06-14T17:31:25Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Germany. Players involved: Aleksandar Pavlovic, Leroy Sané.",
+      "provider_wallclock": "2026-06-14T17:31:25Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1775.0,
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aleksandar Pavlovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Leroy Sané"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507492",
+      "time": "2026-06-14T17:31:26Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Germany.",
+      "provider_wallclock": "2026-06-14T17:31:26Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1777.0,
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "Germany"
+        }
+      }
+    },
+    {
+      "event_id": "49507540",
+      "time": "2026-06-14T17:33:48Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Germany. Players involved: Leroy Sané, Florian Wirtz.",
+      "provider_wallclock": "2026-06-14T17:33:48Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 1919.0,
+          "displayValue": "32'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Leroy Sané"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Florian Wirtz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507566",
+      "time": "2026-06-14T17:35:38Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Nico Schlotterbeck, Jürgen Locadia.",
+      "provider_wallclock": "2026-06-14T17:35:38Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2028.0,
+          "displayValue": "34'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nico Schlotterbeck"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jürgen Locadia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507607",
+      "time": "2026-06-14T17:36:53Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Curaçao. Players involved: Juninho Bacuna, Sontje Hansen.",
+      "provider_wallclock": "2026-06-14T17:36:53Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2104.0,
+          "displayValue": "36'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Juninho Bacuna"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sontje Hansen"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507655",
+      "time": "2026-06-14T17:38:10Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Germany.",
+      "provider_wallclock": "2026-06-14T17:38:10Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2180.0,
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Germany"
+        }
+      }
+    },
+    {
+      "event_id": "49507667",
+      "time": "2026-06-14T17:39:20Z",
+      "type": "goal---header",
+      "text": "Event: Goal - Header. Team: Germany. Players involved: Nico Schlotterbeck, Nathaniel Brown.",
+      "provider_wallclock": "2026-06-14T17:39:20Z",
+      "facts": {
+        "type": {
+          "id": "137",
+          "text": "Goal - Header",
+          "type": "goal---header"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2250.0,
+          "displayValue": "38'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nico Schlotterbeck"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nathaniel Brown"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507711",
+      "time": "2026-06-14T17:40:42Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Leroy Sané, Deveron Fonville.",
+      "provider_wallclock": "2026-06-14T17:40:42Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2333.0,
+          "displayValue": "39'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Leroy Sané"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Deveron Fonville"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507725",
+      "time": "2026-06-14T17:41:34Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Curaçao. Players involved: Juninho Bacuna, Kai Havertz.",
+      "provider_wallclock": "2026-06-14T17:41:34Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2385.0,
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Juninho Bacuna"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Kai Havertz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507834",
+      "time": "2026-06-14T17:44:58Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Germany.",
+      "provider_wallclock": "2026-06-14T17:44:58Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2588.0,
+          "displayValue": "44'"
+        },
+        "team": {
+          "displayName": "Germany"
+        }
+      }
+    },
+    {
+      "event_id": "49507840",
+      "time": "2026-06-14T17:45:42Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Germany.",
+      "provider_wallclock": "2026-06-14T17:45:42Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2633.0,
+          "displayValue": "44'"
+        },
+        "team": {
+          "displayName": "Germany"
+        }
+      }
+    },
+    {
+      "event_id": "49507865",
+      "time": "2026-06-14T17:46:40Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Germany. Players involved: Nathaniel Brown.",
+      "provider_wallclock": "2026-06-14T17:46:40Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2691.0,
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nathaniel Brown"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507866",
+      "time": "2026-06-14T17:46:42Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Germany. Players involved: Aleksandar Pavlovic, Leroy Sané.",
+      "provider_wallclock": "2026-06-14T17:46:42Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2693.0,
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aleksandar Pavlovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Leroy Sané"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507891",
+      "time": "2026-06-14T17:46:45Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Germany. Players involved: Kai Havertz.",
+      "provider_wallclock": "2026-06-14T17:46:45Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2696.0,
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kai Havertz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507892",
+      "time": "2026-06-14T17:48:08Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Curaçao. Players involved: Sontje Hansen, Livano Comenencia.",
+      "provider_wallclock": "2026-06-14T17:48:08Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2700.0,
+          "displayValue": "45'+2'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sontje Hansen"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Livano Comenencia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507931",
+      "time": "2026-06-14T17:48:58Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Curaçao. Players involved: Riechedly Bazoer, Felix Nmecha.",
+      "provider_wallclock": "2026-06-14T17:48:58Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2700.0,
+          "displayValue": "45'+3'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Riechedly Bazoer"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Felix Nmecha"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507949",
+      "time": "2026-06-14T17:50:59Z",
+      "type": "penalty---scored",
+      "text": "Event: Penalty - Scored. Team: Germany. Players involved: Kai Havertz.",
+      "provider_wallclock": "2026-06-14T17:50:59Z",
+      "facts": {
+        "type": {
+          "id": "98",
+          "text": "Penalty - Scored",
+          "type": "penalty---scored"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2700.0,
+          "displayValue": "45'+5'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kai Havertz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49507970",
+      "time": "2026-06-14T17:52:02Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-14T17:52:02Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": 2700.0,
+          "displayValue": "45'+6'"
+        }
+      }
+    },
+    {
+      "event_id": "49508193",
+      "time": "2026-06-14T18:07:56Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Curaçao. Players involved: Jeremy Antonisse, Sontje Hansen.",
+      "provider_wallclock": "2026-06-14T18:07:56Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 2700.0,
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jeremy Antonisse"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sontje Hansen"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508206",
+      "time": "2026-06-14T18:08:32Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-14T18:08:32Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 2700.0,
+          "displayValue": "45'"
+        }
+      }
+    },
+    {
+      "event_id": "49508227",
+      "time": "2026-06-14T18:09:22Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Curaçao. Players involved: Riechedly Bazoer, Jamal Musiala.",
+      "provider_wallclock": "2026-06-14T18:09:22Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 2750.0,
+          "displayValue": "46'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Riechedly Bazoer"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jamal Musiala"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508258",
+      "time": "2026-06-14T18:09:41Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Germany. Players involved: Jamal Musiala, Joshua Kimmich.",
+      "provider_wallclock": "2026-06-14T18:09:41Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 2768.0,
+          "displayValue": "47'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jamal Musiala"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Joshua Kimmich"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508328",
+      "time": "2026-06-14T18:12:41Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Curaçao. Players involved: Deveron Fonville, Leroy Sané.",
+      "provider_wallclock": "2026-06-14T18:12:41Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 2949.0,
+          "displayValue": "50'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Deveron Fonville"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Leroy Sané"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508344",
+      "time": "2026-06-14T18:13:04Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Germany. Players involved: Felix Nmecha, Joshua Kimmich.",
+      "provider_wallclock": "2026-06-14T18:13:04Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 2972.0,
+          "displayValue": "50'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Felix Nmecha"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Joshua Kimmich"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508365",
+      "time": "2026-06-14T18:13:48Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Curaçao. Players involved: Tahith Chong, Nico Schlotterbeck.",
+      "provider_wallclock": "2026-06-14T18:13:48Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3015.0,
+          "displayValue": "51'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tahith Chong"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nico Schlotterbeck"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508404",
+      "time": "2026-06-14T18:15:05Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Nathaniel Brown, Tahith Chong.",
+      "provider_wallclock": "2026-06-14T18:15:05Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3093.0,
+          "displayValue": "52'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nathaniel Brown"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tahith Chong"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508421",
+      "time": "2026-06-14T18:15:47Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Kai Havertz, Leandro Bacuna.",
+      "provider_wallclock": "2026-06-14T18:15:47Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3134.0,
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kai Havertz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Leandro Bacuna"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508452",
+      "time": "2026-06-14T18:16:30Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Germany. Players involved: Florian Wirtz, Joshua Kimmich.",
+      "provider_wallclock": "2026-06-14T18:16:30Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3178.0,
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Florian Wirtz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Joshua Kimmich"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508451",
+      "time": "2026-06-14T18:16:31Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Germany.",
+      "provider_wallclock": "2026-06-14T18:16:31Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3179.0,
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Germany"
+        }
+      }
+    },
+    {
+      "event_id": "49508489",
+      "time": "2026-06-14T18:17:10Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Germany. Players involved: Kai Havertz, Florian Wirtz.",
+      "provider_wallclock": "2026-06-14T18:17:10Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3218.0,
+          "displayValue": "54'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kai Havertz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Florian Wirtz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508487",
+      "time": "2026-06-14T18:17:14Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Germany. Players involved: Aleksandar Pavlovic, Florian Wirtz.",
+      "provider_wallclock": "2026-06-14T18:17:14Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3222.0,
+          "displayValue": "54'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aleksandar Pavlovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Florian Wirtz"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508501",
+      "time": "2026-06-14T18:18:09Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Jamal Musiala, Tahith Chong.",
+      "provider_wallclock": "2026-06-14T18:18:09Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3277.0,
+          "displayValue": "55'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jamal Musiala"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tahith Chong"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508571",
+      "time": "2026-06-14T18:19:54Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Nathaniel Brown, Livano Comenencia.",
+      "provider_wallclock": "2026-06-14T18:19:54Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3382.0,
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nathaniel Brown"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Livano Comenencia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508668",
+      "time": "2026-06-14T18:23:01Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Nico Schlotterbeck, Tahith Chong.",
+      "provider_wallclock": "2026-06-14T18:23:01Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3568.0,
+          "displayValue": "60'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nico Schlotterbeck"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tahith Chong"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508677",
+      "time": "2026-06-14T18:23:33Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Aleksandar Pavlovic, Tahith Chong.",
+      "provider_wallclock": "2026-06-14T18:23:33Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3601.0,
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aleksandar Pavlovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tahith Chong"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508705",
+      "time": "2026-06-14T18:24:15Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Jonathan Tah, Jürgen Locadia.",
+      "provider_wallclock": "2026-06-14T18:24:15Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3643.0,
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jonathan Tah"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jürgen Locadia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508710",
+      "time": "2026-06-14T18:25:24Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Curaçao. Players involved: Leandro Bacuna, Jeremy Antonisse.",
+      "provider_wallclock": "2026-06-14T18:25:24Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3712.0,
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Leandro Bacuna"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jeremy Antonisse"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508722",
+      "time": "2026-06-14T18:26:06Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Germany. Players involved: Leroy Sané, Jonathan Tah.",
+      "provider_wallclock": "2026-06-14T18:26:06Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3753.0,
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Leroy Sané"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jonathan Tah"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508782",
+      "time": "2026-06-14T18:27:16Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Germany. Players involved: Deniz Undav, Jamal Musiala.",
+      "provider_wallclock": "2026-06-14T18:27:16Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3823.0,
+          "displayValue": "64'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Deniz Undav"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jamal Musiala"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508785",
+      "time": "2026-06-14T18:27:43Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Curaçao. Players involved: Jearl Margaritha, Jürgen Locadia.",
+      "provider_wallclock": "2026-06-14T18:27:43Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3851.0,
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jearl Margaritha"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jürgen Locadia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508818",
+      "time": "2026-06-14T18:28:55Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Deniz Undav, Leandro Bacuna.",
+      "provider_wallclock": "2026-06-14T18:28:55Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3923.0,
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Deniz Undav"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Leandro Bacuna"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508826",
+      "time": "2026-06-14T18:29:37Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Curaçao. Players involved: Livano Comenencia.",
+      "provider_wallclock": "2026-06-14T18:29:37Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3964.0,
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Livano Comenencia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508825",
+      "time": "2026-06-14T18:29:38Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Curaçao. Players involved: Livano Comenencia.",
+      "provider_wallclock": "2026-06-14T18:29:38Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 3966.0,
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Livano Comenencia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508863",
+      "time": "2026-06-14T18:31:15Z",
+      "type": "goal---volley",
+      "text": "Event: Goal - Volley. Team: Germany. Players involved: Nathaniel Brown, Deniz Undav.",
+      "provider_wallclock": "2026-06-14T18:31:15Z",
+      "facts": {
+        "type": {
+          "id": "173",
+          "text": "Goal - Volley",
+          "type": "goal---volley"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4062.0,
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nathaniel Brown"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Deniz Undav"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508865",
+      "time": "2026-06-14T18:32:31Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Germany.",
+      "provider_wallclock": "2026-06-14T18:32:31Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4139.0,
+          "displayValue": "69'"
+        },
+        "team": {
+          "displayName": "Germany"
+        }
+      }
+    },
+    {
+      "event_id": "49508866",
+      "time": "2026-06-14T18:32:32Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Curaçao.",
+      "provider_wallclock": "2026-06-14T18:32:32Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4139.0,
+          "displayValue": "69'"
+        },
+        "team": {
+          "id": "11678",
+          "displayName": "Curaçao"
+        }
+      }
+    },
+    {
+      "event_id": "49508867",
+      "time": "2026-06-14T18:34:54Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Germany.",
+      "provider_wallclock": "2026-06-14T18:34:54Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4282.0,
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "Germany"
+        }
+      }
+    },
+    {
+      "event_id": "49508868",
+      "time": "2026-06-14T18:34:54Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Curaçao.",
+      "provider_wallclock": "2026-06-14T18:34:54Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4282.0,
+          "displayValue": "72'"
+        },
+        "team": {
+          "id": "11678",
+          "displayName": "Curaçao"
+        }
+      }
+    },
+    {
+      "event_id": "49508870",
+      "time": "2026-06-14T18:35:35Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Germany. Players involved: Antonio Rüdiger, Jonathan Tah.",
+      "provider_wallclock": "2026-06-14T18:35:35Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4322.0,
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Antonio Rüdiger"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jonathan Tah"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508869",
+      "time": "2026-06-14T18:35:57Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Germany. Players involved: Leon Goretzka, Felix Nmecha.",
+      "provider_wallclock": "2026-06-14T18:35:57Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4345.0,
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Leon Goretzka"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Felix Nmecha"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508876",
+      "time": "2026-06-14T18:36:04Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Germany. Players involved: David Raum, Nathaniel Brown.",
+      "provider_wallclock": "2026-06-14T18:36:04Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4351.0,
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "David Raum"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nathaniel Brown"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508891",
+      "time": "2026-06-14T18:36:30Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Aleksandar Pavlovic, Tahith Chong.",
+      "provider_wallclock": "2026-06-14T18:36:30Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4378.0,
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aleksandar Pavlovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tahith Chong"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508890",
+      "time": "2026-06-14T18:37:11Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Aleksandar Pavlovic, Tahith Chong.",
+      "provider_wallclock": "2026-06-14T18:37:11Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4419.0,
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aleksandar Pavlovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tahith Chong"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508910",
+      "time": "2026-06-14T18:38:12Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Curaçao. Players involved: Tahith Chong, Leandro Bacuna.",
+      "provider_wallclock": "2026-06-14T18:38:12Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4480.0,
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tahith Chong"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Leandro Bacuna"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508920",
+      "time": "2026-06-14T18:38:52Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Curaçao. Players involved: Jearl Margaritha, Livano Comenencia.",
+      "provider_wallclock": "2026-06-14T18:38:52Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4520.0,
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jearl Margaritha"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Livano Comenencia"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49508963",
+      "time": "2026-06-14T18:40:39Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Germany. Players involved: Deniz Undav, Joshua Kimmich.",
+      "provider_wallclock": "2026-06-14T18:40:39Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4626.0,
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Deniz Undav"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Joshua Kimmich"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49509033",
+      "time": "2026-06-14T18:44:24Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Germany.",
+      "provider_wallclock": "2026-06-14T18:44:24Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4852.0,
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Germany"
+        }
+      }
+    },
+    {
+      "event_id": "49509035",
+      "time": "2026-06-14T18:45:43Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Curaçao. Players involved: Gervane Kastaneer, Tahith Chong.",
+      "provider_wallclock": "2026-06-14T18:45:43Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4930.0,
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gervane Kastaneer"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tahith Chong"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49509037",
+      "time": "2026-06-14T18:46:05Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Germany. Players involved: Waldemar Anton, Joshua Kimmich.",
+      "provider_wallclock": "2026-06-14T18:46:05Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4953.0,
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Waldemar Anton"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Joshua Kimmich"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49509047",
+      "time": "2026-06-14T18:46:25Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Curaçao. Players involved: Gervane Kastaneer.",
+      "provider_wallclock": "2026-06-14T18:46:25Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 4973.0,
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gervane Kastaneer"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49509062",
+      "time": "2026-06-14T18:47:17Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Curaçao.",
+      "provider_wallclock": "2026-06-14T18:47:17Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 5025.0,
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        }
+      }
+    },
+    {
+      "event_id": "49509081",
+      "time": "2026-06-14T18:48:35Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Germany. Players involved: David Raum, Deniz Undav.",
+      "provider_wallclock": "2026-06-14T18:48:35Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 5103.0,
+          "displayValue": "86'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "David Raum"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Deniz Undav"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49509086",
+      "time": "2026-06-14T18:49:01Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Germany. Players involved: Aleksandar Pavlovic, Juninho Bacuna.",
+      "provider_wallclock": "2026-06-14T18:49:01Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 5129.0,
+          "displayValue": "86'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aleksandar Pavlovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Juninho Bacuna"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49509096",
+      "time": "2026-06-14T18:49:38Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Curaçao. Players involved: Sherel Floranus, Manuel Neuer.",
+      "provider_wallclock": "2026-06-14T18:49:38Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 5166.0,
+          "displayValue": "87'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sherel Floranus"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Manuel Neuer"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49509123",
+      "time": "2026-06-14T18:51:15Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Germany. Players involved: Kai Havertz, Deniz Undav.",
+      "provider_wallclock": "2026-06-14T18:51:15Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 5263.0,
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Germany"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kai Havertz"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Deniz Undav"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49509252",
+      "time": "2026-06-14T18:57:06Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Curaçao. Players involved: Livano Comenencia, Aleksandar Pavlovic.",
+      "provider_wallclock": "2026-06-14T18:57:06Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 5400.0,
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "displayName": "Curaçao"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Livano Comenencia"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Aleksandar Pavlovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49509261",
+      "time": "2026-06-14T18:58:53Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-14T18:58:53Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": 5400.0,
+          "displayValue": "90'+6'"
+        }
+      }
+    }
+  ],
+  "excluded_event_entries": {}
+}

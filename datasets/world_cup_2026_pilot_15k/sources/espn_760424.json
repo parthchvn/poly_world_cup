@@ -1,0 +1,2719 @@
+{
+  "fixture_id": "espn:760424",
+  "espn_event_id": "760424",
+  "kickoff": "2026-06-15T02:00:00Z",
+  "target_end_exclusive": "2026-06-15T03:57:34Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760424",
+    "source_body_sha256": "4985a69ac0bd28731ce9a69b814a52d112a37c20816f938fe6da7f54dbfa4654",
+    "captured_at_utc": "2026-09-24T22:46:46.633994Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49520558",
+      "time": "2026-06-15T02:00:40Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-15T02:00:40Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49520593",
+      "time": "2026-06-15T02:03:09Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Tunisia. Players involved: Yan Valery, Gabriel Gudmundsson.",
+      "provider_wallclock": "2026-06-15T02:03:09Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "149.0",
+          "displayValue": "3'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Yan Valery"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Gabriel Gudmundsson"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520616",
+      "time": "2026-06-15T02:04:55Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Sweden. Players involved: Viktor Gyökeres, Yasin Ayari.",
+      "provider_wallclock": "2026-06-15T02:04:55Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "255.0",
+          "displayValue": "5'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Viktor Gyökeres"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Yasin Ayari"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520632",
+      "time": "2026-06-15T02:06:00Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T02:06:00Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "320.0",
+          "displayValue": "6'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        }
+      }
+    },
+    {
+      "event_id": "49520630",
+      "time": "2026-06-15T02:06:01Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Tunisia.",
+      "provider_wallclock": "2026-06-15T02:06:01Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "320.0",
+          "displayValue": "6'"
+        },
+        "team": {
+          "id": "659",
+          "displayName": "Tunisia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49520633",
+      "time": "2026-06-15T02:06:20Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T02:06:20Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "340.0",
+          "displayValue": "6'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        }
+      }
+    },
+    {
+      "event_id": "49520634",
+      "time": "2026-06-15T02:06:20Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Tunisia.",
+      "provider_wallclock": "2026-06-15T02:06:20Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "340.0",
+          "displayValue": "6'"
+        },
+        "team": {
+          "id": "659",
+          "displayName": "Tunisia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49520652",
+      "time": "2026-06-15T02:06:59Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Sweden. Players involved: Viktor Gyökeres.",
+      "provider_wallclock": "2026-06-15T02:06:59Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "379.0",
+          "displayValue": "7'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Viktor Gyökeres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520651",
+      "time": "2026-06-15T02:07:01Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Sweden. Players involved: Yasin Ayari.",
+      "provider_wallclock": "2026-06-15T02:07:01Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "381.0",
+          "displayValue": "7'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Yasin Ayari"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520670",
+      "time": "2026-06-15T02:09:55Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Sweden. Players involved: Gabriel Gudmundsson.",
+      "provider_wallclock": "2026-06-15T02:09:55Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "555.0",
+          "displayValue": "10'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gabriel Gudmundsson"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520680",
+      "time": "2026-06-15T02:10:58Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Tunisia. Players involved: Rani Khedira, Yasin Ayari.",
+      "provider_wallclock": "2026-06-15T02:10:58Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "618.0",
+          "displayValue": "11'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Rani Khedira"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Yasin Ayari"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520721",
+      "time": "2026-06-15T02:13:13Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Tunisia. Players involved: Elias Saad.",
+      "provider_wallclock": "2026-06-15T02:13:13Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "753.0",
+          "displayValue": "13'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Elias Saad"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520787",
+      "time": "2026-06-15T02:16:32Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Sweden. Players involved: Yasin Ayari, Omar Rekik.",
+      "provider_wallclock": "2026-06-15T02:16:32Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "952.0",
+          "displayValue": "16'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Yasin Ayari"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Omar Rekik"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520805",
+      "time": "2026-06-15T02:18:13Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Tunisia. Players involved: Elias Saad, Hannibal Mejbri.",
+      "provider_wallclock": "2026-06-15T02:18:13Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1053.0",
+          "displayValue": "18'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Elias Saad"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hannibal Mejbri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520877",
+      "time": "2026-06-15T02:22:34Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Sweden. Players involved: Gabriel Gudmundsson, Elias Saad.",
+      "provider_wallclock": "2026-06-15T02:22:34Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1314.0",
+          "displayValue": "22'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gabriel Gudmundsson"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Elias Saad"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520879",
+      "time": "2026-06-15T02:22:38Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T02:22:38Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1319.0",
+          "displayValue": "22'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        }
+      }
+    },
+    {
+      "event_id": "49520878",
+      "time": "2026-06-15T02:22:39Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Tunisia.",
+      "provider_wallclock": "2026-06-15T02:22:39Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1319.0",
+          "displayValue": "22'"
+        },
+        "team": {
+          "id": "659",
+          "displayName": "Tunisia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49520886",
+      "time": "2026-06-15T02:25:51Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Tunisia.",
+      "provider_wallclock": "2026-06-15T02:25:51Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1511.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "id": "659",
+          "displayName": "Tunisia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49520887",
+      "time": "2026-06-15T02:25:51Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T02:25:51Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1511.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        }
+      }
+    },
+    {
+      "event_id": "49520951",
+      "time": "2026-06-15T02:29:48Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Sweden. Players involved: Alexander Isak, Viktor Gyökeres.",
+      "provider_wallclock": "2026-06-15T02:29:48Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1748.0",
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alexander Isak"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Viktor Gyökeres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520962",
+      "time": "2026-06-15T02:31:35Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Tunisia. Players involved: Rani Khedira, Anis Slimane.",
+      "provider_wallclock": "2026-06-15T02:31:35Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1855.0",
+          "displayValue": "31'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Rani Khedira"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Anis Slimane"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520964",
+      "time": "2026-06-15T02:31:40Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Tunisia. Players involved: Rani Khedira.",
+      "provider_wallclock": "2026-06-15T02:31:40Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1860.0",
+          "displayValue": "31'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Rani Khedira"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49520977",
+      "time": "2026-06-15T02:32:42Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T02:32:42Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1922.0",
+          "displayValue": "33'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        }
+      }
+    },
+    {
+      "event_id": "49520980",
+      "time": "2026-06-15T02:33:24Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Sweden. Players involved: Victor Lindelöf, Benjamin Nygren.",
+      "provider_wallclock": "2026-06-15T02:33:24Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1964.0",
+          "displayValue": "33'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Victor Lindelöf"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Benjamin Nygren"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521019",
+      "time": "2026-06-15T02:35:47Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T02:35:47Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2107.0",
+          "displayValue": "36'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        }
+      }
+    },
+    {
+      "event_id": "49521102",
+      "time": "2026-06-15T02:41:34Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Sweden. Players involved: Benjamin Nygren, Hannibal Mejbri.",
+      "provider_wallclock": "2026-06-15T02:41:34Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2454.0",
+          "displayValue": "41'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Benjamin Nygren"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hannibal Mejbri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521122",
+      "time": "2026-06-15T02:43:10Z",
+      "type": "goal---header",
+      "text": "Event: Goal - Header. Team: Tunisia. Players involved: Omar Rekik, Hannibal Mejbri.",
+      "provider_wallclock": "2026-06-15T02:43:10Z",
+      "facts": {
+        "type": {
+          "id": "137",
+          "text": "Goal - Header",
+          "type": "goal---header"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2550.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Omar Rekik"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hannibal Mejbri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521155",
+      "time": "2026-06-15T02:46:25Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Tunisia. Players involved: Ali Abdi, Alexander Bernhardsson.",
+      "provider_wallclock": "2026-06-15T02:46:25Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+1'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Abdi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alexander Bernhardsson"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521212",
+      "time": "2026-06-15T02:49:41Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-15T02:49:41Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        }
+      }
+    },
+    {
+      "event_id": "49521227",
+      "time": "2026-06-15T03:05:40Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-15T03:05:40Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49521266",
+      "time": "2026-06-15T03:07:40Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Tunisia. Players involved: Yan Valery, Gabriel Gudmundsson.",
+      "provider_wallclock": "2026-06-15T03:07:40Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2820.0",
+          "displayValue": "47'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Yan Valery"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Gabriel Gudmundsson"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521305",
+      "time": "2026-06-15T03:10:10Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Sweden. Players involved: Gustaf Lagerbielke.",
+      "provider_wallclock": "2026-06-15T03:10:10Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2970.0",
+          "displayValue": "50'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gustaf Lagerbielke"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521331",
+      "time": "2026-06-15T03:10:40Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Sweden. Players involved: Alexander Isak, Mohamed Amine Ben Hamida.",
+      "provider_wallclock": "2026-06-15T03:10:40Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2975.0",
+          "displayValue": "50'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alexander Isak"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohamed Amine Ben Hamida"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521322",
+      "time": "2026-06-15T03:11:30Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Sweden. Players involved: Jesper Karlström, Elias Saad.",
+      "provider_wallclock": "2026-06-15T03:11:30Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3050.0",
+          "displayValue": "51'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jesper Karlström"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Elias Saad"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521325",
+      "time": "2026-06-15T03:12:38Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Tunisia. Players involved: Hannibal Mejbri.",
+      "provider_wallclock": "2026-06-15T03:12:38Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3118.0",
+          "displayValue": "52'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Hannibal Mejbri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521343",
+      "time": "2026-06-15T03:13:39Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Sweden. Players involved: Viktor Gyökeres, Jesper Karlström.",
+      "provider_wallclock": "2026-06-15T03:13:39Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3179.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Viktor Gyökeres"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jesper Karlström"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521340",
+      "time": "2026-06-15T03:13:42Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Sweden. Players involved: Viktor Gyökeres.",
+      "provider_wallclock": "2026-06-15T03:13:42Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3181.0",
+          "displayValue": "54'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Viktor Gyökeres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521345",
+      "time": "2026-06-15T03:14:07Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Tunisia. Players involved: Rani Khedira.",
+      "provider_wallclock": "2026-06-15T03:14:07Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3206.0",
+          "displayValue": "54'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Rani Khedira"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521356",
+      "time": "2026-06-15T03:15:01Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Tunisia.",
+      "provider_wallclock": "2026-06-15T03:15:01Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3260.0",
+          "displayValue": "55'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        }
+      }
+    },
+    {
+      "event_id": "49521365",
+      "time": "2026-06-15T03:15:40Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Tunisia. Players involved: Montassar Talbi, Hannibal Mejbri.",
+      "provider_wallclock": "2026-06-15T03:15:40Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3300.0",
+          "displayValue": "55'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Montassar Talbi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hannibal Mejbri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521379",
+      "time": "2026-06-15T03:15:57Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Sweden. Players involved: Viktor Gyökeres.",
+      "provider_wallclock": "2026-06-15T03:15:57Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3317.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Viktor Gyökeres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521410",
+      "time": "2026-06-15T03:18:00Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Tunisia. Players involved: Yan Valery, Gabriel Gudmundsson.",
+      "provider_wallclock": "2026-06-15T03:18:00Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3440.0",
+          "displayValue": "58'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Yan Valery"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Gabriel Gudmundsson"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521431",
+      "time": "2026-06-15T03:19:40Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Sweden. Players involved: Viktor Gyökeres, Alexander Isak.",
+      "provider_wallclock": "2026-06-15T03:19:40Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3539.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Viktor Gyökeres"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alexander Isak"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521458",
+      "time": "2026-06-15T03:22:07Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Tunisia.",
+      "provider_wallclock": "2026-06-15T03:22:07Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3687.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        }
+      }
+    },
+    {
+      "event_id": "49521473",
+      "time": "2026-06-15T03:23:19Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Sweden. Players involved: Victor Lindelöf, Hannibal Mejbri.",
+      "provider_wallclock": "2026-06-15T03:23:19Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3759.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Victor Lindelöf"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hannibal Mejbri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521474",
+      "time": "2026-06-15T03:23:55Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Tunisia.",
+      "provider_wallclock": "2026-06-15T03:23:55Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3795.0",
+          "displayValue": "64'"
+        },
+        "team": {
+          "id": "659",
+          "displayName": "Tunisia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49521475",
+      "time": "2026-06-15T03:23:55Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T03:23:55Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3795.0",
+          "displayValue": "64'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        }
+      }
+    },
+    {
+      "event_id": "49521478",
+      "time": "2026-06-15T03:24:54Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Sweden. Players involved: Elliot Stroud, Gabriel Gudmundsson.",
+      "provider_wallclock": "2026-06-15T03:24:54Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3853.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Elliot Stroud"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Gabriel Gudmundsson"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521479",
+      "time": "2026-06-15T03:24:57Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Sweden. Players involved: Lucas Bergvall, Benjamin Nygren.",
+      "provider_wallclock": "2026-06-15T03:24:57Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3856.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lucas Bergvall"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Benjamin Nygren"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521480",
+      "time": "2026-06-15T03:24:58Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T03:24:58Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3857.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        }
+      }
+    },
+    {
+      "event_id": "49521481",
+      "time": "2026-06-15T03:24:58Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Tunisia.",
+      "provider_wallclock": "2026-06-15T03:24:58Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3857.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "id": "659",
+          "displayName": "Tunisia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49521497",
+      "time": "2026-06-15T03:26:04Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Sweden. Players involved: Viktor Gyökeres, Gustaf Lagerbielke.",
+      "provider_wallclock": "2026-06-15T03:26:04Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3924.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Viktor Gyökeres"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Gustaf Lagerbielke"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521500",
+      "time": "2026-06-15T03:26:22Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Tunisia. Players involved: Yan Valery.",
+      "provider_wallclock": "2026-06-15T03:26:22Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3941.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Yan Valery"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521522",
+      "time": "2026-06-15T03:27:44Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Sweden. Players involved: Alexander Isak, Viktor Gyökeres.",
+      "provider_wallclock": "2026-06-15T03:27:44Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4023.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alexander Isak"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Viktor Gyökeres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521534",
+      "time": "2026-06-15T03:28:54Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Tunisia.",
+      "provider_wallclock": "2026-06-15T03:28:54Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4093.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "id": "659",
+          "displayName": "Tunisia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49521535",
+      "time": "2026-06-15T03:28:54Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T03:28:54Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4093.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        }
+      }
+    },
+    {
+      "event_id": "49521539",
+      "time": "2026-06-15T03:31:36Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T03:31:36Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4256.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        }
+      }
+    },
+    {
+      "event_id": "49521540",
+      "time": "2026-06-15T03:31:36Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Tunisia.",
+      "provider_wallclock": "2026-06-15T03:31:36Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4256.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "id": "659",
+          "displayName": "Tunisia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49521541",
+      "time": "2026-06-15T03:32:03Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Tunisia. Players involved: Elias Achouri, Ellyes Skhiri.",
+      "provider_wallclock": "2026-06-15T03:32:03Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4283.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Elias Achouri"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ellyes Skhiri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521542",
+      "time": "2026-06-15T03:32:17Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Tunisia. Players involved: Sebastian Tounekti, Elias Saad.",
+      "provider_wallclock": "2026-06-15T03:32:17Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4296.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sebastian Tounekti"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Elias Saad"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521543",
+      "time": "2026-06-15T03:32:29Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Tunisia. Players involved: Mohamed Hadj Mahmoud, Yan Valery.",
+      "provider_wallclock": "2026-06-15T03:32:29Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4308.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Hadj Mahmoud"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Yan Valery"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521553",
+      "time": "2026-06-15T03:33:31Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Tunisia. Players involved: Sebastian Tounekti, Isak Hien.",
+      "provider_wallclock": "2026-06-15T03:33:31Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4370.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sebastian Tounekti"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Isak Hien"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521577",
+      "time": "2026-06-15T03:35:01Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Sweden. Players involved: Lucas Bergvall, Hannibal Mejbri.",
+      "provider_wallclock": "2026-06-15T03:35:01Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4460.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lucas Bergvall"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hannibal Mejbri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521599",
+      "time": "2026-06-15T03:36:13Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T03:36:13Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4533.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        }
+      }
+    },
+    {
+      "event_id": "49521604",
+      "time": "2026-06-15T03:37:06Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Sweden. Players involved: Isak Hien.",
+      "provider_wallclock": "2026-06-15T03:37:06Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4586.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Isak Hien"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521626",
+      "time": "2026-06-15T03:38:28Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Tunisia. Players involved: Mohamed Hadj Mahmoud.",
+      "provider_wallclock": "2026-06-15T03:38:28Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4667.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Hadj Mahmoud"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521697",
+      "time": "2026-06-15T03:43:05Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Tunisia. Players involved: Ali Abdi, Alexander Bernhardsson.",
+      "provider_wallclock": "2026-06-15T03:43:05Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4945.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Abdi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alexander Bernhardsson"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521698",
+      "time": "2026-06-15T03:43:31Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Tunisia. Players involved: Ismaël Gharbi, Rani Khedira.",
+      "provider_wallclock": "2026-06-15T03:43:31Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4970.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ismaël Gharbi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Rani Khedira"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521699",
+      "time": "2026-06-15T03:43:43Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Tunisia. Players involved: Firas Chaouat, Anis Slimane.",
+      "provider_wallclock": "2026-06-15T03:43:43Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4983.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Firas Chaouat"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Anis Slimane"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521700",
+      "time": "2026-06-15T03:43:54Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Sweden. Players involved: Mattias Svanberg, Jesper Karlström.",
+      "provider_wallclock": "2026-06-15T03:43:54Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4993.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mattias Svanberg"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jesper Karlström"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521708",
+      "time": "2026-06-15T03:44:12Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Sweden. Players involved: Mattias Svanberg, Alexander Isak.",
+      "provider_wallclock": "2026-06-15T03:44:12Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5011.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mattias Svanberg"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alexander Isak"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521704",
+      "time": "2026-06-15T03:46:23Z",
+      "type": "var---referee-decision-cancelled",
+      "text": "Event: VAR - Referee decision cancelled. Team: Sweden. Players involved: Mattias Svanberg.",
+      "provider_wallclock": "2026-06-15T03:46:23Z",
+      "facts": {
+        "type": {
+          "id": "172",
+          "text": "VAR - Referee decision cancelled",
+          "type": "var---referee-decision-cancelled"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5143.0",
+          "displayValue": "86'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mattias Svanberg"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521703",
+      "time": "2026-06-15T03:46:24Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T03:46:24Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5143.0",
+          "displayValue": "86'"
+        },
+        "team": {
+          "id": "466",
+          "displayName": "Sweden"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49521705",
+      "time": "2026-06-15T03:46:25Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T03:46:25Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5144.0",
+          "displayValue": "86'"
+        },
+        "team": {
+          "id": "466",
+          "displayName": "Sweden"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49521761",
+      "time": "2026-06-15T03:48:12Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Sweden. Players involved: Alexander Isak, Viktor Gyökeres.",
+      "provider_wallclock": "2026-06-15T03:48:12Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5252.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alexander Isak"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Viktor Gyökeres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521718",
+      "time": "2026-06-15T03:48:31Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Tunisia. Players involved: Sebastian Tounekti.",
+      "provider_wallclock": "2026-06-15T03:48:31Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5271.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sebastian Tounekti"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521738",
+      "time": "2026-06-15T03:49:47Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Sweden. Players involved: Lucas Bergvall, Viktor Gyökeres.",
+      "provider_wallclock": "2026-06-15T03:49:47Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5346.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lucas Bergvall"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Viktor Gyökeres"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521737",
+      "time": "2026-06-15T03:49:49Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Sweden.",
+      "provider_wallclock": "2026-06-15T03:49:49Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5349.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        }
+      }
+    },
+    {
+      "event_id": "49521741",
+      "time": "2026-06-15T03:50:31Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Sweden. Players involved: Anthony Elanga, Alexander Isak.",
+      "provider_wallclock": "2026-06-15T03:50:31Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5390.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Anthony Elanga"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alexander Isak"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521742",
+      "time": "2026-06-15T03:50:43Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Sweden. Players involved: Daniel Svensson, Alexander Bernhardsson.",
+      "provider_wallclock": "2026-06-15T03:50:43Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+1'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Daniel Svensson"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alexander Bernhardsson"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521763",
+      "time": "2026-06-15T03:52:06Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Sweden. Players involved: Victor Lindelöf, Elias Achouri.",
+      "provider_wallclock": "2026-06-15T03:52:06Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Victor Lindelöf"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Elias Achouri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521767",
+      "time": "2026-06-15T03:52:47Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Tunisia. Players involved: Elias Achouri.",
+      "provider_wallclock": "2026-06-15T03:52:47Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Elias Achouri"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521768",
+      "time": "2026-06-15T03:52:54Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Tunisia. Players involved: Ali Abdi, Gustaf Lagerbielke.",
+      "provider_wallclock": "2026-06-15T03:52:54Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Abdi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Gustaf Lagerbielke"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521782",
+      "time": "2026-06-15T03:54:04Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Tunisia. Players involved: Mohamed Amine Ben Hamida.",
+      "provider_wallclock": "2026-06-15T03:54:04Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "displayName": "Tunisia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohamed Amine Ben Hamida"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521808",
+      "time": "2026-06-15T03:55:47Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Sweden. Players involved: Yasin Ayari, Lucas Bergvall.",
+      "provider_wallclock": "2026-06-15T03:55:47Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+6'"
+        },
+        "team": {
+          "displayName": "Sweden"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Yasin Ayari"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lucas Bergvall"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49521811",
+      "time": "2026-06-15T03:57:34Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-15T03:57:34Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+7'"
+        }
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 6
+  }
+}

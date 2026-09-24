@@ -1,0 +1,2570 @@
+{
+  "fixture_id": "espn:760425",
+  "espn_event_id": "760425",
+  "kickoff": "2026-06-14T20:00:00Z",
+  "target_end_exclusive": "2026-06-14T21:55:29Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760425",
+    "source_body_sha256": "1b5439a257bd129e1c97cd69f2c9051272776422211d1015d0f2dfe8a75b47fc",
+    "captured_at_utc": "2026-09-24T22:46:46.340928Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49510712",
+      "time": "2026-06-14T20:00:12Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-14T20:00:12Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49510790",
+      "time": "2026-06-14T20:02:48Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Netherlands. Players involved: Donyell Malen, Cody Gakpo.",
+      "provider_wallclock": "2026-06-14T20:02:48Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "157.0",
+          "displayValue": "3'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Donyell Malen"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Cody Gakpo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49510788",
+      "time": "2026-06-14T20:02:50Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T20:02:50Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "159.0",
+          "displayValue": "3'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49510877",
+      "time": "2026-06-14T20:05:31Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Netherlands. Players involved: Micky van de Ven, Keito Nakamura.",
+      "provider_wallclock": "2026-06-14T20:05:31Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "319.0",
+          "displayValue": "6'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Micky van de Ven"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Keito Nakamura"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49510893",
+      "time": "2026-06-14T20:07:17Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Netherlands. Players involved: Frenkie de Jong, Ayase Ueda.",
+      "provider_wallclock": "2026-06-14T20:07:17Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "426.0",
+          "displayValue": "8'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Frenkie de Jong"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ayase Ueda"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49511246",
+      "time": "2026-06-14T20:13:24Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Japan.",
+      "provider_wallclock": "2026-06-14T20:13:24Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "793.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "Japan"
+        }
+      }
+    },
+    {
+      "event_id": "49511697",
+      "time": "2026-06-14T20:20:53Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Japan. Players involved: Keito Nakamura, Crysencio Summerville.",
+      "provider_wallclock": "2026-06-14T20:20:53Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1241.0",
+          "displayValue": "21'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Keito Nakamura"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Crysencio Summerville"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49511775",
+      "time": "2026-06-14T20:22:33Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Japan.",
+      "provider_wallclock": "2026-06-14T20:22:33Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1341.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "id": "627",
+          "displayName": "Japan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49511780",
+      "time": "2026-06-14T20:22:33Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T20:22:33Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1341.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49511877",
+      "time": "2026-06-14T20:25:35Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T20:25:35Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1523.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49511878",
+      "time": "2026-06-14T20:25:35Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Japan.",
+      "provider_wallclock": "2026-06-14T20:25:35Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1523.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "id": "627",
+          "displayName": "Japan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49512004",
+      "time": "2026-06-14T20:27:43Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Japan. Players involved: Hiroki Ito, Keito Nakamura.",
+      "provider_wallclock": "2026-06-14T20:27:43Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1651.0",
+          "displayValue": "28'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Hiroki Ito"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Keito Nakamura"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49512185",
+      "time": "2026-06-14T20:30:42Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Japan.",
+      "provider_wallclock": "2026-06-14T20:30:42Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1830.0",
+          "displayValue": "31'"
+        },
+        "team": {
+          "id": "627",
+          "displayName": "Japan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49512186",
+      "time": "2026-06-14T20:30:42Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T20:30:42Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1830.0",
+          "displayValue": "31'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49512187",
+      "time": "2026-06-14T20:30:44Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Japan.",
+      "provider_wallclock": "2026-06-14T20:30:44Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1832.0",
+          "displayValue": "31'"
+        },
+        "team": {
+          "id": "627",
+          "displayName": "Japan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49512188",
+      "time": "2026-06-14T20:30:44Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T20:30:44Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1832.0",
+          "displayValue": "31'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49512314",
+      "time": "2026-06-14T20:32:59Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T20:32:59Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1967.0",
+          "displayValue": "33'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49512368",
+      "time": "2026-06-14T20:33:46Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Netherlands. Players involved: Donyell Malen, Tijjani Reijnders.",
+      "provider_wallclock": "2026-06-14T20:33:46Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2014.0",
+          "displayValue": "34'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Donyell Malen"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tijjani Reijnders"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49512364",
+      "time": "2026-06-14T20:33:52Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Netherlands. Players involved: Micky van de Ven, Tijjani Reijnders.",
+      "provider_wallclock": "2026-06-14T20:33:52Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2020.0",
+          "displayValue": "34'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Micky van de Ven"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tijjani Reijnders"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49512417",
+      "time": "2026-06-14T20:35:02Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Japan. Players involved: Keito Nakamura.",
+      "provider_wallclock": "2026-06-14T20:35:02Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2091.0",
+          "displayValue": "35'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Keito Nakamura"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49512457",
+      "time": "2026-06-14T20:35:44Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Netherlands. Players involved: Cody Gakpo, Denzel Dumfries.",
+      "provider_wallclock": "2026-06-14T20:35:44Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2132.0",
+          "displayValue": "36'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Cody Gakpo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Denzel Dumfries"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49512801",
+      "time": "2026-06-14T20:42:53Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Japan. Players involved: Keito Nakamura, Tsuyoshi Watanabe.",
+      "provider_wallclock": "2026-06-14T20:42:53Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2561.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Keito Nakamura"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tsuyoshi Watanabe"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49512835",
+      "time": "2026-06-14T20:43:56Z",
+      "type": "dispossessed",
+      "text": "Event: Dispossessed. Team: Japan. Players involved: Takefusa Kubo.",
+      "provider_wallclock": "2026-06-14T20:43:56Z",
+      "facts": {
+        "type": {
+          "id": "196",
+          "text": "Dispossessed",
+          "type": "dispossessed"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2625.0",
+          "displayValue": "44'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Takefusa Kubo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49512836",
+      "time": "2026-06-14T20:43:56Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Netherlands. Players involved: Frenkie de Jong, Takefusa Kubo.",
+      "provider_wallclock": "2026-06-14T20:43:56Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2625.0",
+          "displayValue": "44'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Frenkie de Jong"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Takefusa Kubo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49512840",
+      "time": "2026-06-14T20:44:22Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Japan. Players involved: Ayase Ueda, Daichi Kamada.",
+      "provider_wallclock": "2026-06-14T20:44:22Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2650.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ayase Ueda"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Daichi Kamada"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49512934",
+      "time": "2026-06-14T20:46:08Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Japan. Players involved: Hiroki Ito, Crysencio Summerville.",
+      "provider_wallclock": "2026-06-14T20:46:08Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+1'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Hiroki Ito"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Crysencio Summerville"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49513033",
+      "time": "2026-06-14T20:47:10Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T20:47:10Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+2'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49513090",
+      "time": "2026-06-14T20:48:11Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-14T20:48:11Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+3'"
+        }
+      }
+    },
+    {
+      "event_id": "49513594",
+      "time": "2026-06-14T21:04:10Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-14T21:04:10Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        }
+      }
+    },
+    {
+      "event_id": "49513686",
+      "time": "2026-06-14T21:08:15Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Japan. Players involved: Ritsu Doan, Cody Gakpo.",
+      "provider_wallclock": "2026-06-14T21:08:15Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2944.0",
+          "displayValue": "50'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ritsu Doan"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Cody Gakpo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49513720",
+      "time": "2026-06-14T21:09:12Z",
+      "type": "goal---header",
+      "text": "Event: Goal - Header. Team: Netherlands. Players involved: Virgil van Dijk, Ryan Gravenberch.",
+      "provider_wallclock": "2026-06-14T21:09:12Z",
+      "facts": {
+        "type": {
+          "id": "137",
+          "text": "Goal - Header",
+          "type": "goal---header"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3001.0",
+          "displayValue": "51'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Virgil van Dijk"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ryan Gravenberch"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49513918",
+      "time": "2026-06-14T21:15:54Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Japan. Players involved: Keito Nakamura, Takefusa Kubo.",
+      "provider_wallclock": "2026-06-14T21:15:54Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3403.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Keito Nakamura"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Takefusa Kubo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49513969",
+      "time": "2026-06-14T21:18:51Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T21:18:51Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3580.0",
+          "displayValue": "60'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49513976",
+      "time": "2026-06-14T21:19:34Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Netherlands. Players involved: Crysencio Summerville, Tsuyoshi Watanabe.",
+      "provider_wallclock": "2026-06-14T21:19:34Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3623.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Crysencio Summerville"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tsuyoshi Watanabe"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49513978",
+      "time": "2026-06-14T21:19:38Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Netherlands. Players involved: Crysencio Summerville.",
+      "provider_wallclock": "2026-06-14T21:19:38Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3627.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Crysencio Summerville"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514034",
+      "time": "2026-06-14T21:20:58Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Japan. Players involved: Takefusa Kubo, Crysencio Summerville.",
+      "provider_wallclock": "2026-06-14T21:20:58Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3708.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Takefusa Kubo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Crysencio Summerville"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514068",
+      "time": "2026-06-14T21:22:18Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Netherlands. Players involved: Crysencio Summerville, Ryan Gravenberch.",
+      "provider_wallclock": "2026-06-14T21:22:18Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3788.0",
+          "displayValue": "64'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Crysencio Summerville"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ryan Gravenberch"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514079",
+      "time": "2026-06-14T21:23:35Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Japan. Players involved: Ayase Ueda, Jan Paul van Hecke.",
+      "provider_wallclock": "2026-06-14T21:23:35Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3864.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ayase Ueda"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jan Paul van Hecke"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514128",
+      "time": "2026-06-14T21:24:26Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Netherlands. Players involved: Tijjani Reijnders.",
+      "provider_wallclock": "2026-06-14T21:24:26Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3915.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tijjani Reijnders"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514129",
+      "time": "2026-06-14T21:24:58Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Japan. Players involved: Junya Ito, Daizen Maeda.",
+      "provider_wallclock": "2026-06-14T21:24:58Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3948.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Junya Ito"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Daizen Maeda"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514147",
+      "time": "2026-06-14T21:25:30Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Japan. Players involved: Takefusa Kubo, Ayase Ueda.",
+      "provider_wallclock": "2026-06-14T21:25:30Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3979.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Takefusa Kubo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ayase Ueda"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514172",
+      "time": "2026-06-14T21:25:50Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T21:25:50Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4000.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49514171",
+      "time": "2026-06-14T21:25:51Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Japan.",
+      "provider_wallclock": "2026-06-14T21:25:51Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4000.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "id": "627",
+          "displayName": "Japan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49514200",
+      "time": "2026-06-14T21:28:10Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T21:28:10Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4140.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49514199",
+      "time": "2026-06-14T21:28:11Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Japan.",
+      "provider_wallclock": "2026-06-14T21:28:11Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4140.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "id": "627",
+          "displayName": "Japan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49514201",
+      "time": "2026-06-14T21:28:52Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Netherlands. Players involved: Memphis Depay, Donyell Malen.",
+      "provider_wallclock": "2026-06-14T21:28:52Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4182.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Memphis Depay"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Donyell Malen"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514202",
+      "time": "2026-06-14T21:29:03Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Netherlands. Players involved: Teun Koopmeiners, Crysencio Summerville.",
+      "provider_wallclock": "2026-06-14T21:29:03Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4192.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Teun Koopmeiners"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Crysencio Summerville"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514203",
+      "time": "2026-06-14T21:29:10Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Netherlands. Players involved: Quinten Timber, Tijjani Reijnders.",
+      "provider_wallclock": "2026-06-14T21:29:10Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4199.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Quinten Timber"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tijjani Reijnders"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514248",
+      "time": "2026-06-14T21:30:11Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Japan.",
+      "provider_wallclock": "2026-06-14T21:30:11Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4261.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "Japan"
+        }
+      }
+    },
+    {
+      "event_id": "49514249",
+      "time": "2026-06-14T21:30:12Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T21:30:12Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4261.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "id": "449",
+          "displayName": "Netherlands"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49514261",
+      "time": "2026-06-14T21:30:41Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Japan.",
+      "provider_wallclock": "2026-06-14T21:30:41Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4290.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "Japan"
+        }
+      }
+    },
+    {
+      "event_id": "49514262",
+      "time": "2026-06-14T21:30:41Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T21:30:41Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4290.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "id": "449",
+          "displayName": "Netherlands"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49514287",
+      "time": "2026-06-14T21:31:23Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Netherlands. Players involved: Cody Gakpo, Frenkie de Jong.",
+      "provider_wallclock": "2026-06-14T21:31:23Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4332.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Cody Gakpo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Frenkie de Jong"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514285",
+      "time": "2026-06-14T21:31:25Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T21:31:25Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4334.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49514292",
+      "time": "2026-06-14T21:31:58Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Netherlands. Players involved: Jan Paul van Hecke, Memphis Depay.",
+      "provider_wallclock": "2026-06-14T21:31:58Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4367.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jan Paul van Hecke"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Memphis Depay"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514310",
+      "time": "2026-06-14T21:32:55Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Japan.",
+      "provider_wallclock": "2026-06-14T21:32:55Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4424.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "Japan"
+        }
+      }
+    },
+    {
+      "event_id": "49514311",
+      "time": "2026-06-14T21:33:28Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Japan. Players involved: Yukinari Sugawara, Ritsu Doan.",
+      "provider_wallclock": "2026-06-14T21:33:28Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4458.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Yukinari Sugawara"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ritsu Doan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514312",
+      "time": "2026-06-14T21:33:34Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Japan. Players involved: Takehiro Tomiyasu, Tsuyoshi Watanabe.",
+      "provider_wallclock": "2026-06-14T21:33:34Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4464.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Takehiro Tomiyasu"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tsuyoshi Watanabe"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514362",
+      "time": "2026-06-14T21:33:41Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Japan. Players involved: Koki Ogawa, Takefusa Kubo.",
+      "provider_wallclock": "2026-06-14T21:33:41Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4470.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Koki Ogawa"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Takefusa Kubo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514409",
+      "time": "2026-06-14T21:34:05Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Japan. Players involved: Keito Nakamura, Junya Ito.",
+      "provider_wallclock": "2026-06-14T21:34:05Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4494.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Keito Nakamura"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Junya Ito"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514425",
+      "time": "2026-06-14T21:34:44Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Netherlands. Players involved: Teun Koopmeiners, Quinten Timber.",
+      "provider_wallclock": "2026-06-14T21:34:44Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4533.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Teun Koopmeiners"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Quinten Timber"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514518",
+      "time": "2026-06-14T21:36:32Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Japan. Players involved: Koki Ogawa, Yukinari Sugawara.",
+      "provider_wallclock": "2026-06-14T21:36:32Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4641.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Koki Ogawa"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Yukinari Sugawara"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514582",
+      "time": "2026-06-14T21:38:20Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Japan. Players involved: Yukinari Sugawara, Junya Ito.",
+      "provider_wallclock": "2026-06-14T21:38:20Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4749.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Yukinari Sugawara"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Junya Ito"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514646",
+      "time": "2026-06-14T21:39:50Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Netherlands. Players involved: Nathan Aké, Ryan Gravenberch.",
+      "provider_wallclock": "2026-06-14T21:39:50Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4840.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nathan Aké"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ryan Gravenberch"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514767",
+      "time": "2026-06-14T21:41:43Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Netherlands. Players involved: Memphis Depay, Shogo Taniguchi.",
+      "provider_wallclock": "2026-06-14T21:41:43Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4952.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Memphis Depay"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Shogo Taniguchi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514768",
+      "time": "2026-06-14T21:41:45Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Netherlands. Players involved: Memphis Depay.",
+      "provider_wallclock": "2026-06-14T21:41:45Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4955.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Memphis Depay"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514785",
+      "time": "2026-06-14T21:42:17Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Japan. Players involved: Kento Shiogai, Ayase Ueda.",
+      "provider_wallclock": "2026-06-14T21:42:17Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4986.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kento Shiogai"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ayase Ueda"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514796",
+      "time": "2026-06-14T21:42:43Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Japan. Players involved: Takehiro Tomiyasu, Frenkie de Jong.",
+      "provider_wallclock": "2026-06-14T21:42:43Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5012.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Takehiro Tomiyasu"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Frenkie de Jong"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514797",
+      "time": "2026-06-14T21:43:14Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Netherlands. Players involved: Brian Brobbey, Cody Gakpo.",
+      "provider_wallclock": "2026-06-14T21:43:14Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5043.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brian Brobbey"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Cody Gakpo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514897",
+      "time": "2026-06-14T21:45:09Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Netherlands. Players involved: Teun Koopmeiners, Takehiro Tomiyasu.",
+      "provider_wallclock": "2026-06-14T21:45:09Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5157.0",
+          "displayValue": "86'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Teun Koopmeiners"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Takehiro Tomiyasu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49514929",
+      "time": "2026-06-14T21:46:01Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Japan.",
+      "provider_wallclock": "2026-06-14T21:46:01Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5210.0",
+          "displayValue": "87'"
+        },
+        "team": {
+          "displayName": "Japan"
+        }
+      }
+    },
+    {
+      "event_id": "49514970",
+      "time": "2026-06-14T21:46:48Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Japan.",
+      "provider_wallclock": "2026-06-14T21:46:48Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5257.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Japan"
+        }
+      }
+    },
+    {
+      "event_id": "49515014",
+      "time": "2026-06-14T21:47:10Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Japan. Players involved: Koki Ogawa, Junya Ito.",
+      "provider_wallclock": "2026-06-14T21:47:10Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5279.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Koki Ogawa"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Junya Ito"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49515010",
+      "time": "2026-06-14T21:47:12Z",
+      "type": "goal---header",
+      "text": "Event: Goal - Header. Team: Japan. Players involved: Daichi Kamada, Koki Ogawa.",
+      "provider_wallclock": "2026-06-14T21:47:12Z",
+      "facts": {
+        "type": {
+          "id": "137",
+          "text": "Goal - Header",
+          "type": "goal---header"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5281.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "displayName": "Japan"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Daichi Kamada"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Koki Ogawa"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49515030",
+      "time": "2026-06-14T21:48:46Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T21:48:46Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5375.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49515031",
+      "time": "2026-06-14T21:48:46Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Japan.",
+      "provider_wallclock": "2026-06-14T21:48:46Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5375.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "id": "627",
+          "displayName": "Japan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49515032",
+      "time": "2026-06-14T21:48:54Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Netherlands.",
+      "provider_wallclock": "2026-06-14T21:48:54Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5384.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        }
+      }
+    },
+    {
+      "event_id": "49515033",
+      "time": "2026-06-14T21:48:55Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Japan.",
+      "provider_wallclock": "2026-06-14T21:48:55Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5384.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "id": "627",
+          "displayName": "Japan"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49515063",
+      "time": "2026-06-14T21:49:27Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Netherlands. Players involved: Micky van de Ven, Junya Ito.",
+      "provider_wallclock": "2026-06-14T21:49:27Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+1'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Micky van de Ven"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Junya Ito"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49515064",
+      "time": "2026-06-14T21:49:29Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Netherlands. Players involved: Micky van de Ven.",
+      "provider_wallclock": "2026-06-14T21:49:29Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+1'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Micky van de Ven"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49515204",
+      "time": "2026-06-14T21:51:43Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Netherlands. Players involved: Teun Koopmeiners, Denzel Dumfries.",
+      "provider_wallclock": "2026-06-14T21:51:43Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Netherlands"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Teun Koopmeiners"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Denzel Dumfries"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49515292",
+      "time": "2026-06-14T21:55:29Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-14T21:55:29Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+7'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 6
+  }
+}

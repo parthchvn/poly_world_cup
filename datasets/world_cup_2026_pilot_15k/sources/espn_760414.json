@@ -1,0 +1,2849 @@
+{
+  "fixture_id": "espn:760414",
+  "espn_event_id": "760414",
+  "kickoff": "2026-06-12T02:00:00Z",
+  "target_end_exclusive": "2026-06-12T03:57:03Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760414",
+    "source_body_sha256": "bc395bd0bc75df9acf83c5feb43af8fc5c6a02e285fe0bbfdce172d2ae789256",
+    "captured_at_utc": "2026-09-24T22:46:36.443408Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49484621",
+      "time": "2026-06-12T02:00:46Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-12T02:00:46Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484669",
+      "time": "2026-06-12T02:03:33Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: South Korea. Players involved: Lee Gi-Hyuk.",
+      "provider_wallclock": "2026-06-12T02:03:33Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "166.0",
+          "displayValue": "3'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Gi-Hyuk"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484745",
+      "time": "2026-06-12T02:08:47Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Ladislav Krejcí, Lee Kang-In.",
+      "provider_wallclock": "2026-06-12T02:08:47Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "480.0",
+          "displayValue": "8'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ladislav Krejcí"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Kang-In"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484762",
+      "time": "2026-06-12T02:10:29Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: South Korea.",
+      "provider_wallclock": "2026-06-12T02:10:29Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "582.0",
+          "displayValue": "10'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        }
+      }
+    },
+    {
+      "event_id": "49484786",
+      "time": "2026-06-12T02:12:11Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: South Korea. Players involved: Son Heung-Min, Lee Jae-Sung.",
+      "provider_wallclock": "2026-06-12T02:12:11Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "685.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Son Heung-Min"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Jae-Sung"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484785",
+      "time": "2026-06-12T02:12:15Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: South Korea.",
+      "provider_wallclock": "2026-06-12T02:12:15Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "688.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        }
+      }
+    },
+    {
+      "event_id": "49484794",
+      "time": "2026-06-12T02:12:41Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: South Korea. Players involved: Lee Han-Beom, Lee Tae-Seok.",
+      "provider_wallclock": "2026-06-12T02:12:41Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "714.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Han-Beom"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Tae-Seok"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484818",
+      "time": "2026-06-12T02:13:55Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: South Korea. Players involved: Lee Kang-In, Kim Min-Jae.",
+      "provider_wallclock": "2026-06-12T02:13:55Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "788.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Kang-In"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Kim Min-Jae"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484816",
+      "time": "2026-06-12T02:14:01Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: South Korea.",
+      "provider_wallclock": "2026-06-12T02:14:01Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "794.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        }
+      }
+    },
+    {
+      "event_id": "49484837",
+      "time": "2026-06-12T02:14:45Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: South Korea. Players involved: Son Heung-Min, Lee Kang-In.",
+      "provider_wallclock": "2026-06-12T02:14:45Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "838.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Son Heung-Min"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Kang-In"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484848",
+      "time": "2026-06-12T02:15:18Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Czechia.",
+      "provider_wallclock": "2026-06-12T02:15:18Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "871.0",
+          "displayValue": "15'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        }
+      }
+    },
+    {
+      "event_id": "49484847",
+      "time": "2026-06-12T02:16:09Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Pavel Sulc, Son Heung-Min.",
+      "provider_wallclock": "2026-06-12T02:16:09Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "922.0",
+          "displayValue": "16'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Pavel Sulc"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Son Heung-Min"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484870",
+      "time": "2026-06-12T02:18:16Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Czechia. Players involved: Tomás Soucek.",
+      "provider_wallclock": "2026-06-12T02:18:16Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1049.0",
+          "displayValue": "18'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tomás Soucek"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484874",
+      "time": "2026-06-12T02:19:30Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Korea. Players involved: Kim Min-Jae, Lukás Provod.",
+      "provider_wallclock": "2026-06-12T02:19:30Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1123.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kim Min-Jae"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lukás Provod"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484899",
+      "time": "2026-06-12T02:20:56Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Czechia.",
+      "provider_wallclock": "2026-06-12T02:20:56Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1209.0",
+          "displayValue": "21'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        }
+      }
+    },
+    {
+      "event_id": "49484909",
+      "time": "2026-06-12T02:21:40Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Czechia.",
+      "provider_wallclock": "2026-06-12T02:21:40Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1253.0",
+          "displayValue": "21'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        }
+      }
+    },
+    {
+      "event_id": "49484916",
+      "time": "2026-06-12T02:22:20Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Czechia. Players involved: Tomás Soucek, Alexandr Sojka.",
+      "provider_wallclock": "2026-06-12T02:22:20Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1292.0",
+          "displayValue": "22'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tomás Soucek"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alexandr Sojka"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484923",
+      "time": "2026-06-12T02:23:01Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Lukás Provod, Paik Seung-Ho.",
+      "provider_wallclock": "2026-06-12T02:23:01Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1334.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lukás Provod"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Paik Seung-Ho"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484925",
+      "time": "2026-06-12T02:23:02Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: South Korea.",
+      "provider_wallclock": "2026-06-12T02:23:02Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1335.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        }
+      }
+    },
+    {
+      "event_id": "49484926",
+      "time": "2026-06-12T02:23:02Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Czechia.",
+      "provider_wallclock": "2026-06-12T02:23:02Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1335.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "id": "450",
+          "displayName": "Czechia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484927",
+      "time": "2026-06-12T02:25:12Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: South Korea.",
+      "provider_wallclock": "2026-06-12T02:25:12Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1465.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        }
+      }
+    },
+    {
+      "event_id": "49484928",
+      "time": "2026-06-12T02:25:12Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Czechia.",
+      "provider_wallclock": "2026-06-12T02:25:12Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1465.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "id": "450",
+          "displayName": "Czechia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484933",
+      "time": "2026-06-12T02:25:41Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: South Korea. Players involved: Lee Han-Beom.",
+      "provider_wallclock": "2026-06-12T02:25:41Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1494.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Han-Beom"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484936",
+      "time": "2026-06-12T02:26:12Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: South Korea.",
+      "provider_wallclock": "2026-06-12T02:26:12Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1525.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        }
+      }
+    },
+    {
+      "event_id": "49484937",
+      "time": "2026-06-12T02:26:13Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Czechia.",
+      "provider_wallclock": "2026-06-12T02:26:13Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1525.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "id": "450",
+          "displayName": "Czechia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484939",
+      "time": "2026-06-12T02:26:57Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: South Korea.",
+      "provider_wallclock": "2026-06-12T02:26:57Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1570.0",
+          "displayValue": "27'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        }
+      }
+    },
+    {
+      "event_id": "49484938",
+      "time": "2026-06-12T02:26:58Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Czechia.",
+      "provider_wallclock": "2026-06-12T02:26:58Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1570.0",
+          "displayValue": "27'"
+        },
+        "team": {
+          "id": "450",
+          "displayName": "Czechia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484974",
+      "time": "2026-06-12T02:28:17Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Korea. Players involved: Lee Han-Beom, Pavel Sulc.",
+      "provider_wallclock": "2026-06-12T02:28:17Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1650.0",
+          "displayValue": "28'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Han-Beom"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Pavel Sulc"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484991",
+      "time": "2026-06-12T02:29:19Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Vladimír Coufal, Lee Gi-Hyuk.",
+      "provider_wallclock": "2026-06-12T02:29:19Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1712.0",
+          "displayValue": "29'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Vladimír Coufal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Gi-Hyuk"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485037",
+      "time": "2026-06-12T02:32:09Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Czechia. Players involved: Pavel Sulc.",
+      "provider_wallclock": "2026-06-12T02:32:09Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1882.0",
+          "displayValue": "32'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Pavel Sulc"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485073",
+      "time": "2026-06-12T02:34:18Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Korea. Players involved: Lee Tae-Seok, Vladimír Coufal.",
+      "provider_wallclock": "2026-06-12T02:34:18Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2011.0",
+          "displayValue": "34'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Tae-Seok"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Vladimír Coufal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485117",
+      "time": "2026-06-12T02:36:50Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Vladimír Coufal, Lee Jae-Sung.",
+      "provider_wallclock": "2026-06-12T02:36:50Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2163.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Vladimír Coufal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Jae-Sung"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485140",
+      "time": "2026-06-12T02:38:06Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: South Korea. Players involved: Son Heung-Min, Lee Jae-Sung.",
+      "provider_wallclock": "2026-06-12T02:38:06Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2239.0",
+          "displayValue": "38'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Son Heung-Min"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Jae-Sung"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485161",
+      "time": "2026-06-12T02:39:20Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: South Korea. Players involved: Son Heung-Min, Kim Min-Jae.",
+      "provider_wallclock": "2026-06-12T02:39:20Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2313.0",
+          "displayValue": "39'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Son Heung-Min"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Kim Min-Jae"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485166",
+      "time": "2026-06-12T02:39:57Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Vladimír Coufal, Lee Tae-Seok.",
+      "provider_wallclock": "2026-06-12T02:39:57Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2350.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Vladimír Coufal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Tae-Seok"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485167",
+      "time": "2026-06-12T02:39:57Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Vladimír Coufal, Lee Jae-Sung.",
+      "provider_wallclock": "2026-06-12T02:39:57Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2350.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Vladimír Coufal"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Jae-Sung"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485189",
+      "time": "2026-06-12T02:41:24Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Korea. Players involved: Lee Jae-Sung, Alexandr Sojka.",
+      "provider_wallclock": "2026-06-12T02:41:24Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2437.0",
+          "displayValue": "41'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Jae-Sung"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alexandr Sojka"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485225",
+      "time": "2026-06-12T02:43:37Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Robin Hranác, Son Heung-Min.",
+      "provider_wallclock": "2026-06-12T02:43:37Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2570.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Robin Hranác"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Son Heung-Min"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485289",
+      "time": "2026-06-12T02:46:52Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: South Korea. Players involved: Son Heung-Min, Lee Tae-Seok.",
+      "provider_wallclock": "2026-06-12T02:46:52Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+2'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Son Heung-Min"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Tae-Seok"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485321",
+      "time": "2026-06-12T02:48:00Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: South Korea. Players involved: Hwang In-Beom, Son Heung-Min.",
+      "provider_wallclock": "2026-06-12T02:48:00Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+3'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Hwang In-Beom"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Son Heung-Min"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485324",
+      "time": "2026-06-12T02:48:52Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-12T02:48:52Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49485334",
+      "time": "2026-06-12T03:03:57Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-12T03:03:57Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49485367",
+      "time": "2026-06-12T03:05:53Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Korea. Players involved: Kim Min-Jae, Patrik Schick.",
+      "provider_wallclock": "2026-06-12T03:05:53Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2816.0",
+          "displayValue": "47'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kim Min-Jae"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Patrik Schick"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485378",
+      "time": "2026-06-12T03:06:19Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Czechia.",
+      "provider_wallclock": "2026-06-12T03:06:19Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2842.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        }
+      }
+    },
+    {
+      "event_id": "49485413",
+      "time": "2026-06-12T03:07:42Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: South Korea. Players involved: Hwang In-Beom, Lee Kang-In.",
+      "provider_wallclock": "2026-06-12T03:07:42Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2925.0",
+          "displayValue": "49'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Hwang In-Beom"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Kang-In"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485425",
+      "time": "2026-06-12T03:07:44Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: South Korea. Players involved: Lee Jae-Sung.",
+      "provider_wallclock": "2026-06-12T03:07:44Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2928.0",
+          "displayValue": "49'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Jae-Sung"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485481",
+      "time": "2026-06-12T03:11:04Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Tomás Soucek, Lee Jae-Sung.",
+      "provider_wallclock": "2026-06-12T03:11:04Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3127.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tomás Soucek"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Jae-Sung"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485550",
+      "time": "2026-06-12T03:14:08Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: South Korea. Players involved: Son Heung-Min, Lee Jae-Sung.",
+      "provider_wallclock": "2026-06-12T03:14:08Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3311.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Son Heung-Min"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Jae-Sung"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485547",
+      "time": "2026-06-12T03:14:09Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: South Korea.",
+      "provider_wallclock": "2026-06-12T03:14:09Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3312.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        }
+      }
+    },
+    {
+      "event_id": "49485589",
+      "time": "2026-06-12T03:17:08Z",
+      "type": "goal---header",
+      "text": "Event: Goal - Header. Team: Czechia. Players involved: Ladislav Krejcí, Vladimír Coufal.",
+      "provider_wallclock": "2026-06-12T03:17:08Z",
+      "facts": {
+        "type": {
+          "id": "137",
+          "text": "Goal - Header",
+          "type": "goal---header"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3491.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ladislav Krejcí"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Vladimír Coufal"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485629",
+      "time": "2026-06-12T03:19:40Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: South Korea. Players involved: Lee Jae-Sung, Seol Young-Woo.",
+      "provider_wallclock": "2026-06-12T03:19:40Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3643.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Jae-Sung"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Seol Young-Woo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485638",
+      "time": "2026-06-12T03:20:37Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Korea. Players involved: Seol Young-Woo, Jaroslav Zelený.",
+      "provider_wallclock": "2026-06-12T03:20:37Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3701.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Seol Young-Woo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jaroslav Zelený"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485639",
+      "time": "2026-06-12T03:20:45Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: South Korea. Players involved: Hwang Hee-Chan, Lee Jae-Sung.",
+      "provider_wallclock": "2026-06-12T03:20:45Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3708.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Hwang Hee-Chan"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Jae-Sung"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485646",
+      "time": "2026-06-12T03:21:25Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Ladislav Krejcí, Lee Kang-In.",
+      "provider_wallclock": "2026-06-12T03:21:25Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3748.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ladislav Krejcí"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Kang-In"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485647",
+      "time": "2026-06-12T03:22:01Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Czechia. Players involved: Adam Hlozek, Pavel Sulc.",
+      "provider_wallclock": "2026-06-12T03:22:01Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3784.0",
+          "displayValue": "64'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Adam Hlozek"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Pavel Sulc"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485649",
+      "time": "2026-06-12T03:22:07Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Czechia. Players involved: Tomás Chorý, Patrik Schick.",
+      "provider_wallclock": "2026-06-12T03:22:07Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3790.0",
+          "displayValue": "64'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tomás Chorý"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Patrik Schick"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485651",
+      "time": "2026-06-12T03:22:09Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Czechia. Players involved: Michal Sadílek, Lukás Provod.",
+      "provider_wallclock": "2026-06-12T03:22:09Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3792.0",
+          "displayValue": "64'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Michal Sadílek"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lukás Provod"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485726",
+      "time": "2026-06-12T03:25:42Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: South Korea. Players involved: Hwang In-Beom, Lee Kang-In.",
+      "provider_wallclock": "2026-06-12T03:25:42Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4004.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Hwang In-Beom"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Kang-In"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485728",
+      "time": "2026-06-12T03:27:15Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: South Korea. Players involved: Eom Ji-Sung, Lee Tae-Seok.",
+      "provider_wallclock": "2026-06-12T03:27:15Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4097.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Eom Ji-Sung"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Tae-Seok"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485729",
+      "time": "2026-06-12T03:27:44Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: South Korea. Players involved: Oh Hyeon-Gyu, Son Heung-Min.",
+      "provider_wallclock": "2026-06-12T03:27:44Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4127.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Oh Hyeon-Gyu"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Son Heung-Min"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485735",
+      "time": "2026-06-12T03:28:05Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Robin Hranác, Oh Hyeon-Gyu.",
+      "provider_wallclock": "2026-06-12T03:28:05Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4148.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Robin Hranác"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Oh Hyeon-Gyu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485736",
+      "time": "2026-06-12T03:28:17Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: South Korea.",
+      "provider_wallclock": "2026-06-12T03:28:17Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4160.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        }
+      }
+    },
+    {
+      "event_id": "49485737",
+      "time": "2026-06-12T03:28:18Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Czechia.",
+      "provider_wallclock": "2026-06-12T03:28:18Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4160.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "id": "450",
+          "displayName": "Czechia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49485738",
+      "time": "2026-06-12T03:30:22Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: South Korea.",
+      "provider_wallclock": "2026-06-12T03:30:22Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4285.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        }
+      }
+    },
+    {
+      "event_id": "49485739",
+      "time": "2026-06-12T03:30:22Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Czechia.",
+      "provider_wallclock": "2026-06-12T03:30:22Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4285.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "id": "450",
+          "displayName": "Czechia"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49485749",
+      "time": "2026-06-12T03:32:17Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Stepán Chaloupek, Hwang Hee-Chan.",
+      "provider_wallclock": "2026-06-12T03:32:17Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4401.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Stepán Chaloupek"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hwang Hee-Chan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485754",
+      "time": "2026-06-12T03:32:42Z",
+      "type": "ball-touch",
+      "text": "Event: Ball touch. Team: South Korea. Players involved: Lee Kang-In.",
+      "provider_wallclock": "2026-06-12T03:32:42Z",
+      "facts": {
+        "type": {
+          "id": "177",
+          "text": "Ball touch",
+          "type": "ball-touch"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4425.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Kang-In"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485755",
+      "time": "2026-06-12T03:32:42Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Ladislav Krejcí, Lee Kang-In.",
+      "provider_wallclock": "2026-06-12T03:32:42Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4425.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ladislav Krejcí"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Kang-In"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485787",
+      "time": "2026-06-12T03:34:42Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Korea. Players involved: Lee Han-Beom, Adam Hlozek.",
+      "provider_wallclock": "2026-06-12T03:34:42Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4545.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Han-Beom"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Adam Hlozek"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485788",
+      "time": "2026-06-12T03:35:47Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Czechia. Players involved: Michal Sadílek.",
+      "provider_wallclock": "2026-06-12T03:35:47Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4610.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Michal Sadílek"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485808",
+      "time": "2026-06-12T03:38:21Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: South Korea. Players involved: Oh Hyeon-Gyu, Hwang In-Beom.",
+      "provider_wallclock": "2026-06-12T03:38:21Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4764.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Oh Hyeon-Gyu"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hwang In-Beom"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485828",
+      "time": "2026-06-12T03:40:49Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Czechia. Players involved: Adam Hlozek.",
+      "provider_wallclock": "2026-06-12T03:40:49Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4912.0",
+          "displayValue": "82'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Adam Hlozek"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485827",
+      "time": "2026-06-12T03:40:50Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Czechia.",
+      "provider_wallclock": "2026-06-12T03:40:50Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4914.0",
+          "displayValue": "82'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        }
+      }
+    },
+    {
+      "event_id": "49485830",
+      "time": "2026-06-12T03:41:21Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Tomás Chorý, Paik Seung-Ho.",
+      "provider_wallclock": "2026-06-12T03:41:21Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4945.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tomás Chorý"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Paik Seung-Ho"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485836",
+      "time": "2026-06-12T03:42:25Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: South Korea. Players involved: Kim Jin-Gyu, Hwang In-Beom.",
+      "provider_wallclock": "2026-06-12T03:42:25Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5008.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kim Jin-Gyu"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Hwang In-Beom"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485837",
+      "time": "2026-06-12T03:42:31Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: South Korea. Players involved: Park Jin-Seop, Paik Seung-Ho.",
+      "provider_wallclock": "2026-06-12T03:42:31Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5014.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Park Jin-Seop"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Paik Seung-Ho"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485841",
+      "time": "2026-06-12T03:42:56Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Czechia. Players involved: Mojmír Chytil, Alexandr Sojka.",
+      "provider_wallclock": "2026-06-12T03:42:56Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5039.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mojmír Chytil"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alexandr Sojka"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485854",
+      "time": "2026-06-12T03:43:33Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Korea. Players involved: Lee Han-Beom, Tomás Chorý.",
+      "provider_wallclock": "2026-06-12T03:43:33Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5076.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Han-Beom"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tomás Chorý"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485896",
+      "time": "2026-06-12T03:46:06Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Czechia. Players involved: Michal Sadílek.",
+      "provider_wallclock": "2026-06-12T03:46:06Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5229.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Michal Sadílek"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485949",
+      "time": "2026-06-12T03:49:36Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Robin Hranác, Lee Kang-In.",
+      "provider_wallclock": "2026-06-12T03:49:36Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+1'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Robin Hranác"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lee Kang-In"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485955",
+      "time": "2026-06-12T03:50:27Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Mojmír Chytil, Kim Min-Jae.",
+      "provider_wallclock": "2026-06-12T03:50:27Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mojmír Chytil"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Kim Min-Jae"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485968",
+      "time": "2026-06-12T03:51:39Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Czechia. Players involved: Michal Sadílek, Mojmír Chytil.",
+      "provider_wallclock": "2026-06-12T03:51:39Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Michal Sadílek"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mojmír Chytil"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485982",
+      "time": "2026-06-12T03:52:19Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: South Korea. Players involved: Kim Jin-Gyu, Oh Hyeon-Gyu.",
+      "provider_wallclock": "2026-06-12T03:52:19Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kim Jin-Gyu"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Oh Hyeon-Gyu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49485992",
+      "time": "2026-06-12T03:52:42Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Czechia. Players involved: Adam Hlozek.",
+      "provider_wallclock": "2026-06-12T03:52:42Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Adam Hlozek"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486000",
+      "time": "2026-06-12T03:53:29Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Czechia. Players involved: Tomás Chorý, Kim Jin-Gyu.",
+      "provider_wallclock": "2026-06-12T03:53:29Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+5'"
+        },
+        "team": {
+          "displayName": "Czechia"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tomás Chorý"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Kim Jin-Gyu"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486016",
+      "time": "2026-06-12T03:54:35Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Korea. Players involved: Lee Gi-Hyuk, Ladislav Krejcí.",
+      "provider_wallclock": "2026-06-12T03:54:35Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+6'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Gi-Hyuk"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ladislav Krejcí"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486017",
+      "time": "2026-06-12T03:54:37Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: South Korea. Players involved: Lee Gi-Hyuk.",
+      "provider_wallclock": "2026-06-12T03:54:37Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+6'"
+        },
+        "team": {
+          "displayName": "South Korea"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lee Gi-Hyuk"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486027",
+      "time": "2026-06-12T03:57:03Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-12T03:57:03Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+7'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 8
+  }
+}

@@ -1,0 +1,2349 @@
+{
+  "fixture_id": "espn:760432",
+  "espn_event_id": "760432",
+  "kickoff": "2026-06-16T19:00:00Z",
+  "target_end_exclusive": "2026-06-16T21:03:57Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760432",
+    "source_body_sha256": "a8600f41f80ac8e815c7aa190ec29c452215c661112be28ac7c8e5809f59331b",
+    "captured_at_utc": "2026-09-24T22:46:50.773883Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49531066",
+      "time": "2026-06-16T19:02:52Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-16T19:02:52Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        }
+      }
+    },
+    {
+      "event_id": "49531089",
+      "time": "2026-06-16T19:03:58Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Senegal.",
+      "provider_wallclock": "2026-06-16T19:03:58Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "65.0",
+          "displayValue": "2'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        }
+      }
+    },
+    {
+      "event_id": "49531093",
+      "time": "2026-06-16T19:04:56Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Senegal. Players involved: Nicolas Jackson, Mike Maignan.",
+      "provider_wallclock": "2026-06-16T19:04:56Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "124.0",
+          "displayValue": "3'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nicolas Jackson"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mike Maignan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531114",
+      "time": "2026-06-16T19:06:25Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: France. Players involved: Adrien Rabiot, Sadio Mané.",
+      "provider_wallclock": "2026-06-16T19:06:25Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "212.0",
+          "displayValue": "4'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Adrien Rabiot"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sadio Mané"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531168",
+      "time": "2026-06-16T19:09:29Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Senegal. Players involved: Ismaïla Sarr, Nicolas Jackson.",
+      "provider_wallclock": "2026-06-16T19:09:29Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "397.0",
+          "displayValue": "7'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ismaïla Sarr"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nicolas Jackson"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531191",
+      "time": "2026-06-16T19:10:28Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Senegal. Players involved: Ismaïla Sarr.",
+      "provider_wallclock": "2026-06-16T19:10:28Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "456.0",
+          "displayValue": "8'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ismaïla Sarr"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531322",
+      "time": "2026-06-16T19:16:59Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Senegal. Players involved: Idrissa Gueye, Désiré Doué.",
+      "provider_wallclock": "2026-06-16T19:16:59Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "846.0",
+          "displayValue": "15'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Idrissa Gueye"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Désiré Doué"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531397",
+      "time": "2026-06-16T19:20:55Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: France. Players involved: Ousmane Dembélé, Michael Olise.",
+      "provider_wallclock": "2026-06-16T19:20:55Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1083.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ousmane Dembélé"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Michael Olise"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531433",
+      "time": "2026-06-16T19:23:06Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: France.",
+      "provider_wallclock": "2026-06-16T19:23:06Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1214.0",
+          "displayValue": "21'"
+        },
+        "team": {
+          "displayName": "France"
+        }
+      }
+    },
+    {
+      "event_id": "49531441",
+      "time": "2026-06-16T19:24:05Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: France. Players involved: Dayot Upamecano, Sadio Mané.",
+      "provider_wallclock": "2026-06-16T19:24:05Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1272.0",
+          "displayValue": "22'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Dayot Upamecano"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sadio Mané"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531465",
+      "time": "2026-06-16T19:25:14Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: France.",
+      "provider_wallclock": "2026-06-16T19:25:14Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1342.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "France"
+        }
+      }
+    },
+    {
+      "event_id": "49531507",
+      "time": "2026-06-16T19:27:21Z",
+      "type": "shot-hit-woodwork",
+      "text": "Event: Shot Hit Woodwork. Team: Senegal. Players involved: Nicolas Jackson, El Hadji Malick Diouf.",
+      "provider_wallclock": "2026-06-16T19:27:21Z",
+      "facts": {
+        "type": {
+          "id": "136",
+          "text": "Shot Hit Woodwork",
+          "type": "shot-hit-woodwork"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1468.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nicolas Jackson"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "El Hadji Malick Diouf"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531506",
+      "time": "2026-06-16T19:27:24Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Senegal.",
+      "provider_wallclock": "2026-06-16T19:27:24Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1472.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        }
+      }
+    },
+    {
+      "event_id": "49531513",
+      "time": "2026-06-16T19:28:34Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: France.",
+      "provider_wallclock": "2026-06-16T19:28:34Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1542.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "displayName": "France"
+        }
+      }
+    },
+    {
+      "event_id": "49531512",
+      "time": "2026-06-16T19:28:35Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Senegal.",
+      "provider_wallclock": "2026-06-16T19:28:35Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1542.0",
+          "displayValue": "26'"
+        },
+        "team": {
+          "id": "654",
+          "displayName": "Senegal"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49531519",
+      "time": "2026-06-16T19:31:55Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: France.",
+      "provider_wallclock": "2026-06-16T19:31:55Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1743.0",
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "France"
+        }
+      }
+    },
+    {
+      "event_id": "49531518",
+      "time": "2026-06-16T19:31:56Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Senegal.",
+      "provider_wallclock": "2026-06-16T19:31:56Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1743.0",
+          "displayValue": "30'"
+        },
+        "team": {
+          "id": "654",
+          "displayName": "Senegal"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49531525",
+      "time": "2026-06-16T19:32:49Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Senegal. Players involved: Lamine Camara, Ousmane Dembélé.",
+      "provider_wallclock": "2026-06-16T19:32:49Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1796.0",
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lamine Camara"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ousmane Dembélé"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531540",
+      "time": "2026-06-16T19:33:13Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Senegal. Players involved: Ismaïla Sarr, Nicolas Jackson.",
+      "provider_wallclock": "2026-06-16T19:33:13Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1821.0",
+          "displayValue": "31'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ismaïla Sarr"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nicolas Jackson"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531558",
+      "time": "2026-06-16T19:34:09Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: France. Players involved: Jules Koundé, Sadio Mané.",
+      "provider_wallclock": "2026-06-16T19:34:09Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1877.0",
+          "displayValue": "32'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jules Koundé"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sadio Mané"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531702",
+      "time": "2026-06-16T19:42:20Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Senegal. Players involved: Sadio Mané, Ismaïla Sarr.",
+      "provider_wallclock": "2026-06-16T19:42:20Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2368.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sadio Mané"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ismaïla Sarr"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531714",
+      "time": "2026-06-16T19:42:46Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: France.",
+      "provider_wallclock": "2026-06-16T19:42:46Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2393.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "id": "478",
+          "displayName": "France"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49531715",
+      "time": "2026-06-16T19:42:46Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Senegal.",
+      "provider_wallclock": "2026-06-16T19:42:46Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2393.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        }
+      }
+    },
+    {
+      "event_id": "49531716",
+      "time": "2026-06-16T19:44:20Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: France.",
+      "provider_wallclock": "2026-06-16T19:44:20Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2488.0",
+          "displayValue": "42'"
+        },
+        "team": {
+          "id": "478",
+          "displayName": "France"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49531717",
+      "time": "2026-06-16T19:44:20Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Senegal.",
+      "provider_wallclock": "2026-06-16T19:44:20Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2488.0",
+          "displayValue": "42'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        }
+      }
+    },
+    {
+      "event_id": "49531729",
+      "time": "2026-06-16T19:45:00Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Senegal. Players involved: Pape Gueye.",
+      "provider_wallclock": "2026-06-16T19:45:00Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2528.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Pape Gueye"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531751",
+      "time": "2026-06-16T19:46:39Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: France.",
+      "provider_wallclock": "2026-06-16T19:46:39Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2627.0",
+          "displayValue": "44'"
+        },
+        "team": {
+          "displayName": "France"
+        }
+      }
+    },
+    {
+      "event_id": "49531884",
+      "time": "2026-06-16T19:53:50Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Senegal. Players involved: Ismaïla Sarr.",
+      "provider_wallclock": "2026-06-16T19:53:50Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+6'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ismaïla Sarr"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531885",
+      "time": "2026-06-16T19:54:05Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-16T19:54:05Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+7'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49531890",
+      "time": "2026-06-16T20:09:17Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-16T20:09:17Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        }
+      }
+    },
+    {
+      "event_id": "49531900",
+      "time": "2026-06-16T20:09:43Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Senegal. Players involved: Lamine Camara, Michael Olise.",
+      "provider_wallclock": "2026-06-16T20:09:43Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2725.0",
+          "displayValue": "46'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lamine Camara"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Michael Olise"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531934",
+      "time": "2026-06-16T20:11:11Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: France. Players involved: Désiré Doué, Dayot Upamecano.",
+      "provider_wallclock": "2026-06-16T20:11:11Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2813.0",
+          "displayValue": "47'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Désiré Doué"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Dayot Upamecano"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531945",
+      "time": "2026-06-16T20:12:05Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Senegal. Players involved: Nicolas Jackson, Dayot Upamecano.",
+      "provider_wallclock": "2026-06-16T20:12:05Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2867.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nicolas Jackson"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Dayot Upamecano"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49531971",
+      "time": "2026-06-16T20:13:25Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: France. Players involved: Dayot Upamecano.",
+      "provider_wallclock": "2026-06-16T20:13:25Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2948.0",
+          "displayValue": "50'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Dayot Upamecano"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532028",
+      "time": "2026-06-16T20:16:40Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: France. Players involved: Michael Olise, Jules Koundé.",
+      "provider_wallclock": "2026-06-16T20:16:40Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3143.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Michael Olise"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jules Koundé"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532029",
+      "time": "2026-06-16T20:16:42Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: France.",
+      "provider_wallclock": "2026-06-16T20:16:42Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3144.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "France"
+        }
+      }
+    },
+    {
+      "event_id": "49532102",
+      "time": "2026-06-16T20:20:27Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: France. Players involved: Kylian Mbappé, Michael Olise.",
+      "provider_wallclock": "2026-06-16T20:20:27Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3369.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kylian Mbappé"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Michael Olise"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532100",
+      "time": "2026-06-16T20:20:48Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: France.",
+      "provider_wallclock": "2026-06-16T20:20:48Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3391.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "France"
+        }
+      }
+    },
+    {
+      "event_id": "49532121",
+      "time": "2026-06-16T20:23:46Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: France.",
+      "provider_wallclock": "2026-06-16T20:23:46Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3568.0",
+          "displayValue": "60'"
+        },
+        "team": {
+          "id": "478",
+          "displayName": "France"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49532122",
+      "time": "2026-06-16T20:23:46Z",
+      "type": "var---referee-decision-confirmed",
+      "text": "Event: VAR - Referee decision confirmed. Team: France. Players involved: Kylian Mbappé.",
+      "provider_wallclock": "2026-06-16T20:23:46Z",
+      "facts": {
+        "type": {
+          "id": "171",
+          "text": "VAR - Referee decision confirmed",
+          "type": "var---referee-decision-confirmed"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3568.0",
+          "displayValue": "60'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kylian Mbappé"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532123",
+      "time": "2026-06-16T20:25:02Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: France.",
+      "provider_wallclock": "2026-06-16T20:25:02Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3644.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "id": "478",
+          "displayName": "France"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49532189",
+      "time": "2026-06-16T20:29:12Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: France. Players involved: Theo Hernández, Désiré Doué.",
+      "provider_wallclock": "2026-06-16T20:29:12Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3895.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Theo Hernández"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Désiré Doué"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532203",
+      "time": "2026-06-16T20:29:49Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: France. Players involved: Kylian Mbappé, Michael Olise.",
+      "provider_wallclock": "2026-06-16T20:29:49Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3931.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kylian Mbappé"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Michael Olise"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532220",
+      "time": "2026-06-16T20:31:31Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Senegal. Players involved: Krépin Diatta.",
+      "provider_wallclock": "2026-06-16T20:31:31Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4034.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Krépin Diatta"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532221",
+      "time": "2026-06-16T20:32:17Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: France.",
+      "provider_wallclock": "2026-06-16T20:32:17Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4079.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "France"
+        }
+      }
+    },
+    {
+      "event_id": "49532222",
+      "time": "2026-06-16T20:32:17Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Senegal.",
+      "provider_wallclock": "2026-06-16T20:32:17Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4079.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "id": "654",
+          "displayName": "Senegal"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49532223",
+      "time": "2026-06-16T20:35:08Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Senegal.",
+      "provider_wallclock": "2026-06-16T20:35:08Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4250.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "id": "654",
+          "displayName": "Senegal"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49532224",
+      "time": "2026-06-16T20:35:08Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: France.",
+      "provider_wallclock": "2026-06-16T20:35:08Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4250.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "displayName": "France"
+        }
+      }
+    },
+    {
+      "event_id": "49532231",
+      "time": "2026-06-16T20:35:35Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: France. Players involved: Michael Olise.",
+      "provider_wallclock": "2026-06-16T20:35:35Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4277.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Michael Olise"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532246",
+      "time": "2026-06-16T20:36:31Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Senegal.",
+      "provider_wallclock": "2026-06-16T20:36:31Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4333.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        }
+      }
+    },
+    {
+      "event_id": "49532254",
+      "time": "2026-06-16T20:37:55Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: France. Players involved: Désiré Doué, Adrien Rabiot.",
+      "provider_wallclock": "2026-06-16T20:37:55Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4417.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Désiré Doué"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Adrien Rabiot"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532253",
+      "time": "2026-06-16T20:37:56Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: France.",
+      "provider_wallclock": "2026-06-16T20:37:56Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4418.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "France"
+        }
+      }
+    },
+    {
+      "event_id": "49532273",
+      "time": "2026-06-16T20:39:16Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Senegal. Players involved: Ibrahim Mbaye, Ismaïla Sarr.",
+      "provider_wallclock": "2026-06-16T20:39:16Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4498.0",
+          "displayValue": "75'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ibrahim Mbaye"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ismaïla Sarr"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532274",
+      "time": "2026-06-16T20:39:27Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Senegal. Players involved: Habib Diarra, Lamine Camara.",
+      "provider_wallclock": "2026-06-16T20:39:27Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4509.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Habib Diarra"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lamine Camara"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532294",
+      "time": "2026-06-16T20:40:35Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: France. Players involved: Kylian Mbappé, Habib Diarra.",
+      "provider_wallclock": "2026-06-16T20:40:35Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4577.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kylian Mbappé"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Habib Diarra"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532302",
+      "time": "2026-06-16T20:41:15Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Senegal. Players involved: Habib Diarra, Kylian Mbappé.",
+      "provider_wallclock": "2026-06-16T20:41:15Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4617.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Habib Diarra"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Kylian Mbappé"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532304",
+      "time": "2026-06-16T20:41:15Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Senegal. Players involved: Habib Diarra, Kylian Mbappé.",
+      "provider_wallclock": "2026-06-16T20:41:15Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4617.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Habib Diarra"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Kylian Mbappé"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532333",
+      "time": "2026-06-16T20:43:08Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Senegal. Players involved: El Hadji Malick Diouf.",
+      "provider_wallclock": "2026-06-16T20:43:08Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4730.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "El Hadji Malick Diouf"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532335",
+      "time": "2026-06-16T20:43:43Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: France. Players involved: Bradley Barcola, Ousmane Dembélé.",
+      "provider_wallclock": "2026-06-16T20:43:43Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4765.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Bradley Barcola"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ousmane Dembélé"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532382",
+      "time": "2026-06-16T20:45:54Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: France. Players involved: Bradley Barcola, Adrien Rabiot.",
+      "provider_wallclock": "2026-06-16T20:45:54Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4896.0",
+          "displayValue": "82'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Bradley Barcola"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Adrien Rabiot"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532384",
+      "time": "2026-06-16T20:47:03Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Senegal. Players involved: Iliman Ndiaye, Pape Gueye.",
+      "provider_wallclock": "2026-06-16T20:47:03Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4965.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Iliman Ndiaye"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Pape Gueye"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532385",
+      "time": "2026-06-16T20:47:10Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Senegal. Players involved: Bamba Dieng, Nicolas Jackson.",
+      "provider_wallclock": "2026-06-16T20:47:10Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4972.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Bamba Dieng"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Nicolas Jackson"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532415",
+      "time": "2026-06-16T20:49:15Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: France. Players involved: Kylian Mbappé, Michael Olise.",
+      "provider_wallclock": "2026-06-16T20:49:15Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5097.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kylian Mbappé"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Michael Olise"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532443",
+      "time": "2026-06-16T20:50:49Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: France. Players involved: Rayan Cherki, Désiré Doué.",
+      "provider_wallclock": "2026-06-16T20:50:49Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5191.0",
+          "displayValue": "87'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Rayan Cherki"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Désiré Doué"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532463",
+      "time": "2026-06-16T20:51:52Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Senegal. Players involved: Pathé Ciss, Idrissa Gueye.",
+      "provider_wallclock": "2026-06-16T20:51:52Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5254.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Pathé Ciss"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Idrissa Gueye"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532486",
+      "time": "2026-06-16T20:53:22Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Senegal.",
+      "provider_wallclock": "2026-06-16T20:53:22Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5344.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        }
+      }
+    },
+    {
+      "event_id": "49532537",
+      "time": "2026-06-16T20:55:54Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Senegal. Players involved: Habib Diarra, Michael Olise.",
+      "provider_wallclock": "2026-06-16T20:55:54Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Habib Diarra"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Michael Olise"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532554",
+      "time": "2026-06-16T20:56:45Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Senegal. Players involved: El Hadji Malick Diouf, Rayan Cherki.",
+      "provider_wallclock": "2026-06-16T20:56:45Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "El Hadji Malick Diouf"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Rayan Cherki"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532591",
+      "time": "2026-06-16T20:58:48Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Senegal. Players involved: Ibrahim Mbaye, Iliman Ndiaye.",
+      "provider_wallclock": "2026-06-16T20:58:48Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+5'"
+        },
+        "team": {
+          "displayName": "Senegal"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ibrahim Mbaye"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Iliman Ndiaye"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532600",
+      "time": "2026-06-16T20:59:56Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: France. Players involved: Kylian Mbappé.",
+      "provider_wallclock": "2026-06-16T20:59:56Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+6'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kylian Mbappé"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532612",
+      "time": "2026-06-16T21:01:21Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: France. Players involved: Kylian Mbappé, Moussa Niakhaté.",
+      "provider_wallclock": "2026-06-16T21:01:21Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+8'"
+        },
+        "team": {
+          "displayName": "France"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kylian Mbappé"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Moussa Niakhaté"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49532634",
+      "time": "2026-06-16T21:02:26Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Senegal.",
+      "provider_wallclock": "2026-06-16T21:02:26Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+9'"
+        },
+        "team": {
+          "id": "654",
+          "displayName": "Senegal"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49532636",
+      "time": "2026-06-16T21:02:26Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: France.",
+      "provider_wallclock": "2026-06-16T21:02:26Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+9'"
+        },
+        "team": {
+          "displayName": "France"
+        }
+      }
+    },
+    {
+      "event_id": "49532637",
+      "time": "2026-06-16T21:03:03Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: France.",
+      "provider_wallclock": "2026-06-16T21:03:03Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+9'"
+        },
+        "team": {
+          "displayName": "France"
+        }
+      }
+    },
+    {
+      "event_id": "49532638",
+      "time": "2026-06-16T21:03:03Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Senegal.",
+      "provider_wallclock": "2026-06-16T21:03:03Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+9'"
+        },
+        "team": {
+          "id": "654",
+          "displayName": "Senegal"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49532651",
+      "time": "2026-06-16T21:03:57Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-16T21:03:57Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+10'"
+        }
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 5
+  }
+}

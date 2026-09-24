@@ -1,0 +1,2902 @@
+{
+  "fixture_id": "espn:760415",
+  "espn_event_id": "760415",
+  "kickoff": "2026-06-11T19:00:00Z",
+  "target_end_exclusive": "2026-06-11T21:03:44Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760415",
+    "source_body_sha256": "21c270748e7b29bae3f1bcd30b21047ac4f3e48186b419e4d89a3d9af4d4e1f7",
+    "captured_at_utc": "2026-09-24T22:46:36.849283Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49483569",
+      "time": "2026-06-11T19:05:57Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-11T19:05:57Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49483420",
+      "time": "2026-06-11T19:08:37Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Africa. Players involved: Aubrey Modiba, Roberto Alvarado.",
+      "provider_wallclock": "2026-06-11T19:08:37Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "161.0",
+          "displayValue": "3'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aubrey Modiba"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Roberto Alvarado"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483323",
+      "time": "2026-06-11T19:09:27Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Mexico. Players involved: Brian Gutiérrez.",
+      "provider_wallclock": "2026-06-11T19:09:27Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "210.0",
+          "displayValue": "4'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483329",
+      "time": "2026-06-11T19:10:02Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Mexico. Players involved: Raúl Jiménez, Israel Reyes.",
+      "provider_wallclock": "2026-06-11T19:10:02Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "245.0",
+          "displayValue": "5'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Raúl Jiménez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Israel Reyes"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483421",
+      "time": "2026-06-11T19:10:03Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Mexico.",
+      "provider_wallclock": "2026-06-11T19:10:03Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "246.0",
+          "displayValue": "5'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        }
+      }
+    },
+    {
+      "event_id": "49483413",
+      "time": "2026-06-11T19:14:29Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Mexico. Players involved: Julián Quiñones, Érik Lira.",
+      "provider_wallclock": "2026-06-11T19:14:29Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "513.0",
+          "displayValue": "9'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Julián Quiñones"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Érik Lira"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483581",
+      "time": "2026-06-11T19:15:48Z",
+      "type": "handball",
+      "text": "Event: Handball. Team: Mexico. Players involved: Raúl Jiménez.",
+      "provider_wallclock": "2026-06-11T19:15:48Z",
+      "facts": {
+        "type": {
+          "id": "122",
+          "text": "Handball",
+          "type": "handball"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "592.0",
+          "displayValue": "10'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Raúl Jiménez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483474",
+      "time": "2026-06-11T19:16:06Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Africa. Players involved: Khuliso Mudau, Julián Quiñones.",
+      "provider_wallclock": "2026-06-11T19:16:06Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "609.0",
+          "displayValue": "11'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Khuliso Mudau"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Julián Quiñones"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483491",
+      "time": "2026-06-11T19:17:55Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Mexico.",
+      "provider_wallclock": "2026-06-11T19:17:55Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "718.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        }
+      }
+    },
+    {
+      "event_id": "49483495",
+      "time": "2026-06-11T19:18:28Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Mexico. Players involved: Raúl Jiménez, Roberto Alvarado.",
+      "provider_wallclock": "2026-06-11T19:18:28Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "752.0",
+          "displayValue": "13'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Raúl Jiménez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Roberto Alvarado"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483518",
+      "time": "2026-06-11T19:20:19Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Africa. Players involved: Sphephelo Sithole, Álvaro Fidalgo.",
+      "provider_wallclock": "2026-06-11T19:20:19Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "862.0",
+          "displayValue": "15'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sphephelo Sithole"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Álvaro Fidalgo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483525",
+      "time": "2026-06-11T19:21:14Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: Brian Gutiérrez, Mbekezeli Mbokazi.",
+      "provider_wallclock": "2026-06-11T19:21:14Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "917.0",
+          "displayValue": "16'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mbekezeli Mbokazi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483540",
+      "time": "2026-06-11T19:22:15Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Africa. Players involved: Teboho Mokoena, Álvaro Fidalgo.",
+      "provider_wallclock": "2026-06-11T19:22:15Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "978.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Teboho Mokoena"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Álvaro Fidalgo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483541",
+      "time": "2026-06-11T19:22:18Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: South Africa. Players involved: Teboho Mokoena.",
+      "provider_wallclock": "2026-06-11T19:22:18Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "981.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Teboho Mokoena"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483379",
+      "time": "2026-06-11T19:24:56Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Mexico. Players involved: Julián Quiñones, Israel Reyes.",
+      "provider_wallclock": "2026-06-11T19:24:56Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1139.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Julián Quiñones"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Israel Reyes"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483384",
+      "time": "2026-06-11T19:25:39Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: César Montes, Lyle Foster.",
+      "provider_wallclock": "2026-06-11T19:25:39Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1183.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "César Montes"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lyle Foster"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483387",
+      "time": "2026-06-11T19:25:39Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: César Montes, Lyle Foster.",
+      "provider_wallclock": "2026-06-11T19:25:39Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1183.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "César Montes"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lyle Foster"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483407",
+      "time": "2026-06-11T19:26:31Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Africa. Players involved: Khuliso Mudau, César Montes.",
+      "provider_wallclock": "2026-06-11T19:26:31Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1235.0",
+          "displayValue": "21'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Khuliso Mudau"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "César Montes"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483584",
+      "time": "2026-06-11T19:28:25Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: Brian Gutiérrez, Teboho Mokoena.",
+      "provider_wallclock": "2026-06-11T19:28:25Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1348.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Teboho Mokoena"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483588",
+      "time": "2026-06-11T19:28:25Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: Brian Gutiérrez, Teboho Mokoena.",
+      "provider_wallclock": "2026-06-11T19:28:25Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1348.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Teboho Mokoena"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483587",
+      "time": "2026-06-11T19:28:33Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Mexico. Players involved: Brian Gutiérrez.",
+      "provider_wallclock": "2026-06-11T19:28:33Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1356.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483601",
+      "time": "2026-06-11T19:30:11Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Mexico.",
+      "provider_wallclock": "2026-06-11T19:30:11Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1455.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        }
+      }
+    },
+    {
+      "event_id": "49483602",
+      "time": "2026-06-11T19:30:12Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: South Africa.",
+      "provider_wallclock": "2026-06-11T19:30:12Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1455.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "id": "467",
+          "displayName": "South Africa"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49483603",
+      "time": "2026-06-11T19:32:50Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Mexico.",
+      "provider_wallclock": "2026-06-11T19:32:50Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1613.0",
+          "displayValue": "27'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        }
+      }
+    },
+    {
+      "event_id": "49483604",
+      "time": "2026-06-11T19:32:51Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: South Africa.",
+      "provider_wallclock": "2026-06-11T19:32:51Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1613.0",
+          "displayValue": "27'"
+        },
+        "team": {
+          "id": "467",
+          "displayName": "South Africa"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49483651",
+      "time": "2026-06-11T19:35:05Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Mexico. Players involved: Brian Gutiérrez, Julián Quiñones.",
+      "provider_wallclock": "2026-06-11T19:35:05Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1748.0",
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Julián Quiñones"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483695",
+      "time": "2026-06-11T19:37:50Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: South Africa. Players involved: Mbekezeli Mbokazi.",
+      "provider_wallclock": "2026-06-11T19:37:50Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1913.0",
+          "displayValue": "32'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mbekezeli Mbokazi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483762",
+      "time": "2026-06-11T19:42:56Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: South Africa. Players involved: Lyle Foster, Mbekezeli Mbokazi.",
+      "provider_wallclock": "2026-06-11T19:42:56Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2219.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Lyle Foster"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mbekezeli Mbokazi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483790",
+      "time": "2026-06-11T19:44:38Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Africa. Players involved: Sphephelo Sithole, Érik Lira.",
+      "provider_wallclock": "2026-06-11T19:44:38Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2321.0",
+          "displayValue": "39'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sphephelo Sithole"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Érik Lira"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483864",
+      "time": "2026-06-11T19:47:45Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Mexico. Players involved: Julián Quiñones, Álvaro Fidalgo.",
+      "provider_wallclock": "2026-06-11T19:47:45Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2508.0",
+          "displayValue": "42'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Julián Quiñones"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Álvaro Fidalgo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483871",
+      "time": "2026-06-11T19:47:51Z",
+      "type": "shot-hit-woodwork",
+      "text": "Event: Shot Hit Woodwork. Team: Mexico. Players involved: Julián Quiñones, Brian Gutiérrez.",
+      "provider_wallclock": "2026-06-11T19:47:51Z",
+      "facts": {
+        "type": {
+          "id": "136",
+          "text": "Shot Hit Woodwork",
+          "type": "shot-hit-woodwork"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2514.0",
+          "displayValue": "42'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Julián Quiñones"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483861",
+      "time": "2026-06-11T19:48:00Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: Roberto Alvarado, Mbekezeli Mbokazi.",
+      "provider_wallclock": "2026-06-11T19:48:00Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2523.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Roberto Alvarado"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mbekezeli Mbokazi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483863",
+      "time": "2026-06-11T19:48:00Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: Roberto Alvarado, Mbekezeli Mbokazi.",
+      "provider_wallclock": "2026-06-11T19:48:00Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2523.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Roberto Alvarado"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mbekezeli Mbokazi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483892",
+      "time": "2026-06-11T19:49:23Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: South Africa.",
+      "provider_wallclock": "2026-06-11T19:49:23Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2606.0",
+          "displayValue": "44'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        }
+      }
+    },
+    {
+      "event_id": "49483898",
+      "time": "2026-06-11T19:50:08Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: South Africa. Players involved: Mbekezeli Mbokazi.",
+      "provider_wallclock": "2026-06-11T19:50:08Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2652.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mbekezeli Mbokazi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483928",
+      "time": "2026-06-11T19:52:18Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Mexico. Players involved: Jesús Gallardo, Raúl Jiménez.",
+      "provider_wallclock": "2026-06-11T19:52:18Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+2'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jesús Gallardo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Raúl Jiménez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483955",
+      "time": "2026-06-11T19:54:01Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Mexico. Players involved: Brian Gutiérrez, Julián Quiñones.",
+      "provider_wallclock": "2026-06-11T19:54:01Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Julián Quiñones"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49483962",
+      "time": "2026-06-11T19:54:57Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-11T19:54:57Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        }
+      }
+    },
+    {
+      "event_id": "49483976",
+      "time": "2026-06-11T20:11:30Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-11T20:11:30Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        }
+      }
+    },
+    {
+      "event_id": "49483984",
+      "time": "2026-06-11T20:12:06Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Mexico. Players involved: Brian Gutiérrez.",
+      "provider_wallclock": "2026-06-11T20:12:06Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2735.0",
+          "displayValue": "46'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484010",
+      "time": "2026-06-11T20:13:51Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Mexico. Players involved: Julián Quiñones, Raúl Jiménez.",
+      "provider_wallclock": "2026-06-11T20:13:51Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2840.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Julián Quiñones"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Raúl Jiménez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484042",
+      "time": "2026-06-11T20:15:27Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Africa. Players involved: Sphephelo Sithole, Brian Gutiérrez.",
+      "provider_wallclock": "2026-06-11T20:15:27Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2936.0",
+          "displayValue": "49'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sphephelo Sithole"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484043",
+      "time": "2026-06-11T20:15:31Z",
+      "type": "red-card",
+      "text": "Event: Red Card. Team: South Africa. Players involved: Sphephelo Sithole.",
+      "provider_wallclock": "2026-06-11T20:15:31Z",
+      "facts": {
+        "type": {
+          "id": "93",
+          "text": "Red Card",
+          "type": "red-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2940.0",
+          "displayValue": "49'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sphephelo Sithole"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484051",
+      "time": "2026-06-11T20:17:37Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Mexico. Players involved: Raúl Jiménez.",
+      "provider_wallclock": "2026-06-11T20:17:37Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3066.0",
+          "displayValue": "52'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Raúl Jiménez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484048",
+      "time": "2026-06-11T20:17:40Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Mexico. Players involved: Jesús Gallardo, Brian Gutiérrez.",
+      "provider_wallclock": "2026-06-11T20:17:40Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3070.0",
+          "displayValue": "52'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jesús Gallardo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484063",
+      "time": "2026-06-11T20:18:34Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Mexico.",
+      "provider_wallclock": "2026-06-11T20:18:34Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3123.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        }
+      }
+    },
+    {
+      "event_id": "49484104",
+      "time": "2026-06-11T20:21:30Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: South Africa. Players involved: Aubrey Modiba, Teboho Mokoena.",
+      "provider_wallclock": "2026-06-11T20:21:30Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3300.0",
+          "displayValue": "55'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aubrey Modiba"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Teboho Mokoena"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484117",
+      "time": "2026-06-11T20:22:26Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: South Africa. Players involved: Thalente Mbatha, Lyle Foster.",
+      "provider_wallclock": "2026-06-11T20:22:26Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3356.0",
+          "displayValue": "56'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Thalente Mbatha"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Lyle Foster"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484135",
+      "time": "2026-06-11T20:23:21Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Africa. Players involved: Aubrey Modiba, Érik Lira.",
+      "provider_wallclock": "2026-06-11T20:23:21Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3410.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Aubrey Modiba"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Érik Lira"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484145",
+      "time": "2026-06-11T20:24:24Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Mexico. Players involved: Israel Reyes, Brian Gutiérrez.",
+      "provider_wallclock": "2026-06-11T20:24:24Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3473.0",
+          "displayValue": "58'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Israel Reyes"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484185",
+      "time": "2026-06-11T20:27:07Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: Roberto Alvarado, Aubrey Modiba.",
+      "provider_wallclock": "2026-06-11T20:27:07Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3636.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Roberto Alvarado"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Aubrey Modiba"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484186",
+      "time": "2026-06-11T20:27:28Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: South Africa. Players involved: Themba Zwane, Jayden Adams.",
+      "provider_wallclock": "2026-06-11T20:27:28Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3657.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Themba Zwane"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jayden Adams"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484210",
+      "time": "2026-06-11T20:28:58Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: Julián Quiñones, Khuliso Mudau.",
+      "provider_wallclock": "2026-06-11T20:28:58Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3747.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Julián Quiñones"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Khuliso Mudau"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484243",
+      "time": "2026-06-11T20:31:59Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Mexico. Players involved: Luis Chávez, Brian Gutiérrez.",
+      "provider_wallclock": "2026-06-11T20:31:59Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3928.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Luis Chávez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Brian Gutiérrez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484244",
+      "time": "2026-06-11T20:32:03Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Mexico. Players involved: Gilberto Mora, Álvaro Fidalgo.",
+      "provider_wallclock": "2026-06-11T20:32:03Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3932.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gilberto Mora"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Álvaro Fidalgo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484266",
+      "time": "2026-06-11T20:33:07Z",
+      "type": "goal---header",
+      "text": "Event: Goal - Header. Team: Mexico. Players involved: Raúl Jiménez, Roberto Alvarado.",
+      "provider_wallclock": "2026-06-11T20:33:07Z",
+      "facts": {
+        "type": {
+          "id": "137",
+          "text": "Goal - Header",
+          "type": "goal---header"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3996.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Raúl Jiménez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Roberto Alvarado"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484268",
+      "time": "2026-06-11T20:34:17Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: South Africa.",
+      "provider_wallclock": "2026-06-11T20:34:17Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4066.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "id": "467",
+          "displayName": "South Africa"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484269",
+      "time": "2026-06-11T20:34:17Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Mexico.",
+      "provider_wallclock": "2026-06-11T20:34:17Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4066.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        }
+      }
+    },
+    {
+      "event_id": "49484271",
+      "time": "2026-06-11T20:35:53Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: South Africa.",
+      "provider_wallclock": "2026-06-11T20:35:53Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4162.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "id": "467",
+          "displayName": "South Africa"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484274",
+      "time": "2026-06-11T20:35:53Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Mexico.",
+      "provider_wallclock": "2026-06-11T20:35:53Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4162.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        }
+      }
+    },
+    {
+      "event_id": "49484299",
+      "time": "2026-06-11T20:38:01Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Mexico. Players involved: Julián Quiñones.",
+      "provider_wallclock": "2026-06-11T20:38:01Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4291.0",
+          "displayValue": "72'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Julián Quiñones"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484314",
+      "time": "2026-06-11T20:39:00Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Mexico.",
+      "provider_wallclock": "2026-06-11T20:39:00Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4349.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        }
+      }
+    },
+    {
+      "event_id": "49484313",
+      "time": "2026-06-11T20:39:01Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: South Africa.",
+      "provider_wallclock": "2026-06-11T20:39:01Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4349.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "id": "467",
+          "displayName": "South Africa"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484316",
+      "time": "2026-06-11T20:39:28Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: South Africa.",
+      "provider_wallclock": "2026-06-11T20:39:28Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4377.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "id": "467",
+          "displayName": "South Africa"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484317",
+      "time": "2026-06-11T20:39:28Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Mexico.",
+      "provider_wallclock": "2026-06-11T20:39:28Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4377.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        }
+      }
+    },
+    {
+      "event_id": "49484323",
+      "time": "2026-06-11T20:39:45Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Africa. Players involved: Nkosinathi Sibisi, Julián Quiñones.",
+      "provider_wallclock": "2026-06-11T20:39:45Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4395.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nkosinathi Sibisi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Julián Quiñones"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484324",
+      "time": "2026-06-11T20:39:47Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: South Africa. Players involved: Nkosinathi Sibisi.",
+      "provider_wallclock": "2026-06-11T20:39:47Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4396.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nkosinathi Sibisi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484356",
+      "time": "2026-06-11T20:41:34Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: Luis Chávez, Aubrey Modiba.",
+      "provider_wallclock": "2026-06-11T20:41:34Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4504.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Luis Chávez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Aubrey Modiba"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484359",
+      "time": "2026-06-11T20:42:08Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Mexico. Players involved: Edson Álvarez, Érik Lira.",
+      "provider_wallclock": "2026-06-11T20:42:08Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4537.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Edson Álvarez"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Érik Lira"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484360",
+      "time": "2026-06-11T20:42:17Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Mexico. Players involved: Armando González, Raúl Jiménez.",
+      "provider_wallclock": "2026-06-11T20:42:17Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4547.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Armando González"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Raúl Jiménez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484361",
+      "time": "2026-06-11T20:42:27Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: South Africa. Players involved: Evidence Makgopa, Iqraam Rayners.",
+      "provider_wallclock": "2026-06-11T20:42:27Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4557.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Evidence Makgopa"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Iqraam Rayners"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484362",
+      "time": "2026-06-11T20:42:44Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: South Africa. Players involved: Oswin Appollis, Aubrey Modiba.",
+      "provider_wallclock": "2026-06-11T20:42:44Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4573.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Oswin Appollis"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Aubrey Modiba"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484390",
+      "time": "2026-06-11T20:44:49Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Mexico. Players involved: Alexis Vega, Julián Quiñones.",
+      "provider_wallclock": "2026-06-11T20:44:49Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4698.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alexis Vega"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Julián Quiñones"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484398",
+      "time": "2026-06-11T20:45:28Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: Gilberto Mora, Teboho Mokoena.",
+      "provider_wallclock": "2026-06-11T20:45:28Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4738.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Gilberto Mora"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Teboho Mokoena"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484428",
+      "time": "2026-06-11T20:46:32Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Africa. Players involved: Themba Zwane, Roberto Alvarado.",
+      "provider_wallclock": "2026-06-11T20:46:32Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4801.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Themba Zwane"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Roberto Alvarado"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484421",
+      "time": "2026-06-11T20:46:46Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: South Africa.",
+      "provider_wallclock": "2026-06-11T20:46:46Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4815.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "id": "467",
+          "displayName": "South Africa"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484422",
+      "time": "2026-06-11T20:46:46Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Mexico.",
+      "provider_wallclock": "2026-06-11T20:46:46Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4815.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        }
+      }
+    },
+    {
+      "event_id": "49484423",
+      "time": "2026-06-11T20:47:22Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Mexico.",
+      "provider_wallclock": "2026-06-11T20:47:22Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4852.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        }
+      }
+    },
+    {
+      "event_id": "49484424",
+      "time": "2026-06-11T20:47:23Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: South Africa.",
+      "provider_wallclock": "2026-06-11T20:47:23Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4852.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "id": "467",
+          "displayName": "South Africa"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484426",
+      "time": "2026-06-11T20:48:17Z",
+      "type": "var---referee-decision-cancelled",
+      "text": "Event: VAR - Referee decision cancelled. Team: South Africa. Players involved: Themba Zwane.",
+      "provider_wallclock": "2026-06-11T20:48:17Z",
+      "facts": {
+        "type": {
+          "id": "172",
+          "text": "VAR - Referee decision cancelled",
+          "type": "var---referee-decision-cancelled"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4906.0",
+          "displayValue": "82'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Themba Zwane"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484425",
+      "time": "2026-06-11T20:48:18Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: South Africa.",
+      "provider_wallclock": "2026-06-11T20:48:18Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4906.0",
+          "displayValue": "82'"
+        },
+        "team": {
+          "id": "467",
+          "displayName": "South Africa"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484427",
+      "time": "2026-06-11T20:49:36Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: South Africa.",
+      "provider_wallclock": "2026-06-11T20:49:36Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4985.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "id": "467",
+          "displayName": "South Africa"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49484429",
+      "time": "2026-06-11T20:49:54Z",
+      "type": "red-card",
+      "text": "Event: Red Card. Team: South Africa. Players involved: Themba Zwane.",
+      "provider_wallclock": "2026-06-11T20:49:54Z",
+      "facts": {
+        "type": {
+          "id": "93",
+          "text": "Red Card",
+          "type": "red-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5003.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Themba Zwane"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484505",
+      "time": "2026-06-11T20:54:47Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: Armando González, Mbekezeli Mbokazi.",
+      "provider_wallclock": "2026-06-11T20:54:47Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5296.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Armando González"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mbekezeli Mbokazi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484526",
+      "time": "2026-06-11T20:56:08Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: South Africa. Players involved: Mbekezeli Mbokazi, Edson Álvarez.",
+      "provider_wallclock": "2026-06-11T20:56:08Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5377.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "South Africa"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mbekezeli Mbokazi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Edson Álvarez"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484547",
+      "time": "2026-06-11T20:57:41Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: César Montes, Khuliso Mudau.",
+      "provider_wallclock": "2026-06-11T20:57:41Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "César Montes"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Khuliso Mudau"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484548",
+      "time": "2026-06-11T20:57:57Z",
+      "type": "red-card",
+      "text": "Event: Red Card. Team: Mexico. Players involved: César Montes.",
+      "provider_wallclock": "2026-06-11T20:57:57Z",
+      "facts": {
+        "type": {
+          "id": "93",
+          "text": "Red Card",
+          "type": "red-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "César Montes"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484598",
+      "time": "2026-06-11T21:03:02Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: Jesús Gallardo, Khuliso Mudau.",
+      "provider_wallclock": "2026-06-11T21:03:02Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+7'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jesús Gallardo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Khuliso Mudau"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484600",
+      "time": "2026-06-11T21:03:02Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Mexico. Players involved: Jesús Gallardo, Khuliso Mudau.",
+      "provider_wallclock": "2026-06-11T21:03:02Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+7'"
+        },
+        "team": {
+          "displayName": "Mexico"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jesús Gallardo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Khuliso Mudau"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49484603",
+      "time": "2026-06-11T21:03:44Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-11T21:03:44Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+8'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 6
+  }
+}

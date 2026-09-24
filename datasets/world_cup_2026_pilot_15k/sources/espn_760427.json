@@ -1,0 +1,2954 @@
+{
+  "fixture_id": "espn:760427",
+  "espn_event_id": "760427",
+  "kickoff": "2026-06-16T01:00:00Z",
+  "target_end_exclusive": "2026-06-16T03:03:14Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760427",
+    "source_body_sha256": "d258e8d32249d89d395e46220d6a3bbfba28210efbb5dc2b8995543bcfad6290",
+    "captured_at_utc": "2026-09-24T22:46:50.562236Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49527980",
+      "time": "2026-06-16T01:03:53Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-16T01:03:53Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        }
+      }
+    },
+    {
+      "event_id": "49528036",
+      "time": "2026-06-16T01:06:12Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: New Zealand. Players involved: Joe Bell, Arya Yousefi.",
+      "provider_wallclock": "2026-06-16T01:06:12Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "140.0",
+          "displayValue": "3'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Joe Bell"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Arya Yousefi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49528136",
+      "time": "2026-06-16T01:09:26Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Iran. Players involved: Arya Yousefi, Saman Ghoddos.",
+      "provider_wallclock": "2026-06-16T01:09:26Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "334.0",
+          "displayValue": "6'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Arya Yousefi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Saman Ghoddos"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49528195",
+      "time": "2026-06-16T01:10:36Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: New Zealand. Players involved: Elijah Just, Chris Wood.",
+      "provider_wallclock": "2026-06-16T01:10:36Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "403.0",
+          "displayValue": "7'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Elijah Just"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Chris Wood"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49528343",
+      "time": "2026-06-16T01:14:30Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Iran. Players involved: Shahriyar Moghanloo, Michael Boxall.",
+      "provider_wallclock": "2026-06-16T01:14:30Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "638.0",
+          "displayValue": "11'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Shahriyar Moghanloo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Michael Boxall"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49528375",
+      "time": "2026-06-16T01:15:22Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: New Zealand. Players involved: Sarpreet Singh, Elijah Just.",
+      "provider_wallclock": "2026-06-16T01:15:22Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "689.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sarpreet Singh"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Elijah Just"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49528515",
+      "time": "2026-06-16T01:17:10Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: New Zealand. Players involved: Marko Stamenic.",
+      "provider_wallclock": "2026-06-16T01:17:10Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "797.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marko Stamenic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49528514",
+      "time": "2026-06-16T01:17:11Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: New Zealand.",
+      "provider_wallclock": "2026-06-16T01:17:11Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "798.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        }
+      }
+    },
+    {
+      "event_id": "49528576",
+      "time": "2026-06-16T01:17:51Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: New Zealand. Players involved: Callum McCowatt.",
+      "provider_wallclock": "2026-06-16T01:17:51Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "838.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Callum McCowatt"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49528596",
+      "time": "2026-06-16T01:17:53Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: New Zealand. Players involved: Chris Wood, Callum McCowatt.",
+      "provider_wallclock": "2026-06-16T01:17:53Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "840.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Chris Wood"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Callum McCowatt"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49528683",
+      "time": "2026-06-16T01:20:33Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Iran.",
+      "provider_wallclock": "2026-06-16T01:20:33Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1001.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "Iran"
+        }
+      }
+    },
+    {
+      "event_id": "49528682",
+      "time": "2026-06-16T01:20:34Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: New Zealand.",
+      "provider_wallclock": "2026-06-16T01:20:34Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1001.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "id": "2666",
+          "displayName": "New Zealand"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49528736",
+      "time": "2026-06-16T01:21:49Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: New Zealand.",
+      "provider_wallclock": "2026-06-16T01:21:49Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1076.0",
+          "displayValue": "18'"
+        },
+        "team": {
+          "id": "2666",
+          "displayName": "New Zealand"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49528737",
+      "time": "2026-06-16T01:21:49Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Iran.",
+      "provider_wallclock": "2026-06-16T01:21:49Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1076.0",
+          "displayValue": "18'"
+        },
+        "team": {
+          "displayName": "Iran"
+        }
+      }
+    },
+    {
+      "event_id": "49528751",
+      "time": "2026-06-16T01:22:31Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: New Zealand. Players involved: Sarpreet Singh, Finn Surman.",
+      "provider_wallclock": "2026-06-16T01:22:31Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1118.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sarpreet Singh"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Finn Surman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49528784",
+      "time": "2026-06-16T01:23:07Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: New Zealand. Players involved: Sarpreet Singh, Ramin Rezaeian.",
+      "provider_wallclock": "2026-06-16T01:23:07Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1155.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sarpreet Singh"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ramin Rezaeian"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49528925",
+      "time": "2026-06-16T01:26:02Z",
+      "type": "shot-hit-woodwork",
+      "text": "Event: Shot Hit Woodwork. Team: Iran. Players involved: Mehdi Taremi, Ali Nemati.",
+      "provider_wallclock": "2026-06-16T01:26:02Z",
+      "facts": {
+        "type": {
+          "id": "136",
+          "text": "Shot Hit Woodwork",
+          "type": "shot-hit-woodwork"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1329.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mehdi Taremi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ali Nemati"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49528988",
+      "time": "2026-06-16T01:28:07Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: New Zealand.",
+      "provider_wallclock": "2026-06-16T01:28:07Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1454.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        }
+      }
+    },
+    {
+      "event_id": "49528989",
+      "time": "2026-06-16T01:28:07Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Iran.",
+      "provider_wallclock": "2026-06-16T01:28:07Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1454.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "id": "469",
+          "displayName": "Iran"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49529060",
+      "time": "2026-06-16T01:31:18Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: New Zealand.",
+      "provider_wallclock": "2026-06-16T01:31:18Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1646.0",
+          "displayValue": "28'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        }
+      }
+    },
+    {
+      "event_id": "49529059",
+      "time": "2026-06-16T01:31:19Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Iran.",
+      "provider_wallclock": "2026-06-16T01:31:19Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1646.0",
+          "displayValue": "28'"
+        },
+        "team": {
+          "id": "469",
+          "displayName": "Iran"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49529142",
+      "time": "2026-06-16T01:32:00Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Iran. Players involved: Saman Ghoddos, Mohammad Mohebbi.",
+      "provider_wallclock": "2026-06-16T01:32:00Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1687.0",
+          "displayValue": "29'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Saman Ghoddos"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohammad Mohebbi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49529143",
+      "time": "2026-06-16T01:32:53Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: New Zealand. Players involved: Liberato Cacace, Sarpreet Singh.",
+      "provider_wallclock": "2026-06-16T01:32:53Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1740.0",
+          "displayValue": "29'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Liberato Cacace"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sarpreet Singh"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49529163",
+      "time": "2026-06-16T01:33:31Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Iran. Players involved: Saman Ghoddos, Mohammad Mohebbi.",
+      "provider_wallclock": "2026-06-16T01:33:31Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1778.0",
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Saman Ghoddos"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mohammad Mohebbi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49529311",
+      "time": "2026-06-16T01:35:39Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Iran. Players involved: Shahriyar Moghanloo, Saman Ghoddos.",
+      "provider_wallclock": "2026-06-16T01:35:39Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1906.0",
+          "displayValue": "32'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Shahriyar Moghanloo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Saman Ghoddos"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49529312",
+      "time": "2026-06-16T01:35:41Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Iran. Players involved: Ramin Rezaeian.",
+      "provider_wallclock": "2026-06-16T01:35:41Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1908.0",
+          "displayValue": "32'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ramin Rezaeian"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49529371",
+      "time": "2026-06-16T01:38:05Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Iran.",
+      "provider_wallclock": "2026-06-16T01:38:05Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2052.0",
+          "displayValue": "35'"
+        },
+        "team": {
+          "displayName": "Iran"
+        }
+      }
+    },
+    {
+      "event_id": "49529372",
+      "time": "2026-06-16T01:38:05Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: New Zealand.",
+      "provider_wallclock": "2026-06-16T01:38:05Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2052.0",
+          "displayValue": "35'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        }
+      }
+    },
+    {
+      "event_id": "49529373",
+      "time": "2026-06-16T01:38:21Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Iran.",
+      "provider_wallclock": "2026-06-16T01:38:21Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2068.0",
+          "displayValue": "35'"
+        },
+        "team": {
+          "id": "469",
+          "displayName": "Iran"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49529374",
+      "time": "2026-06-16T01:38:21Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: New Zealand.",
+      "provider_wallclock": "2026-06-16T01:38:21Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2068.0",
+          "displayValue": "35'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        }
+      }
+    },
+    {
+      "event_id": "49529473",
+      "time": "2026-06-16T01:40:00Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: New Zealand. Players involved: Marko Stamenic, Shahriyar Moghanloo.",
+      "provider_wallclock": "2026-06-16T01:40:00Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2167.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marko Stamenic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Shahriyar Moghanloo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49529603",
+      "time": "2026-06-16T01:42:27Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Iran.",
+      "provider_wallclock": "2026-06-16T01:42:27Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2314.0",
+          "displayValue": "39'"
+        },
+        "team": {
+          "displayName": "Iran"
+        }
+      }
+    },
+    {
+      "event_id": "49529601",
+      "time": "2026-06-16T01:42:28Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: New Zealand.",
+      "provider_wallclock": "2026-06-16T01:42:28Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2314.0",
+          "displayValue": "39'"
+        },
+        "team": {
+          "id": "2666",
+          "displayName": "New Zealand"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49529651",
+      "time": "2026-06-16T01:44:29Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Iran.",
+      "provider_wallclock": "2026-06-16T01:44:29Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2437.0",
+          "displayValue": "41'"
+        },
+        "team": {
+          "displayName": "Iran"
+        }
+      }
+    },
+    {
+      "event_id": "49529652",
+      "time": "2026-06-16T01:44:30Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: New Zealand.",
+      "provider_wallclock": "2026-06-16T01:44:30Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2437.0",
+          "displayValue": "41'"
+        },
+        "team": {
+          "id": "2666",
+          "displayName": "New Zealand"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49529752",
+      "time": "2026-06-16T01:46:47Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Iran. Players involved: Shoja Khalilzadeh, Liberato Cacace.",
+      "provider_wallclock": "2026-06-16T01:46:47Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2574.0",
+          "displayValue": "43'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Shoja Khalilzadeh"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Liberato Cacace"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49529769",
+      "time": "2026-06-16T01:47:52Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: New Zealand. Players involved: Chris Wood.",
+      "provider_wallclock": "2026-06-16T01:47:52Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2640.0",
+          "displayValue": "44'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Chris Wood"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49529856",
+      "time": "2026-06-16T01:49:20Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: New Zealand. Players involved: Callum McCowatt, Chris Wood.",
+      "provider_wallclock": "2026-06-16T01:49:20Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+1'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Callum McCowatt"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Chris Wood"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49529957",
+      "time": "2026-06-16T01:51:43Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Iran. Players involved: Shahriyar Moghanloo, Arya Yousefi.",
+      "provider_wallclock": "2026-06-16T01:51:43Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+3'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Shahriyar Moghanloo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Arya Yousefi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49529995",
+      "time": "2026-06-16T01:52:47Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: New Zealand. Players involved: Elijah Just, Mehdi Taremi.",
+      "provider_wallclock": "2026-06-16T01:52:47Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Elijah Just"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mehdi Taremi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530034",
+      "time": "2026-06-16T01:53:34Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Iran. Players involved: Ramin Rezaeian.",
+      "provider_wallclock": "2026-06-16T01:53:34Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+5'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ramin Rezaeian"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530101",
+      "time": "2026-06-16T01:55:02Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-16T01:55:02Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+7'"
+        }
+      }
+    },
+    {
+      "event_id": "49530194",
+      "time": "2026-06-16T02:11:48Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Iran. Players involved: Mehdi Ghayedi, Arya Yousefi.",
+      "provider_wallclock": "2026-06-16T02:11:48Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mehdi Ghayedi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Arya Yousefi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530215",
+      "time": "2026-06-16T02:12:37Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-16T02:12:37Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49530239",
+      "time": "2026-06-16T02:14:15Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: New Zealand. Players involved: Chris Wood, Max Crocombe.",
+      "provider_wallclock": "2026-06-16T02:14:15Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2798.0",
+          "displayValue": "47'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Chris Wood"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Max Crocombe"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530255",
+      "time": "2026-06-16T02:15:08Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Iran.",
+      "provider_wallclock": "2026-06-16T02:15:08Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2851.0",
+          "displayValue": "48'"
+        },
+        "team": {
+          "displayName": "Iran"
+        }
+      }
+    },
+    {
+      "event_id": "49530268",
+      "time": "2026-06-16T02:16:11Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Iran. Players involved: Mehdi Ghayedi, Ali Nemati.",
+      "provider_wallclock": "2026-06-16T02:16:11Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2915.0",
+          "displayValue": "49'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mehdi Ghayedi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ali Nemati"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530298",
+      "time": "2026-06-16T02:18:09Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Iran. Players involved: Shahriyar Moghanloo, Ramin Rezaeian.",
+      "provider_wallclock": "2026-06-16T02:18:09Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3032.0",
+          "displayValue": "51'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Shahriyar Moghanloo"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ramin Rezaeian"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530328",
+      "time": "2026-06-16T02:20:28Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Iran. Players involved: Ali Alipour, Shahriyar Moghanloo.",
+      "provider_wallclock": "2026-06-16T02:20:28Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3171.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Alipour"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Shahriyar Moghanloo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530337",
+      "time": "2026-06-16T02:20:51Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Iran. Players involved: Ali Alipour, Finn Surman.",
+      "provider_wallclock": "2026-06-16T02:20:51Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3195.0",
+          "displayValue": "54'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Alipour"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Finn Surman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530353",
+      "time": "2026-06-16T02:21:37Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: New Zealand. Players involved: Elijah Just, Chris Wood.",
+      "provider_wallclock": "2026-06-16T02:21:37Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3240.0",
+          "displayValue": "54'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Elijah Just"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Chris Wood"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530376",
+      "time": "2026-06-16T02:23:50Z",
+      "type": "pass",
+      "text": "Event: Pass. Team: Iran. Players involved: Mohammad Mohebbi.",
+      "provider_wallclock": "2026-06-16T02:23:50Z",
+      "facts": {
+        "type": {
+          "id": "118",
+          "text": "Pass",
+          "type": "pass"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3373.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohammad Mohebbi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530411",
+      "time": "2026-06-16T02:25:57Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: New Zealand. Players involved: Tim Payne, Mehdi Ghayedi.",
+      "provider_wallclock": "2026-06-16T02:25:57Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3501.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tim Payne"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mehdi Ghayedi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530445",
+      "time": "2026-06-16T02:27:43Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Iran. Players involved: Shoja Khalilzadeh, Callum McCowatt.",
+      "provider_wallclock": "2026-06-16T02:27:43Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3606.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Shoja Khalilzadeh"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Callum McCowatt"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530449",
+      "time": "2026-06-16T02:28:13Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: New Zealand. Players involved: Sarpreet Singh, Chris Wood.",
+      "provider_wallclock": "2026-06-16T02:28:13Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3636.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sarpreet Singh"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Chris Wood"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530497",
+      "time": "2026-06-16T02:30:41Z",
+      "type": "goal---header",
+      "text": "Event: Goal - Header. Team: Iran. Players involved: Mohammad Mohebbi, Ramin Rezaeian.",
+      "provider_wallclock": "2026-06-16T02:30:41Z",
+      "facts": {
+        "type": {
+          "id": "137",
+          "text": "Goal - Header",
+          "type": "goal---header"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3784.0",
+          "displayValue": "64'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohammad Mohebbi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ramin Rezaeian"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530499",
+      "time": "2026-06-16T02:32:02Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Iran. Players involved: Ehsan Hajsafi, Saman Ghoddos.",
+      "provider_wallclock": "2026-06-16T02:32:02Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3865.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ehsan Hajsafi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Saman Ghoddos"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530529",
+      "time": "2026-06-16T02:33:49Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Iran.",
+      "provider_wallclock": "2026-06-16T02:33:49Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3972.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "Iran"
+        }
+      }
+    },
+    {
+      "event_id": "49530533",
+      "time": "2026-06-16T02:34:28Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Iran. Players involved: Ali Nemati, Max Crocombe.",
+      "provider_wallclock": "2026-06-16T02:34:28Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4012.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Nemati"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Max Crocombe"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530532",
+      "time": "2026-06-16T02:34:55Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: New Zealand. Players involved: Ryan Thomas, Callum McCowatt.",
+      "provider_wallclock": "2026-06-16T02:34:55Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4038.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ryan Thomas"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Callum McCowatt"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530534",
+      "time": "2026-06-16T02:35:11Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: New Zealand. Players involved: Ben Old, Liberato Cacace.",
+      "provider_wallclock": "2026-06-16T02:35:11Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4054.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ben Old"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Liberato Cacace"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530536",
+      "time": "2026-06-16T02:35:16Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: New Zealand.",
+      "provider_wallclock": "2026-06-16T02:35:16Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4060.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        }
+      }
+    },
+    {
+      "event_id": "49530535",
+      "time": "2026-06-16T02:35:17Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Iran.",
+      "provider_wallclock": "2026-06-16T02:35:17Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4060.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "id": "469",
+          "displayName": "Iran"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49530537",
+      "time": "2026-06-16T02:37:36Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: New Zealand.",
+      "provider_wallclock": "2026-06-16T02:37:36Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4200.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        }
+      }
+    },
+    {
+      "event_id": "49530538",
+      "time": "2026-06-16T02:37:37Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Iran.",
+      "provider_wallclock": "2026-06-16T02:37:37Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4200.0",
+          "displayValue": "70'"
+        },
+        "team": {
+          "id": "469",
+          "displayName": "Iran"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49530567",
+      "time": "2026-06-16T02:39:52Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Iran. Players involved: Mohammad Mohebbi, Mehdi Ghayedi.",
+      "provider_wallclock": "2026-06-16T02:39:52Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4336.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mohammad Mohebbi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mehdi Ghayedi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530569",
+      "time": "2026-06-16T02:40:08Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Iran. Players involved: Saeid Ezatolahi, Elijah Just.",
+      "provider_wallclock": "2026-06-16T02:40:08Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4352.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Saeid Ezatolahi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Elijah Just"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530618",
+      "time": "2026-06-16T02:42:58Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Iran. Players involved: Ehsan Hajsafi, Mehdi Taremi.",
+      "provider_wallclock": "2026-06-16T02:42:58Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4521.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ehsan Hajsafi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mehdi Taremi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530621",
+      "time": "2026-06-16T02:43:14Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Iran. Players involved: Mehdi Ghayedi, Tim Payne.",
+      "provider_wallclock": "2026-06-16T02:43:14Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4538.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mehdi Ghayedi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tim Payne"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530632",
+      "time": "2026-06-16T02:44:41Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: New Zealand. Players involved: Callan Elliot, Tim Payne.",
+      "provider_wallclock": "2026-06-16T02:44:41Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4624.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Callan Elliot"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tim Payne"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530642",
+      "time": "2026-06-16T02:45:20Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: New Zealand.",
+      "provider_wallclock": "2026-06-16T02:45:20Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4663.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "id": "2666",
+          "displayName": "New Zealand"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49530643",
+      "time": "2026-06-16T02:45:20Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Iran.",
+      "provider_wallclock": "2026-06-16T02:45:20Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4663.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "Iran"
+        }
+      }
+    },
+    {
+      "event_id": "49530644",
+      "time": "2026-06-16T02:45:40Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Iran.",
+      "provider_wallclock": "2026-06-16T02:45:40Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4683.0",
+          "displayValue": "79'"
+        },
+        "team": {
+          "displayName": "Iran"
+        }
+      }
+    },
+    {
+      "event_id": "49530656",
+      "time": "2026-06-16T02:46:38Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Iran. Players involved: Mehdi Taremi, Ramin Rezaeian.",
+      "provider_wallclock": "2026-06-16T02:46:38Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4741.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mehdi Taremi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ramin Rezaeian"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530658",
+      "time": "2026-06-16T02:47:07Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Iran. Players involved: Amirhossein Hosseinzadeh, Mehdi Taremi.",
+      "provider_wallclock": "2026-06-16T02:47:07Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4769.0",
+          "displayValue": "80'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Amirhossein Hosseinzadeh"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Mehdi Taremi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530670",
+      "time": "2026-06-16T02:47:46Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Iran. Players involved: Saeid Ezatolahi, Ryan Thomas.",
+      "provider_wallclock": "2026-06-16T02:47:46Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4809.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Saeid Ezatolahi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ryan Thomas"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530677",
+      "time": "2026-06-16T02:48:29Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: New Zealand. Players involved: Finn Surman.",
+      "provider_wallclock": "2026-06-16T02:48:29Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4852.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Finn Surman"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530719",
+      "time": "2026-06-16T02:51:12Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: New Zealand. Players involved: Ryan Thomas, Ramin Rezaeian.",
+      "provider_wallclock": "2026-06-16T02:51:12Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5016.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ryan Thomas"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ramin Rezaeian"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530743",
+      "time": "2026-06-16T02:52:19Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Iran. Players involved: Ali Alipour.",
+      "provider_wallclock": "2026-06-16T02:52:19Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5083.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Alipour"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530741",
+      "time": "2026-06-16T02:52:25Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Iran. Players involved: Saeid Ezatolahi.",
+      "provider_wallclock": "2026-06-16T02:52:25Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5088.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Saeid Ezatolahi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530746",
+      "time": "2026-06-16T02:52:59Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: New Zealand. Players involved: Marko Stamenic, Ehsan Hajsafi.",
+      "provider_wallclock": "2026-06-16T02:52:59Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5122.0",
+          "displayValue": "86'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Marko Stamenic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ehsan Hajsafi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530766",
+      "time": "2026-06-16T02:54:00Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Iran. Players involved: Saeid Ezatolahi, Amirhossein Hosseinzadeh.",
+      "provider_wallclock": "2026-06-16T02:54:00Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5183.0",
+          "displayValue": "87'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Saeid Ezatolahi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Amirhossein Hosseinzadeh"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530797",
+      "time": "2026-06-16T02:55:17Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Iran.",
+      "provider_wallclock": "2026-06-16T02:55:17Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5260.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Iran"
+        }
+      }
+    },
+    {
+      "event_id": "49530809",
+      "time": "2026-06-16T02:56:10Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Iran. Players involved: Ali Nemati.",
+      "provider_wallclock": "2026-06-16T02:56:10Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5313.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Nemati"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530807",
+      "time": "2026-06-16T02:56:25Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Iran. Players involved: Ehsan Hajsafi, Elijah Just.",
+      "provider_wallclock": "2026-06-16T02:56:25Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5329.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ehsan Hajsafi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Elijah Just"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530808",
+      "time": "2026-06-16T02:56:27Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Iran. Players involved: Ehsan Hajsafi.",
+      "provider_wallclock": "2026-06-16T02:56:27Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5330.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ehsan Hajsafi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530833",
+      "time": "2026-06-16T02:58:44Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: New Zealand. Players involved: Jesse Randall, Sarpreet Singh.",
+      "provider_wallclock": "2026-06-16T02:58:44Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jesse Randall"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sarpreet Singh"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530834",
+      "time": "2026-06-16T02:58:55Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: New Zealand. Players involved: Tyler Bindon, Marko Stamenic.",
+      "provider_wallclock": "2026-06-16T02:58:55Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tyler Bindon"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Marko Stamenic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530845",
+      "time": "2026-06-16T02:59:36Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: New Zealand. Players involved: Chris Wood, Jesse Randall.",
+      "provider_wallclock": "2026-06-16T02:59:36Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Chris Wood"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jesse Randall"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530875",
+      "time": "2026-06-16T03:00:58Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Iran.",
+      "provider_wallclock": "2026-06-16T03:00:58Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+4'"
+        },
+        "team": {
+          "displayName": "Iran"
+        }
+      }
+    },
+    {
+      "event_id": "49530886",
+      "time": "2026-06-16T03:01:47Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: New Zealand. Players involved: Ryan Thomas, Ali Alipour.",
+      "provider_wallclock": "2026-06-16T03:01:47Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+5'"
+        },
+        "team": {
+          "displayName": "New Zealand"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ryan Thomas"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ali Alipour"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530896",
+      "time": "2026-06-16T03:02:31Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Iran. Players involved: Mehdi Ghayedi, Tyler Bindon.",
+      "provider_wallclock": "2026-06-16T03:02:31Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+5'"
+        },
+        "team": {
+          "displayName": "Iran"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Mehdi Ghayedi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tyler Bindon"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49530898",
+      "time": "2026-06-16T03:03:14Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-16T03:03:14Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+6'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 7,
+    "no_wallclock": 1
+  }
+}

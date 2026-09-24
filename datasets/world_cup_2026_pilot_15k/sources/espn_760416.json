@@ -1,0 +1,3395 @@
+{
+  "fixture_id": "espn:760416",
+  "espn_event_id": "760416",
+  "kickoff": "2026-06-12T19:00:00Z",
+  "target_end_exclusive": "2026-06-12T20:57:45Z",
+  "target_end_basis": "provider_end_regular_time",
+  "provenance": {
+    "provider": "ESPN",
+    "source_url": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/summary?event=760416",
+    "source_body_sha256": "ee7c93d6d6dfaa8246a37a7aa6bc8ac8dceb7317d17434adeac253cee21acf28",
+    "captured_at_utc": "2026-09-24T22:46:36.726946Z",
+    "historical_publication_verified": false,
+    "actor_exposure_verified": false,
+    "time_basis": "provider_event_time_proxy",
+    "transformation": "Text rendered from structured event type, team, participants, explicit roles and score when present. No original narrative commentary or article bodies."
+  },
+  "events": [
+    {
+      "event_id": "49486048",
+      "time": "2026-06-12T19:02:17Z",
+      "type": "kickoff",
+      "text": "Event: Kickoff.",
+      "provider_wallclock": "2026-06-12T19:02:17Z",
+      "facts": {
+        "type": {
+          "id": "80",
+          "text": "Kickoff",
+          "type": "kickoff"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "0.0",
+          "displayValue": ""
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49486054",
+      "time": "2026-06-12T19:02:55Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:02:55Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "38.0",
+          "displayValue": "1'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486065",
+      "time": "2026-06-12T19:03:52Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Canada. Players involved: Alistair Johnston, Sead Kolasinac.",
+      "provider_wallclock": "2026-06-12T19:03:52Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "95.0",
+          "displayValue": "2'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alistair Johnston"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sead Kolasinac"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486073",
+      "time": "2026-06-12T19:04:32Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Bosnia-Herzegovina. Players involved: Amar Memic.",
+      "provider_wallclock": "2026-06-12T19:04:32Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "134.0",
+          "displayValue": "3'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Amar Memic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486105",
+      "time": "2026-06-12T19:06:31Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Canada. Players involved: Liam Millar, Amar Dedic.",
+      "provider_wallclock": "2026-06-12T19:06:31Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "253.0",
+          "displayValue": "5'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Liam Millar"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Amar Dedic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486112",
+      "time": "2026-06-12T19:07:06Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Bosnia-Herzegovina. Players involved: Jovo Lukic, Ivan Basic.",
+      "provider_wallclock": "2026-06-12T19:07:06Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "288.0",
+          "displayValue": "5'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jovo Lukic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ivan Basic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486214",
+      "time": "2026-06-12T19:12:51Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Canada. Players involved: Alistair Johnston, Amar Memic.",
+      "provider_wallclock": "2026-06-12T19:12:51Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "634.0",
+          "displayValue": "11'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alistair Johnston"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Amar Memic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486215",
+      "time": "2026-06-12T19:12:54Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Canada. Players involved: Alistair Johnston.",
+      "provider_wallclock": "2026-06-12T19:12:54Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "636.0",
+          "displayValue": "11'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alistair Johnston"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486216",
+      "time": "2026-06-12T19:13:23Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:13:23Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "666.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "id": "206",
+          "displayName": "Canada"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49486217",
+      "time": "2026-06-12T19:13:23Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T19:13:23Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "666.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        }
+      }
+    },
+    {
+      "event_id": "49486218",
+      "time": "2026-06-12T19:14:17Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:14:17Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "720.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "id": "206",
+          "displayName": "Canada"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49486219",
+      "time": "2026-06-12T19:14:17Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T19:14:17Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "720.0",
+          "displayValue": "12'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        }
+      }
+    },
+    {
+      "event_id": "49486222",
+      "time": "2026-06-12T19:14:25Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Bosnia-Herzegovina. Players involved: Jovo Lukic, Ivan Basic.",
+      "provider_wallclock": "2026-06-12T19:14:25Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "728.0",
+          "displayValue": "13'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jovo Lukic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ivan Basic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486260",
+      "time": "2026-06-12T19:16:04Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:16:04Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "827.0",
+          "displayValue": "14'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486269",
+      "time": "2026-06-12T19:16:49Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T19:16:49Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "872.0",
+          "displayValue": "15'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        }
+      }
+    },
+    {
+      "event_id": "49486267",
+      "time": "2026-06-12T19:16:50Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:16:50Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "872.0",
+          "displayValue": "15'"
+        },
+        "team": {
+          "id": "206",
+          "displayName": "Canada"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49486270",
+      "time": "2026-06-12T19:17:08Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T19:17:08Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "891.0",
+          "displayValue": "15'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        }
+      }
+    },
+    {
+      "event_id": "49486275",
+      "time": "2026-06-12T19:17:08Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:17:08Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "891.0",
+          "displayValue": "15'"
+        },
+        "team": {
+          "id": "206",
+          "displayName": "Canada"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49486310",
+      "time": "2026-06-12T19:18:32Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Canada. Players involved: Jonathan David.",
+      "provider_wallclock": "2026-06-12T19:18:32Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "974.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jonathan David"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486320",
+      "time": "2026-06-12T19:19:13Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Ivan Basic, Ismaël Koné.",
+      "provider_wallclock": "2026-06-12T19:19:13Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1016.0",
+          "displayValue": "17'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ivan Basic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ismaël Koné"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486353",
+      "time": "2026-06-12T19:21:12Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Canada. Players involved: Stephen Eustáquio, Esmir Bajraktarevic.",
+      "provider_wallclock": "2026-06-12T19:21:12Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1134.0",
+          "displayValue": "19'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Stephen Eustáquio"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Esmir Bajraktarevic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486366",
+      "time": "2026-06-12T19:22:14Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T19:22:14Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1197.0",
+          "displayValue": "20'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        }
+      }
+    },
+    {
+      "event_id": "49486368",
+      "time": "2026-06-12T19:22:46Z",
+      "type": "goal---header",
+      "text": "Event: Goal - Header. Team: Bosnia-Herzegovina. Players involved: Jovo Lukic, Sead Kolasinac.",
+      "provider_wallclock": "2026-06-12T19:22:46Z",
+      "facts": {
+        "type": {
+          "id": "137",
+          "text": "Goal - Header",
+          "type": "goal---header"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1228.0",
+          "displayValue": "21'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jovo Lukic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sead Kolasinac"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486378",
+      "time": "2026-06-12T19:24:24Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Ermedin Demirovic, Luc de Fougerolles.",
+      "provider_wallclock": "2026-06-12T19:24:24Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1327.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ermedin Demirovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Luc de Fougerolles"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486380",
+      "time": "2026-06-12T19:24:42Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:24:42Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1345.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486381",
+      "time": "2026-06-12T19:24:43Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T19:24:43Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1345.0",
+          "displayValue": "23'"
+        },
+        "team": {
+          "id": "452",
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49486382",
+      "time": "2026-06-12T19:27:03Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:27:03Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1485.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486384",
+      "time": "2026-06-12T19:27:03Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T19:27:03Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1485.0",
+          "displayValue": "25'"
+        },
+        "team": {
+          "id": "452",
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49486412",
+      "time": "2026-06-12T19:28:52Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Sead Kolasinac, Tajon Buchanan.",
+      "provider_wallclock": "2026-06-12T19:28:52Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1595.0",
+          "displayValue": "27'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sead Kolasinac"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tajon Buchanan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486428",
+      "time": "2026-06-12T19:29:30Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Canada. Players involved: Jonathan David, Liam Millar.",
+      "provider_wallclock": "2026-06-12T19:29:30Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1633.0",
+          "displayValue": "28'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jonathan David"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Liam Millar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486431",
+      "time": "2026-06-12T19:30:14Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:30:14Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1677.0",
+          "displayValue": "28'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486438",
+      "time": "2026-06-12T19:30:45Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Tarik Muharemovic, Jonathan David.",
+      "provider_wallclock": "2026-06-12T19:30:45Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1708.0",
+          "displayValue": "29'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tarik Muharemovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jonathan David"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486446",
+      "time": "2026-06-12T19:31:28Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Canada. Players involved: Ismaël Koné, Stephen Eustáquio.",
+      "provider_wallclock": "2026-06-12T19:31:28Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1751.0",
+          "displayValue": "30'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ismaël Koné"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Stephen Eustáquio"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486489",
+      "time": "2026-06-12T19:33:55Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Canada. Players involved: Tani Oluwaseyi, Alistair Johnston.",
+      "provider_wallclock": "2026-06-12T19:33:55Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1897.0",
+          "displayValue": "32'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tani Oluwaseyi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alistair Johnston"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486508",
+      "time": "2026-06-12T19:35:23Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:35:23Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "1986.0",
+          "displayValue": "34'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486582",
+      "time": "2026-06-12T19:39:03Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:39:03Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2206.0",
+          "displayValue": "37'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486588",
+      "time": "2026-06-12T19:39:34Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Canada. Players involved: Jonathan David, Tani Oluwaseyi.",
+      "provider_wallclock": "2026-06-12T19:39:34Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2236.0",
+          "displayValue": "38'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jonathan David"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tani Oluwaseyi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486586",
+      "time": "2026-06-12T19:39:36Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:39:36Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2239.0",
+          "displayValue": "38'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486606",
+      "time": "2026-06-12T19:40:53Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:40:53Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2316.0",
+          "displayValue": "39'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486617",
+      "time": "2026-06-12T19:41:31Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:41:31Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2354.0",
+          "displayValue": "40'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486647",
+      "time": "2026-06-12T19:43:01Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Amar Dedic, Luc de Fougerolles.",
+      "provider_wallclock": "2026-06-12T19:43:01Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2444.0",
+          "displayValue": "41'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Amar Dedic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Luc de Fougerolles"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486658",
+      "time": "2026-06-12T19:43:56Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Amar Memic, Alistair Johnston.",
+      "provider_wallclock": "2026-06-12T19:43:56Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2499.0",
+          "displayValue": "42'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Amar Memic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alistair Johnston"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486694",
+      "time": "2026-06-12T19:45:51Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Bosnia-Herzegovina. Players involved: Benjamin Tahirovic.",
+      "provider_wallclock": "2026-06-12T19:45:51Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2613.0",
+          "displayValue": "44'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Benjamin Tahirovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486697",
+      "time": "2026-06-12T19:46:07Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Ermedin Demirovic, Derek Cornelius.",
+      "provider_wallclock": "2026-06-12T19:46:07Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2630.0",
+          "displayValue": "44'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ermedin Demirovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Derek Cornelius"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486699",
+      "time": "2026-06-12T19:46:24Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Bosnia-Herzegovina. Players involved: Ermedin Demirovic.",
+      "provider_wallclock": "2026-06-12T19:46:24Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2646.0",
+          "displayValue": "45'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ermedin Demirovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486731",
+      "time": "2026-06-12T19:48:08Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Jovo Lukic, Tajon Buchanan.",
+      "provider_wallclock": "2026-06-12T19:48:08Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+1'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jovo Lukic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tajon Buchanan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486732",
+      "time": "2026-06-12T19:48:12Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Bosnia-Herzegovina. Players involved: Jovo Lukic.",
+      "provider_wallclock": "2026-06-12T19:48:12Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+1'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jovo Lukic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486764",
+      "time": "2026-06-12T19:50:16Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Canada. Players involved: Alistair Johnston, Tani Oluwaseyi.",
+      "provider_wallclock": "2026-06-12T19:50:16Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+3'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alistair Johnston"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tani Oluwaseyi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486763",
+      "time": "2026-06-12T19:50:18Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Canada.",
+      "provider_wallclock": "2026-06-12T19:50:18Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+3'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486769",
+      "time": "2026-06-12T19:50:42Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Canada. Players involved: Derek Cornelius, Stephen Eustáquio.",
+      "provider_wallclock": "2026-06-12T19:50:42Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Derek Cornelius"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Stephen Eustáquio"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486777",
+      "time": "2026-06-12T19:51:15Z",
+      "type": "halftime",
+      "text": "Event: Halftime.",
+      "provider_wallclock": "2026-06-12T19:51:15Z",
+      "facts": {
+        "type": {
+          "id": "81",
+          "text": "Halftime",
+          "type": "halftime"
+        },
+        "period": {
+          "number": 1
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'+4'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49486790",
+      "time": "2026-06-12T20:06:34Z",
+      "type": "start-2nd-half",
+      "text": "Event: Start 2nd Half.",
+      "provider_wallclock": "2026-06-12T20:06:34Z",
+      "facts": {
+        "type": {
+          "id": "82",
+          "text": "Start 2nd Half",
+          "type": "start-2nd-half"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2700.0",
+          "displayValue": "45'"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49486788",
+      "time": "2026-06-12T20:06:45Z",
+      "type": "shot-on-target",
+      "text": "Event: Shot On Target. Team: Bosnia-Herzegovina. Players involved: Ermedin Demirovic, Ivan Basic.",
+      "provider_wallclock": "2026-06-12T20:06:45Z",
+      "facts": {
+        "type": {
+          "id": "106",
+          "text": "Shot On Target",
+          "type": "shot-on-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2711.0",
+          "displayValue": "46'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ermedin Demirovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ivan Basic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486798",
+      "time": "2026-06-12T20:07:15Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Nikola Katic, Tani Oluwaseyi.",
+      "provider_wallclock": "2026-06-12T20:07:15Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2741.0",
+          "displayValue": "46'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nikola Katic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tani Oluwaseyi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486840",
+      "time": "2026-06-12T20:09:35Z",
+      "type": "offside",
+      "text": "Event: Offside. Team: Canada. Players involved: Alistair Johnston.",
+      "provider_wallclock": "2026-06-12T20:09:35Z",
+      "facts": {
+        "type": {
+          "id": "68",
+          "text": "Offside",
+          "type": "offside"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2881.0",
+          "displayValue": "49'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Alistair Johnston"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486842",
+      "time": "2026-06-12T20:09:44Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T20:09:44Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2890.0",
+          "displayValue": "49'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        }
+      }
+    },
+    {
+      "event_id": "49486843",
+      "time": "2026-06-12T20:09:44Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Canada.",
+      "provider_wallclock": "2026-06-12T20:09:44Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2890.0",
+          "displayValue": "49'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486846",
+      "time": "2026-06-12T20:10:59Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Canada.",
+      "provider_wallclock": "2026-06-12T20:10:59Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2965.0",
+          "displayValue": "50'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49486847",
+      "time": "2026-06-12T20:11:00Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T20:11:00Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "2965.0",
+          "displayValue": "50'"
+        },
+        "team": {
+          "id": "452",
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49486861",
+      "time": "2026-06-12T20:11:48Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Ermedin Demirovic, Luc de Fougerolles.",
+      "provider_wallclock": "2026-06-12T20:11:48Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3013.0",
+          "displayValue": "51'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ermedin Demirovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Luc de Fougerolles"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486892",
+      "time": "2026-06-12T20:13:56Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Ivan Basic, Stephen Eustáquio.",
+      "provider_wallclock": "2026-06-12T20:13:56Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3141.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ivan Basic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Stephen Eustáquio"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486905",
+      "time": "2026-06-12T20:14:23Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Canada. Players involved: Richie Laryea, Stephen Eustáquio.",
+      "provider_wallclock": "2026-06-12T20:14:23Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3169.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Richie Laryea"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Stephen Eustáquio"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486902",
+      "time": "2026-06-12T20:14:29Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Canada. Players involved: Luc de Fougerolles, Ermedin Demirovic.",
+      "provider_wallclock": "2026-06-12T20:14:29Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3174.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Luc de Fougerolles"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ermedin Demirovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486903",
+      "time": "2026-06-12T20:14:32Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Canada. Players involved: Luc de Fougerolles.",
+      "provider_wallclock": "2026-06-12T20:14:32Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3177.0",
+          "displayValue": "53'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Luc de Fougerolles"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486919",
+      "time": "2026-06-12T20:15:23Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T20:15:23Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3229.0",
+          "displayValue": "54'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        }
+      }
+    },
+    {
+      "event_id": "49486950",
+      "time": "2026-06-12T20:18:34Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Canada. Players involved: Stephen Eustáquio, Benjamin Tahirovic.",
+      "provider_wallclock": "2026-06-12T20:18:34Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3420.0",
+          "displayValue": "57'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Stephen Eustáquio"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Benjamin Tahirovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49486959",
+      "time": "2026-06-12T20:19:19Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T20:19:19Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3464.0",
+          "displayValue": "58'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        }
+      }
+    },
+    {
+      "event_id": "49486963",
+      "time": "2026-06-12T20:19:45Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Bosnia-Herzegovina. Players involved: Tarik Muharemovic, Ivan Basic.",
+      "provider_wallclock": "2026-06-12T20:19:45Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3490.0",
+          "displayValue": "59'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tarik Muharemovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ivan Basic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487001",
+      "time": "2026-06-12T20:22:08Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Canada. Players involved: Jacob Shaffelburg, Liam Millar.",
+      "provider_wallclock": "2026-06-12T20:22:08Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3633.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jacob Shaffelburg"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Liam Millar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487002",
+      "time": "2026-06-12T20:22:26Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Canada. Players involved: Promise David, Jonathan David.",
+      "provider_wallclock": "2026-06-12T20:22:26Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3651.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Promise David"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jonathan David"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487003",
+      "time": "2026-06-12T20:22:30Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Canada. Players involved: Ali Ahmed, Tajon Buchanan.",
+      "provider_wallclock": "2026-06-12T20:22:30Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3655.0",
+          "displayValue": "61'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ali Ahmed"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tajon Buchanan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487004",
+      "time": "2026-06-12T20:22:46Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Bosnia-Herzegovina. Players involved: Samed Bazdar, Jovo Lukic.",
+      "provider_wallclock": "2026-06-12T20:22:46Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3671.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Samed Bazdar"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jovo Lukic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487006",
+      "time": "2026-06-12T20:22:47Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Bosnia-Herzegovina. Players involved: Armin Gigovic, Ivan Basic.",
+      "provider_wallclock": "2026-06-12T20:22:47Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3672.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Armin Gigovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ivan Basic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487010",
+      "time": "2026-06-12T20:23:08Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Esmir Bajraktarevic, Richie Laryea.",
+      "provider_wallclock": "2026-06-12T20:23:08Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3694.0",
+          "displayValue": "62'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Esmir Bajraktarevic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Richie Laryea"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487020",
+      "time": "2026-06-12T20:24:02Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Canada. Players involved: Promise David, Armin Gigovic.",
+      "provider_wallclock": "2026-06-12T20:24:02Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3747.0",
+          "displayValue": "63'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Promise David"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Armin Gigovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487060",
+      "time": "2026-06-12T20:26:29Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Canada. Players involved: Stephen Eustáquio, Richie Laryea.",
+      "provider_wallclock": "2026-06-12T20:26:29Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3894.0",
+          "displayValue": "65'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Stephen Eustáquio"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Richie Laryea"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487084",
+      "time": "2026-06-12T20:27:29Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Canada. Players involved: Tani Oluwaseyi, Jacob Shaffelburg.",
+      "provider_wallclock": "2026-06-12T20:27:29Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3955.0",
+          "displayValue": "66'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Tani Oluwaseyi"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Jacob Shaffelburg"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487083",
+      "time": "2026-06-12T20:27:38Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Samed Bazdar, Luc de Fougerolles.",
+      "provider_wallclock": "2026-06-12T20:27:38Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "3964.0",
+          "displayValue": "67'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Samed Bazdar"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Luc de Fougerolles"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487108",
+      "time": "2026-06-12T20:29:23Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Sead Kolasinac, Tani Oluwaseyi.",
+      "provider_wallclock": "2026-06-12T20:29:23Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4069.0",
+          "displayValue": "68'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sead Kolasinac"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tani Oluwaseyi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487112",
+      "time": "2026-06-12T20:30:03Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Canada. Players involved: Luc de Fougerolles, Sead Kolasinac.",
+      "provider_wallclock": "2026-06-12T20:30:03Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4109.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Luc de Fougerolles"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sead Kolasinac"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487114",
+      "time": "2026-06-12T20:30:09Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Canada.",
+      "provider_wallclock": "2026-06-12T20:30:09Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4115.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49487113",
+      "time": "2026-06-12T20:30:10Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T20:30:10Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4115.0",
+          "displayValue": "69'"
+        },
+        "team": {
+          "id": "452",
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49487116",
+      "time": "2026-06-12T20:32:34Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Canada.",
+      "provider_wallclock": "2026-06-12T20:32:34Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4260.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "displayName": "Canada"
+        }
+      }
+    },
+    {
+      "event_id": "49487117",
+      "time": "2026-06-12T20:32:35Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T20:32:35Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4260.0",
+          "displayValue": "71'"
+        },
+        "team": {
+          "id": "452",
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49487147",
+      "time": "2026-06-12T20:34:23Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Canada. Players involved: Ismaël Koné, Samed Bazdar.",
+      "provider_wallclock": "2026-06-12T20:34:23Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4368.0",
+          "displayValue": "73'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ismaël Koné"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Samed Bazdar"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487155",
+      "time": "2026-06-12T20:34:53Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Sead Kolasinac, Stephen Eustáquio.",
+      "provider_wallclock": "2026-06-12T20:34:53Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4399.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Sead Kolasinac"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Stephen Eustáquio"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487156",
+      "time": "2026-06-12T20:35:20Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Bosnia-Herzegovina. Players involved: Ivan Sunjic, Esmir Bajraktarevic.",
+      "provider_wallclock": "2026-06-12T20:35:20Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4425.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ivan Sunjic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Esmir Bajraktarevic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487158",
+      "time": "2026-06-12T20:35:27Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Bosnia-Herzegovina. Players involved: Kerim Alajbegovic, Amar Memic.",
+      "provider_wallclock": "2026-06-12T20:35:27Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4432.0",
+          "displayValue": "74'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kerim Alajbegovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Amar Memic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487218",
+      "time": "2026-06-12T20:37:32Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Canada. Players involved: Cyle Larin, Tani Oluwaseyi.",
+      "provider_wallclock": "2026-06-12T20:37:32Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4558.0",
+          "displayValue": "76'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Cyle Larin"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tani Oluwaseyi"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487222",
+      "time": "2026-06-12T20:37:47Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Kerim Alajbegovic, Alistair Johnston.",
+      "provider_wallclock": "2026-06-12T20:37:47Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4572.0",
+          "displayValue": "77'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Kerim Alajbegovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Alistair Johnston"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487265",
+      "time": "2026-06-12T20:39:34Z",
+      "type": "goal",
+      "text": "Event: Goal. Team: Canada. Players involved: Cyle Larin, Promise David.",
+      "provider_wallclock": "2026-06-12T20:39:34Z",
+      "facts": {
+        "type": {
+          "id": "70",
+          "text": "Goal",
+          "type": "goal"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4679.0",
+          "displayValue": "78'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Cyle Larin"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Promise David"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487281",
+      "time": "2026-06-12T20:41:53Z",
+      "type": "shot-off-target",
+      "text": "Event: Shot Off Target. Team: Canada. Players involved: Promise David, Cyle Larin.",
+      "provider_wallclock": "2026-06-12T20:41:53Z",
+      "facts": {
+        "type": {
+          "id": "117",
+          "text": "Shot Off Target",
+          "type": "shot-off-target"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4819.0",
+          "displayValue": "81'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Promise David"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Cyle Larin"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487319",
+      "time": "2026-06-12T20:44:11Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T20:44:11Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4957.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        }
+      }
+    },
+    {
+      "event_id": "49487320",
+      "time": "2026-06-12T20:44:12Z",
+      "type": "start-delay",
+      "text": "Event: Start Delay. Team: Canada.",
+      "provider_wallclock": "2026-06-12T20:44:12Z",
+      "facts": {
+        "type": {
+          "id": "129",
+          "text": "Start Delay",
+          "type": "start-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "4957.0",
+          "displayValue": "83'"
+        },
+        "team": {
+          "id": "206",
+          "displayName": "Canada"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49487324",
+      "time": "2026-06-12T20:45:04Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T20:45:04Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5010.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        }
+      }
+    },
+    {
+      "event_id": "49487323",
+      "time": "2026-06-12T20:45:05Z",
+      "type": "end-delay",
+      "text": "Event: End Delay. Team: Canada.",
+      "provider_wallclock": "2026-06-12T20:45:05Z",
+      "facts": {
+        "type": {
+          "id": "130",
+          "text": "End Delay",
+          "type": "end-delay"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5010.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "id": "206",
+          "displayName": "Canada"
+        },
+        "scoringPlay": false,
+        "shootout": false
+      }
+    },
+    {
+      "event_id": "49487331",
+      "time": "2026-06-12T20:45:13Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Bosnia-Herzegovina. Players involved: Dzenis Burnic, Sead Kolasinac.",
+      "provider_wallclock": "2026-06-12T20:45:13Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5018.0",
+          "displayValue": "84'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Dzenis Burnic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Sead Kolasinac"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487344",
+      "time": "2026-06-12T20:45:58Z",
+      "type": "corner-awarded",
+      "text": "Event: Corner Awarded. Team: Bosnia-Herzegovina.",
+      "provider_wallclock": "2026-06-12T20:45:58Z",
+      "facts": {
+        "type": {
+          "id": "95",
+          "text": "Corner Awarded",
+          "type": "corner-awarded"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5064.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        }
+      }
+    },
+    {
+      "event_id": "49487354",
+      "time": "2026-06-12T20:46:31Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Bosnia-Herzegovina. Players involved: Dzenis Burnic.",
+      "provider_wallclock": "2026-06-12T20:46:31Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5097.0",
+          "displayValue": "85'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Dzenis Burnic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487399",
+      "time": "2026-06-12T20:48:54Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Ivan Sunjic, Promise David.",
+      "provider_wallclock": "2026-06-12T20:48:54Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5240.0",
+          "displayValue": "88'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ivan Sunjic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Promise David"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487414",
+      "time": "2026-06-12T20:49:51Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Ermedin Demirovic, Ismaël Koné.",
+      "provider_wallclock": "2026-06-12T20:49:51Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5297.0",
+          "displayValue": "89'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ermedin Demirovic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Ismaël Koné"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487432",
+      "time": "2026-06-12T20:50:36Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Ivan Sunjic, Stephen Eustáquio.",
+      "provider_wallclock": "2026-06-12T20:50:36Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5342.0",
+          "displayValue": "90'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Ivan Sunjic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Stephen Eustáquio"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487456",
+      "time": "2026-06-12T20:52:28Z",
+      "type": "substitution",
+      "text": "Event: Substitution. Team: Canada. Players involved: Jonathan Osorio, Stephen Eustáquio.",
+      "provider_wallclock": "2026-06-12T20:52:28Z",
+      "facts": {
+        "type": {
+          "id": "76",
+          "text": "Substitution",
+          "type": "substitution"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+1'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Jonathan Osorio"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Stephen Eustáquio"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487468",
+      "time": "2026-06-12T20:52:55Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Canada. Players involved: Promise David, Tarik Muharemovic.",
+      "provider_wallclock": "2026-06-12T20:52:55Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+2'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Promise David"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Tarik Muharemovic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487479",
+      "time": "2026-06-12T20:54:12Z",
+      "type": "foul",
+      "text": "Event: Foul. Team: Bosnia-Herzegovina. Players involved: Nikola Katic, Cyle Larin.",
+      "provider_wallclock": "2026-06-12T20:54:12Z",
+      "facts": {
+        "type": {
+          "id": "66",
+          "text": "Foul",
+          "type": "foul"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nikola Katic"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Cyle Larin"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487480",
+      "time": "2026-06-12T20:54:16Z",
+      "type": "yellow-card",
+      "text": "Event: Yellow Card. Team: Bosnia-Herzegovina. Players involved: Nikola Katic.",
+      "provider_wallclock": "2026-06-12T20:54:16Z",
+      "facts": {
+        "type": {
+          "id": "94",
+          "text": "Yellow Card",
+          "type": "yellow-card"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+3'"
+        },
+        "team": {
+          "displayName": "Bosnia-Herzegovina"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Nikola Katic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487520",
+      "time": "2026-06-12T20:56:52Z",
+      "type": "shot-blocked",
+      "text": "Event: Shot Blocked. Team: Canada. Players involved: Cyle Larin, Richie Laryea.",
+      "provider_wallclock": "2026-06-12T20:56:52Z",
+      "facts": {
+        "type": {
+          "id": "135",
+          "text": "Shot Blocked",
+          "type": "shot-blocked"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+6'"
+        },
+        "team": {
+          "displayName": "Canada"
+        },
+        "participants": [
+          {
+            "athlete": {
+              "displayName": "Cyle Larin"
+            }
+          },
+          {
+            "athlete": {
+              "displayName": "Richie Laryea"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_id": "49487533",
+      "time": "2026-06-12T20:57:45Z",
+      "type": "end-regular-time",
+      "text": "Event: End Regular Time.",
+      "provider_wallclock": "2026-06-12T20:57:45Z",
+      "facts": {
+        "type": {
+          "id": "83",
+          "text": "End Regular Time",
+          "type": "end-regular-time"
+        },
+        "period": {
+          "number": 2
+        },
+        "clock": {
+          "value": "5400.0",
+          "displayValue": "90'+7'"
+        }
+      }
+    }
+  ],
+  "excluded_event_entries": {
+    "unstructured": 7
+  }
+}
