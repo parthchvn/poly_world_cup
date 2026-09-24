@@ -339,6 +339,81 @@ def publish_recovery_audit(recovery):
     return proof
 
 
+def package_capture_inputs(recovery, output_dir, chunk_bytes=8*1024*1024):
+    """Persist expensive fresh captures separately from the much larger DB."""
+    import shutil
+    import tarfile
+    recovery,output_dir=Path(recovery),Path(output_dir)
+    if output_dir.exists() and any(output_dir.iterdir()):
+        raise ValueError('Recovery bundle output must be empty')
+    report=json.loads((recovery/'recovery_report.json').read_text())
+    fresh=json.loads((recovery/'trades'/'batch_progress.json').read_text())
+    exact=json.loads((recovery/'exact20'/'collection_report.json').read_text())
+    if fresh['status']!='api_exhausted' or exact['status']!='complete':
+        raise TradeIngestionError('Only complete captures may be bundled')
+    if not (recovery/'recovery_audit.json').exists():
+        publish_recovery_audit(recovery)
+    directories=('cache','trades','exact20','exact20_cache')
+    files=[path for name in directories for path in (recovery/name).rglob('*')
+           if path.is_file() and not path.name.startswith('.')]
+    files.extend(recovery/name for name in ('recovery_report.json','recovery_audit.json'))
+    output_dir.mkdir(parents=True,exist_ok=True)
+    fd,temporary=tempfile.mkstemp(prefix='worldcup_capture_inputs_',suffix='.tar.gz');os.close(fd)
+    archive=Path(temporary)
+    try:
+        with tarfile.open(archive,'w:gz',compresslevel=3) as bundle:
+            for path in sorted(files):
+                bundle.add(path,arcname=str(path.relative_to(recovery)),recursive=False)
+        archive_hash=sha256(archive);archive_bytes=archive.stat().st_size;parts=[]
+        with archive.open('rb') as stream:
+            index=1
+            while content:=stream.read(chunk_bytes):
+                path=output_dir/f'capture_inputs.tar.gz.part{index:03d}'
+                path.write_bytes(content)
+                parts.append({'path':path.name,'bytes':len(content),'sha256':hashlib.sha256(content).hexdigest()})
+                index+=1
+        for name in ('recovery_report.json','recovery_audit.json'):
+            shutil.copyfile(recovery/name,output_dir/name)
+        manifest={
+            'schema_version':1,'archive_format':'tar+gzip split into ordered binary parts',
+            'archive_sha256':archive_hash,'archive_bytes':archive_bytes,'archive_member_count':len(files),
+            'parts':parts,'captured_condition_count':fresh['condition_count'],
+            'full_replacement_observations':fresh['validated_observation_count'],
+            'exact20_pairs':exact['recovered_pair_count'],'exact20_observations':exact['recovered_observation_count'],
+            'old_filtered_archive_required_separately':True,
+            'old_filtered_archive_sha256':report['archive_recovery']['archive_sha256'],
+            'source_sqlite_included':False,'old_filtered_archive_included':False,
+            'all_excluded_actor_contract_histories_included':False,
+            'raw_captures_support_replay_not_chain_completeness':True}
+        write_json(output_dir/'MANIFEST.json',manifest)
+        (output_dir/'CHECKSUMS.sha256').write_text(''.join(f"{p['sha256']}  {p['path']}\n" for p in parts))
+        readme="""# Fresh capture recovery inputs
+
+This archive preserves the fresh19 replacement-contract API captures and1,700 exactly-20 actor–contract queries used to rebuild the actor-sequence dataset. It contains immutable raw response caches, normalized pages, cursor manifests, capture reports, and recovery audits. It does not contain `source.sqlite`, the original3.35GB filtered archive, or a complete set of histories for excluded actor–contract pairs across all 312 contracts. The 19 full-contract captures do include their excluded high-activity pairs.
+
+The original `world_cup_lt20.sqlite` and its `MANIFEST.json` are required separately. Their verified SHA256 is recorded in this package manifest. The complete published count ledger and registry remain in `datasets/world_cup_2026_tournament_lt20_v2_evidence`.
+
+From the repository root, first verify the parts inside this directory using `sha256sum -c CHECKSUMS.sha256`. Then concatenate parts in numeric order, extract into a new recovery directory, and rebuild offline:
+
+```sh
+cat datasets/world_cup_2026_actor_sequences_v3_recovery/capture_inputs.tar.gz.part* > /tmp/worldcup_capture_inputs.tar.gz
+mkdir -p data/sequence_v3_recovery
+tar -xzf /tmp/worldcup_capture_inputs.tar.gz -C data/sequence_v3_recovery
+python scripts/recover_sequence_trades.py --archive /path/to/world_cup_lt20.sqlite
+```
+
+The recovery directory must not already contain a published `source.sqlite`. For a new online collection instead, add `--collect` to the recovery command. Every selected actor–contract pair must exactly match the full count ledger before publication. Inherited293-contract normalized evidence is never described as newly raw-replayed. Coverage bounds are the narrower selected-cohort observed interval. API exhaustion and repeated observations are not proofs of canonical fill identity, deliberate inactivity, or chain completeness.
+"""
+        # Keep prose readable while retaining exact technical identifiers.
+        for old,new in [('fresh19','fresh 19'),('and1,700','and 1,700'),('original3.35GB','original 3.35 GB'),('Inherited293-contract','Inherited 293-contract')]:
+            readme=readme.replace(old,new)
+        readme = readme.replace('# Fresh capture recovery inputs\n', '# Fresh capture recovery inputs\n\nThe archive has ' + str(len(parts)) + ' ordered parts, each at most ' + str(chunk_bytes // (1024*1024)) + ' MiB, to fit GitHub API uploads.\n')
+        (output_dir/'README.md').write_text(readme)
+        return manifest
+    finally:
+        archive.unlink(missing_ok=True)
+
+
 def collect_sources(evidence, recovery, replacements):
     """Reproduce both missing capture sets at a combined 12 logical requests/s."""
     from concurrent.futures import ThreadPoolExecutor
@@ -368,7 +443,8 @@ def main():
     p.add_argument('--evidence',type=Path,default=Path('datasets/world_cup_2026_tournament_lt20_v2_evidence'))
     p.add_argument('--recovery',type=Path,default=Path('data/sequence_v3_recovery'))
     p.add_argument('--wait-for-captures',action='store_true')
-    p.add_argument('--collect',action='store_true',help='Collect or resume the19 missing full conditions and exactly20 pairs before rebuilding')
+    p.add_argument('--collect',action='store_true',help='Collect or resume the 19 missing full conditions and exactly20 pairs before rebuilding')
+    p.add_argument('--package-inputs',type=Path,help='After success, package fresh replay inputs in this empty output directory')
     args=p.parse_args(); args.recovery.mkdir(parents=True,exist_ok=True)
     contracts={c['condition_id']:c for c in json.loads((args.evidence/'registry.json').read_text())['contracts']}
     tokens={c:{t['token_id'] for t in row['tokens']} for c,row in contracts.items()}
@@ -413,6 +489,8 @@ def main():
     os.replace(private,output)
     write_json(args.recovery/'recovery_report.json',report)
     publish_recovery_audit(args.recovery)
+    if args.package_inputs:
+        package_capture_inputs(args.recovery,args.package_inputs)
     print(now(),'PUBLISHED',json.dumps({k:report[k] for k in ('selected_observation_count','selected_pair_count','source_database_sha256')}),flush=True)
 
 

@@ -1,0 +1,124 @@
+{
+  "archive_recovery": {
+    "archive_bytes": 3352584192,
+    "archive_manifest_sha256": "b7105d92881b6318ea9f86e9bc8f67657db76835b18c4abbbd8f3c060f6b98cb",
+    "archive_path": "/workspace/scratch/329be6515bcc/recovered_source/original_filtered/world_cup_lt20.sqlite",
+    "archive_sha256": "98a0f7db2685c459a60c90766e2d4edbf32e314e27a6b600121495e57cb28bcd",
+    "inherited_observation_count": 3467060,
+    "provenance_scope": "inherited_normalized_archive_not_new_raw_replay"
+  },
+  "canonical_fill_identity_available": false,
+  "capture_time_semantics": "Inherited condition capture timestamps unknown; source verification time is not substituted.",
+  "condition_count": 312,
+  "coverage_bound_scope": "selected_cohort_observed_interval",
+  "filter_scope": [
+    "wallet",
+    "condition_id"
+  ],
+  "finished_at_utc": "2026-09-24T12:53:36.814772Z",
+  "fixture_count": 104,
+  "full_ledger": {
+    "files": [
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00001.jsonl.gz",
+        "sha256": "4f620ed11f6ddd0ffb461cd75cab30b3b01979a1cb5a979bbaa98f4e27899d29"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00002.jsonl.gz",
+        "sha256": "0a565813a759c3f53b0bb5ff4d1412b4b516b9a39dd7687c58b930e207aa453f"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00003.jsonl.gz",
+        "sha256": "4c0fb7fc9fc0854eea87bf45d476f0d5581e3c012fedbafebdacc2f73373c961"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00004.jsonl.gz",
+        "sha256": "b78492536a553b312df54897f823fba69adc7624ab8f1a0fcc6909d08e14ca61"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00005.jsonl.gz",
+        "sha256": "422b437ac841800bf77ffab1b0a2902212a2fdd162de5e880f2c831da63214d7"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00006.jsonl.gz",
+        "sha256": "5aba530189e75f245f6e142d8aef2229b85f3354ce54e3b8e77260902d5976b6"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00007.jsonl.gz",
+        "sha256": "27f2193a0dadcb936312bff15c64cc951757b098e6134f3d30d6a53a41951424"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00008.jsonl.gz",
+        "sha256": "98865bd4052255560da7e98c531d49523f86588768745993d16a6e7d65c1782f"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00009.jsonl.gz",
+        "sha256": "1f778131b0b794914603c4d6a9ad552ca8b3efaa007d07b0182d943c3a8e73d6"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00010.jsonl.gz",
+        "sha256": "4d094ea24b3eb4fb82172edd70265a2839fe87f94622e998b7f1604ac4fd969d"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00011.jsonl.gz",
+        "sha256": "8c1e969349cfb3b22798b940952af466e94e8b6ae17c2ed94a6a3fa86104e9d2"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00012.jsonl.gz",
+        "sha256": "29169e71740228541cc49c6c8509a4a49c970c2a81c6f7f7073c4ebf3ecc6134"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00013.jsonl.gz",
+        "sha256": "c0d4c15ca8799423d0ab3705e99d7653169752e64e93f54da39ce4cfe2f25fa9"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00014.jsonl.gz",
+        "sha256": "50091886110b6ea0c679fc6ce5466f058379ada1b9337259eb82ec05aa5d8ff4"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00015.jsonl.gz",
+        "sha256": "1511f6e93e1c0300c3301410321847f788765989ef6a8e201be45af6255bfb3f"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00016.jsonl.gz",
+        "sha256": "b81a7af6ec5f68443d2d6cd474fd14510ed6482936aac4d4be1bf2e480c9da81"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00017.jsonl.gz",
+        "sha256": "4a41a9136b5f532dcd1499de1f4467aaa1c6fedfd7c06f6aab110795bf4b761e"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00018.jsonl.gz",
+        "sha256": "0032056140655c4b36fa4169827e6db5a34b703ac9db6905de143a45038222bb"
+      },
+      {
+        "path": "datasets/world_cup_2026_tournament_lt20_v2_evidence/trade_count_ledger/part-00019.jsonl.gz",
+        "sha256": "6aa39b8a89e7a8c31d01faed2917ce11b1bfb2b5de9b0811bedcd186fbf5a970"
+      }
+    ],
+    "observation_count": 12250443,
+    "pair_count": 2259806
+  },
+  "limitations": [
+    "API observations are not canonical fills or deliberate decisions",
+    "The <=20 selection is retrospective per binary contract, not proof of market-maker status",
+    "Only selected actor-contract histories are present; excluded actor-contract histories are absent",
+    "Coverage endpoints are narrower selected-cohort observations, not full-condition endpoints",
+    "API exhaustion is not chain completeness; trades below 0.000001 tokens are excluded"
+  ],
+  "maximum_observations_inclusive": 20,
+  "minimum_size_tokens": "0.000001",
+  "raw_replayed_replacement_contracts": 19,
+  "schema_version": 3,
+  "selected_observation_count": 3974200,
+  "selected_pair_count": 2206158,
+  "selected_pair_counts_exactly_match_full_ledger": true,
+  "selected_wallet_count": 255438,
+  "source_completeness_certified": false,
+  "source_database_bytes": 3980079104,
+  "source_database_path": "/workspace/scratch/329be6515bcc/poly_world_cup_repo/data/sequence_v3_recovery/source.sqlite",
+  "source_database_sha256": "390ae3b96d6fe85ef7a887d8c6d0686d80c658d542f8f956ab380bdd6c1e6ae8",
+  "source_page_semantics": "Inherited ledger includes unused and superseded references; only fresh page entries are newly raw-replayed.",
+  "source_scope": "selected_cohort_with_full_count_ledger",
+  "training_coverage_certified": false
+}

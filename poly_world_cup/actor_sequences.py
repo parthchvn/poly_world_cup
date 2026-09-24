@@ -453,6 +453,34 @@ def export_actor_sequences(source, output, evidence, split_policy, policy, token
         raise ValueError("Source mutated during export")
     _reject_wal(source)
     (output / "fixture_coverage.json").write_text(_json({k: dict(v) for k, v in sorted(fixture_counts.items())}) + "\n")
+    (output / "README.md").write_text(
+        "# World Cup 2026 actor conversations, version 3\n\n"
+        f"This export contains **{obs_shards.count:,} selected observations** from "
+        f"**{counts['actors']:,} actors** across the configured 104 matches. "
+        "Check `fixture_coverage.json` for actual retained target coverage.\n\n"
+        f"There are **{index.count:,} complete multi-turn conversations**. "
+        "Each compressed JSONL line is one conversation; only its `messages` field is a model input. "
+        "Turns within the line share attention. Separate lines do not.\n\n"
+        "The `conditional_trades` profile predicts observed execution attributes. "
+        "The alternative `scheduled_windows` profile predicts observations or `NO_TRADE` "
+        "over fixed 15-minute windows in explicitly monitored contracts. "
+        "The two profiles have different prediction tasks.\n\n"
+        "The activity filter is at most 20 captured observations per actor and binary contract. "
+        "News appears initially and as incremental updates. Initial summaries are numerical "
+        "activity summaries, not inferred private beliefs.\n\n"
+        f"**{quarantine.count:,} observations** are retained in the observation archive but excluded "
+        "from targets by temporal or source-quality checks. Source-valid earlier observations "
+        "can still supply history within their own fixture partition.\n\n"
+        f"Reference tokens: maximum **{max(token_histogram, default=0):,}**. "
+        "Check `requires_long_context` before selecting a trainer context limit. "
+        "No target is silently truncated. Counts use the pinned Qwen3 tokenizer and supplied template.\n\n"
+        "Export status alone is not a validation result. The authoritative "
+        "[independent report](../../reports/actor_sequences_validation.json) must say passed "
+        "and match this manifest's SHA-256 before using this as the completed release. "
+        "No model has been trained.\n\n"
+        "[Format and inspection](../../docs/actor_sequence_dataset.md) · "
+        "[Training guide](../../docs/actor_sequence_training.md)\n"
+    )
     for path in sorted(output.rglob("*")):
         if path.is_file():
             artifacts[str(path.relative_to(output))] = {"sha256": _sha(path), "bytes": path.stat().st_size}
