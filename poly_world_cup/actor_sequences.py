@@ -385,7 +385,8 @@ def export_actor_sequences(source, output, evidence, split_policy, policy, token
     coverage = {r["condition_id"]: dict(r) for r in db.execute("SELECT * FROM condition_coverage")}
     if len(coverage) != 312 or set(coverage) != set(catalog.contracts) or len({r["fixture_id"] for r in catalog.contracts.values()}) != 104:
         raise ValueError("Expected complete source coverage for all 104 fixtures / 312 contracts")
-    if any(r["status"] not in {"api_exhausted", "api_exhausted_raw_replay_verified", "api_exhausted_selected_cohort_verified"} for r in coverage.values()):
+    if any(r["status"] not in {"api_exhausted", "api_exhausted_raw_replay_verified", "api_exhausted_selected_cohort_verified",
+        "inherited_api_exhausted_selected_cohort_verified", "recaptured_api_exhausted_selected_cohort_verified"} for r in coverage.values()):
         raise ValueError("Every condition needs an exhausted captured history")
     if any(type(r["earliest_query_us"]) is not int or type(r["latest_query_us"]) is not int or
            r["earliest_query_us"] > r["latest_query_us"] for r in coverage.values()):
@@ -395,6 +396,10 @@ def export_actor_sequences(source, output, evidence, split_policy, policy, token
     for name, value in {"policy.json": asdict(policy), "split_policy.json": split_policy,
         "context_catalog.json": catalog.audit_catalog(), "source_coverage.json": coverage}.items():
         (output / name).write_text(_json(value) + "\n")
+    metadata = {r["key"]: json.loads(r["value_json"]) for r in db.execute("SELECT * FROM metadata")}
+    if metadata.get("source_scope") == "selected_cohort_with_full_count_ledger" and policy.max_trades_per_market > metadata["report"]["maximum_observations_inclusive"]:
+        raise ValueError("Source recovery does not contain the requested larger activity cohort")
+    (output / "source_metadata.json").write_text(_json(metadata) + "\n")
     shards = {(p, s): _Shards(output / p / s, 2000) for p in PROFILES for s in SPLITS}
     obs_shards, quarantine = _Shards(output / "observations", 100000), _Shards(output / "quarantine", 100000)
     index = _Shards(output / "actor_index", 100000)

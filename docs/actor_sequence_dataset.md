@@ -102,7 +102,16 @@ are for validation, not model inputs. Feed only the `messages` field to SFT.
 
 ## Build and validate
 
-Recover the selected observations into a closed SQLite database, with all
+Reassemble and extract the existing `world_cup_lt20.part01` and `.part02` ZIP
+archive. Keep its `MANIFEST.json` beside `world_cup_lt20.sqlite`, then run:
+
+```bash
+python scripts/recover_sequence_trades.py \
+  --archive /path/to/world_cup_lt20.sqlite --collect
+```
+
+This resumes the missing contract histories and the additional exactly-20
+pairs, then recovers the selected observations into a closed SQLite database, with all
 eligible pair counts exactly reconciled to the full published tournament count
 ledger. A recovered selected-only database must explicitly declare that scope.
 Conservative interval bounds based on the earliest/latest recovered selected

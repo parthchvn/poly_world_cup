@@ -1,0 +1,317 @@
+{
+  "code_stable": true,
+  "full_release_validation": false,
+  "parallel": {
+    "actors": 30,
+    "assistant_mask_probes": {
+      "conditional_trades/test": {
+        "assistant_turns": 9,
+        "masked_tokens": 413,
+        "note": "Probe applies only to this row/template; inspect actual trainer labels before training.",
+        "status": "assistant_content_and_end_tokens_verified",
+        "supervised_spans": 9,
+        "total_tokens": 5624
+      },
+      "conditional_trades/train": {
+        "assistant_turns": 13,
+        "masked_tokens": 578,
+        "note": "Probe applies only to this row/template; inspect actual trainer labels before training.",
+        "status": "assistant_content_and_end_tokens_verified",
+        "supervised_spans": 13,
+        "total_tokens": 6148
+      },
+      "conditional_trades/validation": {
+        "assistant_turns": 9,
+        "masked_tokens": 431,
+        "note": "Probe applies only to this row/template; inspect actual trainer labels before training.",
+        "status": "assistant_content_and_end_tokens_verified",
+        "supervised_spans": 9,
+        "total_tokens": 7188
+      },
+      "scheduled_windows/test": {
+        "assistant_turns": 78,
+        "masked_tokens": 681,
+        "note": "Probe applies only to this row/template; inspect actual trainer labels before training.",
+        "status": "assistant_content_and_end_tokens_verified",
+        "supervised_spans": 78,
+        "total_tokens": 6672
+      },
+      "scheduled_windows/train": {
+        "assistant_turns": 15,
+        "masked_tokens": 228,
+        "note": "Probe applies only to this row/template; inspect actual trainer labels before training.",
+        "status": "assistant_content_and_end_tokens_verified",
+        "supervised_spans": 15,
+        "total_tokens": 4877
+      },
+      "scheduled_windows/validation": {
+        "assistant_turns": 56,
+        "masked_tokens": 570,
+        "note": "Probe applies only to this row/template; inspect actual trainer labels before training.",
+        "status": "assistant_content_and_end_tokens_verified",
+        "supervised_spans": 56,
+        "total_tokens": 7078
+      }
+    },
+    "code_sha256_after": {
+      "configs/actor_sequence_chat_template.jinja": "8e2e35bf605f6bd22992f06d6073f5e7f3a04b9bc99a76ee521ea0504e62ed71",
+      "poly_world_cup/actor_sequences.py": "3c9e4ee269aa34e062ceaafc0505112eefe0f80546c3c7cb931e11713404ca67",
+      "poly_world_cup/sequence_context.py": "8b1269e7348e223c7a27bb52e92e16425ed658d071500651a161bf2a1b740b19",
+      "poly_world_cup/sequence_tokens.py": "a41f0d06cd9a13f50983cc4770ee64a3e82d639e730f5bd670bd918e67e03d42"
+    },
+    "code_sha256_before": {
+      "configs/actor_sequence_chat_template.jinja": "8e2e35bf605f6bd22992f06d6073f5e7f3a04b9bc99a76ee521ea0504e62ed71",
+      "poly_world_cup/actor_sequences.py": "3c9e4ee269aa34e062ceaafc0505112eefe0f80546c3c7cb931e11713404ca67",
+      "poly_world_cup/sequence_context.py": "8b1269e7348e223c7a27bb52e92e16425ed658d071500651a161bf2a1b740b19",
+      "poly_world_cup/sequence_tokens.py": "a41f0d06cd9a13f50983cc4770ee64a3e82d639e730f5bd670bd918e67e03d42"
+    },
+    "conversation_gzip_bytes": 2213764,
+    "conversation_gzip_sha256": "866623dfc6a4b45178014c896cf388b59de5ecfcaa7179989880d29487cd61d2",
+    "counts": {
+      "conditional_target_observations": 1750,
+      "scheduled_target_observations": 678,
+      "test_eligible_negative_windows": 2166,
+      "test_eligible_positive_windows": 79,
+      "test_eligible_windows": 2245,
+      "test_retained_negative_windows": 2166,
+      "test_retained_positive_windows": 79,
+      "test_retained_windows": 2245,
+      "train_eligible_negative_windows": 8267,
+      "train_eligible_positive_windows": 209,
+      "train_eligible_windows": 8476,
+      "train_retained_negative_windows": 414,
+      "train_retained_positive_windows": 209,
+      "train_retained_windows": 623,
+      "validation_eligible_negative_windows": 4528,
+      "validation_eligible_positive_windows": 207,
+      "validation_eligible_windows": 4735,
+      "validation_retained_negative_windows": 4528,
+      "validation_retained_positive_windows": 207,
+      "validation_retained_windows": 4735
+    },
+    "exact_token_count_mismatches": [],
+    "first_output_seconds": 8.896983571999954,
+    "full_result_sha256": "4fc7b2fae3506c90fbbffb32f416e41570bf9806b15a92cb1922782dc294db33",
+    "groups": {
+      "conditional_trades/test": {
+        "max_tokens": 7177,
+        "rows": 36,
+        "tokens": 164088,
+        "turns": 228
+      },
+      "conditional_trades/train": {
+        "max_tokens": 7684,
+        "rows": 132,
+        "tokens": 832326,
+        "turns": 896
+      },
+      "conditional_trades/validation": {
+        "max_tokens": 7222,
+        "rows": 71,
+        "tokens": 418847,
+        "turns": 569
+      },
+      "scheduled_windows/test": {
+        "max_tokens": 7915,
+        "rows": 57,
+        "tokens": 309511,
+        "turns": 2245
+      },
+      "scheduled_windows/train": {
+        "max_tokens": 7267,
+        "rows": 118,
+        "tokens": 677932,
+        "turns": 623
+      },
+      "scheduled_windows/validation": {
+        "max_tokens": 7323,
+        "rows": 130,
+        "tokens": 854616,
+        "turns": 4735
+      }
+    },
+    "input_observations": 1767,
+    "oversized_rows": [],
+    "policy": {
+      "activity_seconds": 86400,
+      "carry_trades": 16,
+      "evaluation_negative_probability": 1.0,
+      "filter_scope": "actor_market",
+      "horizon_seconds": 900,
+      "initial_news_per_scope": 8,
+      "max_tokens": 8192,
+      "max_trades_per_market": 20,
+      "max_turns": 128,
+      "response_reserve_tokens": 1024,
+      "sampling_seed": "world-cup-actor-sequences-v3",
+      "train_negative_probability": 0.05
+    },
+    "population_projection": null,
+    "scope": "old archived partial-capture per-pair <20 selected observations only; not complete v3 source or prospective absence evidence",
+    "seconds_including_full_token_verification_and_mask_probes": 16.656351290999737,
+    "workers": 8
+  },
+  "publication_note": "This smoke records the exact builder code hashes used in both runs. Later changes to source_metadata export and source-status allowlist guards affect export-only checks, not the actor-conversation builder exercised here. This report does not validate those later export-only checks; full-source and release validation are separate.",
+  "reproduction_script": "data/sequence_v3_benchmark/restored_archive_smoke.py",
+  "sample_limitations": [
+    "Archived partial-capture actor-market cohort with strictly fewer than 20 observations, not the final inclusive-at-most-20 v3 cohort.",
+    "Thirty multi-target actors chosen across the three target splits; this is not a representative population sample.",
+    "Observation coverage is the minimum/maximum of archived selected records, not proof of full API coverage or continuously open markets.",
+    "Timings include independent complete-template tokenization of every output row and six profile/split mask probes; no training was run."
+  ],
+  "scope": "old archived partial-capture per-pair <20 selected observations only; not complete v3 source or prospective absence evidence",
+  "serial": {
+    "actors": 30,
+    "assistant_mask_probes": {
+      "conditional_trades/test": {
+        "assistant_turns": 9,
+        "masked_tokens": 413,
+        "note": "Probe applies only to this row/template; inspect actual trainer labels before training.",
+        "status": "assistant_content_and_end_tokens_verified",
+        "supervised_spans": 9,
+        "total_tokens": 5624
+      },
+      "conditional_trades/train": {
+        "assistant_turns": 13,
+        "masked_tokens": 578,
+        "note": "Probe applies only to this row/template; inspect actual trainer labels before training.",
+        "status": "assistant_content_and_end_tokens_verified",
+        "supervised_spans": 13,
+        "total_tokens": 6148
+      },
+      "conditional_trades/validation": {
+        "assistant_turns": 9,
+        "masked_tokens": 431,
+        "note": "Probe applies only to this row/template; inspect actual trainer labels before training.",
+        "status": "assistant_content_and_end_tokens_verified",
+        "supervised_spans": 9,
+        "total_tokens": 7188
+      },
+      "scheduled_windows/test": {
+        "assistant_turns": 78,
+        "masked_tokens": 681,
+        "note": "Probe applies only to this row/template; inspect actual trainer labels before training.",
+        "status": "assistant_content_and_end_tokens_verified",
+        "supervised_spans": 78,
+        "total_tokens": 6672
+      },
+      "scheduled_windows/train": {
+        "assistant_turns": 15,
+        "masked_tokens": 228,
+        "note": "Probe applies only to this row/template; inspect actual trainer labels before training.",
+        "status": "assistant_content_and_end_tokens_verified",
+        "supervised_spans": 15,
+        "total_tokens": 4877
+      },
+      "scheduled_windows/validation": {
+        "assistant_turns": 56,
+        "masked_tokens": 570,
+        "note": "Probe applies only to this row/template; inspect actual trainer labels before training.",
+        "status": "assistant_content_and_end_tokens_verified",
+        "supervised_spans": 56,
+        "total_tokens": 7078
+      }
+    },
+    "code_sha256_after": {
+      "configs/actor_sequence_chat_template.jinja": "8e2e35bf605f6bd22992f06d6073f5e7f3a04b9bc99a76ee521ea0504e62ed71",
+      "poly_world_cup/actor_sequences.py": "3c9e4ee269aa34e062ceaafc0505112eefe0f80546c3c7cb931e11713404ca67",
+      "poly_world_cup/sequence_context.py": "8b1269e7348e223c7a27bb52e92e16425ed658d071500651a161bf2a1b740b19",
+      "poly_world_cup/sequence_tokens.py": "a41f0d06cd9a13f50983cc4770ee64a3e82d639e730f5bd670bd918e67e03d42"
+    },
+    "code_sha256_before": {
+      "configs/actor_sequence_chat_template.jinja": "8e2e35bf605f6bd22992f06d6073f5e7f3a04b9bc99a76ee521ea0504e62ed71",
+      "poly_world_cup/actor_sequences.py": "3c9e4ee269aa34e062ceaafc0505112eefe0f80546c3c7cb931e11713404ca67",
+      "poly_world_cup/sequence_context.py": "8b1269e7348e223c7a27bb52e92e16425ed658d071500651a161bf2a1b740b19",
+      "poly_world_cup/sequence_tokens.py": "a41f0d06cd9a13f50983cc4770ee64a3e82d639e730f5bd670bd918e67e03d42"
+    },
+    "conversation_gzip_bytes": 2213764,
+    "conversation_gzip_sha256": "866623dfc6a4b45178014c896cf388b59de5ecfcaa7179989880d29487cd61d2",
+    "counts": {
+      "conditional_target_observations": 1750,
+      "scheduled_target_observations": 678,
+      "test_eligible_negative_windows": 2166,
+      "test_eligible_positive_windows": 79,
+      "test_eligible_windows": 2245,
+      "test_retained_negative_windows": 2166,
+      "test_retained_positive_windows": 79,
+      "test_retained_windows": 2245,
+      "train_eligible_negative_windows": 8267,
+      "train_eligible_positive_windows": 209,
+      "train_eligible_windows": 8476,
+      "train_retained_negative_windows": 414,
+      "train_retained_positive_windows": 209,
+      "train_retained_windows": 623,
+      "validation_eligible_negative_windows": 4528,
+      "validation_eligible_positive_windows": 207,
+      "validation_eligible_windows": 4735,
+      "validation_retained_negative_windows": 4528,
+      "validation_retained_positive_windows": 207,
+      "validation_retained_windows": 4735
+    },
+    "exact_token_count_mismatches": [],
+    "first_output_seconds": 1.749851427000067,
+    "full_result_sha256": "4fc7b2fae3506c90fbbffb32f416e41570bf9806b15a92cb1922782dc294db33",
+    "groups": {
+      "conditional_trades/test": {
+        "max_tokens": 7177,
+        "rows": 36,
+        "tokens": 164088,
+        "turns": 228
+      },
+      "conditional_trades/train": {
+        "max_tokens": 7684,
+        "rows": 132,
+        "tokens": 832326,
+        "turns": 896
+      },
+      "conditional_trades/validation": {
+        "max_tokens": 7222,
+        "rows": 71,
+        "tokens": 418847,
+        "turns": 569
+      },
+      "scheduled_windows/test": {
+        "max_tokens": 7915,
+        "rows": 57,
+        "tokens": 309511,
+        "turns": 2245
+      },
+      "scheduled_windows/train": {
+        "max_tokens": 7267,
+        "rows": 118,
+        "tokens": 677932,
+        "turns": 623
+      },
+      "scheduled_windows/validation": {
+        "max_tokens": 7323,
+        "rows": 130,
+        "tokens": 854616,
+        "turns": 4735
+      }
+    },
+    "input_observations": 1767,
+    "oversized_rows": [],
+    "policy": {
+      "activity_seconds": 86400,
+      "carry_trades": 16,
+      "evaluation_negative_probability": 1.0,
+      "filter_scope": "actor_market",
+      "horizon_seconds": 900,
+      "initial_news_per_scope": 8,
+      "max_tokens": 8192,
+      "max_trades_per_market": 20,
+      "max_turns": 128,
+      "response_reserve_tokens": 1024,
+      "sampling_seed": "world-cup-actor-sequences-v3",
+      "train_negative_probability": 0.05
+    },
+    "population_projection": null,
+    "scope": "old archived partial-capture per-pair <20 selected observations only; not complete v3 source or prospective absence evidence",
+    "seconds_including_full_token_verification_and_mask_probes": 20.757530405000125,
+    "workers": 1
+  },
+  "serial_parallel_full_records_equal": true,
+  "six_profile_split_masks_passed": true,
+  "source_snapshot_sha256": "0da6e8c1e40972cb09abe70671ae9a7d0918cdc49bab69121508670727b60b27",
+  "training_performed": false
+}

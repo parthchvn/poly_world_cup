@@ -230,7 +230,7 @@ def inherit_archive(db,archive,replacements,evidence):
 def import_exact20(db,root,cache,valid_tokens):
     # Companion collector documents each single-page user+condition query. Never
     # infer completeness from a short page without terminal pagination and counts.
-    from recover_exact20_pairs import verify_saved_pair
+    from scripts.recover_exact20_pairs import verify_saved_pair
     pairs=list(db.execute('''SELECT wallet,condition_id FROM wallet_market_counts
         WHERE observation_count=20 AND condition_id NOT IN(SELECT condition_id FROM recovery_conditions)'''))
     count=0
@@ -301,12 +301,74 @@ def finalize(db,evidence,contracts,archive_info,ledger_info,output):
     return report
 
 
+def publish_recovery_audit(recovery):
+    """Write compact capture proofs after the immutable source DB is published."""
+    recovery=Path(recovery)
+    source=recovery/'source.sqlite'
+    db=sqlite3.connect('file:'+str(source.resolve())+'?mode=ro',uri=True)
+    db.row_factory=sqlite3.Row
+    report=json.loads((recovery/'recovery_report.json').read_text())
+    ledger_digest=hashlib.sha256()
+    for row in db.execute('SELECT wallet,condition_id,observation_count FROM wallet_market_counts ORDER BY wallet,condition_id'):
+        ledger_digest.update(_json_bytes(list(row)))
+    replacements=[]
+    for row in db.execute('SELECT * FROM recovery_conditions ORDER BY condition_id'):
+        entry=dict(row);entry.update(json.loads(entry.pop('details_json')))
+        entry['raw_replay_verified']=True
+        replacements.append(entry)
+    condition_rows=[dict(r) for r in db.execute('SELECT * FROM condition_coverage ORDER BY condition_id')]
+    proof={
+        'schema_version':1,'created_at_utc':now(),
+        'source_database_sha256':report['source_database_sha256'],
+        'source_scope':'selected_cohort_with_full_count_ledger',
+        'coverage_bound_scope':'selected_cohort_observed_interval',
+        'canonical_pair_count_ledger_sha256':ledger_digest.hexdigest(),
+        'canonical_pair_count_ledger_hash_encoding':'UTF8 compact JSON arrays [wallet,condition_id,count] with LF, sorted by wallet then condition',
+        'replacement_capture_raw_replays':replacements,
+        'full_replacement_observation_count':sum(r['full_count'] for r in replacements),
+        'selected_replacement_observation_count':sum(r['selected_count'] for r in replacements),
+        'replacement_page_count':sum(r['page_count'] for r in replacements),
+        'exact20_collection_report_sha256':sha256(recovery/'exact20'/'collection_report.json'),
+        'replacement_collection_report_sha256':sha256(recovery/'trades'/'batch_progress.json'),
+        'condition_coverage':condition_rows,
+        'api_exhaustion_is_not_chain_completeness':True,
+        'inherited_raw_response_bodies_replayed_in_this_recovery':False,
+        'page_count_semantics':'Fresh conditions: full replayed page count. Inherited conditions: distinct selected-source page references, including exactly20 user query pages.'}
+    db.close()
+    write_json(recovery/'recovery_audit.json',proof)
+    return proof
+
+
+def collect_sources(evidence, recovery, replacements):
+    """Reproduce both missing capture sets at a combined 12 logical requests/s."""
+    from concurrent.futures import ThreadPoolExecutor
+    from poly_world_cup.batch import run_batch
+    from scripts.recover_exact20_pairs import main as exact20_main
+    def replacements_job():
+        report=run_batch(replacements,output_dir=recovery/'trades',cache_dir=recovery/'cache',
+            workers=32,requests_per_second=6,minimum_size='0.000001',compress=True,
+            on_progress=lambda r: print(now(),'replacement capture',r['status_counts'],r['committed_observation_count'],flush=True))
+        if report['status']!='api_exhausted':
+            raise TradeIngestionError('Replacement capture did not finish: inspect batch_progress.json')
+    def exact20_job():
+        status=exact20_main(['--evidence',str(evidence),'--output',str(recovery/'exact20'),
+                            '--cache',str(recovery/'exact20_cache'),'--workers','32',
+                            '--requests-per-second','6'])
+        if status:
+            raise TradeIngestionError('Exactly20 capture failed: inspect failed_collection_report.json')
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        pending=[executor.submit(replacements_job),executor.submit(exact20_job)]
+        for future in pending:
+            future.result()
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--archive',type=Path,required=True)
     p.add_argument('--evidence',type=Path,default=Path('datasets/world_cup_2026_tournament_lt20_v2_evidence'))
     p.add_argument('--recovery',type=Path,default=Path('data/sequence_v3_recovery'))
     p.add_argument('--wait-for-captures',action='store_true')
+    p.add_argument('--collect',action='store_true',help='Collect or resume the19 missing full conditions and exactly20 pairs before rebuilding')
     args=p.parse_args(); args.recovery.mkdir(parents=True,exist_ok=True)
     contracts={c['condition_id']:c for c in json.loads((args.evidence/'registry.json').read_text())['contracts']}
     tokens={c:{t['token_id'] for t in row['tokens']} for c,row in contracts.items()}
@@ -314,6 +376,8 @@ def main():
     output=args.recovery/'source.sqlite'
     if output.exists():
         raise SystemExit('Refusing to replace an existing published source DB; choose a new recovery directory')
+    if args.collect:
+        collect_sources(args.evidence,args.recovery,replacements)
     fd,private_name=tempfile.mkstemp(prefix='worldcup_selected_source_',suffix='.sqlite');os.close(fd)
     private=Path(private_name)
     print(now(),'building private DB',str(private),flush=True)
@@ -348,6 +412,7 @@ def main():
     report['source_database_path']=str(output.resolve())
     os.replace(private,output)
     write_json(args.recovery/'recovery_report.json',report)
+    publish_recovery_audit(args.recovery)
     print(now(),'PUBLISHED',json.dumps({k:report[k] for k in ('selected_observation_count','selected_pair_count','source_database_sha256')}),flush=True)
 
 
