@@ -1,0 +1,15 @@
+{%- for message in messages %}
+    {%- if message.role not in ['system', 'user', 'assistant'] %}
+        {{- raise_exception('Actor conversations support only system, user and assistant roles') }}
+    {%- endif %}
+    {{- '<|im_start|>' + message.role + '\n' }}
+    {%- if message.role == 'assistant' %}
+        {%- generation %}{{- message.content + '<|im_end|>' }}{%- endgeneration %}
+        {{- '\n' }}
+    {%- else %}
+        {{- message.content + '<|im_end|>\n' }}
+    {%- endif %}
+{%- endfor %}
+{%- if add_generation_prompt %}
+    {{- '<|im_start|>assistant\n' }}
+{%- endif %}
