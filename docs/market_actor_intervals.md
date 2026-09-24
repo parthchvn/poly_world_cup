@@ -95,6 +95,23 @@ differ; `actor_index.jsonl` lists the actors present in your export.
 
 ## Existing trades and other leagues
 
+If ESPN returns HTTP 403 for Germany–Curaçao, the exporter automatically uses
+the included historical event file for ESPN match `760422`. To skip the live
+ESPN request altogether, run:
+
+```bash
+python3 scripts/build_market_actor_dataset.py 1897059 \
+  --espn-file data_sources/espn/fifa.world_760422.json.gz \
+  --out data/germany_curacao_draw
+```
+
+This file preserves the captured event types, teams, participants, match clocks,
+and provider UTC event times. Its short text is rendered from those structured
+facts, rather than reproducing article bodies or narrative commentary. Capture
+details are included in `source_provenance` inside the file. It is a historical
+snapshot, not a live feed. For other matches without a bundled snapshot, the
+error identifies the failing URL and explains how to supply `--espn-file`.
+
 Reuse an existing CSV, JSON array, or JSONL file (optionally gzip):
 
 ```bash
