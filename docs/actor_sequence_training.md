@@ -79,9 +79,12 @@ Default chunks target at most 8,192 reference-template tokens and 128 target
 turns. Their initial context retains up to 16 exact earlier executions plus
 small numerical activity summaries. The summary is computed from strictly
 earlier observations in its declared scope. Older exact history can therefore
-be lost across chunk boundaries. Check any separately flagged oversized atomic
-turns: one window's necessary context and joint answer may itself exceed the
-budget. Never assume every row fits merely because a limit is configured.
+be lost across chunk boundaries. A chunk boundary uses only past turns, the
+current user context and a fixed response reservation. It cannot depend on
+the unseen answer's length. Check separately flagged oversized conversations:
+an initial context or unexpectedly large joint answer may exceed the budget,
+including in a conversation with several turns. Never assume every row fits
+merely because a limit is configured.
 
 The default training policy keeps all eligible positive windows and samples
 negative windows with probability 0.05. Validation and test retain all eligible

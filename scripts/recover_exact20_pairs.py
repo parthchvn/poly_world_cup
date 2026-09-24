@@ -158,8 +158,8 @@ def verify_saved_pair(root: Path, cache: Path, wallet: str, condition: str,
     return rows, {
         "page": {key: manifest[key] for key in (
             "normalized_sha256", "request_url", "body_sha256", "retrieved_at")},
-        "normalized_path": str(normalized_path), "raw_path": str(raw_path),
-        "manifest_path": str(manifest_path),
+        "normalized_path": str(normalized_path.resolve()), "raw_path": str(raw_path.resolve()),
+        "manifest_path": str(manifest_path.resolve()),
         "manifest_sha256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
     }
 
