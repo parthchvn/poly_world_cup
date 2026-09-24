@@ -1,0 +1,490 @@
+{
+  "action_counts": {
+    "installed": 14
+  },
+  "checks": {
+    "all_final_manifest_artifacts_scanned": 928,
+    "all_final_manifest_gzip_crc_passed": true,
+    "all_final_manifest_gzip_files_crc_checked": 921,
+    "all_nonartifact_manifest_fields_preserved": true,
+    "export_exit_code_0_verified_before_installation": true,
+    "manifest_artifact_metadata_changed": [
+      "actor_index/part-00005.jsonl.gz",
+      "actor_index/part-00007.jsonl.gz",
+      "conditional_trades/test/part-00014.jsonl.gz",
+      "conditional_trades/test/part-00016.jsonl.gz",
+      "conditional_trades/train/part-00091.jsonl.gz",
+      "conditional_trades/train/part-00098.jsonl.gz",
+      "conditional_trades/train/part-00198.jsonl.gz",
+      "conditional_trades/validation/part-00043.jsonl.gz",
+      "observations/part-00017.jsonl.gz",
+      "scheduled_windows/test/part-00022.jsonl.gz",
+      "scheduled_windows/test/part-00033.jsonl.gz",
+      "scheduled_windows/train/part-00074.jsonl.gz",
+      "scheduled_windows/train/part-00077.jsonl.gz",
+      "scheduled_windows/train/part-00168.jsonl.gz"
+    ],
+    "postinstallation_row_totals": {
+      "actor_index": 1675195,
+      "conditional_trades/test": 111417,
+      "conditional_trades/train": 433991,
+      "conditional_trades/validation": 205012,
+      "observations": 3974200,
+      "quarantine": 61943,
+      "scheduled_windows/test": 157000,
+      "scheduled_windows/train": 367869,
+      "scheduled_windows/validation": 399906,
+      "source_evidence/pages": 15180,
+      "source_evidence/pair_counts": 2259806
+    }
+  },
+  "dataset": "datasets/world_cup_2026_actor_sequences_v3",
+  "evidence_aggregates_by_kind": {
+    "actor_index": {
+      "rows": 200000,
+      "rows_with_complete_original_evidence": 85941,
+      "rows_without_complete_original_evidence": 114059,
+      "shards": 2,
+      "surviving_complete_original_rows": 85941
+    },
+    "conversation": {
+      "rows": 22000,
+      "rows_with_complete_original_evidence": 19353,
+      "rows_without_complete_original_evidence": 2647,
+      "shards": 11,
+      "surviving_complete_original_rows": 12631
+    },
+    "observations": {
+      "rows": 100000,
+      "rows_with_complete_original_evidence": 66331,
+      "rows_without_complete_original_evidence": 33669,
+      "shards": 1,
+      "surviving_complete_original_rows": 66331
+    }
+  },
+  "evidence_interpretation": [
+    "Original evidence means bytes or complete row hashes preserved before reconstruction. Reconstructed actor-index entries are not independent original witnesses for conversation rows.",
+    "A missing original complete row or index hash is not invented. Those conversation tails were replayed from the immutable source between matching intact boundaries; original compressed prefixes still match byte for byte.",
+    "Counts across conversation, observation and index rows are different record types and must not be interpreted as unique trades.",
+    "This report establishes repair provenance and file integrity. Full source, context, label, index and token validation are separate release checks bound to the final manifest.",
+    "The cause of the original truncated files is not established by these checks."
+  ],
+  "installation_report_sha256": "6aea8885fe5770e4d49ab9dca2581fcf648682b069cb0600435a8408d2c52c6e",
+  "installer_sha256": "3ec7fae81c5fe8c45fd60eff6f3dd547b9d6e36d97fc118c29114987c58ddbd7",
+  "manifest_before_repair_sha256": "640fec17f7e0f01df76271cb93a96af12799b1907a65a33b2aeea0535897fe3e",
+  "manifest_sha256": "383ddf1139c7ae4f59c017179955b3c1c65f39cd489521f7d19c9ac6280a02af",
+  "postinstallation_scan_sha256": "35b78fa59f48f857e9ab38fd10c10aaa738dc83f70afc2249be66577fa07aacb",
+  "reconstruction_script": "scripts/reconstruct_actor_sequence_shard.py",
+  "reconstruction_script_sha256": "8c52ec8b70233cd3948f6ea02e141fd67258d8c2701e2f1fdc84c0afa8da5c51",
+  "repairs": [
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 1188561,
+        "sha256": "e55f6407f588bc7b1c4bb2a9f617a8628a636b52c52cf20619bf5f27523e8c59"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "merged_stream_right_boundary_matches": true,
+        "method": "Merge the first 700001 conversation sequences in original export order, including verified conversation replacements; compare unchanged index shards and right boundary.",
+        "original_compressed_prefix_bytes": 1188561,
+        "rows_reconstructed_without_complete_original_row": 87327,
+        "surviving_complete_rows_compared": 12673,
+        "unchanged_index_shards_compared": 5
+      },
+      "kind": "actor_index",
+      "observed_before_installation_sha256": "e55f6407f588bc7b1c4bb2a9f617a8628a636b52c52cf20619bf5f27523e8c59",
+      "path": "actor_index/part-00005.jsonl.gz",
+      "proof_report_sha256s": [
+        "2cb3ca934284b228ef8b6a3fe4d09a1cc6e183433cdda7f2d146152b38418ca1"
+      ],
+      "replacement": {
+        "bytes": 9363786,
+        "sha256": "336a2d43c246b6ef50a5ba2d40281129f12c269a4078a184811886af88efcb67"
+      },
+      "rows": 100000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 6857908,
+        "sha256": "340dd315430e92d98f11d3f5cedd133852fb3d7b121abccaf02049a7251d65d7"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "merged_stream_right_boundary_matches": true,
+        "method": "Merge the first 700001 conversation sequences in original export order, including verified conversation replacements; compare unchanged index shards and right boundary.",
+        "original_compressed_prefix_bytes": 6857908,
+        "rows_reconstructed_without_complete_original_row": 26732,
+        "surviving_complete_rows_compared": 73268,
+        "unchanged_index_shards_compared": 5
+      },
+      "kind": "actor_index",
+      "observed_before_installation_sha256": "340dd315430e92d98f11d3f5cedd133852fb3d7b121abccaf02049a7251d65d7",
+      "path": "actor_index/part-00007.jsonl.gz",
+      "proof_report_sha256s": [
+        "2cb3ca934284b228ef8b6a3fe4d09a1cc6e183433cdda7f2d146152b38418ca1"
+      ],
+      "replacement": {
+        "bytes": 9359584,
+        "sha256": "51c502ca30d5127d6f53c0669a0a4edd66f8bf80593352a65c768318bae11c10"
+      },
+      "rows": 100000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 3452468,
+        "sha256": "e2ecaff4a89d8794fe0f42e7fb46bbb269cb713edb9e2193e087b7da4ed97e57"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "intact_neighbor_boundary_rows_compared": 2,
+        "method": "Replay unchanged exporter from reviewed source within exact intact neighboring sequence boundaries.",
+        "original_actor_index_entries_compared": 1486,
+        "original_compressed_prefix_bytes": 3452468,
+        "rows_with_complete_original_row_or_original_index_hash": 1491,
+        "rows_without_either_complete_original_witness": 509,
+        "surviving_complete_rows_compared": 1491
+      },
+      "kind": "conversation",
+      "observed_before_installation_sha256": "e2ecaff4a89d8794fe0f42e7fb46bbb269cb713edb9e2193e087b7da4ed97e57",
+      "path": "conditional_trades/test/part-00014.jsonl.gz",
+      "proof_report_sha256s": [
+        "7a8194189c172b10bc742666ef80ee997603262ee7f681af36fe3987f5433a80"
+      ],
+      "replacement": {
+        "bytes": 4693478,
+        "sha256": "a6a5800e3232e149e7676a098284f74479cd7e9cc362f93b3329dfc201683172"
+      },
+      "rows": 2000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 1869268,
+        "sha256": "2ee5843c0120c29869dc48df7b2dfb58ba27566ee03c259ebcce752710730d4e"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "intact_neighbor_boundary_rows_compared": 2,
+        "method": "Replay unchanged exporter from reviewed source within exact intact neighboring sequence boundaries.",
+        "original_actor_index_entries_compared": 0,
+        "original_compressed_prefix_bytes": 1869268,
+        "rows_with_complete_original_row_or_original_index_hash": 780,
+        "rows_without_either_complete_original_witness": 1220,
+        "surviving_complete_rows_compared": 780
+      },
+      "kind": "conversation",
+      "observed_before_installation_sha256": "2ee5843c0120c29869dc48df7b2dfb58ba27566ee03c259ebcce752710730d4e",
+      "path": "conditional_trades/test/part-00016.jsonl.gz",
+      "proof_report_sha256s": [
+        "8e14b99e7f496f65007f001fcbe360ea60d9123b9083fdb58e4aa874c09aae26"
+      ],
+      "replacement": {
+        "bytes": 4752656,
+        "sha256": "cbc78f66c5507d6f18d8e24e982a8c512b37d7aee094c13af3c6af20c3c49df4"
+      },
+      "rows": 2000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 3781246,
+        "sha256": "3c6e0410f647a8457f0c067ef5ecf5ed3132de2e7b8f9a0add065a4afdf62464"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "intact_neighbor_boundary_rows_compared": 2,
+        "method": "Replay unchanged exporter from reviewed source within exact intact neighboring sequence boundaries.",
+        "original_actor_index_entries_compared": 932,
+        "original_compressed_prefix_bytes": 3781246,
+        "rows_with_complete_original_row_or_original_index_hash": 2000,
+        "rows_without_either_complete_original_witness": 0,
+        "surviving_complete_rows_compared": 1279
+      },
+      "kind": "conversation",
+      "observed_before_installation_sha256": "3c6e0410f647a8457f0c067ef5ecf5ed3132de2e7b8f9a0add065a4afdf62464",
+      "path": "conditional_trades/train/part-00091.jsonl.gz",
+      "proof_report_sha256s": [
+        "2154cf4cf0d592da2035f7de4279c0ea965985d4b9ad01867d29eb79860cd103"
+      ],
+      "replacement": {
+        "bytes": 5952336,
+        "sha256": "5cd20162f2ca36e5384dcce005a9473075e6eaf98547d8ef8dd62a928872ecca"
+      },
+      "rows": 2000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 1234742,
+        "sha256": "c38ac9cc41ce831efa75829812fb885e6018f26ba8fcdf0bae6f2043830ca5a0"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "intact_neighbor_boundary_rows_compared": 2,
+        "method": "Replay unchanged exporter from reviewed source within exact intact neighboring sequence boundaries.",
+        "original_actor_index_entries_compared": 2000,
+        "original_compressed_prefix_bytes": 1234742,
+        "rows_with_complete_original_row_or_original_index_hash": 2000,
+        "rows_without_either_complete_original_witness": 0,
+        "surviving_complete_rows_compared": 387
+      },
+      "kind": "conversation",
+      "observed_before_installation_sha256": "c38ac9cc41ce831efa75829812fb885e6018f26ba8fcdf0bae6f2043830ca5a0",
+      "path": "conditional_trades/train/part-00098.jsonl.gz",
+      "proof_report_sha256s": [
+        "3f4c8144e4955547cccd69202a70fe750a4e037b97b35aba0bf75ba4f537098c"
+      ],
+      "replacement": {
+        "bytes": 6068964,
+        "sha256": "72b9c9564812feda4747f67fff0f7701d8c9f26d6c13fc91e5dfa47357db109b"
+      },
+      "rows": 2000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 639042,
+        "sha256": "cfd36c79915a37e710f6d96d211981ddfa6261d5d98e73e12ed2d6af1b56cd16"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "intact_neighbor_boundary_rows_compared": 2,
+        "method": "Replay unchanged exporter from reviewed source within exact intact neighboring sequence boundaries.",
+        "original_actor_index_entries_compared": 2000,
+        "original_compressed_prefix_bytes": 639042,
+        "rows_with_complete_original_row_or_original_index_hash": 2000,
+        "rows_without_either_complete_original_witness": 0,
+        "surviving_complete_rows_compared": 225
+      },
+      "kind": "conversation",
+      "observed_before_installation_sha256": "cfd36c79915a37e710f6d96d211981ddfa6261d5d98e73e12ed2d6af1b56cd16",
+      "path": "conditional_trades/train/part-00198.jsonl.gz",
+      "proof_report_sha256s": [
+        "bdc4b3858ea17d41c870d337faf94b0a33c83d2b9f2dcf57cf6af09176af71e0",
+        "dfa6650dc9ce884ff567e88b018c2181522344e7772e4c84bf519fd027b99500",
+        "eb53529d748ace07d6c99212187c0143e6202c5bce532eb394ff4f07bb5459c5",
+        "fc3f1e46befcd8a5bbce9cd907e3ad0cd2fee6c5cc97dd47f1a873a13709a69b"
+      ],
+      "replacement": {
+        "bytes": 6261526,
+        "sha256": "bc0cfebf18dbc94799eb8fc2d6a6af637c0f6f02945045e7d4476cc6e3409cdf"
+      },
+      "rows": 2000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 4966608,
+        "sha256": "642a1ed9707489e2aeb8583934847ae7d35eafe1a1cc51730f1dc2d03704b2d6"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "intact_neighbor_boundary_rows_compared": 2,
+        "method": "Replay unchanged exporter from reviewed source within exact intact neighboring sequence boundaries.",
+        "original_actor_index_entries_compared": 404,
+        "original_compressed_prefix_bytes": 4966608,
+        "rows_with_complete_original_row_or_original_index_hash": 2000,
+        "rows_without_either_complete_original_witness": 0,
+        "surviving_complete_rows_compared": 1689
+      },
+      "kind": "conversation",
+      "observed_before_installation_sha256": "642a1ed9707489e2aeb8583934847ae7d35eafe1a1cc51730f1dc2d03704b2d6",
+      "path": "conditional_trades/validation/part-00043.jsonl.gz",
+      "proof_report_sha256s": [
+        "7652a853e0201919859e958ea5865f205e72af60e2970cd0c40e958b4820b280"
+      ],
+      "replacement": {
+        "bytes": 5897060,
+        "sha256": "af94f18647e9808470861b6ba503375d94bc9bf109b57813a6280584f2fed264"
+      },
+      "rows": 2000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 11165547,
+        "sha256": "3639613395340952fef8c7bd610703e1a0f529043e948ab02868979612c00f94"
+      },
+      "evidence": {
+        "adjacent_boundaries_match": true,
+        "entire_original_compressed_prefix_preserved": true,
+        "method": "Replay normalized observations from the reviewed immutable source at exact source ordinals.",
+        "original_compressed_prefix_bytes": 11165547,
+        "rows_reconstructed_without_complete_original_row": 33669,
+        "source_ordinals": [
+          1600001,
+          1700000
+        ],
+        "surviving_complete_rows_compared": 66331
+      },
+      "kind": "observations",
+      "observed_before_installation_sha256": "3639613395340952fef8c7bd610703e1a0f529043e948ab02868979612c00f94",
+      "path": "observations/part-00017.jsonl.gz",
+      "proof_report_sha256s": [
+        "a14ceb4abd4c3e9ba664da67f06d35d25cefe585ec9b21776591c9b07e325595"
+      ],
+      "replacement": {
+        "bytes": 16885877,
+        "sha256": "0986f42e716e69281d46c89190c84233319119caf12ad2fd58ceb9d3add0f244"
+      },
+      "rows": 100000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 5962359,
+        "sha256": "4634bf91dcdd33895566a93356862c521381271f0cbd04ff87cf5da7adcb5e07"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "intact_neighbor_boundary_rows_compared": 2,
+        "method": "Replay unchanged exporter from reviewed source within exact intact neighboring sequence boundaries.",
+        "original_actor_index_entries_compared": 0,
+        "original_compressed_prefix_bytes": 5962359,
+        "rows_with_complete_original_row_or_original_index_hash": 1461,
+        "rows_without_either_complete_original_witness": 539,
+        "surviving_complete_rows_compared": 1461
+      },
+      "kind": "conversation",
+      "observed_before_installation_sha256": "4634bf91dcdd33895566a93356862c521381271f0cbd04ff87cf5da7adcb5e07",
+      "path": "scheduled_windows/test/part-00022.jsonl.gz",
+      "proof_report_sha256s": [
+        "753c783eec22f8d0041d2ae09359d813d7392700f7a6ad7e678080ae4b147555"
+      ],
+      "replacement": {
+        "bytes": 8150719,
+        "sha256": "e5ee98a3920f3e08d548f01f7a1a3b084643cb8385b0d8ddd77f44218e7a3c5c"
+      },
+      "rows": 2000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 6956610,
+        "sha256": "e78d901d0e6127bfb4a15296c6bebeac28653ba55a54eda6c5f5919408f82b70"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "intact_neighbor_boundary_rows_compared": 2,
+        "method": "Replay unchanged exporter from reviewed source within exact intact neighboring sequence boundaries.",
+        "original_actor_index_entries_compared": 294,
+        "original_compressed_prefix_bytes": 6956610,
+        "rows_with_complete_original_row_or_original_index_hash": 2000,
+        "rows_without_either_complete_original_witness": 0,
+        "surviving_complete_rows_compared": 1766
+      },
+      "kind": "conversation",
+      "observed_before_installation_sha256": "e78d901d0e6127bfb4a15296c6bebeac28653ba55a54eda6c5f5919408f82b70",
+      "path": "scheduled_windows/test/part-00033.jsonl.gz",
+      "proof_report_sha256s": [
+        "1b98b74a93506a8d1a80ad2cb6a79fd5cbbff85d0b1fe62206a1eafbcd582b42"
+      ],
+      "replacement": {
+        "bytes": 7870349,
+        "sha256": "2f199b06a6bc7db9a4b695fc4d2d480028da47c6d385f965c3f28c948b730cc1"
+      },
+      "rows": 2000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 5203739,
+        "sha256": "f86ed1d9dc677c5f668f9ad868354042571bab592e529302eea1caaa91a57f8e"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "intact_neighbor_boundary_rows_compared": 2,
+        "method": "Replay unchanged exporter from reviewed source within exact intact neighboring sequence boundaries.",
+        "original_actor_index_entries_compared": 1596,
+        "original_compressed_prefix_bytes": 5203739,
+        "rows_with_complete_original_row_or_original_index_hash": 1621,
+        "rows_without_either_complete_original_witness": 379,
+        "surviving_complete_rows_compared": 1621
+      },
+      "kind": "conversation",
+      "observed_before_installation_sha256": "f86ed1d9dc677c5f668f9ad868354042571bab592e529302eea1caaa91a57f8e",
+      "path": "scheduled_windows/train/part-00074.jsonl.gz",
+      "proof_report_sha256s": [
+        "e1185f0280b133836ce83d367fc354ccbb0b307807c6e61b0d98652dfaba4f58"
+      ],
+      "replacement": {
+        "bytes": 6393096,
+        "sha256": "67aff3f46705542c789b6867e698283ed8f503fc90af727e2252162c592d3dad"
+      },
+      "rows": 2000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 5086003,
+        "sha256": "60aeda24e50cddcf75ebfc4fd2efba04d0ce0b3366cd721381fc99ab50954cb5"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "intact_neighbor_boundary_rows_compared": 2,
+        "method": "Replay unchanged exporter from reviewed source within exact intact neighboring sequence boundaries.",
+        "original_actor_index_entries_compared": 533,
+        "original_compressed_prefix_bytes": 5086003,
+        "rows_with_complete_original_row_or_original_index_hash": 2000,
+        "rows_without_either_complete_original_witness": 0,
+        "surviving_complete_rows_compared": 1646
+      },
+      "kind": "conversation",
+      "observed_before_installation_sha256": "60aeda24e50cddcf75ebfc4fd2efba04d0ce0b3366cd721381fc99ab50954cb5",
+      "path": "scheduled_windows/train/part-00077.jsonl.gz",
+      "proof_report_sha256s": [
+        "650b075b88644626370aef9f9f369e0ea945064d3be82daac8d101480a55e442"
+      ],
+      "replacement": {
+        "bytes": 6236577,
+        "sha256": "b1e1e2e21f0d17aa10d2c3054eab0d13c778d12506ad95ce7b44047fb9429ba7"
+      },
+      "rows": 2000
+    },
+    {
+      "action": "installed",
+      "damaged_original": {
+        "bytes": 892178,
+        "sha256": "caaad36060ded3034d06750cb2d16aaf0e4b2061cc8bb84fc3c79c58023afb12"
+      },
+      "evidence": {
+        "entire_original_compressed_prefix_preserved": true,
+        "intact_neighbor_boundary_rows_compared": 2,
+        "method": "Replay unchanged exporter from reviewed source within exact intact neighboring sequence boundaries.",
+        "original_actor_index_entries_compared": 2000,
+        "original_compressed_prefix_bytes": 892178,
+        "rows_with_complete_original_row_or_original_index_hash": 2000,
+        "rows_without_either_complete_original_witness": 0,
+        "surviving_complete_rows_compared": 286
+      },
+      "kind": "conversation",
+      "observed_before_installation_sha256": "caaad36060ded3034d06750cb2d16aaf0e4b2061cc8bb84fc3c79c58023afb12",
+      "path": "scheduled_windows/train/part-00168.jsonl.gz",
+      "proof_report_sha256s": [
+        "95fac7c73acb55873a11e4009c9f264d2f46f940fd05e815e70b57ca956113d2",
+        "a3d98cc55a8cadcd21aeafc81664f45f2ba108aeb3edacf894dfce85578bf5ba",
+        "fc3f1e46befcd8a5bbce9cd907e3ad0cd2fee6c5cc97dd47f1a873a13709a69b"
+      ],
+      "replacement": {
+        "bytes": 6656895,
+        "sha256": "450fb9636061e940885d815c6b347c8856848c700fb91017c847e91719c8bcf4"
+      },
+      "rows": 2000
+    }
+  ],
+  "replay_code_sha256": {
+    "poly_world_cup/actor_sequences.py": "3d87bb9c90a2e2d12a42e4b1448f8d1b9a434354322cbb35e5d40d82fffc5da6",
+    "poly_world_cup/sequence_context.py": "8b1269e7348e223c7a27bb52e92e16425ed658d071500651a161bf2a1b740b19",
+    "poly_world_cup/sequence_tokens.py": "a41f0d06cd9a13f50983cc4770ee64a3e82d639e730f5bd670bd918e67e03d42",
+    "poly_world_cup/sft.py": "994cb4dde4500a2fa576e21b1d78aeccaeccdef575633ee76c9cf8e1bd943b66",
+    "scripts/measure_sequence_tokens.py": "e225d40c749dd068ee9f7544fc6173632cf7564ab370fb416377e293564ab0e6"
+  },
+  "reviewed_plan_sha256": "28282da0462d039b22b9add0b2ee26dc90fbb3254d1483d14634859c31047df5",
+  "reviewed_source_database_sha256": "390ae3b96d6fe85ef7a887d8c6d0686d80c658d542f8f956ab380bdd6c1e6ae8",
+  "schema_version": 1,
+  "scope_review_sha256": "990771fdf087e2fffa4c48924649b542b2f182c5e56ee6f047c1bb5ed2ba57de",
+  "status": "repair_integrity_verified"
+}

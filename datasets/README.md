@@ -1,8 +1,46 @@
 # Prepared World Cup SFT data
 
-[Preparation and loading guide](../docs/tournament_sft_v2.md) · [Readable examples](../reports/sft_v2_preview.json) · [Validation report](../reports/sft_v2_validation.json)
+## world_cup_2026_actor_sequences_v3
 
-## world_cup_2026_tournament_lt20_v2
+**The complete export is available; full independent validation is pending.**
+It covers all **104 fixtures and 312 binary match-result contracts**. This
+version stores bounded multi-turn actor conversations, with compact news/context
+updates and earlier observed actions available through attention within each
+conversation. Separate JSONL rows do not share attention or persistent actor memory.
+
+| Profile | Exported conversations | Target |
+| --- | ---: | --- |
+| `conditional_trades` | 750,420 | Captured execution details, conditional on observing an execution |
+| `scheduled_windows` | 924,775 | All captured observations in a fixed future 15-minute window, or `NO_TRADE` |
+
+Export counts are **255,438 actors, 3,974,200 selected API observations and
+8,283,490,246 reference tokens** across both task views. The largest conversation
+has 10,301 reference tokens; 872 exceed the 8,192-token target. These counts
+await the independent full validation and token recount. See the
+[release status](../reports/actor_sequences_release_status.json).
+
+The v3 filter retains **actor–binary-contract pairs with at most 20 captured
+observations**, inclusive. Actors can have more than 20 observations across
+different contracts. This retrospective rule differs from v2's global 1–19 rule;
+the release counts are therefore not directly comparable cohorts. `NO_TRADE`
+means no captured observation in the monitored scope, not proof of complete
+on-chain inactivity. A 104-fixture export does not independently certify
+canonical historical completeness.
+
+[Release directory](world_cup_2026_actor_sequences_v3/) ·
+[Manifest and checksums](world_cup_2026_actor_sequences_v3/manifest.json) ·
+[Row format and inspection](../docs/actor_sequence_dataset.md) ·
+[Training and messages-only loading](../docs/actor_sequence_training.md)
+
+Each `.jsonl.gz` line contains one complete `messages` conversation plus outer
+audit metadata. Train on `messages` only. The messages-only loader requires a
+matching passed full validation report, which is not yet published. It preserves
+every turn and refuses silent truncation. Read the training guide before choosing
+a model's context limit. No model has been trained. Earlier releases remain unchanged.
+
+## Previous release: world_cup_2026_tournament_lt20_v2
+
+[Preparation and loading guide](../docs/tournament_sft_v2.md) · [Readable examples](../reports/sft_v2_preview.json) · [Validation report](../reports/sft_v2_validation.json)
 
 **All 104 fixtures, all 312 primary binary match-result contracts, and all 624 outcome tokens.** Every contract's recorded API traversal is exhausted. The tournament-wide 1–19 observation filter retains **208,296 wallets and 979,000 observations**.
 

@@ -1,0 +1,1 @@
+{"activity_seconds":86400,"carry_trades":16,"evaluation_negative_probability":1.0,"filter_scope":"actor_market","horizon_seconds":900,"initial_news_per_scope":8,"max_tokens":8192,"max_trades_per_market":20,"max_turns":128,"response_reserve_tokens":1024,"sampling_seed":"world-cup-actor-sequences-v3","train_negative_probability":0.05}

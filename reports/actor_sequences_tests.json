@@ -1,11 +1,11 @@
 {
   "command": "python -m unittest discover -s tests -v",
-  "tests_run": 454,
-  "seconds": 38.032,
+  "tests_run": 478,
+  "seconds": 53.595,
   "result": "passed",
   "skipped": 1,
   "skip_reason": "Optional previous-run smoke artifact was pruned; separate restored-archive smoke independently passed.",
   "python_version": "3.12.14",
   "full_release_validation": false,
-  "log_sha256": "01f74790daefc57ffdd2be8b2d62bf4a48aada6386fb5e7bc1f9ad2b221a10da"
+  "log_sha256": "45d1564ec5a7a6337e15ba43644eb83f81338a60dc7aeba3d8d7902e2c156186"
 }

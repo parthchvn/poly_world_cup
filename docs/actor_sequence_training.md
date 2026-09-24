@@ -2,12 +2,19 @@
 
 ## Current status
 
-The v3 pipeline is being rebuilt and validated. Full collection, export and
-independent validation remain pending. The planned dataset paths below do not
-claim that all 104 matches have already been exported in this format. A prior
-actual-source smoke test is useful implementation evidence, not a full release
-or a predictive-accuracy result. Consult the current release manifest and
-validation reports before training.
+The complete v3 export is available for all 104 fixtures and 312 binary
+contracts. Full independent validation remains pending. Export counts and
+inspection instructions are in the [dataset guide](actor_sequence_dataset.md),
+and the [release status](../reports/actor_sequences_release_status.json) records
+the checks completed so far.
+
+Before training, require a `passed` report at
+`reports/actor_sequences_validation.json` that binds the exact
+[release manifest](../datasets/world_cup_2026_actor_sequences_v3/manifest.json)
+and includes the all-row token recount. That final report is not yet published,
+and the messages-only loader deliberately refuses training input export without
+it. An export manifest or [bounded smoke test](../reports/actor_sequence_smoke.json)
+does not establish full-release readiness. No model has been trained by this pipeline.
 
 ## What one row means
 
@@ -28,7 +35,7 @@ Its stated scope matters: missing history is not evidence of no activity.
 
 ## Prediction tasks and context updates
 
-The planned release path is `datasets/world_cup_2026_actor_sequences_v3`.
+The release path is `datasets/world_cup_2026_actor_sequences_v3`.
 It has two task views:
 
 - `conditional_trades` predicts captured executions given that they occur at
@@ -66,10 +73,13 @@ not no orders, no activity elsewhere, or a deliberate decision against trading.
 Source observation bounds do not certify continuously open trading. Incomplete
 or invalid capture must not be relabeled as inactivity.
 
-The default cohort retains actor-contract pairs with at most 20 captured
-observations, inclusive. Final whole-period counts make cohort membership
-retrospective. The threshold is an activity heuristic, not a human/bot label.
-An actor can have many more than 20 observations across multiple contracts.
+The default cohort retains actor–binary-contract pairs with at most 20 captured
+observations, inclusive, counting BUY/SELL and both Yes/No outcomes together.
+It removes an ineligible pair completely rather than keeping its first 20
+observations. Final whole-period counts make cohort membership retrospective.
+The threshold is an activity heuristic, not a human/bot label. An actor can
+have many more than 20 observations across multiple contracts. This differs
+from v2's fewer-than-20 rule across the actor's entire captured tournament.
 The actual manifest records the selected filter scope and takes precedence
 over these defaults.
 
@@ -80,11 +90,20 @@ turns. Their initial context retains up to 16 exact earlier executions plus
 small numerical activity summaries. The summary is computed from strictly
 earlier observations in its declared scope. Older exact history can therefore
 be lost across chunk boundaries. A chunk boundary uses only past turns, the
-current user context and a fixed response reservation. It cannot depend on
+current user context and a fixed 1,024-token response reservation. It cannot depend on
 the unseen answer's length. Check separately flagged oversized conversations:
 an initial context or unexpectedly large joint answer may exceed the budget,
 including in a conversation with several turns. Never assume every row fits
 merely because a limit is configured.
+
+The completed export manifest currently records a largest conversation of
+10,301 reference tokens and 872 conversations above the 8,192-token target;
+these counts still await the independent full recount. Plan for a context
+window of at least 16,384 tokens with this reference tokenizer/template to
+preserve the exported conversations. Remeasure with the actual training
+model's tokenizer and template: a nominal 16k context for a different model
+is not automatically equivalent. Do not let a trainer silently truncate rows
+to 8,192 tokens.
 
 The default training policy keeps all eligible positive windows and samples
 negative windows with probability 0.05. Validation and test retain all eligible
@@ -97,6 +116,73 @@ silently truncate them. Rebuild oversized rows with explicit context limits,
 or select a supported larger window, while preserving every intended target
 exactly once within its task view.
 
+## Load only the conversation messages
+
+Choose one task profile and one split. After the full release passes validation,
+create a trainer input file:
+
+```bash
+python scripts/export_actor_messages.py \
+  datasets/world_cup_2026_actor_sequences_v3 \
+  --validation reports/actor_sequences_validation.json \
+  --profile scheduled_windows --split train \
+  --output data/sft_inputs/scheduled_windows_train.jsonl.gz
+```
+
+Run separately with `--split validation` and a different output filename for
+evaluation. Choose `conditional_trades` instead to predict execution details
+conditional on an execution being observed.
+
+Every output row has exactly one outer key, `messages`, containing the complete
+original conversation. The script excludes audit metadata, streams one row at a
+time, preserves all turns, and never truncates or silently filters oversized
+conversations. Its report includes the maximum reference length and the count
+requiring a longer context window. The real training tokenizer, template and
+context limit must still be checked separately.
+
+The exporter requires a completed, non-sample manifest and a matching passed
+full validation report, including the actual all-row token recount. It verifies
+the selected shards' sizes, checksums, rows and totals before publishing the
+new output filename. It writes outside the frozen release and refuses to
+overwrite an existing output.
+
+Hugging Face Datasets can stream the exported JSONL gzip file:
+
+```python
+from datasets import load_dataset
+
+train = load_dataset(
+    "json",
+    data_files={"train": "data/sft_inputs/scheduled_windows_train.jsonl.gz"},
+    split="train",
+    streaming=True,
+)
+example = next(iter(train))
+assert set(example) == {"messages"}
+```
+
+Pass complete conversations to the trainer's chat-data interface. For a custom
+loader, this repository iterator avoids creating a second corpus copy:
+
+```python
+from scripts.export_actor_messages import iter_messages
+
+rows = iter_messages(
+    dataset="datasets/world_cup_2026_actor_sequences_v3",
+    validation="reports/actor_sequences_validation.json",
+    profile="scheduled_windows",
+    split="train",
+)
+for example in rows:
+    messages = example["messages"]
+    # Hand this whole conversation to the trainer's dataset adapter.
+```
+
+Each selected shard is verified before its first row is yielded. Consume this
+iterator to exhaustion for final aggregate and file-stability checks. The CLI
+additionally withholds its output filename until all checks finish. These
+helpers prepare inputs; they do not choose a model or run training.
+
 ## Measure tokens without model weights
 
 The reference tokenizer is `Qwen/Qwen3-0.6B` at immutable revision
@@ -104,21 +190,35 @@ The reference tokenizer is `Qwen/Qwen3-0.6B` at immutable revision
 not a choice of training model. No weights are required.
 
 ```bash
-python -m pip install 'transformers==4.57.6' 'jinja2==3.1.6'
+python -m pip install 'transformers==4.57.6' 'tokenizers==0.22.2' 'jinja2==3.1.6'
 ```
 
 Download tokenizer files only:
 
 ```python
+from pathlib import Path
+from shutil import copyfile
+
 from huggingface_hub import snapshot_download
 
+tokenizer_dir = Path("data/tokenizer_reference/qwen3_06b")
 snapshot_download(
     repo_id="Qwen/Qwen3-0.6B",
     revision="c1899de289a04d12100db370d81485cdf75e47ca",
     allow_patterns=["tokenizer.json", "tokenizer_config.json", "merges.txt", "vocab.json"],
-    local_dir="data/tokenizer_reference/qwen3_06b",
+    local_dir=tokenizer_dir,
+)
+copyfile(
+    "configs/actor_sequence_tokenizer_reference.json",
+    tokenizer_dir / "reference_manifest.json",
 )
 ```
+
+The committed [reference receipt](../configs/actor_sequence_tokenizer_reference.json)
+records the exact upstream file sizes and SHA-256 hashes. Copy it unchanged:
+the release also fingerprints these receipt bytes as `reference_manifest.json`.
+Generating equivalent metadata with different formatting would change that
+fingerprint. No model weights are downloaded.
 
 After the profiles have been exported:
 
@@ -206,5 +306,6 @@ faithful recovery of an actor's reasoning. No training run is implied here.
 ## Primary references
 
 - [Hugging Face chat templates](https://huggingface.co/docs/transformers/v4.57.1/en/chat_templating)
+- [Hugging Face dataset loading](https://huggingface.co/docs/datasets/en/loading)
 - [TRL supervised fine-tuning](https://huggingface.co/docs/trl/en/sft_trainer)
 - [Pinned Qwen tokenizer configuration](https://huggingface.co/Qwen/Qwen3-0.6B/blob/c1899de289a04d12100db370d81485cdf75e47ca/tokenizer_config.json)

@@ -7,7 +7,50 @@ The research question is whether information observable before a query time
 helps predict a wallet's subsequent **observed execution**. Executed fills are
 not direct observations of private beliefs or order-submission decisions.
 
-**Prepared SFT release, version 2:** [all 104 matches](datasets/world_cup_2026_tournament_lt20_v2/),
+## Actor conversations, version 3
+
+**The complete v3 export is available; final independent validation is pending.**
+It covers all 104 fixtures and 312 binary contracts and contains **1,675,195
+chronological actor conversations** built from **3,974,200 selected API
+observations for 255,438 wallets**. These are export counts awaiting full
+source, context, label and token reconciliation. See the
+[release status](reports/actor_sequences_release_status.json).
+
+Each JSONL row contains multiple context/answer turns. The model can attend to
+earlier turns in that row; adjacent rows do not create persistent actor memory.
+News and market context use compact updates, and each new conversation chunk
+supplies bounded earlier history and numerical activity summaries.
+
+The `conditional_trades` profile predicts observed execution details. The
+`scheduled_windows` profile predicts captured observations over fixed future
+15-minute windows, including `NO_TRADE`. That label means no captured observation
+in the monitored contracts, not independently verified on-chain inactivity.
+The filter retains actor–binary-contract pairs with **at most 20** observations
+over the captured period. It is retrospective and differs from v2's
+tournament-wide fewer-than-20 rule.
+
+| Export measurement | Value, pending independent validation |
+| --- | ---: |
+| Conditional conversations | 750,420 |
+| Scheduled conversations | 924,775 |
+| Reference tokens across both task views | 8,283,490,246 |
+| Largest conversation / conversations above the 8,192-token target | 10,301 / 872 |
+| Fixtures with retained observations in each task profile | 104 |
+
+[Dataset files](datasets/world_cup_2026_actor_sequences_v3/) ·
+[Dataset format and inspection](docs/actor_sequence_dataset.md) ·
+[Training and messages-only loading](docs/actor_sequence_training.md) ·
+[Release manifest](datasets/world_cup_2026_actor_sequences_v3/manifest.json)
+
+The training loader requires a matching passed full validation report, which is
+not yet published. The export can be inspected now. Coverage of all 104 fixtures
+does not certify that every historical execution was captured. No model has
+been trained, and no predictive-accuracy result is claimed. Earlier dataset
+releases remain unchanged.
+
+## Previous prepared release, version 2
+
+[All 104 matches](datasets/world_cup_2026_tournament_lt20_v2/),
 with **961,023 targets per profile**. The filtered cohort contains
 **208,296 wallets**. All **312 contract API histories are exhausted**, and all **104 fixtures have
 exported examples with verified prior direct-match news**. The tournament-wide
@@ -95,9 +138,11 @@ See [the live report](reports/live_validation.json),
 
 ## Run
 
-Python 3.11+ on Linux/macOS. Runtime code uses the standard library. Collection
-requires public internet access; the unit tests are offline. Trade writer
-locking currently uses POSIX `fcntl`.
+Python 3.11+ on Linux/macOS. Collection uses the standard library and requires
+public internet access. Actor-sequence token measurement additionally uses the
+pinned optional tokenizer dependencies in the [training guide](docs/actor_sequence_training.md).
+Most unit tests are offline; real-tokenizer checks need the local reference
+files. Trade writer locking currently uses POSIX `fcntl`.
 
 ```bash
 git clone https://github.com/parthchvn/poly_world_cup.git
@@ -179,9 +224,9 @@ outside Git; reports preserve their coverage summaries, hashes, and timestamps.
 | Current fixture/news metadata can leak future information | Registry is retrospective and `feature_eligible=false`; historical versions are required. |
 | On-chain time differs from decision time | Preserve block timestamps; do not invent order placement or matching times. |
 | Trade-only rows cannot learn whether someone trades | Separate conditional action prediction from checkpoint occurrence prediction. |
-| Missing observations can look like inactivity | Incomplete coverage produces `CENSORED`, never a negative label. |
+| Missing observations can look like inactivity | Scheduled `NO_TRADE` labels describe the declared captured scope only; uncertain or missing source coverage does not establish real inactivity. |
 | API pagination is not archive certification | Every collection manifest has `training_coverage_certified=false`. |
-| Final participants can contaminate historical cohorts | Build wallet eligibility from a historical global or explicitly restricted World Cup prefix. |
+| Final participants can contaminate historical cohorts | The prepared activity filter is retrospective; a prospective experiment needs eligibility fixed from historical information. |
 | Fixture markets trade concurrently | Require both global time boundaries and disjoint fixture IDs. |
 | Fills do not reveal beliefs | Source-grounded background first; inferred beliefs are an optional ablation. |
 
@@ -191,8 +236,10 @@ the tournament collector requests `0.000001`. Each manifest fixes the actual
 threshold, and a resume rejects changed filters. A smaller accepted request
 does not prove the provider has no hidden floor or coverage gaps. Consequently
 these remain observations from a **filtered** API. Rows lack canonical log/order IDs and explicit
-maker/taker roles. Distinct rows that look identical are retained. No execution
-bundles, inventory balances, or complete negative windows are inferred here.
+maker/taker roles. Distinct rows that look identical are retained. Grouped
+targets collect observations by timestamp or forecast window; they do not
+identify execution bundles or inventory balances. Scheduled empty windows
+describe the captured observations and do not certify complete market inactivity.
 
 ## Next steps, in order
 
@@ -203,9 +250,10 @@ bundles, inventory balances, or complete negative windows are inferred here.
 2. **Reconstruct historical context:** global prior wallet activity,
    position-changing events, dated market state, and versioned news. Resolve
    kickoff discrepancies and unknown opening-time evidence.
-3. **Extend prepared examples:** the [retrospective SFT profiles](docs/tournament_sft.md)
-   now implement an explicitly limited conditional-observation target. Upgrade
-   these only as canonical execution and historical availability evidence improves.
+3. **Use the declared prediction task:** the [actor conversations](docs/actor_sequence_dataset.md)
+   separate conditional execution prediction from scheduled observation windows.
+   Upgrade their evidence claims only as canonical execution and historical
+   availability evidence improves.
 4. **Establish baselines, then SFT:** evaluate history-only and market-only
    models, add sourced news, and test whether an LLM improves held-out results.
 5. **Interpret the model:** perform controlled interventions only after

@@ -24,6 +24,18 @@ class CoordinatorTests(unittest.TestCase):
         return SimpleNamespace(dataset=Path("data"),source=Path("source"),evidence=Path("evidence"),
             tokenizer=Path("tokenizer"),chat_template=Path("template"),token_workers=7)
 
+    def test_source_worker_selection_reaches_both_validation_modes(self):
+        from scripts.validate_actor_sequences import validate_release
+        for with_tokens in (False,True):
+            with self.subTest(with_tokens=with_tokens):
+                args=self.args();args.source_workers=3
+                if not with_tokens:args.tokenizer=None
+                with patch("scripts.validate_actor_sequences.validate_sequences",return_value={"source":"done"}) as source, \
+                     patch("scripts.validate_actor_sequences.recount_tokens",return_value={"tokens":"done"}), \
+                     patch("scripts.validate_actor_sequences.attach_token_recount",return_value={"status":"passed"}):
+                    validate_release(args)
+                self.assertEqual(source.call_args.kwargs["workers"],3)
+
     def test_independent_checks_overlap(self):
         from scripts.validate_actor_sequences import validate_release
         token_started,source_started = Event(),Event()
@@ -47,6 +59,27 @@ class CoordinatorTests(unittest.TestCase):
                 (token if failing=="tokens" else source).side_effect = ValueError("verification failed")
                 with self.assertRaisesRegex(ValueError,"verification failed"):
                     validate_release(self.args())
+                attach.assert_not_called()
+
+    def test_failure_is_logged_before_other_check_finishes(self):
+        from scripts.validate_actor_sequences import validate_release
+        for failing in ("tokens","source"):
+            reported,release=Event(),Event()
+            def waiting(*args,**kwargs):
+                self.assertTrue(release.wait(5));return {}
+            def fail(*args,**kwargs):
+                raise ValueError("early failure")
+            def progress(value):
+                if "FAILED" in value and "early failure" in value:reported.set()
+            with self.subTest(failing=failing), \
+                 patch("scripts.validate_actor_sequences.recount_tokens",side_effect=fail if failing=="tokens" else waiting), \
+                 patch("scripts.validate_actor_sequences.validate_sequences",side_effect=fail if failing=="source" else waiting), \
+                 patch("scripts.validate_actor_sequences.attach_token_recount") as attach:
+                with ThreadPoolExecutor(max_workers=1) as runner:
+                    result=runner.submit(validate_release,self.args(),progress)
+                    try:self.assertTrue(reported.wait(3),"Failure remained hidden behind the independent check")
+                    finally:release.set()
+                    with self.assertRaisesRegex(ValueError,"early failure"):result.result()
                 attach.assert_not_called()
 
 

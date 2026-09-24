@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "status": "complete_export_full_independent_validation_pending",
+  "recorded_at_utc": "2026-09-24T16:56:48.723028+00:00",
+  "manifest_sha256": "383ddf1139c7ae4f59c017179955b3c1c65f39cd489521f7d19c9ac6280a02af",
+  "dataset": "datasets/world_cup_2026_actor_sequences_v3",
+  "dataset_files": 929,
+  "export_manifest_counts": {
+    "fixtures": 104,
+    "contracts": 312,
+    "actors": 255438,
+    "selected_observations": 3974200,
+    "conversations": 1675195,
+    "tokens": {
+      "max": 10301,
+      "p50": 5844,
+      "p95": 7208,
+      "total": 8283490246
+    }
+  },
+  "checks_completed": {
+    "export_exit_code": 0,
+    "manifest_artifact_hashes": true,
+    "all_gzip_integrity_and_row_counts": true,
+    "fourteen_deterministic_repairs_verified": true,
+    "parallel_source_validator_review": "passed",
+    "serial_parallel_archived_source_smoke": "matching_audit_results_across_all_six_groups",
+    "unit_tests": {
+      "tests_run": 478,
+      "passed": true,
+      "skipped": 1,
+      "report": "reports/actor_sequences_tests.json"
+    }
+  },
+  "independent_full_validation": {
+    "status": "pending",
+    "source_context_labels": "in_progress",
+    "token_recount": {
+      "completed_shards_at_snapshot": 654,
+      "total_shards": 839
+    },
+    "training_loader_enabled": false,
+    "note": "Progress counts are a snapshot, not a passing validation report. The loader requires reports/actor_sequences_validation.json with full source and token checks for this exact manifest."
+  },
+  "model_training_performed": false,
+  "prospective_training_ready": false,
+  "earlier_dataset_artifacts_modified": false,
+  "limitations": [
+    "Captured provider observations do not certify every on-chain execution.",
+    "NO_TRADE means zero captured observations within the declared monitored scope.",
+    "Separate conversation rows do not share attention or persistent memory."
+  ]
+}
