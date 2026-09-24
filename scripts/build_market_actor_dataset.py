@@ -26,6 +26,7 @@ import shutil
 import sqlite3
 import sys
 import tempfile
+from urllib.error import HTTPError
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -134,10 +135,25 @@ def export(args):
     fixture_date = args.date or market.get("fixture_date")
     teams = args.teams or market.get("team_names")
     print("Fetching ESPN commentary once for this match", flush=True)
-    context = collect_espn_context(client, event_id=event_id, league=args.league,
+    context_options = dict(event_id=event_id, league=args.league,
         fixture_date=fixture_date, teams=teams, espn_files=args.espn_file, time_map=args.time_map,
         time_policy="provider", allow_clock_estimates=args.allow_clock_estimates,
         include_core_plays=args.include_core_plays)
+    try:
+        context = collect_espn_context(client, **context_options)
+    except HTTPError as error:
+        # Public ESPN availability can differ between networks. A previously
+        # captured factual event file needs no live ESPN request or credentials.
+        safe_id = str(event_id) if str(event_id).isdigit() else "unknown"
+        snapshot = ROOT / "data_sources" / "espn" / f"{args.league}_{safe_id}.json.gz"
+        if error.code == 403 and not args.espn_file and not args.include_core_plays and snapshot.is_file():
+            print(f"ESPN returned HTTP 403; using saved match events: {snapshot}", flush=True)
+            context_options.update(espn_files=[snapshot], include_core_plays=False)
+            context = collect_espn_context(client, **context_options)
+        else:
+            raise ValueError(f"ESPN returned HTTP {error.code} for {error.url}. "
+                "Use --espn-file PATH with a saved ESPN summary or event JSON/JSONL file. "
+                "No trade collection or actor export has started.") from error
     events = [event for event in context["timed_events"] if not args.key_events_only or key_event(event)]
     events.sort(key=lambda event: (event["timestamp_us"], event["news_id"]))
     event_times = [event["timestamp_us"] for event in events]
