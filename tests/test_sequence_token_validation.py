@@ -4,13 +4,14 @@ import gzip
 import importlib.util
 import json
 from pathlib import Path
+import shutil
 import tempfile
 from threading import Event
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
-from poly_world_cup.sequence_token_validation import recount_tokens,attach_token_recount
+from poly_world_cup.sequence_token_validation import recount_tokens,attach_token_recount,recount_closed_shards
 from poly_world_cup.sequence_validation import sha,PROFILES,SPLITS
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,6 +62,8 @@ class FullTemplateRecountTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory();self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
+        cache = tempfile.TemporaryDirectory();self.addCleanup(cache.cleanup)
+        self.cache = Path(cache.name)
         self.manifest = {"tokenizer":{"files":{p.name:sha(p) for p in REFERENCE.iterdir() if p.is_file()},
             "chat_template_sha256":sha(TEMPLATE)},"profiles":{p:{s:{} for s in SPLITS} for p in PROFILES}}
         for profile in PROFILES:
@@ -136,6 +139,46 @@ class FullTemplateRecountTests(unittest.TestCase):
         (path.parent/"part-99999.jsonl.gz").write_bytes(path.read_bytes())
         with self.assertRaisesRegex(ValueError,"Missing or unlisted"):
             self.recount()
+
+    def test_only_closed_shards_are_cached_and_final_recount_reuses_them(self):
+        # Only the first conditional/train shard has a successor and is sealed.
+        early = recount_closed_shards(self.root,REFERENCE,TEMPLATE,self.cache,progress=lambda _:None)
+        self.assertEqual(early["shards_recomputed"],1)
+        self.assertEqual(early["conversations"],2)
+        again = recount_closed_shards(self.root,REFERENCE,TEMPLATE,self.cache,progress=lambda _:None)
+        self.assertEqual(again["shards_recomputed"],0)
+        final = recount_tokens(self.root,REFERENCE,TEMPLATE,workers=1,receipt_cache=self.cache,progress=lambda _:None)
+        self.assertEqual(final["receipt_shards_reused"],1)
+        # A repeated final validation uses all seven receipts without invoking the tokenizer.
+        with patch("poly_world_cup.sequence_token_validation._recount_file",side_effect=AssertionError("duplicate tokenization")):
+            repeated = recount_tokens(self.root,REFERENCE,TEMPLATE,workers=1,receipt_cache=self.cache,progress=lambda _:None)
+        self.assertEqual(repeated["receipt_shards_reused"],7)
+        self.assertEqual(final["files"],repeated["files"])
+        self.assertEqual(repeated["conversations"],14)
+
+    def test_cached_mutated_shard_is_recounted_and_bad_count_fails(self):
+        recount_tokens(self.root,REFERENCE,TEMPLATE,workers=1,receipt_cache=self.cache,progress=lambda _:None)
+        self.mutate(lambda rows:rows[0].update(token_count=rows[0]["token_count"]+1))
+        with self.assertRaisesRegex(ValueError,"Actual chat token count mismatch"):
+            recount_tokens(self.root,REFERENCE,TEMPLATE,workers=1,receipt_cache=self.cache,progress=lambda _:None)
+
+    def test_cached_missing_row_still_fails_complete_manifest_totals(self):
+        recount_tokens(self.root,REFERENCE,TEMPLATE,workers=1,receipt_cache=self.cache,progress=lambda _:None)
+        self.mutate(lambda rows:rows.pop())
+        with self.assertRaisesRegex(ValueError,"omitted rows"):
+            recount_tokens(self.root,REFERENCE,TEMPLATE,workers=1,receipt_cache=self.cache,progress=lambda _:None)
+
+    def test_changed_tokenizer_fingerprint_never_reuses_old_receipt(self):
+        recount_tokens(self.root,REFERENCE,TEMPLATE,workers=1,receipt_cache=self.cache,progress=lambda _:None)
+        reference = self.cache/"changed_reference"
+        shutil.copytree(REFERENCE,reference)
+        path = reference/"tokenizer_config.json"
+        path.write_text(path.read_text()+"\n")
+        self.manifest["tokenizer"]["files"] = {p.name:sha(p) for p in reference.iterdir() if p.is_file()}
+        self.rehash()
+        result = recount_tokens(self.root,reference,TEMPLATE,workers=1,receipt_cache=self.cache,progress=lambda _:None)
+        self.assertEqual(result["receipt_shards_reused"],0)
+        self.assertEqual(result["conversations"],14)
 
 
 if __name__ == "__main__":unittest.main()

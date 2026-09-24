@@ -16,7 +16,7 @@ def validate_release(args,progress=print):
         return validate_sequences(args.dataset,args.source,args.evidence,progress=progress)
     with ThreadPoolExecutor(max_workers=1,thread_name_prefix="token-coordinator") as coordinator:
         future = coordinator.submit(recount_tokens,args.dataset,args.tokenizer,args.chat_template,
-            workers=args.token_workers,progress=progress)
+            workers=args.token_workers,progress=progress,receipt_cache=getattr(args,"token_receipts",None))
         structural = validate_sequences(args.dataset,args.source,args.evidence,progress=progress)
         tokens = future.result()
     return attach_token_recount(structural,tokens)
@@ -29,6 +29,7 @@ def main():
     parser.add_argument("--tokenizer",type=Path)
     parser.add_argument("--chat-template",type=Path,default=Path(__file__).resolve().parents[1]/"configs/actor_sequence_chat_template.jinja")
     parser.add_argument("--token-workers",type=int,choices=range(1,33),default=7,metavar="1-32")
+    parser.add_argument("--token-receipts",type=Path,help="Reuse independently recounted, hash-bound shard receipts stored outside the dataset")
     args = parser.parse_args()
     result = validate_release(args,progress=lambda text:print(text,flush=True))
     args.report.parent.mkdir(parents=True,exist_ok=True)
