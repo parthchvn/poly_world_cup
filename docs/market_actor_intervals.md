@@ -52,12 +52,14 @@ item from ESPN event `401915443` is represented as:
 ```json
 {
   "time": "2026-09-10T19:16:34Z",
-  "match_clock": "14'",
   "type": "start-delay",
-  "text": "Delay in match because of an injury Luis Díaz (Bayern Munich).",
-  "time_basis": "provider_event_time_proxy"
+  "text": "Delay in match because of an injury Luis Díaz (Bayern Munich)."
 }
 ```
+
+Actor rows omit `match_clock` and `time_basis` to reduce repeated tokens.
+Each event's clock and timing provenance remain in the shared
+`espn_events.jsonl` file, including flags for estimated timestamps.
 
 The default includes all timestamped commentary/key events returned for that
 match, plus explicitly associated headline metadata where available. It does
@@ -92,6 +94,17 @@ head -n 1 data/market_1897059/actors/0x00aec21f5151f554dc1452724dd2b4f5c7ce5de1.
 
 That wallet appears in the previously captured market data. New captures may
 differ; `actor_index.jsonl` lists the actors present in your export.
+
+To remove the two repeated fields from an existing local export, create a
+compact copy without fetching news or trades again:
+
+```bash
+python3 scripts/compact_market_actor_news.py data/germany_curacao_draw \
+  --out data/germany_curacao_draw_compact
+```
+
+The copy preserves the actor rows, event timestamps, news text, trade labels,
+and shared source files. It supports both `.jsonl` and `.jsonl.gz` actor files.
 
 ## Existing trades and other leagues
 
@@ -147,7 +160,7 @@ JSON, core-play pages, or normalized JSONL with `text` and `time_utc`.
 `{"events": {"PLAY_ID": "ISO_UTC_TIMESTAMP"}}`. Optional `period_anchors`
 entries map a period number to `time_utc` and `clock_seconds`.
 `--allow-clock-estimates` permits estimates only with an anchor for the same
-period and marks them as estimates. The script never silently treats halftime
+period and marks them as estimates in `espn_events.jsonl`. The script never silently treats halftime
 or extra time as a continuous countdown from scheduled kickoff.
 
 ## Efficiency and interpretation

@@ -61,9 +61,8 @@ def key_event(event):
 def news_feature(event):
     # The feature contains the actual text. IDs/URLs are kept in the shared
     # source files, never substituted for the news supplied to the model.
-    return {"time": event["time_utc"], "match_clock": event.get("match_clock"),
-            "type": event.get("kind"), "text": event["text"],
-            "time_basis": event["time_basis"]}
+    # Match clocks and per-event timing provenance also remain in those files.
+    return {"time": event["time_utc"], "type": event.get("kind"), "text": event["text"]}
 
 
 def stage_trades(db, iterator):
@@ -246,7 +245,9 @@ def export(args):
             "no_trade_semantics": "zero_captured_observations_in_this_actor_market_open_interval",
             "task_semantics": "retrospective_gap_description; future_execution_defines_interval_end",
             "prospective_trade_occurrence_training_ready": False,
-            "timestamp_semantics": "ESPN provider wallclock is an occurrence proxy; explicit estimates are flagged",
+            "news_feature_fields": ["time", "type", "text"],
+            "news_source_metadata": "espn_events.jsonl",
+            "timestamp_semantics": "ESPN provider wallclock is an occurrence proxy; per-event timing bases and explicit estimates are recorded in espn_events.jsonl",
             "complete_historical_espn_news_archive": False,
             "previous_datasets_modified": False}
         write_json(work / "manifest.json", manifest)
