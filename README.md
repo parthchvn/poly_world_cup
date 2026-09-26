@@ -106,6 +106,16 @@ The trainer performs single-machine data-parallel QLoRA, with one model replica
 per GPU and one resulting shared adapter. Actual H100/NCCL execution still needs
 the smoke test. Generated runs, checkpoints, and adapters must stay outside Git.
 
+## Current entry points
+
+Use `scripts/build_actor_dataset.py` for the per-actor collection format and
+`scripts/train_world_cup_multigpu.py` for one- or multiple-GPU training. The old
+`build_market_actor_dataset.py`, `train_market_qlora.py`, news-compaction helper,
+and GitHub dataset uploader have been retired. Their source remains in the
+pre-cleanup historical tree linked below. Existing older workflow utilities
+remain because they implement distinct collection, recovery, and validation
+operations used by the supporting package and tests.
+
 ## Repository layout and local development
 
 - `scripts/`: collection, conversion/validation utilities for their documented

@@ -1,5 +1,11 @@
 # First World Cup QLoRA run
 
+> Historical experiment notes. The old single-GPU trainer and uploaded pilot
+> dataset are no longer in the current tree. The commands below describe the
+> [archived version](https://github.com/parthchvn/poly_world_cup/tree/ecd4b04e083fad9e6188f12129a7278b4b6b0e93).
+> For current work, use `scripts/train_world_cup_multigpu.py` and the local-data
+> workflow in the [README](../README.md). It supports one or multiple GPUs.
+
 Use `datasets/world_cup_2026_pilot_15k` for a small experiment drawn from
 multiple matches. Its split manifest describes which fixtures were selected
 and the actual counts. The budget counts **assistant decision targets**, not
@@ -183,3 +189,4 @@ dataset or preparation report is not evidence that QLoRA training completed.
 - [PEFT adapter checkpoint format](https://huggingface.co/docs/peft/developer_guides/checkpoint)
 - [Transformers Trainer](https://huggingface.co/docs/transformers/main_classes/trainer)
 - [TRL SFTTrainer and assistant-only training](https://huggingface.co/docs/trl/sft_trainer)
+

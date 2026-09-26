@@ -1,10 +1,11 @@
 # Per-actor market records with ESPN commentary
 
-Run this from the repository, or from the extracted script bundle. It requires
-Python 3.11 or later and uses only the standard library.
+Run this from the repository root. The standalone builder requires Python
+3.11 or later and uses only the standard library. No separate ESPN file is
+needed for the Germany–Curaçao example.
 
 ```bash
-python scripts/build_market_actor_dataset.py 1897059 --out data/market_1897059
+python scripts/build_actor_dataset.py 1897059 --out data/market_1897059
 ```
 
 `1897059` is the Germany–Curaçao draw contract. Replace it with a Polymarket
@@ -17,7 +18,7 @@ file per actor. The default keeps actors with **at most 20 captured trades in
 that market**, including exactly 20. To include every actor:
 
 ```bash
-python scripts/build_market_actor_dataset.py 1897059 \
+python scripts/build_actor_dataset.py 1897059 \
   --max-trades-per-actor 0 --out data/market_1897059_all_actors
 ```
 
@@ -95,40 +96,25 @@ head -n 1 data/market_1897059/actors/0x00aec21f5151f554dc1452724dd2b4f5c7ce5de1.
 That wallet appears in the previously captured market data. New captures may
 differ; `actor_index.jsonl` lists the actors present in your export.
 
-To remove the two repeated fields from an existing local export, create a
-compact copy without fetching news or trades again:
+## Saved ESPN data and existing trades
 
-```bash
-python3 scripts/compact_market_actor_news.py data/germany_curacao_draw \
-  --out data/germany_curacao_draw_compact
-```
+The standalone script includes the Germany–Curaçao metadata and saved ESPN
+snapshot for match `760422`. It uses that snapshot automatically, without a
+live ESPN request or a separate file download. For other World Cup matches it
+tries saved data from pinned historical commits before live APIs where possible.
+Those historical URLs remain available after the repository cleanup.
 
-The copy preserves the actor rows, event timestamps, news text, trade labels,
-and shared source files. It supports both `.jsonl` and `.jsonl.gz` actor files.
+The bundled snapshot contains captured event facts and provider UTC event times.
+It is not a live feed or proof of historical publication time. An explicit
+`--espn-file PATH` remains available for user-supplied sources.
 
-## Existing trades and other leagues
-
-If ESPN returns HTTP 403 for Germany–Curaçao, the exporter automatically uses
-the included historical event file for ESPN match `760422`. To skip the live
-ESPN request altogether, run:
-
-```bash
-python3 scripts/build_market_actor_dataset.py 1897059 \
-  --espn-file data_sources/espn/fifa.world_760422.json.gz \
-  --out data/germany_curacao_draw
-```
-
-This file preserves the captured event types, teams, participants, match clocks,
-and provider UTC event times. Its short text is rendered from those structured
-facts, rather than reproducing article bodies or narrative commentary. Capture
-details are included in `source_provenance` inside the file. It is a historical
-snapshot, not a live feed. For other matches without a bundled snapshot, the
-error identifies the failing URL and explains how to supply `--espn-file`.
+The older news-compaction utility is retired: the current builder already
+emits only `time`, `type`, and `text` in the per-row news feature.
 
 Reuse an existing CSV, JSON array, or JSONL file (optionally gzip):
 
 ```bash
-python scripts/build_market_actor_dataset.py 1897059 \
+python scripts/build_actor_dataset.py 1897059 \
   --trades-file my_market_trades.csv --out data/market_from_csv
 ```
 
@@ -141,7 +127,7 @@ Previously filtered inputs cannot restore excluded actors or executions.
 For a different competition, set its ESPN league and, if necessary, match ID:
 
 ```bash
-python scripts/build_market_actor_dataset.py YOUR_MARKET_ID \
+python scripts/build_actor_dataset.py YOUR_MARKET_ID \
   --league uefa.champions --espn-event-id 401915443 \
   --out data/your_market
 ```
@@ -188,3 +174,4 @@ Source endpoints used by the script:
 - Polymarket: `https://data-api.polymarket.com/v2/trades` and the Gamma market API.
 - ESPN: `https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/summary?event={id}`.
 - Optional ESPN core plays: `https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{id}/competitions/{id}/plays`.
+
