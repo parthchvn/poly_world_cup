@@ -145,6 +145,37 @@ class ActorSFTTests(unittest.TestCase):
             converter.export(self.args())
         self.assertFalse((self.root / 'sft').exists())
 
+    def test_two_match_mode_is_explicit_and_has_no_test_leakage(self):
+        self.source(1, 1); self.source(2, 2)
+        with self.assertRaisesRegex(ValueError, 'at least 3'):
+            converter.export(self.args())
+        with patch('sys.stdout', new_callable=io.StringIO):
+            manifest = converter.export(self.args(train_validation_only=True))
+        self.assertEqual(manifest['fixture_to_split'], {'espn:1': 'train', 'espn:2': 'validation'})
+        self.assertFalse(manifest['held_out_test_available'])
+        self.assertEqual(manifest['enabled_splits'], ['train', 'validation'])
+        self.assertEqual((self.root / 'sft/test.jsonl').read_text(), '')
+        for split in ('train', 'validation'):
+            _, stats = trainer.read_split(self.root / 'sft' / f'{split}.jsonl', OffsetTokenizer(), 10000)
+            self.assertEqual(stats['targets'], 2)
+        plan = self.root / 'sft/split_plan.json'
+        sources = converter.discover([], self.root)
+        self.assertEqual(converter.assign_splits(sources, plan, train_validation_only=True)[0], manifest['fixture_to_split'])
+
+    def test_train_validation_mode_still_groups_matches_and_requires_two(self):
+        self.source(1, 1); self.source(2, 1)
+        sources = converter.discover([], self.root)
+        with self.assertRaisesRegex(ValueError, 'at least 2'):
+            converter.assign_splits(sources, train_validation_only=True)
+        self.source(3, 2); self.source(4, 3)
+        sources = converter.discover([], self.root)
+        mapping, _ = converter.assign_splits(sources, train_validation_only=True)
+        self.assertEqual(mapping, {'espn:1': 'train', 'espn:2': 'train', 'espn:3': 'validation'})
+        plan = self.root / 'plan.json'
+        plan.write_text(json.dumps({'espn:1': 'train', 'espn:2': 'validation', 'espn:3': 'test'}))
+        with self.assertRaisesRegex(ValueError, 'disabled split'):
+            converter.assign_splits(sources, plan, train_validation_only=True)
+
     def test_duplicate_capture_rejected(self):
         path, _, _ = self.source()
         import shutil

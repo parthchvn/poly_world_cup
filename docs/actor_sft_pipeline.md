@@ -115,6 +115,26 @@ assistant decision targets. Counts of conversations and targets therefore differ
 
 ## 3. Training smoke test, then full run
 
+If only two distinct matches have completed collection and you need a training
+smoke test now, pass their completed export directories explicitly and opt in to
+train/validation-only preparation:
+
+```bash
+python scripts/prepare_actor_sft.py \
+  /workspace/world_cup_actor_data/data/market_1897035 \
+  /workspace/world_cup_actor_data/data/market_1897059 \
+  --train-validation-only \
+  --out /workspace/datasets/world_cup_sft_two_matches \
+  --tokenizer /workspace/models/Qwen3.6-27B
+```
+
+This places the earlier match in training and the later one in validation. It
+uses only completed exports, preserves all their targets, and makes no network
+requests. There is no held-out test set in this mode: `test.jsonl` is empty and
+the manifest records `held_out_test_available: false`. Use this new output as
+the trainer's `--dataset-dir`. The default three-way split still requires at
+least three matches. Collect a separate test match before reporting test results.
+
 Use the existing working training environment. The model weights and training
 dependencies must already be present; these scripts do not install or download
 them. Use GPUs in the same machine/Pod.

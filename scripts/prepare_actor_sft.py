@@ -130,34 +130,39 @@ def discover(exports, input_root):
     return sorted(sources, key=lambda x: (x['fixture_id'], str(x['market']['market_id'])))
 
 
-def assign_splits(sources, split_file=None, validation_fraction=0.1, test_fraction=0.1):
+def assign_splits(sources, split_file=None, validation_fraction=0.1, test_fraction=0.1, train_validation_only=False):
+    active_splits = SPLITS[:2] if train_validation_only else SPLITS
     fixtures = {}
     for source in sources:
         fixture, kickoff = source['fixture_id'], source['kickoff']
         if fixture in fixtures:
             require(fixtures[fixture] == kickoff, f'Conflicting kickoff times for {fixture}')
         fixtures[fixture] = kickoff
-    require(len(fixtures) >= 3,
-            f'Found {len(fixtures)} distinct match(es). Need at least 3 for separate train/validation/test matches. '
+    require(len(fixtures) >= len(active_splits),
+            f'Found {len(fixtures)} distinct match(es). Need at least {len(active_splits)} for separate {"/".join(active_splits)} matches. '
             'Collect markets from additional matches; multiple markets from the same match count as one.')
     if split_file:
         raw = read_json(split_file)
         mapping = raw.get('fixture_to_split', raw)
         require(isinstance(mapping, dict) and set(mapping) == set(fixtures),
                 'Split file must assign exactly the input fixture IDs; use fixture_to_split from a saved split_plan.json')
-        require(all(v in SPLITS for v in mapping.values()), 'Unknown split name')
-        require(set(mapping.values()) == set(SPLITS), 'Each split must have at least one fixture')
+        require(all(v in active_splits for v in mapping.values()), 'Unknown or disabled split name')
+        require(set(mapping.values()) == set(active_splits), 'Each enabled split must have at least one fixture')
         return mapping, 'explicit_fixture_assignment'
     require(all(t is not None for t in fixtures.values()),
             'Missing kickoff time. Supply --split-file with explicit fixture assignments.')
-    require(0 < validation_fraction < 1 and 0 < test_fraction < 1 and validation_fraction + test_fraction < 1,
-            'Validation/test fractions must be positive and sum to less than 1')
+    require(0 < validation_fraction < 1, 'Validation fraction must be between 0 and 1')
+    if not train_validation_only:
+        require(0 < test_fraction < 1 and validation_fraction + test_fraction < 1,
+                'Validation/test fractions must be positive and sum to less than 1')
     ordered = sorted(fixtures, key=lambda f: (fixtures[f], f))
-    nv, nt = max(1, math.floor(len(ordered) * validation_fraction)), max(1, math.floor(len(ordered) * test_fraction))
+    nv = max(1, math.floor(len(ordered) * validation_fraction))
+    nt = 0 if train_validation_only else max(1, math.floor(len(ordered) * test_fraction))
     require(nv + nt < len(ordered), 'Requested holdouts leave no training fixtures')
-    mapping = {f: 'train' for f in ordered[:-(nv + nt)]}
-    mapping.update({f: 'validation' for f in ordered[-(nv + nt):-nt]})
-    mapping.update({f: 'test' for f in ordered[-nt:]})
+    train_end = len(ordered) - nv - nt
+    mapping = {f: 'train' for f in ordered[:train_end]}
+    mapping.update({f: 'validation' for f in ordered[train_end:train_end + nv]})
+    mapping.update({f: 'test' for f in ordered[train_end + nv:]})
     return mapping, 'fixture_kickoff_order_not_global_execution_time_cutoff'
 
 
@@ -275,7 +280,12 @@ def token_checker(model_path, max_length):
 
 def export(args):
     sources = discover(args.exports, args.input_root)
-    mapping, method = assign_splits(sources, args.split_file, args.validation_fraction, args.test_fraction)
+    train_validation_only = getattr(args, 'train_validation_only', False)
+    active_splits = SPLITS[:2] if train_validation_only else SPLITS
+    mapping, method = assign_splits(sources, args.split_file, args.validation_fraction, args.test_fraction, train_validation_only)
+    if train_validation_only:
+        print('Train/validation-only preparation: no held-out test split. This supports a training smoke test; '
+              'validation results are not independent test results.', flush=True)
     output = args.out.resolve()
     require(not output.exists(), f'Output exists: {output}. Choose a new --out directory.')
     require(all(output != s['path'] and not output.is_relative_to(s['path']) and not s['path'].is_relative_to(output)
@@ -324,12 +334,13 @@ def export(args):
                 print(f'Market {source["market"]["market_id"]}: {actor_count:,} conversations / {totals["distinct_trade_times"]:,} targets -> {split}', flush=True)
         for stream in streams.values():
             stream.close()
-        require(all(stats[s]['conversations'] > 0 for s in SPLITS), 'Every split needs nonempty conversations')
+        require(all(stats[s]['conversations'] > 0 for s in active_splits), 'Every enabled split needs nonempty conversations')
         metadata = {'format': 'actor_market_trade_messages_v1', 'created_at': datetime.now(timezone.utc).isoformat(),
             'task': 'execution_attributes_conditional_on_observed_execution', 'no_trade_targets': False,
             'history': 'earlier_turns_of_same_actor_and_binary_market; no_cross_market_history',
             'news': 'one_copy_per_gap_from_trade_row; no_extra_news_added',
             'fixture_to_split': mapping, 'split_method': method, 'global_query_time_separation_enforced': False,
+            'enabled_splits': list(active_splits), 'held_out_test_available': not train_validation_only,
             'actor_disjoint_splits': False, 'contract_metadata': 'retrospective_not_time_verified',
             'historical_news_publication_verified': False, 'token_lengths_checked': check is not None,
             'tokenizer': str(args.tokenizer) if args.tokenizer else None,
@@ -357,7 +368,9 @@ def main():
     parser.add_argument('--out', type=Path, required=True, help='New output directory')
     parser.add_argument('--split-file', type=Path, help='Reuse a split_plan.json or fixture-ID to split JSON mapping')
     parser.add_argument('--validation-fraction', type=float, default=0.1, help='Fraction of fixtures, at least one')
-    parser.add_argument('--test-fraction', type=float, default=0.1, help='Fraction of fixtures, at least one')
+    parser.add_argument('--test-fraction', type=float, default=0.1, help='Fraction of fixtures, at least one; ignored with --train-validation-only')
+    parser.add_argument('--train-validation-only', action='store_true',
+                        help='Allow two or more matches with separate train/validation and no held-out test; useful for smoke testing')
     parser.add_argument('--tokenizer', type=Path, help='Local model/tokenizer directory; enables exact trainer-compatible token checks')
     parser.add_argument('--max-length', type=int, default=8192, help='Maximum tokens when --tokenizer is supplied; no truncation')
     args = parser.parse_args()
