@@ -77,6 +77,8 @@ import hashlib
 import gzip
 import json
 import time
+import shutil
+import subprocess
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from decimal import Decimal
@@ -112,14 +114,58 @@ def request_url(url: str, params: dict | None = None) -> str:
 
 
 class HttpClient:
-    def __init__(self, cache_dir: Path, refresh: bool = False, *, timeout: float = 30, retries: int = 3, compress: bool = False):
+    def __init__(self, cache_dir: Path, refresh: bool = False, *, timeout: float = 30, retries: int = 3, compress: bool = False, transport: str = "urllib"):
         self.cache_dir = Path(cache_dir)
         self.refresh = refresh
         self.timeout = timeout
         self.retries = retries
         self.compress = compress
+        self.transport = transport
         if retries < 0 or timeout <= 0:
             raise ValueError("retries must be nonnegative and timeout positive")
+        if transport not in {"urllib", "curl"}:
+            raise ValueError("HTTP transport must be urllib or curl")
+        self.curl = shutil.which("curl") if transport == "curl" else None
+        if transport == "curl" and self.curl is None:
+            raise ValueError("--http-transport curl requires the curl executable on PATH")
+
+    def _fetch(self, request: Request) -> tuple[bytes, dict]:
+        if self.transport == "urllib":
+            with urlopen(request, timeout=self.timeout) as response:
+                return response.read(), {key: response.headers.get(key) for key in ("Date", "ETag", "Last-Modified")}
+        # Use curl's normal user agent and TLS stack, as in a terminal request.
+        # Each attempt has fresh files; failed/partial bodies never enter cache.
+        with tempfile.TemporaryDirectory(prefix="actor-http-") as directory:
+            body_path = Path(directory) / "body"
+            header_path = Path(directory) / "headers"
+            try:
+                result = subprocess.run([
+                    self.curl, "--disable", "--silent", "--show-error", "--location",
+                    "--proto", "=https", "--proto-redir", "=https", "--max-redirs", "5",
+                    "--connect-timeout", str(min(self.timeout, 15)), "--max-time", str(self.timeout),
+                    "--header", "Accept: application/json", "--output", str(body_path),
+                    "--dump-header", str(header_path), "--write-out", "%{http_code}",
+                    "--url", request.full_url,
+                ], capture_output=True, timeout=self.timeout + 5)
+            except subprocess.TimeoutExpired as error:
+                raise URLError(f"curl timed out for {request.full_url}") from error
+            if result.returncode:
+                detail = result.stderr.decode("utf-8", errors="replace").strip()
+                raise URLError(f"curl failed for {request.full_url}: {detail}")
+            try:
+                status = int(result.stdout.strip())
+            except ValueError as error:
+                raise URLError(f"curl returned no HTTP status for {request.full_url}") from error
+            headers = {}
+            for line in header_path.read_text(encoding="iso-8859-1").splitlines():
+                if line.startswith("HTTP/"):
+                    headers = {}
+                elif ":" in line:
+                    key, value = line.split(":", 1)
+                    headers[key.lower()] = value.strip()
+            if not 200 <= status < 300:
+                raise HTTPError(request.full_url, status, f"HTTP {status} via curl", headers, None)
+            return body_path.read_bytes(), {key: headers.get(key.lower()) for key in ("Date", "ETag", "Last-Modified")}
 
     def get_json(self, url: str, params: dict | None = None) -> FetchResult:
         full_url = request_url(url, params)
@@ -142,11 +188,9 @@ class HttpClient:
         })
         for attempt in range(self.retries + 1):
             try:
-                with urlopen(request, timeout=self.timeout) as response:
-                    body = response.read()
-                    response_headers = {key: response.headers.get(key) for key in ("Date", "ETag", "Last-Modified")}
+                body, response_headers = self._fetch(request)
                 break
-            except (HTTPError, URLError, TimeoutError) as error:
+            except (HTTPError, URLError, TimeoutError, ConnectionError) as error:
                 retryable = not isinstance(error, HTTPError) or error.code == 429 or error.code >= 500
                 if not retryable or attempt == self.retries:
                     raise
@@ -1436,7 +1480,7 @@ def export(args):
     cache = args.cache.resolve()
     if cache == output or cache.is_relative_to(output):
         raise ValueError("Keep --cache outside the new --out directory")
-    client = HttpClient(cache / "http", compress=True)
+    client = HttpClient(cache / "http", compress=True, transport=args.http_transport)
     print(f"Resolving market {args.market_id}", flush=True)
     market = resolve_market(args.market_id, client=client, metadata_file=args.market_metadata)
     event_id = args.espn_event_id or market.get("espn_event_id")
@@ -1582,6 +1626,8 @@ def main():
     parser.add_argument("market_id", help="Polymarket numeric market ID, condition ID, or binary-market slug")
     parser.add_argument("--out", type=Path, help="New output directory, never an existing dataset")
     parser.add_argument("--cache", type=Path, default=ROOT / "data" / "market_actor_cache")
+    parser.add_argument("--http-transport", choices=("urllib", "curl"), default="urllib",
+                        help="HTTP client for live APIs; choose curl if Python requests reset but terminal curl works")
     parser.add_argument("--espn-event-id", help="Override automatic match lookup")
     parser.add_argument("--league", default="fifa.world", help="ESPN league slug, e.g. fifa.world or uefa.champions")
     parser.add_argument("--date", help="Fixture date YYYY-MM-DD, if absent from market metadata")

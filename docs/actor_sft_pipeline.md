@@ -36,6 +36,19 @@ Germany–Curaçao has a confirmed local collection run. Collection for the othe
 IDs still depends on accessible trade/ESPN sources with usable timestamps. If a
 dataset already exists, use it; the builder deliberately refuses overwrites.
 
+If Python API requests fail with a connection reset but terminal `curl` can
+retrieve the same URL, select curl for all live ESPN/Polymarket requests:
+
+```bash
+python3 scripts/build_actor_dataset.py 1897059 --http-transport curl
+```
+
+This requires the `curl` executable, with no additional Python packages.
+Keep the same `--cache` and `--out` paths when resuming a failed collection.
+Both transports share cached responses and resumable trade pages. HTTP errors,
+transfer failures, and invalid JSON cannot become successful cached responses.
+Changing transports does not guarantee access from every network.
+
 All completed exports live under `data/market_<id>/` by default. Keep these local.
 For a substantial experiment, collect more matches. Three matches are only the
 minimum for a train/validation/test smoke pipeline, not a robust benchmark.
