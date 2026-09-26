@@ -55,12 +55,10 @@ and ESPN event/source files. These are generated locally, not committed.
 
 ## Source availability and cache behavior
 
-Germany–Curaçao (`1897059`) has a confirmed local end-to-end run. The standalone
-script includes its small metadata/event snapshot. For other World Cup markets,
-it uses pinned historical registry/snapshot URLs when available and public APIs
-as fallbacks. It downloads data, never executable source. This cleanup preserves
-those historical commits, so their pinned URLs continue to work. The script is
-not a promise that every match can be reconstructed from live endpoints alone.
+Germany–Curaçao (`1897059`) has a confirmed local end-to-end run. The builder
+bundles the 104-fixture/312-contract World Cup registry and the 93-event
+Germany–Curaçao snapshot. Other matches use cached or supplied ESPN data, or live
+ESPN requests. No historical GitHub data URL is needed for current collection.
 
 ESPN/API access can fail or lack usable absolute timestamps. Inspect those errors
 and the coverage metadata rather than treating missing information as complete.
@@ -112,7 +110,7 @@ Use `scripts/build_actor_dataset.py` for the per-actor collection format and
 `scripts/train_world_cup_multigpu.py` for one- or multiple-GPU training. The old
 `build_market_actor_dataset.py`, `train_market_qlora.py`, news-compaction helper,
 and GitHub dataset uploader have been retired. Their source remains in the
-pre-cleanup historical tree linked below. Existing older workflow utilities
+external pre-cleanup Git backup. Existing older workflow utilities
 remain because they implement distinct collection, recovery, and validation
 operations used by the supporting package and tests.
 
@@ -129,12 +127,9 @@ operations used by the supporting package and tests.
 python -m unittest discover -s tests -v
 ```
 
-Older documentation may refer to prepared releases and generated reports. Those
-files are no longer present in the current tree. The
-[pre-cleanup tree](https://github.com/parthchvn/poly_world_cup/tree/ecd4b04e083fad9e6188f12129a7278b4b6b0e93)
-preserves that historical record, including the previous release README.
+Older methodology documents describe historical experiments and may include
+commit links that no longer resolve after the history rewrite. Archived datasets
+and reports are not part of this repository. Use local exports for training.
 
-`.gitignore` excludes generated data directories, archives, databases, and model
-artifacts. Stage specific source files when committing; do not force-add outputs.
-The cleanup removes about 10 GB of artifacts from the current tree, without
-rewriting Git history. Use `--depth 1` for a fresh checkout without that history.
+Generated data and model outputs are ignored by Git. A normal clone no longer
+includes the removed datasets from earlier commits; --depth 1 is optional.

@@ -100,9 +100,8 @@ differ; `actor_index.jsonl` lists the actors present in your export.
 
 The standalone script includes the Germany–Curaçao metadata and saved ESPN
 snapshot for match `760422`. It uses that snapshot automatically, without a
-live ESPN request or a separate file download. For other World Cup matches it
-tries saved data from pinned historical commits before live APIs where possible.
-Those historical URLs remain available after the repository cleanup.
+live ESPN request or a separate file download. The full World Cup market registry is bundled in the script. Other matches
+use cached/supplied ESPN data or live ESPN. Historical GitHub URLs are not needed.
 
 The bundled snapshot contains captured event facts and provider UTC event times.
 It is not a live feed or proof of historical publication time. An explicit
