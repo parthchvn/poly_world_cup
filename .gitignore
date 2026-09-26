@@ -10,3 +10,41 @@ data/
 .cache/
 .env
 .env.*
+
+# Generated datasets, downloaded snapshots, and experiment outputs stay local.
+# Unanchored directory patterns also cover runs launched from scripts/.
+datasets/
+data_sources/
+downloads/
+reports/
+outputs/
+runs/
+models/
+adapters/
+checkpoints/
+checkpoint-*/
+token_cache/
+
+# Data/model artifacts written outside the standard output directories.
+*.jsonl
+*.jsonl.gz
+*.csv
+*.tsv
+*.parquet
+*.arrow
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.db
+*.db-*
+*.duckdb
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.safetensors
+*.pt
+*.pth
+*.bin
+*.log
