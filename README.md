@@ -72,33 +72,44 @@ choose a new `--cache` and `--out` for an independent fresh collection.
 
 ## Train on local conversation files
 
-The intended workflow is:
+The collection-to-training workflow is now connected:
 
-1. Collect with `scripts/build_actor_dataset.py`.
-2. Convert actor rows into chronological `messages` conversations and split by
-   match into local training, validation, and test files.
+1. Collect several matches with `scripts/build_actor_dataset.py`.
+2. Convert with `scripts/prepare_actor_sft.py` into chronological `messages`
+   conversations and fixture-disjoint train/validation/test splits.
 3. Train with `scripts/train_world_cup_multigpu.py`.
 
-**Step 2 is not yet implemented for this standalone builder's interval format.**
-The trainer does not read `actors/` directly. Existing legacy exporters target
-other validated schemas; their presence is not a converter for these rows.
-
-Once compatible conversation splits exist locally, run the GPU smoke test in
-your established training environment, supplying the model and dataset paths:
+After collecting at least **three distinct matches**, run from the repository
+root on RunPod in your existing training environment:
 
 ```bash
+python scripts/prepare_actor_sft.py \
+  --input-root data \
+  --out datasets/world_cup_sft \
+  --tokenizer /workspace/models/Qwen3.6-27B
+
 python scripts/train_world_cup_multigpu.py \
   --gpus 2 --gpu-ids 0,1 \
   --model /workspace/models/Qwen3.6-27B \
-  --dataset-dir /workspace/poly_world_cup/datasets/world_cup_sft \
+  --dataset-dir datasets/world_cup_sft \
   --smoke
 ```
 
-The example dataset directory must first contain `train.jsonl` or `train.jsonl.gz`
-and the corresponding validation file in the trainer's conversation schema.
-Remove `--smoke` after a successful test to start a full run. The launcher does
-not install its training dependencies or download weights/data. Use an explicit
-`--dataset-dir`; its historical default refers to the earlier local pilot export.
+Remove `--smoke` after a successful test to start a full run. These commands
+require your local model files and working training dependencies. On a Mac,
+conversion can run without `--tokenizer`, deferring exact length checks to the
+trainer. Conversion does not truncate conversations or discard targets.
+
+The converter predicts observed **trade attributes only**. It checks but does
+not train on retrospective `NO_TRADE` intervals. Earlier trades stay in preceding
+conversation turns; interval news appears once per turn. All markets from one
+match stay in one split. Three matches are a smoke pipeline, not a sufficient
+performance benchmark.
+
+See [the complete collection-to-training guide](docs/actor_sft_pipeline.md) for
+input selection, split reuse, output inspection, token limits, and limitations.
+Always specify `--dataset-dir`; the trainer's historical default refers to the
+older local pilot export.
 
 The trainer performs single-machine data-parallel QLoRA, with one model replica
 per GPU and one resulting shared adapter. Actual H100/NCCL execution still needs
@@ -133,3 +144,4 @@ and reports are not part of this repository. Use local exports for training.
 
 Generated data and model outputs are ignored by Git. A normal clone no longer
 includes the removed datasets from earlier commits; --depth 1 is optional.
+
