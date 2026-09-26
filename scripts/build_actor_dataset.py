@@ -114,15 +114,21 @@ def request_url(url: str, params: dict | None = None) -> str:
 
 
 class HttpClient:
-    def __init__(self, cache_dir: Path, refresh: bool = False, *, timeout: float = 30, retries: int = 3, compress: bool = False, transport: str = "urllib"):
+    def __init__(self, cache_dir: Path, refresh: bool = False, *, timeout: float = 30, retries: int = 3, compress: bool = False, transport: str = "urllib", retry_delay: float = 1, min_interval: float = 0, log_retries: bool = False):
         self.cache_dir = Path(cache_dir)
         self.refresh = refresh
         self.timeout = timeout
         self.retries = retries
         self.compress = compress
         self.transport = transport
+        self.retry_delay = retry_delay
+        self.min_interval = min_interval
+        self.log_retries = log_retries
+        self._next_request_at = 0.0
         if retries < 0 or timeout <= 0:
             raise ValueError("retries must be nonnegative and timeout positive")
+        if retry_delay < 0 or min_interval < 0:
+            raise ValueError("HTTP retry delay and minimum interval must be nonnegative")
         if transport not in {"urllib", "curl"}:
             raise ValueError("HTTP transport must be urllib or curl")
         self.curl = shutil.which("curl") if transport == "curl" else None
@@ -188,13 +194,35 @@ class HttpClient:
         })
         for attempt in range(self.retries + 1):
             try:
-                body, response_headers = self._fetch(request)
+                wait = self._next_request_at - time.monotonic()
+                if wait > 0:
+                    time.sleep(wait)
+                try:
+                    body, response_headers = self._fetch(request)
+                finally:
+                    # Leave a gap after each live attempt, including failures.
+                    self._next_request_at = time.monotonic() + self.min_interval
                 break
             except (HTTPError, URLError, TimeoutError, ConnectionError) as error:
                 retryable = not isinstance(error, HTTPError) or error.code == 429 or error.code >= 500
                 if not retryable or attempt == self.retries:
                     raise
-                time.sleep(min(2 ** attempt, 8))
+                delay = min(self.retry_delay * (2 ** min(attempt, 10)), 60)
+                if isinstance(error, HTTPError) and error.headers:
+                    retry_after = error.headers.get("Retry-After") or error.headers.get("retry-after")
+                    if retry_after:
+                        try:
+                            from email.utils import parsedate_to_datetime
+                            seconds = float(retry_after) if retry_after.strip().isdigit() else (
+                                parsedate_to_datetime(retry_after).timestamp() - time.time())
+                            delay = max(delay, seconds)
+                        except (TypeError, ValueError, OverflowError):
+                            pass
+                if self.log_retries:
+                    reason = f"HTTP {error.code}" if isinstance(error, HTTPError) else "connection/transfer error"
+                    print(f"{reason} from {urlsplit(full_url).netloc}; retry {attempt + 1}/{self.retries} in {delay:g}s",
+                          file=sys.stderr, flush=True)
+                time.sleep(delay)
 
         # Invalid payloads never replace a valid cached response.
         # Amounts/prices must not pass through a binary floating-point round trip.
@@ -553,7 +581,7 @@ def validate_collection(output_dir: Path, *, condition_id: str) -> dict:
 
 def ingest_condition(client: Any, *, condition_id: str, output_dir: Path,
                      limit: int = 1000, max_pages: int | None = None,
-                     compress: bool = False, minimum_size: str = "0.01") -> dict:
+                     compress: bool = False, minimum_size: str = "0.01", progress: bool = False) -> dict:
     """Collect one condition, resumably; return its durable manifest.
 
     ``max_pages`` limits pages committed in this invocation (including recovered
@@ -581,6 +609,9 @@ def ingest_condition(client: Any, *, condition_id: str, output_dir: Path,
         else:
             state = _initial_manifest(condition_id, parameters)
             _atomic_json(manifest_path, state)
+        if progress:
+            print(f"Trade capture: {state['page_count']:,} saved pages / {state['row_count']:,} observations; "
+                  f"status={state['api_traversal_status']}", flush=True)
         committed = 0
         while state["api_traversal_status"] != "exhausted":
             if max_pages is not None and committed >= max_pages:
@@ -632,6 +663,9 @@ def ingest_condition(client: Any, *, condition_id: str, output_dir: Path,
                 _atomic_json(metadata_path, page)
             _commit_page(state, page, manifest_path)
             committed += 1
+            if progress and (committed == 1 or state['page_count'] % 10 == 0 or state['api_traversal_status'] == 'exhausted'):
+                print(f"Saved {state['page_count']:,} trade pages / {state['row_count']:,} observations; "
+                      f"status={state['api_traversal_status']}", flush=True)
         return state
 
 
@@ -1304,7 +1338,7 @@ def load_market_trades(market: dict, *, cache_dir: Path,
         root = Path(capture_dir) if capture_dir is not None else Path(cache_dir) / "trade_capture"
         client = client or HttpClient(Path(cache_dir) / "http", compress=True)
         state = ingest_condition(client, condition_id=market["condition_id"], output_dir=root,
-                                 compress=True, minimum_size="0.000001", max_pages=max_pages)
+                                 compress=True, minimum_size="0.000001", max_pages=max_pages, progress=True)
         report.update(source_type="polymarket_data_api_v2", source=str(root / market["condition_id"]),
                       source_scope="cursor_traversal_captured_observations", api_traversal_status=state["api_traversal_status"],
                       page_count=state["page_count"], minimum_size_tokens="0.000001",
@@ -1480,7 +1514,10 @@ def export(args):
     cache = args.cache.resolve()
     if cache == output or cache.is_relative_to(output):
         raise ValueError("Keep --cache outside the new --out directory")
-    client = HttpClient(cache / "http", compress=True, transport=args.http_transport)
+    client = HttpClient(cache / "http", compress=True, transport=args.http_transport,
+                        timeout=args.http_timeout, retries=args.http_retries,
+                        retry_delay=args.http_retry_delay, min_interval=args.http_min_interval,
+                        log_retries=True)
     print(f"Resolving market {args.market_id}", flush=True)
     market = resolve_market(args.market_id, client=client, metadata_file=args.market_metadata)
     event_id = args.espn_event_id or market.get("espn_event_id")
@@ -1628,6 +1665,12 @@ def main():
     parser.add_argument("--cache", type=Path, default=ROOT / "data" / "market_actor_cache")
     parser.add_argument("--http-transport", choices=("urllib", "curl"), default="urllib",
                         help="HTTP client for live APIs; choose curl if Python requests reset but terminal curl works")
+    parser.add_argument("--http-timeout", type=float, default=45, help="Seconds allowed for each live HTTP attempt (default: 45)")
+    parser.add_argument("--http-retries", type=int, default=8, help="Retries per failed live request (default: 8)")
+    parser.add_argument("--http-retry-delay", type=float, default=2,
+                        help="Initial retry delay in seconds, doubles up to 60; honors Retry-After (default: 2)")
+    parser.add_argument("--http-min-interval", type=float, default=1,
+                        help="Minimum pause in seconds after each live attempt; cache reads never wait (default: 1)")
     parser.add_argument("--espn-event-id", help="Override automatic match lookup")
     parser.add_argument("--league", default="fifa.world", help="ESPN league slug, e.g. fifa.world or uefa.champions")
     parser.add_argument("--date", help="Fixture date YYYY-MM-DD, if absent from market metadata")
@@ -1654,4 +1697,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

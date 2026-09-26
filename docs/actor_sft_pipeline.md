@@ -49,6 +49,16 @@ Both transports share cached responses and resumable trade pages. HTTP errors,
 transfer failures, and invalid JSON cannot become successful cached responses.
 Changing transports does not guarantee access from every network.
 
+Live collection pauses one second after each HTTP attempt and retries transient
+network failures, HTTP 429, and server errors up to eight times per request.
+Retry waits start at two seconds and double up to sixty seconds; `Retry-After`
+can extend the wait. Permanent HTTP errors such as 403 are not retried.
+The builder prints retry waits, saved page counts, and the resume position.
+Tune these with `--http-min-interval`, `--http-retries`, `--http-retry-delay`,
+and `--http-timeout`. A persistent outage still stops the run safely; rerunning
+with the same cache continues from the last committed page. Do not delete the
+cache to retry. These controls do not change the requested trade filters.
+
 All completed exports live under `data/market_<id>/` by default. Keep these local.
 For a substantial experiment, collect more matches. Three matches are only the
 minimum for a train/validation/test smoke pipeline, not a robust benchmark.
