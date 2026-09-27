@@ -219,6 +219,8 @@ def parse_args(argv=None):
     p.add_argument("--kernel-check", action=argparse.BooleanOptionalAction, default=True,
                    help="Check installed Qwen FLA/causal-conv CUDA forward and backward before loading weights")
     p.add_argument("--smoke", action="store_true", help="10 optimizer steps plus up to 32 validation conversations")
+    p.add_argument("--smoke-then-full", action="store_true",
+                   help="Check up to 32 validation conversations after 10 steps, then continue the same full run without reloading weights")
     p.add_argument("--benchmark", action="store_true", help="20 optimizer steps, no evaluation or checkpoint writes; no final adapter")
     p.add_argument("--prepare-only", action="store_true", help="Tokenize/cache without CUDA or weights")
     p.add_argument("--dry-run", action="store_true", help="Show batch plan and paths without imports, files or GPU work")
@@ -239,8 +241,8 @@ def parse_args(argv=None):
         p.error("dropout and warmup ratio must be in [0,1)")
     if args.max_steps == 0 or args.max_steps < -1:
         p.error("max-steps must be -1 or positive")
-    if sum((args.smoke, args.benchmark, args.resume is not None)) > 1:
-        p.error("--smoke, --benchmark and --resume are separate modes")
+    if sum((args.smoke, args.benchmark, args.smoke_then_full)) > 1 or (args.resume and (args.smoke or args.benchmark)):
+        p.error("Choose one of --smoke, --benchmark, --smoke-then-full; --resume is supported only for full training")
     if args.resume and args.init_adapter:
         p.error("Use --resume OR --init-adapter, not both")
     if args.smoke:
@@ -256,7 +258,7 @@ def parse_args(argv=None):
         args.out = args.out or args.resume.parent
     if args.out is None:
         tag = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%f")
-        suffix = "benchmark" if args.benchmark else "smoke" if args.smoke else "full"
+        suffix = "benchmark" if args.benchmark else "smoke" if args.smoke else "smoke_then_full" if args.smoke_then_full else "full"
         args.out = Path(f"/workspace/runs/world_cup_{tag}_{args.gpus}gpu_{suffix}")
     args.out = args.out.expanduser().resolve()
     if args.init_adapter:
@@ -349,8 +351,11 @@ def make_trainer_class():
     from transformers import Trainer
 
     class AssistantTrainer(Trainer):
-        def __init__(self, *a, selected_logits=True, **kw):
+        def __init__(self, *a, selected_logits=True, smoke_check_step=None, smoke_reporter=None, **kw):
             self.selected_logits = selected_logits
+            self.smoke_check_step = smoke_check_step
+            self.smoke_check_result = None
+            self.smoke_reporter = smoke_reporter
             kw["compute_loss_func"] = functools.partial(assistant_loss, selected=selected_logits)
             super().__init__(*a, **kw)
             # We remove labels before model.forward via compute_loss_func. This
@@ -363,6 +368,30 @@ def make_trainer_class():
                 inputs["logits_to_keep"] = selected_positions(inputs["labels"])
             return super().compute_loss(model, inputs, return_outputs=return_outputs,
                                         num_items_in_batch=num_items_in_batch)
+
+        def evaluate(self, eval_dataset=None, ignore_keys=None, metric_key_prefix="eval", **kw):
+            # Trainer calls this normally after a callback requests evaluation.
+            # Every rank follows this path; never evaluate on rank zero alone.
+            check_due = (self.smoke_check_step is not None and self.is_in_train
+                         and self.state.global_step >= self.smoke_check_step
+                         and self.smoke_check_result is None and eval_dataset is None)
+            if not check_due:
+                return super().evaluate(eval_dataset=eval_dataset, ignore_keys=ignore_keys,
+                                        metric_key_prefix=metric_key_prefix, **kw)
+            count = min(32, len(self.eval_dataset))
+            metrics = super().evaluate(eval_dataset=self.eval_dataset.select(range(count)),
+                                       ignore_keys=ignore_keys, metric_key_prefix="smoke_eval", **kw)
+            loss = metrics.get("smoke_eval_loss")
+            if loss is None or not math.isfinite(float(loss)):
+                raise RuntimeError(f"Initial smoke check failed: nonfinite or missing validation loss ({loss})")
+            self.smoke_check_result = {"status": "passed", "step": self.state.global_step,
+                                       "validation_conversations": count, "metrics": metrics}
+            if self.smoke_reporter:
+                self.smoke_reporter(self.smoke_check_result)
+            if self.is_world_process_zero():
+                print(f"Smoke check passed at step {self.state.global_step} on {count} validation conversations. "
+                      "Continuing the same run; model weights and optimizer stay loaded.", flush=True)
+            return metrics
 
     return AssistantTrainer
 
@@ -418,7 +447,7 @@ def kernel_probe(torch, local_rank):
 
 
 def run_signature(args, prepared):
-    return {"model": str(args.model), "data": prepared["identity"],
+    signature = {"model": str(args.model), "data": prepared["identity"],
             "batch": args.batch, "max_length": args.max_length, "epochs": args.epochs,
             "max_steps": args.max_steps, "lr": args.learning_rate, "rank": args.rank,
             "alpha": args.alpha, "dropout": args.dropout, "seed": args.seed,
@@ -426,6 +455,10 @@ def run_signature(args, prepared):
             "gradient_checkpointing": args.gradient_checkpointing,
             "selected_logits": args.selected_logits, "attention": args.attention,
             "init_adapter": str(args.init_adapter) if args.init_adapter else None}
+    # Preserve signatures for ordinary runs/checkpoints made before this option.
+    if args.smoke_then_full:
+        signature["smoke_then_full"] = True
+    return signature
 
 
 def launch(args):
@@ -488,7 +521,8 @@ def launch(args):
             "status": "prepared", "signature": signature, "data": prepared["splits"],
             "task": "conditional_execution", "test_used": False,
             "script_sha256": sha256_file(__file__), "prepared_cache": str(prepared_cache),
-            "mode": "benchmark" if args.benchmark else "smoke" if args.smoke else "full",
+            "mode": "benchmark" if args.benchmark else "smoke" if args.smoke else "smoke_then_full" if args.smoke_then_full else "full",
+            "smoke_check": {"status": "pending"} if args.smoke_then_full else None,
         })
     # Capture software versions for recreating the environment; never install or upgrade it.
     freeze = subprocess.run([sys.executable, "-m", "pip", "freeze"], capture_output=True, text=True)
@@ -622,6 +656,11 @@ def train_worker(args):
             if args.benchmark:
                 torch.cuda.synchronize(local_rank)
             self.times.append(time.perf_counter() - self.step_start)
+            if args.smoke_then_full and trainer.smoke_check_result is None:
+                control.should_log = True
+                if state.global_step >= min(10, total_steps):
+                    control.should_evaluate = True
+            return control
 
         def on_log(self, args_, state, control, logs=None, **kw):
             if main and logs:
@@ -645,9 +684,16 @@ def train_worker(args):
         return basic_collator([{k: v for k, v in row.items() if k != "length"} for row in rows])
 
     TrainerClass = make_trainer_class()
+    def record_smoke_check(report):
+        if main:
+            metadata["smoke_check"] = report
+            atomic_json(metadata_path, metadata)
+
     trainer = TrainerClass(model=model, args=training_args, train_dataset=train_data,
                            eval_dataset=val_data, processing_class=tokenizer,
                            data_collator=collate, selected_logits=args.selected_logits,
+                           smoke_check_step=min(10, total_steps) if args.smoke_then_full else None,
+                           smoke_reporter=record_smoke_check,
                            callbacks=[progress])
     torch.cuda.reset_peak_memory_stats(local_rank)
     try:

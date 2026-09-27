@@ -92,11 +92,14 @@ python scripts/train_world_cup_multigpu.py \
   --gpus 2 --gpu-ids 0,1 \
   --model /workspace/models/Qwen3.6-27B \
   --dataset-dir datasets/world_cup_sft \
-  --smoke
+  --smoke-then-full
 ```
 
-Remove `--smoke` after a successful test to start a full run. These commands
-require your local model files and working training dependencies. On a Mac,
+`--smoke-then-full` checks up to 32 validation conversations after the first ten
+optimizer steps, then continues the full run with the same loaded model and
+optimizer. Those steps count toward training and use the full-run learning-rate
+schedule. Use `--smoke` only for a standalone ten-step test that exits afterward.
+These commands require your local model files and working training dependencies. On a Mac,
 conversion can run without `--tokenizer`, deferring exact length checks to the
 trainer. Conversion does not truncate conversations or discard targets.
 

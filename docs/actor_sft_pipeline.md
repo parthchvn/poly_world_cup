@@ -113,7 +113,7 @@ Output:
 One JSONL line is one entire actor/binary-market conversation, with multiple
 assistant decision targets. Counts of conversations and targets therefore differ.
 
-## 3. Training smoke test, then full run
+## 3. Check training and continue with one model load
 
 If only two distinct matches have completed collection and you need a training
 smoke test now, pass their completed export directories explicitly and opt in to
@@ -144,10 +144,27 @@ python scripts/train_world_cup_multigpu.py \
   --gpus 2 --gpu-ids 0,1 \
   --model /workspace/models/Qwen3.6-27B \
   --dataset-dir datasets/world_cup_sft \
-  --smoke
+  --smoke-then-full
 ```
 
-After that succeeds:
+This loads one model replica per GPU once. After ten optimizer steps (or the
+last step of a shorter run), it evaluates up to 32 validation conversations.
+A missing or nonfinite validation loss stops training. On success, training
+continues with the same model, LoRA adapter, optimizer, and scheduler. The first
+ten steps count toward the full run, whose learning-rate schedule is used from
+the start. The normal evaluation cadence and final evaluation use the full
+validation split; the early subset metrics are named `smoke_eval_*` and are
+recorded separately in `training_metadata.json` as `smoke_check`.
+
+This is an execution and finite-loss check, not an accuracy threshold or a
+complete numerical validation. On resume, retain `--smoke-then-full`; if the
+checkpoint is already beyond step ten, the subset check runs after the first
+resumed optimizer step. Model loading is necessary again after a process exits.
+Offline regression tests cover routing, data selection, state preservation,
+failure handling, and CLI modes. Actual multi-GPU integration for this new mode
+must be checked in the target training environment.
+
+For a full run without the early subset check:
 
 ```bash
 python scripts/train_world_cup_multigpu.py \
@@ -158,7 +175,8 @@ python scripts/train_world_cup_multigpu.py \
 
 Use `--gpus 1 --gpu-ids 0` for one GPU, or `--gpus 4 --gpu-ids 0,1,2,3` for four.
 Always specify the new `--dataset-dir`; the trainer's historical default points
-to the older pilot export. A full run starts separately from its smoke run.
+to the older pilot export. The original `--smoke` remains a standalone ten-step
+run that exits. Starting a separate full command afterward reloads the weights.
 
 ## Conversation and supervision contract
 
