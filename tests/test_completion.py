@@ -10,7 +10,7 @@ import unittest
 from poly_world_cup.attribution import build_attribution_index
 from poly_world_cup.completion import assess, coverage_for_records, eligible_target_times
 from poly_world_cup.sft import export_sft
-from scripts.validate_sft import validate_sft
+from tools.validate_sft import validate_sft
 
 
 POLICY = {"fixture_splits": {"f1": "train", "f2": "validation", "f3": "test"},

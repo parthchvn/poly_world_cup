@@ -8,7 +8,7 @@ import tempfile
 import unittest
 
 from poly_world_cup.attribution import build_attribution_index
-from scripts.export_corpus import export_corpus
+from tools.export_corpus import export_corpus
 
 CONDITION = "0x" + "1" * 64
 REGISTRY = {"fixtures": [{"fixture_id": "fixture:1"}], "contracts": [{
@@ -138,7 +138,7 @@ class ExportCorpusTests(unittest.TestCase):
     def test_concurrent_immutable_database_change_discards_archive(self):
         import os
         from unittest.mock import patch
-        from scripts import export_corpus as exporter
+        from tools import export_corpus as exporter
         original = exporter._archive
         def changed(*args, **kwargs):
             result = original(*args, **kwargs)

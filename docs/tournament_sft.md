@@ -125,19 +125,19 @@ global wallet history is claimed.
 Build from the saved source without changing it:
 
 ```bash
-python scripts/filter_tournament_wallets.py \
+python tools/filter_tournament_wallets.py \
   --database /path/to/world_cup_lt20.sqlite \
   --output data/tournament_lt20/attribution.sqlite \
   --threshold 20 --require-tournament-coverage \
   --report data/tournament_lt20/filter_report.json
 
-python scripts/prepare_sft.py \
+python tools/prepare_sft.py \
   --database data/tournament_lt20/attribution.sqlite \
   --output datasets/world_cup_2026_tournament_lt20_v1 \
   --split-policy configs/tournament_sft_v1.json \
   --shard-rows 20000 --news-limit 8 --allow-partial
 
-python scripts/validate_sft.py \
+python tools/validate_sft.py \
   --dataset datasets/world_cup_2026_tournament_lt20_v1 \
   --report data/tournament_lt20/validation.json
 ```

@@ -8,7 +8,7 @@ import unittest
 
 from poly_world_cup.attribution import build_attribution_index, _micros
 from poly_world_cup.sft import export_sft, _utc
-from scripts.validate_sft import validate_sft
+from tools.validate_sft import validate_sft
 from tests.test_historical_contracts import contract_record_fixture
 
 

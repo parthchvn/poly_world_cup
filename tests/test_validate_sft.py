@@ -8,9 +8,9 @@ import unittest
 
 from poly_world_cup.attribution import build_attribution_index
 from poly_world_cup.sft import export_sft
-from scripts.filter_wallet_activity import filter_database
-from scripts.filter_tournament_wallets import filter_tournament_database
-from scripts.validate_sft import validate_sft
+from tools.filter_wallet_activity import filter_database
+from tools.filter_tournament_wallets import filter_tournament_database
+from tools.validate_sft import validate_sft
 from tests.test_sft import REGISTRY, POLICY, trade, news
 
 

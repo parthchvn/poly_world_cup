@@ -16,7 +16,7 @@ from pathlib import Path, PurePosixPath
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from scripts.measure_sequence_tokens import (
+from tools.measure_sequence_tokens import (
     REFERENCE_CHAT_TEMPLATE, REFERENCE_PATH, assistant_mask_probe,
     file_sha256, load_reference_tokenizer, validate_messages,
 )

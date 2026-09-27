@@ -6,7 +6,7 @@ import tempfile
 import unittest
 
 from poly_world_cup.attribution import build_attribution_index, read_trade_context
-from scripts.filter_wallet_activity import filter_database
+from tools.filter_wallet_activity import filter_database
 
 
 C1 = "0x" + "1" * 64

@@ -16,7 +16,7 @@ import zlib
 
 from poly_world_cup.actor_sequences import SequencePolicy
 from poly_world_cup.sft import _JSONLines, _json, _sha
-from scripts.reconstruct_actor_sequence_shard import canonical_sha, read_prefix, reconstruct
+from tools.reconstruct_actor_sequence_shard import canonical_sha, read_prefix, reconstruct
 
 
 class SequenceShardRecoveryTests(unittest.TestCase):
@@ -71,10 +71,10 @@ class SequenceShardRecoveryTests(unittest.TestCase):
     def run_reconstruction(self, rebuilt=None):
         # These tests isolate recovery evidence, not the separately tested model
         # conversation builder; the real source and gzip I/O remain in use.
-        with patch("scripts.reconstruct_actor_sequence_shard.ContextCatalog", return_value=SimpleNamespace()), \
-             patch("scripts.reconstruct_actor_sequence_shard.load_reference_tokenizer", return_value=object()), \
-             patch("scripts.reconstruct_actor_sequence_shard.TokenBudget", return_value=object()), \
-             patch("scripts.reconstruct_actor_sequence_shard.actor_rows", return_value=rebuilt or self.rows), \
+        with patch("tools.reconstruct_actor_sequence_shard.ContextCatalog", return_value=SimpleNamespace()), \
+             patch("tools.reconstruct_actor_sequence_shard.load_reference_tokenizer", return_value=object()), \
+             patch("tools.reconstruct_actor_sequence_shard.TokenBudget", return_value=object()), \
+             patch("tools.reconstruct_actor_sequence_shard.actor_rows", return_value=rebuilt or self.rows), \
              contextlib.redirect_stdout(io.StringIO()):
             return reconstruct(self.args)
 

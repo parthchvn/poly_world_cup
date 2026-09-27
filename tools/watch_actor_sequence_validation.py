@@ -10,7 +10,7 @@ import time
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from poly_world_cup.sequence_token_validation import recount_closed_shards
 from poly_world_cup.sequence_validation import require
-from scripts.validate_actor_sequences import validate_release
+from tools.validate_actor_sequences import validate_release
 
 
 def main():

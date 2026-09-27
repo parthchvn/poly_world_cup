@@ -6,7 +6,7 @@ import tempfile
 import unittest
 
 from poly_world_cup.attribution import build_attribution_index
-from scripts.prepare_news_catalog import prepare, jsonl, sha, write_jsonl
+from tools.prepare_news_catalog import prepare, jsonl, sha, write_jsonl
 from test_sft import REGISTRY, POLICY, trade, news
 
 

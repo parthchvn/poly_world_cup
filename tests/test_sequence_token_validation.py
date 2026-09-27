@@ -25,44 +25,44 @@ class CoordinatorTests(unittest.TestCase):
             tokenizer=Path("tokenizer"),chat_template=Path("template"),token_workers=7)
 
     def test_source_worker_selection_reaches_both_validation_modes(self):
-        from scripts.validate_actor_sequences import validate_release
+        from tools.validate_actor_sequences import validate_release
         for with_tokens in (False,True):
             with self.subTest(with_tokens=with_tokens):
                 args=self.args();args.source_workers=3
                 if not with_tokens:args.tokenizer=None
-                with patch("scripts.validate_actor_sequences.validate_sequences",return_value={"source":"done"}) as source, \
-                     patch("scripts.validate_actor_sequences.recount_tokens",return_value={"tokens":"done"}), \
-                     patch("scripts.validate_actor_sequences.attach_token_recount",return_value={"status":"passed"}):
+                with patch("tools.validate_actor_sequences.validate_sequences",return_value={"source":"done"}) as source, \
+                     patch("tools.validate_actor_sequences.recount_tokens",return_value={"tokens":"done"}), \
+                     patch("tools.validate_actor_sequences.attach_token_recount",return_value={"status":"passed"}):
                     validate_release(args)
                 self.assertEqual(source.call_args.kwargs["workers"],3)
 
     def test_independent_checks_overlap(self):
-        from scripts.validate_actor_sequences import validate_release
+        from tools.validate_actor_sequences import validate_release
         token_started,source_started = Event(),Event()
         def token(*a,**kw):
             token_started.set();self.assertTrue(source_started.wait(5));return {"tokens":"done"}
         def source(*a,**kw):
             source_started.set();self.assertTrue(token_started.wait(5));return {"source":"done"}
-        with patch("scripts.validate_actor_sequences.recount_tokens",side_effect=token), \
-             patch("scripts.validate_actor_sequences.validate_sequences",side_effect=source), \
-             patch("scripts.validate_actor_sequences.attach_token_recount",return_value={"status":"passed"}) as attach:
+        with patch("tools.validate_actor_sequences.recount_tokens",side_effect=token), \
+             patch("tools.validate_actor_sequences.validate_sequences",side_effect=source), \
+             patch("tools.validate_actor_sequences.attach_token_recount",return_value={"status":"passed"}) as attach:
             self.assertEqual(validate_release(self.args()),{"status":"passed"})
             attach.assert_called_once_with({"source":"done"},{"tokens":"done"})
 
     def test_either_check_failure_prevents_success_attachment(self):
-        from scripts.validate_actor_sequences import validate_release
+        from tools.validate_actor_sequences import validate_release
         for failing in ("tokens","source"):
             with self.subTest(failing=failing), \
-                 patch("scripts.validate_actor_sequences.recount_tokens",return_value={}) as token, \
-                 patch("scripts.validate_actor_sequences.validate_sequences",return_value={}) as source, \
-                 patch("scripts.validate_actor_sequences.attach_token_recount") as attach:
+                 patch("tools.validate_actor_sequences.recount_tokens",return_value={}) as token, \
+                 patch("tools.validate_actor_sequences.validate_sequences",return_value={}) as source, \
+                 patch("tools.validate_actor_sequences.attach_token_recount") as attach:
                 (token if failing=="tokens" else source).side_effect = ValueError("verification failed")
                 with self.assertRaisesRegex(ValueError,"verification failed"):
                     validate_release(self.args())
                 attach.assert_not_called()
 
     def test_failure_is_logged_before_other_check_finishes(self):
-        from scripts.validate_actor_sequences import validate_release
+        from tools.validate_actor_sequences import validate_release
         for failing in ("tokens","source"):
             reported,release=Event(),Event()
             def waiting(*args,**kwargs):
@@ -72,9 +72,9 @@ class CoordinatorTests(unittest.TestCase):
             def progress(value):
                 if "FAILED" in value and "early failure" in value:reported.set()
             with self.subTest(failing=failing), \
-                 patch("scripts.validate_actor_sequences.recount_tokens",side_effect=fail if failing=="tokens" else waiting), \
-                 patch("scripts.validate_actor_sequences.validate_sequences",side_effect=fail if failing=="source" else waiting), \
-                 patch("scripts.validate_actor_sequences.attach_token_recount") as attach:
+                 patch("tools.validate_actor_sequences.recount_tokens",side_effect=fail if failing=="tokens" else waiting), \
+                 patch("tools.validate_actor_sequences.validate_sequences",side_effect=fail if failing=="source" else waiting), \
+                 patch("tools.validate_actor_sequences.attach_token_recount") as attach:
                 with ThreadPoolExecutor(max_workers=1) as runner:
                     result=runner.submit(validate_release,self.args(),progress)
                     try:self.assertTrue(reported.wait(3),"Failure remained hidden behind the independent check")

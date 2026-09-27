@@ -20,7 +20,7 @@ import sys
 import tempfile
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from scripts.filter_wallet_activity import _identity, _reject_live_wal
+from tools.filter_wallet_activity import _identity, _reject_live_wal
 
 
 def encoded(value):

@@ -13,7 +13,7 @@ from poly_world_cup.http import FetchResult, request_url
 from poly_world_cup.trades import API_URL, TradeIngestionError
 
 _SPEC = importlib.util.spec_from_file_location(
-    "recover_exact20_pairs", Path(__file__).parents[1] / "scripts" / "recover_exact20_pairs.py")
+    "recover_exact20_pairs", Path(__file__).parents[1] / "tools" / "recover_exact20_pairs.py")
 recovery = importlib.util.module_from_spec(_SPEC)
 _SPEC.loader.exec_module(recovery)
 

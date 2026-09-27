@@ -3,7 +3,7 @@
 The SFT input can identify the contract's initial question, fixture title and
 Yes/No token IDs without treating a current API title as historical evidence.
 
-`scripts/collect_historical_contracts.py` reads candidate question IDs from the
+`tools/collect_historical_contracts.py` reads candidate question IDs from the
 original SHA-256 checked Gamma capture. It then retrieves the Polygon
 `NegRiskAdapter` events `MarketPrepared` and `QuestionPrepared`. Their byte
 payloads contain the original fixture and question metadata. Each event is
@@ -54,7 +54,7 @@ itself match news and must not be counted toward direct fixture-news coverage.
 Reproduce the collection in a new output directory:
 
 ```bash
-python scripts/collect_historical_contracts.py \
+python tools/collect_historical_contracts.py \
   --registry data/completion_20260923/registry.json \
   --gamma-cache-bodies /path/to/original/data/cache/bodies \
   --output data/completion_20260923/contracts

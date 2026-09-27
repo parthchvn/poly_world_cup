@@ -6,7 +6,7 @@ import unittest
 
 from poly_world_cup.sequence_validation import PROFILES,SPLITS,canonical
 from poly_world_cup.sft import _JSONLines,_Shards
-from scripts.rebuild_sequence_auxiliary_shards import rebuild_index
+from tools.rebuild_sequence_auxiliary_shards import rebuild_index
 
 
 class IndexReconstructionTests(unittest.TestCase):

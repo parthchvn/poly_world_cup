@@ -11,7 +11,7 @@ import unittest
 
 from poly_world_cup.http import FetchResult, request_url
 from poly_world_cup.trades import TradeIngestionError, ingest_condition
-from scripts.recover_sequence_trades import SCHEMA, import_condition, verify_selected_counts, inherit_archive, sha256
+from tools.recover_sequence_trades import SCHEMA, import_condition, verify_selected_counts, inherit_archive, sha256
 
 CONDITION='0x'+'a'*64
 WALLET='0x'+'b'*40

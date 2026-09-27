@@ -117,18 +117,27 @@ the smoke test. Generated runs, checkpoints, and adapters must stay outside Git.
 
 ## Current entry points
 
-Use `scripts/build_actor_dataset.py` for the per-actor collection format and
-`scripts/train_world_cup_multigpu.py` for one- or multiple-GPU training. The old
+The `scripts/` directory contains only the current SFT workflow:
+
+| Script | Purpose |
+|---|---|
+| `scripts/build_actor_dataset.py` | Collect one market and export its per-actor dataset. |
+| `scripts/prepare_actor_sft.py` | Validate actor exports and prepare SFT conversations and splits. |
+| `scripts/train_world_cup_multigpu.py` | Run QLoRA training on one or multiple GPUs. |
+
+Additional collection, recovery, reporting, and historical workflow utilities
+are in [`tools/`](tools/README.md). Run them from the repository root with
+`python3 tools/<name>.py`; their existing command-line options are retained.
+
+The old
 `build_market_actor_dataset.py`, `train_market_qlora.py`, news-compaction helper,
 and GitHub dataset uploader have been retired. Their source remains in the
-external pre-cleanup Git backup. Existing older workflow utilities
-remain because they implement distinct collection, recovery, and validation
-operations used by the supporting package and tests.
+external pre-cleanup Git backup.
 
 ## Repository layout and local development
 
-- `scripts/`: collection, conversion/validation utilities for their documented
-  schemas, and trainers.
+- `scripts/`: the three current dataset-building, SFT-preparation, and training entry points.
+- `tools/`: additional and historical collection, recovery, validation, and reporting utilities.
 - `poly_world_cup/`: supporting modules imported by the repository's scripts.
 - `configs/`: small configuration files and reviewed mappings used by the code.
 - `tests/` and `.github/workflows/`: offline regression tests and CI.
@@ -144,4 +153,3 @@ and reports are not part of this repository. Use local exports for training.
 
 Generated data and model outputs are ignored by Git. A normal clone no longer
 includes the removed datasets from earlier commits; --depth 1 is optional.
-

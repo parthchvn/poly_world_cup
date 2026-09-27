@@ -118,7 +118,7 @@ class SFTExportTests(unittest.TestCase):
                          ["syndication-b", "distinct"])
         contexts = self.load(self.output / "contexts.jsonl.gz")
         self.assertTrue(all(row["eligible_item_count"] == 3 for row in contexts))
-        from scripts.validate_sft import validate_sft
+        from tools.validate_sft import validate_sft
         self.assertEqual(validate_sft(self.output)["profile_examples_verified"], 2)
 
     def test_news_versions_change_only_after_verified_revision_and_link_availability(self):

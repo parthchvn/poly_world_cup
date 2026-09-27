@@ -6,7 +6,7 @@ import sqlite3
 import unittest
 
 from tests import test_complete_tournament_wallets as fixtures
-from scripts.export_trade_evidence import export_trade_evidence, Shards
+from tools.export_trade_evidence import export_trade_evidence, Shards
 
 
 class EvidenceExportTests(unittest.TestCase):

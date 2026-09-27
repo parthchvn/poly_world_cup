@@ -122,7 +122,7 @@ Choose one task profile and one split. After the full release passes validation,
 create a trainer input file:
 
 ```bash
-python scripts/export_actor_messages.py \
+python tools/export_actor_messages.py \
   datasets/world_cup_2026_actor_sequences_v3 \
   --validation reports/actor_sequences_validation.json \
   --profile scheduled_windows --split train \
@@ -165,7 +165,7 @@ Pass complete conversations to the trainer's chat-data interface. For a custom
 loader, this repository iterator avoids creating a second corpus copy:
 
 ```python
-from scripts.export_actor_messages import iter_messages
+from tools.export_actor_messages import iter_messages
 
 rows = iter_messages(
     dataset="datasets/world_cup_2026_actor_sequences_v3",
@@ -223,7 +223,7 @@ fingerprint. No model weights are downloaded.
 After the profiles have been exported:
 
 ```bash
-python scripts/measure_sequence_tokens.py \
+python tools/measure_sequence_tokens.py \
   datasets/world_cup_2026_actor_sequences_v3/conditional_trades \
   datasets/world_cup_2026_actor_sequences_v3/scheduled_windows \
   --tokenizer data/tokenizer_reference/qwen3_06b \

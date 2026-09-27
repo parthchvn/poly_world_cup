@@ -5,7 +5,7 @@ from pathlib import Path
 import unittest
 
 from poly_world_cup.sequence_tokens import TokenBudget
-from scripts.measure_sequence_tokens import load_reference_tokenizer, REFERENCE_PATH, REFERENCE_CHAT_TEMPLATE
+from tools.measure_sequence_tokens import load_reference_tokenizer, REFERENCE_PATH, REFERENCE_CHAT_TEMPLATE
 
 
 class UnknownTokenizer:

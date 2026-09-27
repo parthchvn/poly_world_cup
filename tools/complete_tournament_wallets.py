@@ -19,10 +19,10 @@ import sys
 import tempfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from scripts.filter_wallet_activity import (
+from tools.filter_wallet_activity import (
     CONTEXT_TABLES, _canonical, _identity, _reject_live_wal, _row_digest, _table_sql,
 )
-from scripts.filter_tournament_wallets import _report
+from tools.filter_tournament_wallets import _report
 
 SEMANTIC_FIELDS = ("wallet", "condition_id", "token_id", "side", "shares", "price",
                    "query_us", "transaction_hash")

@@ -22,7 +22,7 @@ from poly_world_cup.attribution import build_attribution_index
 from poly_world_cup.io import write_json
 from poly_world_cup.provenance import verify_raw_provenance
 from poly_world_cup.trades import validate_collection
-from scripts.complete_tournament_wallets import complete_tournament_database
+from tools.complete_tournament_wallets import complete_tournament_database
 
 
 def main():

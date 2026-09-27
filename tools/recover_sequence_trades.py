@@ -230,7 +230,7 @@ def inherit_archive(db,archive,replacements,evidence):
 def import_exact20(db,root,cache,valid_tokens):
     # Companion collector documents each single-page user+condition query. Never
     # infer completeness from a short page without terminal pagination and counts.
-    from scripts.recover_exact20_pairs import verify_saved_pair
+    from tools.recover_exact20_pairs import verify_saved_pair
     pairs=list(db.execute('''SELECT wallet,condition_id FROM wallet_market_counts
         WHERE observation_count=20 AND condition_id NOT IN(SELECT condition_id FROM recovery_conditions)'''))
     count=0
@@ -399,7 +399,7 @@ From the repository root, first verify the parts inside this directory using `sh
 cat datasets/world_cup_2026_actor_sequences_v3_recovery/capture_inputs.tar.gz.part* > /tmp/worldcup_capture_inputs.tar.gz
 mkdir -p data/sequence_v3_recovery
 tar -xzf /tmp/worldcup_capture_inputs.tar.gz -C data/sequence_v3_recovery
-python scripts/recover_sequence_trades.py --archive /path/to/world_cup_lt20.sqlite
+python tools/recover_sequence_trades.py --archive /path/to/world_cup_lt20.sqlite
 ```
 
 The recovery directory must not already contain a published `source.sqlite`. For a new online collection instead, add `--collect` to the recovery command. Every selected actor–contract pair must exactly match the full count ledger before publication. Inherited293-contract normalized evidence is never described as newly raw-replayed. Coverage bounds are the narrower selected-cohort observed interval. API exhaustion and repeated observations are not proofs of canonical fill identity, deliberate inactivity, or chain completeness.
@@ -418,7 +418,7 @@ def collect_sources(evidence, recovery, replacements):
     """Reproduce both missing capture sets at a combined 12 logical requests/s."""
     from concurrent.futures import ThreadPoolExecutor
     from poly_world_cup.batch import run_batch
-    from scripts.recover_exact20_pairs import main as exact20_main
+    from tools.recover_exact20_pairs import main as exact20_main
     def replacements_job():
         report=run_batch(replacements,output_dir=recovery/'trades',cache_dir=recovery/'cache',
             workers=32,requests_per_second=6,minimum_size='0.000001',compress=True,

@@ -338,7 +338,7 @@ _WORKER = None
 def _worker_init(evidence, coverage, split_policy, policy, tokenizer_path, template_path):
     global _WORKER
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
-    from scripts.measure_sequence_tokens import load_reference_tokenizer
+    from tools.measure_sequence_tokens import load_reference_tokenizer
     tokenizer = load_reference_tokenizer(Path(tokenizer_path), chat_template=Path(template_path))
     _WORKER = (ContextCatalog(evidence, policy.initial_news_per_scope), coverage, split_policy,
                policy, TokenBudget(tokenizer, policy.max_tokens))
@@ -371,7 +371,7 @@ def actor_results(actors, *, catalog, coverage, split_policy, policy, budget,
 
 def export_actor_sequences(source, output, evidence, split_policy, policy, tokenizer_path,
                            template_path, *, workers=8, actor_limit=None):
-    from scripts.measure_sequence_tokens import load_reference_tokenizer
+    from tools.measure_sequence_tokens import load_reference_tokenizer
     source, output, evidence = Path(source), Path(output), Path(evidence)
     _reject_wal(source)
     identity, source_sha = _identity(source), _sha(source)

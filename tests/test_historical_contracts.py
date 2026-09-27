@@ -130,7 +130,7 @@ class HistoricalContractTests(unittest.TestCase):
 
 class HistoricalRPCCacheTests(unittest.TestCase):
     def test_reordered_batch_is_cached_and_response_tamper_is_rejected(self):
-        from scripts.collect_historical_contracts import RPC
+        from tools.collect_historical_contracts import RPC
         with tempfile.TemporaryDirectory() as directory:
             rpc = RPC("https://example.test/rpc", directory)
             specs = [{"method": "eth_chainId", "params": []},
@@ -149,7 +149,7 @@ class HistoricalRPCCacheTests(unittest.TestCase):
                 rpc.batch(specs)
 
     def test_cache_cannot_change_provider(self):
-        from scripts.collect_historical_contracts import RPC
+        from tools.collect_historical_contracts import RPC
         with tempfile.TemporaryDirectory() as directory:
             rpc = RPC("https://example.test/rpc", directory)
             spec = {"method": "eth_chainId", "params": []}

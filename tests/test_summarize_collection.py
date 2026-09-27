@@ -1,7 +1,7 @@
 import hashlib
 import unittest
 
-from scripts.summarize_collection import compose_summary, render_readme
+from tools.summarize_collection import compose_summary, render_readme
 
 
 def finished_inputs():

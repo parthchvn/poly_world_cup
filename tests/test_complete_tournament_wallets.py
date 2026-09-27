@@ -6,8 +6,8 @@ import tempfile
 import unittest
 
 from poly_world_cup.attribution import build_attribution_index
-from scripts.filter_wallet_activity import filter_database
-from scripts.complete_tournament_wallets import complete_tournament_database
+from tools.filter_wallet_activity import filter_database
+from tools.complete_tournament_wallets import complete_tournament_database
 
 C1='0x'+'1'*64
 C2='0x'+'2'*64

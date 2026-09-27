@@ -27,7 +27,7 @@ from poly_world_cup.actor_sequences import (
 from poly_world_cup.sequence_context import ContextCatalog
 from poly_world_cup.sequence_tokens import TokenBudget
 from poly_world_cup.sft import _Shards, _identity, _json, _reject_wal, _sha
-from scripts.measure_sequence_tokens import load_reference_tokenizer
+from tools.measure_sequence_tokens import load_reference_tokenizer
 
 
 def require(value, message):
@@ -161,7 +161,7 @@ def reconstruct(args):
         cache_path.write_text(_json({"identity": source_identity, "sha256": source_hash}) + "\n")
     require(source_hash == expected_source, "Incorrect source hash")
     code_paths = [REPO / p for p in ("poly_world_cup/actor_sequences.py", "poly_world_cup/sequence_context.py",
-        "poly_world_cup/sequence_tokens.py", "poly_world_cup/sft.py", "scripts/measure_sequence_tokens.py")]
+        "poly_world_cup/sequence_tokens.py", "poly_world_cup/sft.py", "tools/measure_sequence_tokens.py")]
     code_hashes = {str(p.relative_to(REPO)): _sha(p) for p in code_paths}
     policy = SequencePolicy(**json.loads((dataset / "policy.json").read_text()))
     split_policy = json.loads((dataset / "split_policy.json").read_text())

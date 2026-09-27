@@ -1,6 +1,6 @@
 # Wallet activity filter
 
-`scripts/filter_wallet_activity.py` creates a separate filtered dataset. It opens
+`tools/filter_wallet_activity.py` creates a separate filtered dataset. It opens
 the original database read-only and refuses to overwrite any existing output.
 It does not replace previously generated or uploaded datasets.
 
@@ -28,7 +28,7 @@ period and is a retrospective selection rule, not a pre-trade input feature.
 Run from the repository root after obtaining the original attribution database:
 
 ```bash
-python scripts/filter_wallet_activity.py \
+python tools/filter_wallet_activity.py \
   --database data/full/partial_attribution.sqlite \
   --output data/filtered/world_cup_lt20.sqlite \
   --report data/filtered/filter_report.json

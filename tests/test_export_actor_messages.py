@@ -9,7 +9,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from scripts.export_actor_messages import export_messages
+from tools.export_actor_messages import export_messages
 
 PROFILES = ("conditional_trades", "scheduled_windows")
 SPLITS = ("train", "validation", "test")

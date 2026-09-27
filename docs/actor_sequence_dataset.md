@@ -153,7 +153,7 @@ check; the dataset partition alone does not establish that it never saw a match.
 Print an actual complete row without shortening it:
 
 ```bash
-python scripts/inspect_actor_sequence.py datasets/world_cup_2026_actor_sequences_v3 \
+python tools/inspect_actor_sequence.py datasets/world_cup_2026_actor_sequences_v3 \
   --profile scheduled_windows --split train
 ```
 
@@ -161,11 +161,11 @@ Add `--actor 0x...` to select a known actor or `--messages-only` to inspect just
 the conversation. Inspection is not a substitute for validation.
 
 After the full release passes validation, use the
-[messages-only loader/exporter](../scripts/export_actor_messages.py) to stream
+[messages-only loader/exporter](../tools/export_actor_messages.py) to stream
 one profile/split or create a trainer input file outside the frozen dataset:
 
 ```bash
-python scripts/export_actor_messages.py datasets/world_cup_2026_actor_sequences_v3 \
+python tools/export_actor_messages.py datasets/world_cup_2026_actor_sequences_v3 \
   --validation reports/actor_sequences_validation.json \
   --profile scheduled_windows --split train \
   --output data/training/scheduled_windows_train.jsonl.gz
@@ -184,7 +184,7 @@ Reassemble and extract the existing `world_cup_lt20.part01` and `.part02` ZIP
 archive. Keep its `MANIFEST.json` beside `world_cup_lt20.sqlite`, then run:
 
 ```bash
-python scripts/recover_sequence_trades.py \
+python tools/recover_sequence_trades.py \
   --archive /path/to/world_cup_lt20.sqlite --collect
 ```
 
@@ -196,10 +196,10 @@ conservative scheduled-window bounds, not full-contract first/last timestamps.
 Recovery reports distinguish archived normalized rows from replayed raw captures.
 
 ```bash
-python scripts/prepare_actor_sequences.py \
+python tools/prepare_actor_sequences.py \
   --source data/sequence_v3_recovery/source.sqlite \
   --output datasets/world_cup_2026_actor_sequences_v3 --workers 8
-python scripts/validate_actor_sequences.py \
+python tools/validate_actor_sequences.py \
   --dataset datasets/world_cup_2026_actor_sequences_v3 \
   --source data/sequence_v3_recovery/source.sqlite \
   --evidence datasets/world_cup_2026_tournament_lt20_v2_evidence \

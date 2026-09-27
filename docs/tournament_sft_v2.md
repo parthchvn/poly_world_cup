@@ -282,7 +282,7 @@ gzip streams through their CRC/footer and checks row counts before publication.
 To verify the prepared release after downloading it:
 
 ```bash
-python scripts/validate_sft.py \
+python tools/validate_sft.py \
   --dataset datasets/world_cup_2026_tournament_lt20_v2 \
   --report data/local_checks/sft_v2_validation.json
 ```
@@ -290,10 +290,10 @@ python scripts/validate_sft.py \
 Rebuilding the source cohort requires the original per-contract subset **with its
 full count ledger**, original collection/provenance checkpoints, and the fresh
 replacement capture manifests and raw-response cache. Run
-`scripts/build_trade_completion.py` on those inputs to produce a new completed
-cohort. `scripts/collect_gdelt_news.py` supports a recorded `--stamps` schedule;
-`scripts/collect_historical_contracts.py` reconstructs the initial contract
-catalog. `scripts/refresh_news_context.py` writes a separate cohort database with
+`tools/build_trade_completion.py` on those inputs to produce a new completed
+cohort. `tools/collect_gdelt_news.py` supports a recorded `--stamps` schedule;
+`tools/collect_historical_contracts.py` reconstructs the initial contract
+catalog. `tools/refresh_news_context.py` writes a separate cohort database with
 the verified joined news records and contract evidence. The original source
 tables are not edited. The inherited 293 raw capture bodies are not freshly
 replayed by this release, so independent recollection is a different snapshot.
@@ -302,17 +302,17 @@ From an already reconstructed v2 attribution database and its exact registry,
 export to a fresh directory and run both checks:
 
 ```bash
-python scripts/prepare_sft.py \
+python tools/prepare_sft.py \
   --database /path/to/v2/attribution.sqlite \
   --output data/rebuilt_sft_v2 \
   --split-policy configs/tournament_sft_v1.json \
   --shard-rows 20000 --news-limit 8 --deduplicate-headlines
 
-python scripts/validate_sft.py \
+python tools/validate_sft.py \
   --dataset data/rebuilt_sft_v2 \
   --report data/local_checks/rebuilt_sft_v2_validation.json
 
-python scripts/check_tournament_completion.py \
+python tools/check_tournament_completion.py \
   --database /path/to/v2/attribution.sqlite \
   --registry /path/to/v2/registry.json \
   --release data/rebuilt_sft_v2 \

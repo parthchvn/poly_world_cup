@@ -153,7 +153,7 @@ silently collapsed into supposedly canonical fills.
 Estimate disk use without copying data:
 
 ```bash
-python scripts/export_corpus.py \
+python tools/export_corpus.py \
   --database data/full/attribution.sqlite \
   --archive-news data/news_archive/news_archive.jsonl \
   --provenance-report data/full/provenance_report.json \
@@ -192,7 +192,7 @@ After all collection, provenance, attribution, archive, and receipt-report input
 are finalized, produce a compact overview without scanning the trade database:
 
 ```bash
-python scripts/summarize_collection.py \
+python tools/summarize_collection.py \
   --output reports/tournament_collection.json \
   --readme data/releases/2026-world-cup/DATASET_README.md
 ```
@@ -234,7 +234,7 @@ verifies every saved page. SQLite page hashes, exact observation counts, news
 catalog equality, and body-exclusion checks remain mandatory.
 
 ```bash
-python scripts/export_corpus.py \
+python tools/export_corpus.py \
   --database data/full/partial_attribution.sqlite \
   --archive-news data/news_archive/news_archive.jsonl \
   --provenance-report data/full/provenance_report.json \

@@ -6,7 +6,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from scripts.measure_sequence_tokens import (
+from tools.measure_sequence_tokens import (
     assistant_mask_probe, count_chat_tokens, distribution, input_paths, measure_sequences,
     validate_messages, load_reference_tokenizer, REFERENCE_PATH, REFERENCE_CHAT_TEMPLATE,
 )
