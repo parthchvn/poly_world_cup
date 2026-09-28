@@ -10,6 +10,8 @@ from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
+from tests import actor_snapshot_fixtures as snapshots
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -57,7 +59,8 @@ class ActorSFTTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def source(self, market_id=1, fixture=1, compressed=False, with_market_context=False, context_version=1):
+    def source(self, market_id=1, fixture=1, compressed=False, with_market_context=False, context_version=1,
+               with_actor_snapshots=False):
         path = self.root / ('market_' + str(market_id))
         (path / 'actors').mkdir(parents=True)
         market = {'market_id': str(market_id), 'condition_id': '0x' + f'{market_id:064x}',
@@ -94,6 +97,10 @@ class ActorSFTTests(unittest.TestCase):
                                                      market, None, history_file=history_file)
                 rows = list(builder.actor_records(actor, trades, market, events,
                     [e['timestamp_us'] for e in events], origin, lambda instant: builder.market_context_at(db, instant, version=context_version)))
+        if with_actor_snapshots:
+            snapshots.write_snapshot(path / 'actor_snapshots', actor, market)
+            for row in rows:
+                row['actor_snapshot_ref'] = 'actor_snapshots/' + actor + '.json'
         text = ''.join(converter.sft_compact(row) + '\n' for row in rows)
         name = actor + ('.jsonl.gz' if compressed else '.jsonl')
         actor_file = path / 'actors' / name
@@ -107,6 +114,8 @@ class ActorSFTTests(unittest.TestCase):
             manifest.update(market_context_version=context_version, fill_window_seconds=5)
             if context_version == 2:
                 manifest['market_price_max_age_seconds'] = 300
+        if with_actor_snapshots:
+            manifest['actor_snapshots'] = snapshots.report()
         (path / 'market.json').write_text(json.dumps(market))
         (path / 'manifest.json').write_text(json.dumps(manifest))
         return path, actor_file, rows

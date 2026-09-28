@@ -19,19 +19,19 @@ git pull --ff-only origin main
 The former preparation script is now included in `build_actor_dataset.py`.
 `scripts/` contains only this builder and `train_world_cup_multigpu.py`.
 
-To rebuild existing RunPod exports with market-price context, use a new actor
-output root and the **same existing cache**:
+To rebuild existing RunPod exports with market-price context and actor snapshots,
+use a new actor output root and the **same existing cache**:
 
 ```bash
 cd /poly_world_cup
 git pull --ff-only origin main
 
 python3 scripts/build_actor_dataset.py sft 1897035 1897038 1897059 \
-  --data-root /workspace/world_cup_actor_data/data_with_api_prices \
+  --data-root /workspace/world_cup_actor_data/data_with_actor_snapshots \
   --cache /workspace/world_cup_actor_data/data/market_actor_cache \
   --reuse-existing \
   --http-transport curl \
-  --out /workspace/datasets/world_cup_sft_with_api_prices \
+  --out /workspace/datasets/world_cup_sft_with_actor_snapshots \
   --tokenizer /workspace/models/Qwen3.6-27B
 ```
 
@@ -43,24 +43,27 @@ is checked before trade collection: normally at least three distinct matches,
 or two with `--train-validation-only`.
 
 `--reuse-existing` explicitly reuses completed matching exports with official
-price history (`market_context_version: 2`). It rejects version-1 exports based
-on previous executions and older exports without market context. Collection
-filters and source options apply only to new exports. Without this flag,
-existing actor exports cause an error. If collection fails partway through,
+price history (`market_context_version: 2`) and actor snapshots
+(`actor_snapshots.version: 1`). It rejects older exports missing either feature.
+Collection filters and source options apply only to new exports. Without this
+flag, existing actor exports cause an error. If collection fails partway through,
 rerun with the same cache and `--reuse-existing`: finished exports are retained,
 and unfinished trade captures resume. An exhausted capture is reused without
 scraping its trade pages again. Official token price history is a separate
-cached source; an old trade capture alone does not contain it. An existing SFT
-output is never overwritten; choose another `--out` when preparing a new version.
+cached source; an old trade capture alone does not contain it. Actor snapshots
+also require their own API requests if not cached. An existing SFT output is never
+overwritten; choose another `--out` when preparing a new version.
 
 The separate `prepare` mode remains compatible with version-0 exports (no price
 context) and version-1 exports (previous-execution price estimates), with a
 warning describing the older context. All selected exports must use the same
-version. Preparation does not fetch new price history or upgrade old actor
-files; rebuild them from saved trade captures using the command above. Already
-trained adapters are unchanged. Train a new run with
-`--dataset-dir /workspace/datasets/world_cup_sft_with_api_prices` to learn from
-the added inputs.
+version. It also accepts legacy exports without actor snapshots. Preparation
+does not fetch prices or snapshots, or upgrade old actor files; rebuild them
+from saved trade captures using the command above. Already trained adapters are
+unchanged. Train a new run with
+`--dataset-dir /workspace/datasets/world_cup_sft_with_actor_snapshots` to learn from
+added historical price inputs. Collection-time actor snapshots are for analysis
+and do not become model inputs.
 
 Match-specific files or overrides, such as `--espn-file`, cannot be shared across
 multiple market IDs. Collect those markets individually, then run `prepare`.
@@ -110,7 +113,9 @@ The builder prints retry waits, saved page counts, and the resume position.
 Tune these with `--http-min-interval`, `--http-retries`, `--http-retry-delay`,
 and `--http-timeout`. A persistent outage still stops the run safely; rerunning
 with the same cache continues from the last committed page. Do not delete the
-cache to retry. These controls do not change the requested trade filters.
+cache to retry. These controls do not change the requested trade filters. Actor
+snapshot collection uses up to eight workers, each pausing at least one second between
+live requests; see the snapshot section below.
 
 All completed exports live under `data/market_<id>/` by default. Keep these local.
 For a substantial experiment, collect more matches. Three matches are only the
@@ -248,6 +253,62 @@ Thus missing order lifecycle data does not become a fabricated immediate-fill
 label, and later payoff analysis is not inserted into the decision input. The
 block-time limitation above still applies to interpreting the price context.
 
+## Actor value and position snapshots
+
+New exports collect these three public API results for every retained actor,
+filtered by the actor's wallet and this market's condition ID:
+
+| Field | API result |
+|---|---|
+| `actor_market_value` | `/v2/value`: the API's current marked-to-market holdings value for this actor and condition. This is fetched directly, not derived by summing positions or treated as profit. |
+| `actor_positions_open` | `/v2/positions` with `status=OPEN` and `include_archived=true`: all returned position pages, including their current size/value, cost, fees, and P&L fields. OPEN can include resolved but unredeemed winning positions. |
+| `actor_positions_closed` | `/v2/positions` with `status=CLOSED`: all returned closed-position pages, preserving the API's cost, fee, and P&L fields. |
+
+Each actor's results are stored once in `actor_snapshots/<wallet>.json`. Every
+raw actor row and its `actor_index.jsonl` entry carries `actor_snapshot_ref`, a
+path relative to the export root. The snapshot has `version: 1`, actor/market/
+condition identifiers, `temporal_scope: "collection_time_not_trade_time"`, and
+`historical_model_input: false`. Each of the three result objects contains
+`status: "ok"`, the API's `data` (an object for value, a list for positions), and
+`pages` with request URLs, retrieval times, body hashes, and cache-use flags.
+Successful `value: 0` and empty position lists are valid results. An HTTP,
+validation, or pagination error aborts the export; it does not become zero or
+an empty successful result. Saved HTTP responses remain available for retry.
+
+These are **collection-time snapshots, not historical state at each trade**.
+They can contain later sales, redemptions, and P&L. Position fields reflect the
+API's returned scope; they do not establish every order or a complete transaction
+history. Requests and pages may have different retrieval times, so the three
+results are not an atomic account snapshot. They do not supply a historical
+`as_of` view, and position event-time filters would not create one. Position P&L
+is not attributed to an individual historical fill, and it does not replace the
+unknown realized-profit or fee fields in that fill's `payoff_analysis`.
+Requests record a `0.000001`-token filter floor. The API still excludes inactive
+markets, even with `include_archived=true`; CLOSED requests omit that flag.
+
+Snapshots require at least three requests per retained actor, plus pagination
+(for example, at least 13,731 requests for 4,577 actors). Collection uses eight
+bounded workers by default. `--actor-snapshot-workers` accepts 1 through 8; each
+worker uses at least a one-second live-request pause, or the larger
+`--http-min-interval`. Cached responses avoid repeat requests and retain their
+original retrieval timestamps. Reusing a cache therefore does not refresh
+holdings or P&L; use a new cache and output directory for a fresh capture.
+Interrupting collection can wait for an in-flight request or retry delay to finish;
+queued work is canceled and completed HTTP captures remain cached.
+
+For offline single-market collection, supply `--actor-snapshots-dir PATH`,
+containing one `<wallet>.json` file per retained actor in the same validated
+snapshot format. This is supplied evidence, not independent proof of the
+original API responses. Collect markets separately before preparation when
+using this option.
+
+The preparer validates and copies these files into
+`audit/actor_snapshots/<condition_id>/<wallet>.json` in the SFT output. It records
+references and hashes in `source_audit.jsonl`. Snapshot data is never inserted
+into user/assistant messages or training targets, avoiding later financial state
+leaking into earlier decisions. The trainer continues to use the conversation
+files without needing changes.
+
 ## 2. Convert actor files to conversations
 
 From the repository root on RunPod, using the Python environment and model
@@ -293,7 +354,8 @@ Output:
 | `test.jsonl` | Held-out test conversations; not opened by the trainer |
 | `manifest.json` | Counts, source hashes, split identities and limitations |
 | `split_plan.json` | Reusable assignment of fixture IDs to splits |
-| `source_audit.jsonl` | Per-conversation actor-file hashes and original target row indices |
+| `source_audit.jsonl` | Per-conversation actor-file hashes, original target row indices, and actor-snapshot references/hashes when present |
+| `audit/actor_snapshots/<condition_id>/<wallet>.json` | Collection-time actor value and positions copied from enriched exports; excluded from training messages |
 
 One JSONL line is one entire actor/binary-market conversation, with multiple
 assistant decision targets. Counts of conversations and targets therefore differ.

@@ -17,6 +17,9 @@ Each execution timestamp has an open-interval NO_TRADE row and a TRADE row.
 Both carry interval news. Simultaneous executions share one TRADE row.
 Earlier rows are actor history; history is not copied into every later row.
 Default: at most 20 captured executions per actor in the selected binary market.
+Each row references actor_snapshots/<wallet>.json with API market value and
+open/closed positions at collection time. These are analysis-only snapshots;
+SFT preparation preserves them separately and never inserts them into prompts.
 
 NO_TRADE describes an observed gap, not a verified conscious decision. Interval
 ends use the next observed trade, so these are retrospective sequence records.
@@ -1736,7 +1739,338 @@ def actor_records(actor, trades, market, events, event_times, origin,
         previous = instant
 
 
+# These snapshots describe collection-time positions and values, never the
+# financial state visible before a historical execution. SFT must not prompt
+# with them. Responses and original retrieval times are retained in the cache.
+ACTOR_SNAPSHOT_SCOPE = 'collection_time_not_trade_time'
+ACTOR_SNAPSHOT_API = 'https://data-api.polymarket.com/v2'
+ACTOR_SNAPSHOT_POSITION_NUMBERS = (
+    'current_size', 'avg_price', 'entry_cost_usdc', 'entry_fees_usdc',
+    'total_cost_usdc', 'current_price', 'current_value', 'total_size',
+    'realized_pnl', 'unrealized_pnl', 'total_pnl',
+)
+
+
+def _actor_snapshot_require(condition, message):
+    if not condition:
+        raise ValueError('Actor snapshot: ' + message)
+
+
+def _actor_snapshot_number(value, name):
+    _actor_snapshot_require(not isinstance(value, bool) and
+                            isinstance(value, (str, int, float, Decimal)),
+                            name + ' must be a finite number')
+    try:
+        number = Decimal(str(value))
+    except (InvalidOperation, ValueError):
+        raise ValueError('Actor snapshot: ' + name + ' must be a finite number') from None
+    _actor_snapshot_require(number.is_finite(), name + ' must be a finite number')
+    return number
+
+
+def _actor_snapshot_json(value):
+    """Preserve exact response decimals without changing IDs, booleans or ints."""
+    if isinstance(value, Decimal):
+        _actor_snapshot_require(value.is_finite(), 'nonfinite response number')
+        return str(value)
+    if isinstance(value, float):
+        _actor_snapshot_number(value, 'response number')
+        return value
+    if isinstance(value, list):
+        return [_actor_snapshot_json(item) for item in value]
+    if isinstance(value, dict):
+        _actor_snapshot_require(all(isinstance(key, str) for key in value),
+                                'response object keys must be strings')
+        return {key: _actor_snapshot_json(item) for key, item in value.items()}
+    _actor_snapshot_require(value is None or isinstance(value, (str, int, bool)),
+                            'response is not JSON-compatible')
+    return value
+
+
+def _actor_snapshot_params(actor, market, status=None):
+    params = {'user': actor, 'condition': market['condition_id']}
+    if status is not None:
+        params.update(status=status, limit=500, filter_type='TOKENS', filter_amount='0.000001')
+        if status == 'OPEN':
+            params['include_archived'] = True
+    return params
+
+
+def _actor_snapshot_scope(actor, market):
+    _actor_snapshot_require(isinstance(actor, str) and ADDRESS.fullmatch(actor) is not None,
+                            'invalid actor address')
+    _actor_snapshot_require(isinstance(market, dict) and
+                            isinstance(market.get('condition_id'), str) and
+                            HEX_32.fullmatch(market['condition_id']) is not None,
+                            'invalid market condition')
+    _actor_snapshot_require(isinstance(market.get('market_id'), str) and bool(market['market_id']),
+                            'missing market ID')
+    tokens = market.get('tokens')
+    _actor_snapshot_require(isinstance(tokens, list) and len(tokens) == 2 and
+                            all(isinstance(token, dict) and
+                                isinstance(token.get('token_id'), str) and
+                                re.fullmatch(r'[1-9][0-9]*', token['token_id'])
+                                for token in tokens), 'invalid market outcome tokens')
+    token_ids = {token['token_id'] for token in tokens}
+    _actor_snapshot_require(len(token_ids) == 2, 'duplicate market outcome tokens')
+    return token_ids
+
+
+def _actor_snapshot_positions(data, actor, market, status):
+    token_ids = _actor_snapshot_scope(actor, market)
+    _actor_snapshot_require(isinstance(data, list), 'positions data must be an array')
+    seen_tokens = set()
+    for row in data:
+        _actor_snapshot_require(isinstance(row, dict), 'position must be an object')
+        _actor_snapshot_require(isinstance(row.get('proxy_wallet'), str) and
+                                row['proxy_wallet'].lower() == actor.lower(),
+                                'position wallet does not match actor')
+        _actor_snapshot_require(isinstance(row.get('condition_id'), str) and
+                                row['condition_id'].lower() == market['condition_id'].lower(),
+                                'position condition does not match market')
+        token = row.get('token_id')
+        _actor_snapshot_require(isinstance(token, str) and token in token_ids,
+                                'position token does not belong to market')
+        _actor_snapshot_require(token not in seen_tokens, 'duplicate position token across pages')
+        seen_tokens.add(token)
+        allowed = {'CLOSED'} if status == 'CLOSED' else {'OPEN', 'REDEEMABLE', 'MERGEABLE', 'REDEEMABLE_LOST'}
+        _actor_snapshot_require(isinstance(row.get('status'), str) and row['status'] in allowed,
+                                'position status contradicts request')
+        for name in ACTOR_SNAPSHOT_POSITION_NUMBERS:
+            _actor_snapshot_number(row.get(name), 'position.' + name)
+        _actor_snapshot_json(row)
+
+
+def _actor_snapshot_value(data, actor):
+    _actor_snapshot_require(isinstance(data, dict), 'market value data must be an object')
+    _actor_snapshot_require(isinstance(data.get('proxy_wallet'), str) and
+                            data['proxy_wallet'].lower() == actor.lower(),
+                            'market value wallet does not match actor')
+    _actor_snapshot_number(data.get('value'), 'market value')
+    _actor_snapshot_json(data)
+
+
+def _actor_snapshot_pages(pages, actor, market, status):
+    _actor_snapshot_require(isinstance(pages, list) and bool(pages), 'missing response provenance')
+    if status is None:
+        _actor_snapshot_require(len(pages) == 1, 'market value must have exactly one response')
+    endpoint = ACTOR_SNAPSHOT_API + ('/positions' if status else '/value')
+    expected = {key: str(value).lower() if isinstance(value, bool) else str(value)
+                for key, value in _actor_snapshot_params(actor, market, status).items()}
+    seen = set()
+    for index, page in enumerate(pages):
+        _actor_snapshot_require(isinstance(page, dict), 'page provenance must be an object')
+        url = page.get('url')
+        _actor_snapshot_require(isinstance(url, str), 'page URL is missing')
+        parsed = urlsplit(url)
+        _actor_snapshot_require(urlunsplit((parsed.scheme, parsed.netloc, parsed.path, '', '')) == endpoint
+                                and not parsed.fragment, 'unexpected snapshot API endpoint')
+        pairs = parse_qsl(parsed.query, keep_blank_values=True)
+        params = dict(pairs)
+        _actor_snapshot_require(len(params) == len(pairs), 'duplicate URL query parameters')
+        _actor_snapshot_require(all(params.get(key) == value for key, value in expected.items()),
+                                'page URL does not match actor, market or collection filters')
+        extras = set(params) - set(expected)
+        _actor_snapshot_require(extras == ({'cursor'} if index else set()) and
+                                (index == 0 or bool(params.get('cursor'))),
+                                'invalid page cursor provenance')
+        _actor_snapshot_require(url not in seen, 'repeated page URL')
+        seen.add(url)
+        retrieved = page.get('retrieved_at')
+        _actor_snapshot_require(isinstance(retrieved, str), 'missing retrieval timestamp')
+        try:
+            instant = datetime.fromisoformat(retrieved.replace('Z', '+00:00'))
+        except ValueError:
+            raise ValueError('Actor snapshot: invalid retrieval timestamp') from None
+        _actor_snapshot_require(instant.tzinfo is not None and instant.utcoffset() is not None,
+                                'retrieval timestamp needs an explicit timezone')
+        _actor_snapshot_require(isinstance(page.get('body_sha256'), str) and
+                                re.fullmatch(r'[0-9a-f]{64}', page['body_sha256']) is not None,
+                                'invalid response body hash')
+        _actor_snapshot_require(type(page.get('from_cache')) is bool, 'from_cache must be boolean')
+
+
+def validate_actor_snapshot(snapshot, actor, market):
+    """Validate a current-state sidecar; never reinterpret it as historical input."""
+    _actor_snapshot_scope(actor, market)
+    _actor_snapshot_require(isinstance(snapshot, dict), 'snapshot must be an object')
+    _actor_snapshot_require(type(snapshot.get('version')) is int and snapshot['version'] == 1,
+                            'unsupported snapshot version')
+    _actor_snapshot_require(snapshot.get('actor_id') == actor and
+                            snapshot.get('market_id') == market['market_id'] and
+                            snapshot.get('condition_id') == market['condition_id'],
+                            'snapshot identifiers do not match actor/market')
+    _actor_snapshot_require(snapshot.get('temporal_scope') == ACTOR_SNAPSHOT_SCOPE and
+                            snapshot.get('historical_model_input') is False,
+                            'snapshots must be marked collection-time and excluded from historical input')
+    for name, status in (('actor_market_value', None), ('actor_positions_open', 'OPEN'),
+                         ('actor_positions_closed', 'CLOSED')):
+        feature = snapshot.get(name)
+        _actor_snapshot_require(isinstance(feature, dict) and feature.get('status') == 'ok',
+                                name + ' is missing or not successful')
+        _actor_snapshot_pages(feature.get('pages'), actor, market, status)
+        if status is None:
+            _actor_snapshot_value(feature.get('data'), actor)
+        else:
+            _actor_snapshot_positions(feature.get('data'), actor, market, status)
+    _actor_snapshot_json(snapshot)
+
+
+def _actor_snapshot_safe_path(path):
+    """Reject traversal and symlink components before opening an offline file."""
+    path = Path(path).expanduser()
+    _actor_snapshot_require('..' not in path.parts, 'offline paths may not contain ..')
+    for part in (path, *path.parents):
+        _actor_snapshot_require(not part.is_symlink(), 'offline paths may not contain symlinks')
+    return path
+
+
+def _actor_snapshot_fetch(client, actor, market, stop):
+    snapshot = {'version': 1, 'actor_id': actor, 'market_id': market['market_id'],
+                'condition_id': market['condition_id'], 'temporal_scope': ACTOR_SNAPSHOT_SCOPE,
+                'historical_model_input': False}
+    for name, status in (('actor_market_value', None), ('actor_positions_open', 'OPEN'),
+                         ('actor_positions_closed', 'CLOSED')):
+        params = _actor_snapshot_params(actor, market, status)
+        endpoint = ACTOR_SNAPSHOT_API + ('/positions' if status else '/value')
+        pages, rows, cursors = [], [], set()
+        while True:
+            if stop.is_set():
+                raise ValueError('Actor snapshot collection canceled after another request failed')
+            result = client.get_json(endpoint, params=params)
+            payload = result.data
+            _actor_snapshot_require(isinstance(payload, dict) and 'data' in payload,
+                                    'API response is missing its data envelope')
+            pages.append({'url': result.url, 'retrieved_at': result.retrieved_at,
+                          'body_sha256': result.body_sha256, 'from_cache': result.from_cache})
+            if status is None:
+                _actor_snapshot_value(payload['data'], actor)
+                data = payload['data']
+                break
+            _actor_snapshot_positions(payload['data'], actor, market, status)
+            rows.extend(payload['data'])
+            pagination = payload.get('pagination')
+            _actor_snapshot_require(isinstance(pagination, dict) and
+                                    type(pagination.get('has_more')) is bool and
+                                    'next_cursor' in pagination,
+                                    'positions response is missing pagination')
+            cursor = pagination['next_cursor']
+            _actor_snapshot_require(cursor is None or (isinstance(cursor, str) and bool(cursor)),
+                                    'invalid next_cursor')
+            _actor_snapshot_require(pagination['has_more'] == (cursor is not None),
+                                    'inconsistent has_more and next_cursor')
+            if cursor is None:
+                data = rows
+                break
+            _actor_snapshot_require(cursor not in cursors and bool(payload['data']),
+                                    'repeated cursor or empty nonterminal positions page')
+            cursors.add(cursor)
+            params['cursor'] = cursor
+        snapshot[name] = {'status': 'ok', 'data': _actor_snapshot_json(data), 'pages': pages}
+    validate_actor_snapshot(snapshot, actor, market)
+    return snapshot
+
+
+def collect_actor_snapshots(actors, market, args, output_dir):
+    """Capture three public current-state views once per exported actor.
+
+    Eight workers each wait at least one second between live attempts, below
+    the documented v2 positions endpoint's 200 requests / 10 second ceiling.
+    Scheduling is bounded; failures cancel queued work and preserve HTTP cache.
+    """
+    from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+    import threading
+
+    workers = getattr(args, 'actor_snapshot_workers', 8)
+    _actor_snapshot_require(type(workers) is int and 1 <= workers <= 8,
+                            '--actor-snapshot-workers must be between 1 and 8')
+    actors = list(actors)
+    for actor in actors:
+        _actor_snapshot_scope(actor, market)
+    _actor_snapshot_require(len(set(actor.lower() for actor in actors)) == len(actors),
+                            'duplicate actors requested')
+    destination = Path(output_dir) / 'actor_snapshots'
+    destination.mkdir(parents=True, exist_ok=False)
+    source = getattr(args, 'actor_snapshots_dir', None)
+    if source is not None:
+        source = _actor_snapshot_safe_path(source)
+        _actor_snapshot_require(source.is_dir(), '--actor-snapshots-dir must be a directory')
+    local, stop = threading.local(), threading.Event()
+
+    class SnapshotHttpClient(HttpClient):
+        def _fetch(self, request):
+            # ValueError is outside the HTTP client's retryable exceptions.
+            # Cancellation therefore stops retries after an in-flight request
+            # or existing retry delay finishes, rather than exhausting them.
+            if stop.is_set():
+                raise ValueError('Actor snapshot collection canceled')
+            return super()._fetch(request)
+
+    def capture_one(actor):
+        if stop.is_set():
+            return
+        if source is not None:
+            path = _actor_snapshot_safe_path(source / (actor + '.json'))
+            _actor_snapshot_require(path.is_file(), 'missing offline sidecar ' + str(path))
+            snapshot = json.loads(path.read_text(encoding='utf-8'), parse_float=Decimal)
+            validate_actor_snapshot(snapshot, actor, market)
+            snapshot = _actor_snapshot_json(snapshot)
+        else:
+            if not hasattr(local, 'client'):
+                local.client = SnapshotHttpClient(Path(args.cache) / 'http', compress=True,
+                    transport=args.http_transport, timeout=args.http_timeout,
+                    retries=args.http_retries, retry_delay=args.http_retry_delay,
+                    min_interval=max(1, args.http_min_interval), log_retries=True)
+            snapshot = _actor_snapshot_fetch(local.client, actor, market, stop)
+        if not stop.is_set():
+            atomic_write(destination / (actor + '.json'), compact(snapshot) + '\n')
+
+    def one(actor):
+        try:
+            capture_one(actor)
+        except Exception as error:
+            raise ValueError(f'Actor snapshot {actor}: {error}') from error
+
+    print(f'Collecting current actor values and positions for {len(actors):,} actors '
+          f'({workers} workers; excluded from historical model input)', flush=True)
+    pool = ThreadPoolExecutor(max_workers=workers)
+    pending, remaining, completed = set(), iter(actors), 0
+
+    def fill_queue():
+        while len(pending) < workers * 2:
+            actor = next(remaining, None)
+            if actor is None:
+                break
+            pending.add(pool.submit(one, actor))
+
+    try:
+        fill_queue()
+        while pending:
+            done, pending = wait(pending, return_when=FIRST_COMPLETED)
+            for future in done:
+                future.result()
+                completed += 1
+                if completed % 100 == 0 or completed == len(actors):
+                    print(f'Saved actor snapshots: {completed:,}/{len(actors):,}', flush=True)
+            fill_queue()
+    except BaseException:
+        stop.set()
+        for future in pending:
+            future.cancel()
+        # In-flight requests finish into the cache; the cancellation check stops
+        # them before another endpoint or a write into the abandoned export.
+        pool.shutdown(wait=True, cancel_futures=True)
+        raise
+    else:
+        pool.shutdown(wait=True)
+    return {'version': 1, 'directory': 'actor_snapshots', 'actors': len(actors),
+            'temporal_scope': ACTOR_SNAPSHOT_SCOPE, 'historical_model_input': False}
+
+
 def export(args):
+    snapshot_workers = getattr(args, 'actor_snapshot_workers', 8)
+    if type(snapshot_workers) is not int or not 1 <= snapshot_workers <= 8:
+        raise ValueError('--actor-snapshot-workers must be between 1 and 8')
     fill_window = getattr(args, 'fill_window_seconds', 5)
     price_max_age = getattr(args, 'market_price_max_age_seconds', 300)
     if type(price_max_age) is not int or price_max_age <= 0:
@@ -1842,6 +2176,7 @@ def export(args):
             actors_dir = work / "actors"
             actors_dir.mkdir()
             counts = Counter()
+            exported_actors = []
             price_coverage = Counter({name: 0 for name in (
                 'trade_rows', 'both_outcomes_available', 'yes_available', 'no_available',
                 'yes_missing', 'no_missing', 'yes_stale', 'no_stale',
@@ -1857,6 +2192,7 @@ def export(args):
                         for row in actor_records(actor, trades, market, events, event_times, origin,
                                                  lambda instant: market_context_at(db, instant, version=2,
                                                      max_age_seconds=price_max_age), fill_window):
+                            row['actor_snapshot_ref'] = f'actor_snapshots/{actor}.json'
                             stream.write(compact(row) + "\n")
                             actor_count["rows"] += 1
                             actor_count["news_entries"] += len(row["news"])
@@ -1871,7 +2207,9 @@ def export(args):
                                         price_coverage[outcome + '_' + row['market_context']['missing_reasons'][outcome]] += 1
                                 actor_count["distinct_trade_times"] += 1
                                 actor_count["trade_observations"] += len(row["label"]["trades"])
-                    index_stream.write(compact({"actor_id": actor, "path": "actors/" + filename, **dict(actor_count)}) + "\n")
+                    index_stream.write(compact({"actor_id": actor, "path": "actors/" + filename,
+                        "actor_snapshot_ref": f'actor_snapshots/{actor}.json', **dict(actor_count)}) + "\n")
+                    exported_actors.append(actor)
                     counts.update(actor_count)
                     counts["actors"] += 1
                     if counts["actors"] % 1000 == 0:
@@ -1890,6 +2228,7 @@ def export(args):
         finally:
             db.close()
         db_path.unlink()
+        snapshot_report = collect_actor_snapshots(exported_actors, market, args, work)
         write_json(work / "market.json", market)
         write_events(work / "espn_events.jsonl", context["timed_events"])
         write_events(work / "espn_unplaced_events.jsonl", context["untimed_events"])
@@ -1906,6 +2245,7 @@ def export(args):
             "espn_timed_items": len(events), "espn_unplaced_items": len(context["untimed_events"]),
             "key_events_only": args.key_events_only, "source": source_report,
             "market_context_version": 2, "market_price_history": price_timeline,
+            "actor_snapshots": snapshot_report,
             "market_price_max_age_seconds": price_max_age, "market_price_coverage": dict(price_coverage),
             "price_context_complete_for_exported_rows": price_coverage['both_outcomes_available'] == price_coverage['trade_rows'],
             "market_context_boundary_rule": "price_timestamp < row trade timestamp (interval end for gap rows)",
@@ -1933,7 +2273,8 @@ def export(args):
     except BaseException:
         shutil.rmtree(work, ignore_errors=True)
         raise
-    print(json.dumps({"output": str(output), **dict(counts), 'market_price_coverage': dict(price_coverage)}, indent=2), flush=True)
+    print(json.dumps({"output": str(output), **dict(counts), 'market_price_coverage': dict(price_coverage),
+                      'actor_snapshots': snapshot_report}, indent=2), flush=True)
     return manifest
 
 
@@ -2280,6 +2621,31 @@ def sft_validate_news(news, start, end):
         previous = when
 
 
+def sft_actor_snapshot_audit(source, actor, rows):
+    """Validate fetch-time evidence separately; none of it is prompt context."""
+    report = source['manifest'].get('actor_snapshots')
+    if report is None:
+        sft_require(all('actor_snapshot_ref' not in row for row in rows),
+                    'Actor snapshot references require manifest metadata')
+        return {}
+    sft_require(isinstance(report, dict) and type(report.get('version')) is int and report['version'] == 1
+                and report.get('directory') == 'actor_snapshots'
+                and report.get('temporal_scope') == 'collection_time_not_trade_time'
+                and report.get('historical_model_input') is False,
+                'Invalid actor snapshot manifest metadata')
+    sft_require(type(report.get('actors')) is int and report['actors'] == source['manifest']['counts']['actors'],
+                'Actor snapshot count differs from exported actors')
+    relative = f'actor_snapshots/{actor}.json'
+    sft_require(all(row.get('actor_snapshot_ref') == relative for row in rows),
+                'Missing or inconsistent actor snapshot reference')
+    path = source['path'] / relative
+    sft_require(path.is_file() and not path.is_symlink() and not path.parent.is_symlink(),
+                f'Missing or unsafe actor snapshot: {path}')
+    validate_actor_snapshot(sft_read_json(path), actor, source['market'])
+    return {'actor_snapshot_ref': relative, 'actor_snapshot_sha256': sft_sha(path),
+            'actor_snapshot_used_as_model_input': False}
+
+
 def sft_convert_actor(path, source):
     opener = gzip.open if path.name.endswith('.gz') else open
     digest = hashlib.sha256()
@@ -2294,6 +2660,7 @@ def sft_convert_actor(path, source):
     sft_require(isinstance(actor, str) and re.fullmatch(r'0x[0-9a-fA-F]{40}', actor), f'{path}: invalid actor ID')
     sft_require(path.name in (actor + '.jsonl', actor + '.jsonl.gz'), f'{path}: actor/file mismatch')
     market = source['market']
+    snapshot_audit = sft_actor_snapshot_audit(source, actor, rows)
     version = sft_market_context_version(source['manifest'])
     messages = [{'role': 'system', 'content': SFT_SYSTEM + (
         SFT_CLOB_CONTEXT_SYSTEM if version == 2 else SFT_MARKET_CONTEXT_SYSTEM if version == 1 else '')}]
@@ -2367,6 +2734,7 @@ def sft_convert_actor(path, source):
              'source_sha256': digest.hexdigest(), 'hash_scope': 'uncompressed_actor_jsonl_bytes',
              'first_query_time': first_time, 'last_query_time': last_time,
              'source_trade_row_indices': list(range(1, len(rows), 2))}
+    audit.update(snapshot_audit)
     return record, audit, totals
 
 
@@ -2420,6 +2788,19 @@ def sft_export(args):
                     sft_require(record['actor_id'] not in actor_ids, f'Duplicate actor export: {actor_file}')
                     actor_ids.add(record['actor_id'])
                     tokens = check(record, str(actor_file)) if check else None
+                    if 'actor_snapshot_ref' in audit:
+                        original_ref = audit['actor_snapshot_ref']
+                        # Use the condition as a safe, collision-free market directory.
+                        condition = source['market']['condition_id']
+                        sft_require(isinstance(condition, str) and HEX_32.fullmatch(condition),
+                                    'Snapshot export requires a valid condition ID')
+                        copied_ref = f'audit/actor_snapshots/{condition}/{record["actor_id"]}.json'
+                        destination = work / copied_ref
+                        destination.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copyfile(path / original_ref, destination)
+                        sft_require(sft_sha(destination) == audit['actor_snapshot_sha256'],
+                                    'Actor snapshot changed during preparation')
+                        audit.update(source_actor_snapshot_ref=original_ref, actor_snapshot_ref=copied_ref)
                     streams[split].write(sft_compact(record) + '\n')
                     audit_stream.write(sft_compact({**audit, 'source_export': str(path), 'split': split}) + '\n')
                     source_hash.update(sft_compact([actor_file.name, audit['source_sha256']]).encode() + b'\n')
@@ -2441,7 +2822,8 @@ def sft_export(args):
                     'timestamp_semantics': source['manifest'].get('timestamp_semantics'),
                     'market_context_version': sft_market_context_version(source['manifest']),
                     'fill_window_seconds': source['manifest'].get('fill_window_seconds'),
-                    'market_price_history': source['manifest'].get('market_price_history')})
+                    'market_price_history': source['manifest'].get('market_price_history'),
+                    'actor_snapshots': source['manifest'].get('actor_snapshots')})
                 print(f'Market {source["market"]["market_id"]}: {actor_count:,} conversations / {totals["distinct_trade_times"]:,} targets -> {split}', flush=True)
         for stream in streams.values():
             stream.close()
@@ -2450,6 +2832,7 @@ def sft_export(args):
             'task': 'execution_attributes_conditional_on_observed_execution', 'no_trade_targets': False,
             'market_context_version': context_version,
             'execution_and_payoff_audit_used_as_model_input': False,
+            'actor_snapshots_used_as_model_input': False,
             'history': 'earlier_turns_of_same_actor_and_binary_market; no_cross_market_history',
             'news': 'one_copy_per_gap_from_trade_row; no_extra_news_added',
             'fixture_to_split': mapping, 'split_method': method, 'global_query_time_separation_enforced': False,
@@ -2476,6 +2859,10 @@ def sft_export(args):
 
 
 def add_collection_options(parser):
+    parser.add_argument('--actor-snapshot-workers', type=int, default=8,
+                        help='Concurrent actor value/position collectors, 1 to 8 (default: 8)')
+    parser.add_argument('--actor-snapshots-dir', type=Path,
+                        help='Offline actor_snapshots directory from a previous export; preserves original retrieval times')
     parser.add_argument('--price-history-file', type=Path,
                         help='Saved official CLOB histories for both outcome tokens; see docs for offline JSON format')
     parser.add_argument('--market-price-max-age-seconds', type=int, default=300,
@@ -2561,7 +2948,7 @@ def build_sft(args):
                 'The sft command expects numeric market IDs. Use collection mode for slugs/condition IDs.')
     sft_require(len(ids) == len(set(ids)), 'Duplicate market IDs were supplied')
     per_market = ('espn_event_id', 'date', 'teams', 'espn_file', 'time_map', 'market_metadata', 'trades_file',
-                  'price_history_file')
+                  'price_history_file', 'actor_snapshots_dir')
     sft_require(len(ids) == 1 or not any(getattr(args, name) for name in per_market),
                 'Match-specific files/overrides cannot be shared across multiple market IDs. '
                 'Collect those markets individually, then use prepare.')
@@ -2574,6 +2961,7 @@ def build_sft(args):
     sft_require(args.max_trades_per_actor >= 0, '--max-trades-per-actor must be nonnegative')
     sft_require(args.fill_window_seconds >= 0, '--fill-window-seconds must be nonnegative')
     sft_require(args.market_price_max_age_seconds > 0, '--market-price-max-age-seconds must be positive')
+    sft_require(1 <= args.actor_snapshot_workers <= 8, '--actor-snapshot-workers must be between 1 and 8')
     for path in paths:
         sft_require(output != path and not output.is_relative_to(path) and not path.is_relative_to(output),
                     'SFT output must be separate from every actor export')
@@ -2596,6 +2984,10 @@ def build_sft(args):
                         'with the SAME --cache to reuse saved trade captures, then prepare again.')
             sft_require(str(source['market']['market_id']) == market_id,
                         f'Existing export does not match requested market {market_id}: {path}')
+            snapshot_report = source['manifest'].get('actor_snapshots')
+            sft_require(isinstance(snapshot_report, dict) and snapshot_report.get('version') == 1,
+                        f'Existing export lacks actor snapshots: {path}. Rebuild into a new --data-root '
+                        'with the SAME --cache to reuse saved trade captures, then prepare again.')
             sources.append(source)
             reuse.add(market_id)
         else:

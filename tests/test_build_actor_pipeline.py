@@ -23,7 +23,8 @@ class PipelineTests(unittest.TestCase):
                              '--out', str(self.output), *extra])
 
     def source(self, market_id=1, fixture=1):
-        return self.fixture.source(market_id, fixture, with_market_context=True, context_version=2)
+        return self.fixture.source(market_id, fixture, with_market_context=True, context_version=2,
+                                   with_actor_snapshots=True)
 
     def metadata(self, market_id, **kwargs):
         return {'espn_event_id': market_id,
@@ -99,6 +100,13 @@ class PipelineTests(unittest.TestCase):
         with patch('sys.stderr', new_callable=io.StringIO) as error, self.assertRaises(SystemExit):
             self.command('--reuse-existing')
         self.assertIn('does not match requested market', error.getvalue())
+
+    def test_reuse_cannot_silently_skip_actor_snapshots(self):
+        self.fixture.source(with_market_context=True, context_version=2)
+        with patch('sys.stderr', new_callable=io.StringIO) as error, self.assertRaises(SystemExit):
+            self.command('--reuse-existing')
+        self.assertIn('actor snapshot', error.getvalue().lower())
+        self.assertFalse(self.output.exists())
 
     def test_two_match_mode(self):
         for i in (1, 2):

@@ -11,6 +11,7 @@ import unittest
 from unittest.mock import patch
 
 from tests import test_prepare_actor_sft as fixtures
+from tests import actor_snapshot_fixtures as snapshots
 
 builder = fixtures.builder
 
@@ -234,6 +235,7 @@ class ActorMarketContextTests(unittest.TestCase):
                  'text': 'A timestamped match update', 'kind': 'commentary'}
         context = {'event_id': '1', 'timed_events': [event], 'untimed_events': []}
         output = self.root / 'market_1'
+        snapshots.write_snapshot(self.root / 'snapshot_inputs', self.actor, self.market)
         with patch.object(builder, 'resolve_market', return_value=self.market), \
                 patch.object(builder, 'automatic_espn_file', return_value=None), \
                 patch.object(builder, 'collect_espn_context', return_value=context), \
@@ -242,6 +244,7 @@ class ActorMarketContextTests(unittest.TestCase):
                 patch('sys.stdout', new_callable=io.StringIO):
             builder.main(['1', '--out', str(output), '--cache', str(self.root / 'cache'),
                           '--max-trades-per-actor', '2',
+                          '--actor-snapshots-dir', str(self.root / 'snapshot_inputs'),
                           '--price-history-file', str(history_file or self.official_history_file())])
         return output
 
@@ -282,6 +285,13 @@ class ActorMarketContextTests(unittest.TestCase):
         actor_file = output / 'actors' / (self.actor + '.jsonl')
         rows = [json.loads(line) for line in actor_file.read_text().splitlines()]
         self.assertTrue(all('market_context' in row for row in rows))
+        reference = 'actor_snapshots/' + self.actor + '.json'
+        self.assertTrue(all(row['actor_snapshot_ref'] == reference for row in rows))
+        index = [json.loads(line) for line in (output / 'actor_index.jsonl').read_text().splitlines()]
+        self.assertEqual(index[0]['actor_snapshot_ref'], reference)
+        self.assertEqual(manifest['actor_snapshots']['actors'], 1)
+        self.assertEqual(len(list((output / 'actor_snapshots').glob('*.json'))), 1)
+        self.assertEqual(json.loads((output / reference).read_text())['actor_market_value']['data']['value'], '0')
         self.assertEqual(Decimal(rows[1]['market_context']['yes']['price']), Decimal('0.21'))
         self.assertEqual(Decimal(rows[3]['market_context']['yes']['price']), Decimal('0.46'))
         self.assertEqual(Decimal(rows[1]['market_context']['no']['price']), Decimal('0.71'))
@@ -340,9 +350,12 @@ class ActorMarketContextTests(unittest.TestCase):
                 metadata_file = self.root / f'metadata_{market_id}.json'
                 metadata_file.write_text(json.dumps(market))
                 output = data_root / f'market_{market_id}'
+                snapshot_dir = self.root / f'snapshot_inputs_{market_id}'
+                snapshots.write_snapshot(snapshot_dir, self.actor, market)
                 builder.main([str(market_id), '--market-metadata', str(metadata_file),
                               '--espn-file', str(espn_file), '--trades-file', str(trades_file),
                               '--out', str(output), '--cache', str(self.root / 'cache'),
+                              '--actor-snapshots-dir', str(snapshot_dir),
                               '--max-trades-per-actor', '2', '--fill-window-seconds', '7',
                               '--price-history-file', str(self.official_history_file(market['condition_id']))])
                 exported = [json.loads(line) for line in

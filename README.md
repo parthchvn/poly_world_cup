@@ -19,6 +19,7 @@ Replace `1897059` with a World Cup binary market ID. This creates:
 
 ```text
 data/market_1897059/actors/<wallet>.jsonl
+data/market_1897059/actor_snapshots/<wallet>.json
 ```
 
 Run from the repository root to keep outputs under its ignored `data/` directory.
@@ -54,7 +55,15 @@ submission times, limit-order status, and submission-to-fill delays unknown.
 resolution, before fees. It does not claim an expected profit or reconstruct
 unobserved orders. See the guide for the exact limitations.
 
-Inspect the first two records:
+The builder also fetches three **collection-time actor snapshots**, scoped to
+this wallet and market: `actor_market_value`, `actor_positions_open`, and
+`actor_positions_closed`. They preserve the API's position, cost, fee, and P&L
+fields. Each actor's snapshot is stored once in `actor_snapshots/<wallet>.json`;
+every raw row and actor-index entry points to it through `actor_snapshot_ref`.
+These are the wallet's state when queried, not its state at the historical trade.
+They are retained for analysis and excluded from historical SFT inputs and targets.
+
+Inspect the first two records and their shared actor snapshot:
 
 ```bash
 python3 - <<'PY'
@@ -69,14 +78,19 @@ print(path)
 with path.open() as stream:
     for line in islice(stream, 2):
         print(json.dumps(json.loads(line), indent=2, ensure_ascii=False))
+with path.open() as stream:
+    row = json.loads(next(stream))
+snapshot = path.parent.parent / row['actor_snapshot_ref']
+print(f'Actor snapshot: {snapshot}')
+print(json.dumps(json.loads(snapshot.read_text()), indent=2, ensure_ascii=False))
 PY
 ```
 
 The same output directory contains `manifest.json`, `market.json`, an actor index,
 ESPN event/source files, `market_price_history.jsonl`, and
 `market_price_sources.json` for auditing the shared prices and request sources.
-The manifest records `market_context_version: 2`. These are generated locally,
-not committed.
+The manifest records `market_context_version: 2` and `actor_snapshots.version: 1`.
+These outputs are generated locally, not committed.
 
 ## Source availability and cache behavior
 
@@ -92,8 +106,13 @@ An exhausted trade API traversal does not certify complete on-chain history.
 The next trade determines the interval end retrospectively. ESPN event wallclock
 is an occurrence proxy, not verified historical text-publication time.
 
-Trade collection is cached and resumable. Reusing the cache reuses the capture;
-choose a new `--cache` and `--out` for an independent fresh collection.
+Trade collection and actor snapshot requests are cached and resumable. Reusing
+the cache retains each snapshot's original retrieval time; it does not refresh
+holdings or P&L. Choose a new `--cache` and `--out` for a fresh collection.
+Snapshot collection needs at least three requests per retained actor, plus
+position pagination. It uses eight bounded workers by default; reduce this with
+`--actor-snapshot-workers`. Failed requests stop the export rather than inventing
+zero balances or empty positions. Successful zero values and empty lists are valid.
 
 ## Train on local conversation files
 
@@ -101,42 +120,44 @@ Two scripts handle the current workflow: `build_actor_dataset.py` collects actor
 exports and prepares SFT conversations; `train_world_cup_multigpu.py` trains them.
 
 Collect three distinct matches and prepare the dataset in one command. On RunPod,
-use a new data directory to rebuild earlier exports with market context while
-reusing the existing trade cache:
+use a new data directory to rebuild earlier exports with market prices and actor
+snapshots while reusing the existing trade cache:
 
 ```bash
 cd /poly_world_cup
 git pull --ff-only origin main
 
 python3 scripts/build_actor_dataset.py sft 1897035 1897038 1897059 \
-  --data-root /workspace/world_cup_actor_data/data_with_api_prices \
+  --data-root /workspace/world_cup_actor_data/data_with_actor_snapshots \
   --cache /workspace/world_cup_actor_data/data/market_actor_cache \
   --reuse-existing \
   --http-transport curl \
-  --out /workspace/datasets/world_cup_sft_with_api_prices \
+  --out /workspace/datasets/world_cup_sft_with_actor_snapshots \
   --tokenizer /workspace/models/Qwen3.6-27B
 
 python3 scripts/train_world_cup_multigpu.py \
   --gpus 2 --gpu-ids 0,1 \
   --model /workspace/models/Qwen3.6-27B \
-  --dataset-dir /workspace/datasets/world_cup_sft_with_api_prices \
+  --dataset-dir /workspace/datasets/world_cup_sft_with_actor_snapshots \
   --smoke-then-full
 ```
 
-`--reuse-existing` uses completed matching version-2 exports as-is and builds
-missing ones. It rejects version-1 exports based on previous executions and
-older exports without price context. Collection options apply only to newly
-built exports. An already exhausted trade capture is reused without another
-trade scrape; incomplete captures resume. Official price history is a separate
-cached source, so rebuilding old captures may still require price API requests. Choose a new
-`--out` if the SFT dataset already exists. Earlier trained adapters do not gain
-these inputs automatically: prepare the enriched dataset and train a new run.
+`--reuse-existing` requires completed matching exports with both version-2 market
+context and version-1 actor snapshots. Rebuild older exports into a new directory;
+collection options apply only to newly built exports. An exhausted trade capture
+is reused without another trade scrape; incomplete captures resume. Price history
+and actor snapshots are separately cached sources and may need new API requests.
+Choose a new `--out` if the SFT dataset already exists. Preparation copies the actor
+snapshots into the SFT dataset's `audit/actor_snapshots/` directory, with references
+and hashes in `source_audit.jsonl`; it never inserts them into model messages.
+Earlier trained adapters do not gain historical market-price inputs automatically;
+prepare an enriched dataset and train a new run to use those inputs.
 
 To prepare existing exports without collection, use:
 
 ```bash
 python3 scripts/build_actor_dataset.py prepare \
-  --input-root /workspace/world_cup_actor_data/data_with_api_prices \
+  --input-root /workspace/world_cup_actor_data/data_with_actor_snapshots \
   --out /workspace/datasets/world_cup_sft_new \
   --tokenizer /workspace/models/Qwen3.6-27B
 ```
@@ -154,11 +175,11 @@ that time's earlier YES/NO prices and their ages alongside news and actor histor
 SFT uses a compact `market_context` containing only `price` and `age_seconds`
 for each available outcome; the full timestamps, probabilities, and provenance
 remain in the actor files and audit timeline.
-Current wallet positions, present-day order books, and later resolution outcomes
-are not substituted for historical context. Execution and payoff metadata are
-retained for analysis, not inserted into SFT
-inputs or targets. The converter checks but does not train on retrospective
-`NO_TRADE` intervals. Earlier trades stay in preceding conversation turns;
+Collection-time actor value and positions, present-day order books, and later
+resolution outcomes are not substituted for historical context. Actor snapshots,
+execution metadata, and payoff metadata are retained for analysis, not inserted
+into SFT inputs or targets. The converter checks but does not train on
+retrospective `NO_TRADE` intervals. Earlier trades stay in preceding conversation turns;
 interval news appears once per turn. All markets from one match stay in one split.
 Three matches are a smoke pipeline, not a sufficient performance benchmark.
 
