@@ -2,15 +2,14 @@
 
 The current SFT workflow lives in `scripts/`:
 
-1. `scripts/build_actor_dataset.py` collects a market and exports actor rows.
-2. `scripts/prepare_actor_sft.py` prepares validated SFT conversations and splits.
-3. `scripts/train_world_cup_multigpu.py` trains the adapter.
+1. `scripts/build_actor_dataset.py` collects actor rows and prepares validated SFT conversations and splits.
+2. `scripts/train_world_cup_multigpu.py` trains the adapter.
 
 See the [current workflow guide](../docs/actor_sft_pipeline.md) for commands.
 
 This directory preserves the other 26 utilities for tournament collection,
 news and contract context, older dataset formats, recovery, validation,
-and reporting. They are not required for the current three-script workflow.
+and reporting. They are not required for the current two-script workflow.
 Their move does not make the older data formats interchangeable with the
 current actor exports.
 

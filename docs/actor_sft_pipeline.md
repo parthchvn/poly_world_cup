@@ -14,6 +14,39 @@ If already inside the fresh repository, update it with:
 git pull --ff-only origin main
 ```
 
+## Collect and prepare in one command
+
+The former preparation script is now included in `build_actor_dataset.py`.
+`scripts/` contains only this builder and `train_world_cup_multigpu.py`.
+
+```bash
+python3 scripts/build_actor_dataset.py sft 1897035 1897038 1897059 \
+  --data-root /workspace/world_cup_actor_data/data \
+  --reuse-existing \
+  --http-transport curl \
+  --out /workspace/datasets/world_cup_sft \
+  --tokenizer /workspace/models/Qwen3.6-27B
+```
+
+This collects the selected markets, then validates their exports and writes
+fixture-disjoint SFT splits. `--out` names the new SFT dataset; actor exports go
+under `--data-root/market_<ID>`. The cache defaults to
+`--data-root/market_actor_cache`, or use `--cache` explicitly. The requested split
+is checked before trade collection: normally at least three distinct matches,
+or two with `--train-validation-only`.
+
+`--reuse-existing` explicitly reuses completed matching exports as captured.
+Collection filters and source options apply only to new exports. Without this
+flag, existing actor exports cause an error. If collection fails partway through,
+rerun with the same cache and `--reuse-existing`: finished exports are retained,
+and unfinished trade captures resume. An existing SFT output is never overwritten;
+choose another `--out` when preparing a new version.
+
+Match-specific files or overrides, such as `--espn-file`, cannot be shared across
+multiple market IDs. Collect those markets individually, then run `prepare`.
+The single-market command remains supported unchanged. The following sections
+show separate collection and preparation when you need those controls.
+
 ## 1. Collect several matches
 
 Run the standalone builder from the repository root. One invocation collects one
@@ -69,7 +102,7 @@ From the repository root on RunPod, using the Python environment and model
 directory from the successful training run:
 
 ```bash
-python scripts/prepare_actor_sft.py \
+python scripts/build_actor_dataset.py prepare \
   --input-root data \
   --out datasets/world_cup_sft \
   --tokenizer /workspace/models/Qwen3.6-27B
@@ -81,7 +114,7 @@ rejects two exports of the same market instead of double-counting observations.
 If there are several versions of a market in `data/`, select inputs explicitly:
 
 ```bash
-python scripts/prepare_actor_sft.py \
+python scripts/build_actor_dataset.py prepare \
   data/market_1897035 data/market_1897038 data/market_1897059 \
   --out datasets/world_cup_sft \
   --tokenizer /workspace/models/Qwen3.6-27B
@@ -120,7 +153,7 @@ smoke test now, pass their completed export directories explicitly and opt in to
 train/validation-only preparation:
 
 ```bash
-python scripts/prepare_actor_sft.py \
+python scripts/build_actor_dataset.py prepare \
   /workspace/world_cup_actor_data/data/market_1897035 \
   /workspace/world_cup_actor_data/data/market_1897059 \
   --train-validation-only \
@@ -228,7 +261,7 @@ Adding new fixtures can change the automatic split. To preserve an experiment,
 use its saved `split_plan.json` with exactly the same fixture set:
 
 ```bash
-python scripts/prepare_actor_sft.py --input-root data \
+python scripts/build_actor_dataset.py prepare --input-root data \
   --split-file datasets/world_cup_sft/split_plan.json \
   --out datasets/world_cup_sft_rebuilt \
   --tokenizer /workspace/models/Qwen3.6-27B

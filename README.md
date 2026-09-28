@@ -72,27 +72,38 @@ choose a new `--cache` and `--out` for an independent fresh collection.
 
 ## Train on local conversation files
 
-The collection-to-training workflow is now connected:
+Two scripts handle the current workflow: `build_actor_dataset.py` collects actor
+exports and prepares SFT conversations; `train_world_cup_multigpu.py` trains them.
 
-1. Collect several matches with `scripts/build_actor_dataset.py`.
-2. Convert with `scripts/prepare_actor_sft.py` into chronological `messages`
-   conversations and fixture-disjoint train/validation/test splits.
-3. Train with `scripts/train_world_cup_multigpu.py`.
-
-After collecting at least **three distinct matches**, run from the repository
-root on RunPod in your existing training environment:
+Collect three distinct matches and prepare the dataset in one command. On RunPod,
+from the repository root in your existing training environment:
 
 ```bash
-python scripts/prepare_actor_sft.py \
-  --input-root data \
-  --out datasets/world_cup_sft \
+python3 scripts/build_actor_dataset.py sft 1897035 1897038 1897059 \
+  --data-root /workspace/world_cup_actor_data/data \
+  --reuse-existing \
+  --http-transport curl \
+  --out /workspace/datasets/world_cup_sft \
   --tokenizer /workspace/models/Qwen3.6-27B
 
-python scripts/train_world_cup_multigpu.py \
+python3 scripts/train_world_cup_multigpu.py \
   --gpus 2 --gpu-ids 0,1 \
   --model /workspace/models/Qwen3.6-27B \
-  --dataset-dir datasets/world_cup_sft \
+  --dataset-dir /workspace/datasets/world_cup_sft \
   --smoke-then-full
+```
+
+`--reuse-existing` uses completed matching actor exports as-is and collects only
+missing ones. Collection options apply only to newly built exports. Trade caches
+remain resumable. Choose a new `--out` if the SFT dataset already exists.
+
+To prepare existing exports without collection, use:
+
+```bash
+python3 scripts/build_actor_dataset.py prepare \
+  --input-root /workspace/world_cup_actor_data/data \
+  --out /workspace/datasets/world_cup_sft_new \
+  --tokenizer /workspace/models/Qwen3.6-27B
 ```
 
 `--smoke-then-full` checks up to 32 validation conversations after the first ten
@@ -124,8 +135,7 @@ The `scripts/` directory contains only the current SFT workflow:
 
 | Script | Purpose |
 |---|---|
-| `scripts/build_actor_dataset.py` | Collect one market and export its per-actor dataset. |
-| `scripts/prepare_actor_sft.py` | Validate actor exports and prepare SFT conversations and splits. |
+| `scripts/build_actor_dataset.py` | Collect actor rows, prepare existing exports, or collect multiple markets and prepare SFT in one command. |
 | `scripts/train_world_cup_multigpu.py` | Run QLoRA training on one or multiple GPUs. |
 
 Additional collection, recovery, reporting, and historical workflow utilities
@@ -139,7 +149,7 @@ external pre-cleanup Git backup.
 
 ## Repository layout and local development
 
-- `scripts/`: the three current dataset-building, SFT-preparation, and training entry points.
+- `scripts/`: the two current dataset-building and training entry points.
 - `tools/`: additional and historical collection, recovery, validation, and reporting utilities.
 - `poly_world_cup/`: supporting modules imported by the repository's scripts.
 - `configs/`: small configuration files and reviewed mappings used by the code.

@@ -22,8 +22,8 @@ def load_script(name):
     return module
 
 
-converter = load_script('prepare_actor_sft')
 builder = load_script('build_actor_dataset')
+converter = builder
 trainer = load_script('train_world_cup_multigpu')
 
 
@@ -75,7 +75,7 @@ class ActorSFTTests(unittest.TestCase):
         trades = [dict(time_us=t, time=builder.utc_time(t), trade={'side': side, 'outcome': 'Yes',
                   'shares': '13.123456789', 'price': '0.31'}) for t, side in ((times[0], 'BUY'), (times[0], 'SELL'), (times[1], 'BUY'))]
         rows = list(builder.actor_records(actor, trades, market, events, [e['timestamp_us'] for e in events], origin))
-        text = ''.join(converter.compact(row) + '\n' for row in rows)
+        text = ''.join(converter.sft_compact(row) + '\n' for row in rows)
         name = actor + ('.jsonl.gz' if compressed else '.jsonl')
         actor_file = path / 'actors' / name
         actor_file.write_bytes(gzip.compress(text.encode()) if compressed else text.encode())
@@ -95,9 +95,9 @@ class ActorSFTTests(unittest.TestCase):
         return SimpleNamespace(**value)
 
     def record(self, path):
-        source = converter.discover([path], None)[0]
+        source = converter.sft_discover([path], None)[0]
         file = next((path / 'actors').iterdir())
-        return converter.convert_actor(file, source)
+        return converter.sft_convert_actor(file, source)
 
     def test_target_groups_history_and_news_match_builder(self):
         path, _, _ = self.source()
@@ -130,11 +130,11 @@ class ActorSFTTests(unittest.TestCase):
         for market_id, fixture in ((1, 1), (2, 1), (3, 2), (4, 3)):
             self.source(market_id, fixture, compressed=market_id == 3)
         with patch('sys.stdout', new_callable=io.StringIO):
-            manifest = converter.export(self.args())
+            manifest = converter.sft_export(self.args())
         self.assertEqual(manifest['fixture_to_split'], {'espn:1': 'train', 'espn:2': 'validation', 'espn:3': 'test'})
         self.assertEqual(manifest['stats']['train']['targets'], 4)
         self.assertEqual(manifest['targets_truncated_or_dropped'], 0)
-        for split in converter.SPLITS:
+        for split in converter.SFT_SPLITS:
             _, stats = trainer.read_split(self.root / 'sft' / f'{split}.jsonl', OffsetTokenizer(), 10000)
             self.assertEqual(stats['targets'], manifest['stats'][split]['targets'])
         self.assertEqual(len((self.root / 'sft/source_audit.jsonl').read_text().splitlines()), 4)
@@ -142,15 +142,15 @@ class ActorSFTTests(unittest.TestCase):
     def test_single_match_rejected_even_with_multiple_markets(self):
         self.source(1, 1); self.source(2, 1)
         with self.assertRaisesRegex(ValueError, 'at least 3'):
-            converter.export(self.args())
+            converter.sft_export(self.args())
         self.assertFalse((self.root / 'sft').exists())
 
     def test_two_match_mode_is_explicit_and_has_no_test_leakage(self):
         self.source(1, 1); self.source(2, 2)
         with self.assertRaisesRegex(ValueError, 'at least 3'):
-            converter.export(self.args())
+            converter.sft_export(self.args())
         with patch('sys.stdout', new_callable=io.StringIO):
-            manifest = converter.export(self.args(train_validation_only=True))
+            manifest = converter.sft_export(self.args(train_validation_only=True))
         self.assertEqual(manifest['fixture_to_split'], {'espn:1': 'train', 'espn:2': 'validation'})
         self.assertFalse(manifest['held_out_test_available'])
         self.assertEqual(manifest['enabled_splits'], ['train', 'validation'])
@@ -159,22 +159,22 @@ class ActorSFTTests(unittest.TestCase):
             _, stats = trainer.read_split(self.root / 'sft' / f'{split}.jsonl', OffsetTokenizer(), 10000)
             self.assertEqual(stats['targets'], 2)
         plan = self.root / 'sft/split_plan.json'
-        sources = converter.discover([], self.root)
-        self.assertEqual(converter.assign_splits(sources, plan, train_validation_only=True)[0], manifest['fixture_to_split'])
+        sources = converter.sft_discover([], self.root)
+        self.assertEqual(converter.sft_assign_splits(sources, plan, train_validation_only=True)[0], manifest['fixture_to_split'])
 
     def test_train_validation_mode_still_groups_matches_and_requires_two(self):
         self.source(1, 1); self.source(2, 1)
-        sources = converter.discover([], self.root)
+        sources = converter.sft_discover([], self.root)
         with self.assertRaisesRegex(ValueError, 'at least 2'):
-            converter.assign_splits(sources, train_validation_only=True)
+            converter.sft_assign_splits(sources, train_validation_only=True)
         self.source(3, 2); self.source(4, 3)
-        sources = converter.discover([], self.root)
-        mapping, _ = converter.assign_splits(sources, train_validation_only=True)
+        sources = converter.sft_discover([], self.root)
+        mapping, _ = converter.sft_assign_splits(sources, train_validation_only=True)
         self.assertEqual(mapping, {'espn:1': 'train', 'espn:2': 'train', 'espn:3': 'validation'})
         plan = self.root / 'plan.json'
         plan.write_text(json.dumps({'espn:1': 'train', 'espn:2': 'validation', 'espn:3': 'test'}))
         with self.assertRaisesRegex(ValueError, 'disabled split'):
-            converter.assign_splits(sources, plan, train_validation_only=True)
+            converter.sft_assign_splits(sources, plan, train_validation_only=True)
 
     def test_duplicate_capture_rejected(self):
         path, _, _ = self.source()
@@ -182,19 +182,19 @@ class ActorSFTTests(unittest.TestCase):
         other = self.root / 'duplicate'
         shutil.copytree(path, other)
         with self.assertRaisesRegex(ValueError, 'Duplicate capture'):
-            converter.discover([], self.root)
+            converter.sft_discover([], self.root)
 
     def test_explicit_splits_require_exact_fixture_coverage(self):
         for i in range(1, 4): self.source(i, i)
-        sources = converter.discover([], self.root)
+        sources = converter.sft_discover([], self.root)
         split = self.root / 'plan.json'
         mapping = {'espn:1': 'test', 'espn:2': 'train', 'espn:3': 'validation'}
         split.write_text(json.dumps({'fixture_to_split': mapping}))
-        self.assertEqual(converter.assign_splits(sources, split)[0], mapping)
+        self.assertEqual(converter.sft_assign_splits(sources, split)[0], mapping)
         del mapping['espn:3']
         split.write_text(json.dumps(mapping))
         with self.assertRaisesRegex(ValueError, 'exactly'):
-            converter.assign_splits(sources, split)
+            converter.sft_assign_splits(sources, split)
 
     def test_future_or_equal_time_news_rejected(self):
         path, actor_file, rows = self.source()
@@ -224,7 +224,7 @@ class ActorSFTTests(unittest.TestCase):
         manifest = json.loads(path.read_text()); manifest['counts']['trade_observations'] += 1
         path.write_text(json.dumps(manifest))
         with self.assertRaisesRegex(ValueError, 'count mismatch'), patch('sys.stdout', new_callable=io.StringIO):
-            converter.export(self.args())
+            converter.sft_export(self.args())
         self.assertFalse((self.root / 'sft').exists())
         self.assertFalse(list(self.root.glob('actor-sft-build-*')))
 
@@ -232,16 +232,16 @@ class ActorSFTTests(unittest.TestCase):
         for i in range(1, 4): self.source(i, i)
         def check(record, location):
             return len(trainer.encode_conversation(record, OffsetTokenizer(), 20, location)[0]['input_ids'])
-        with patch.object(converter, 'token_checker', return_value=check):
+        with patch.object(converter, 'sft_token_checker', return_value=check):
             with self.assertRaisesRegex(ValueError, 'exceeds'):
-                converter.export(self.args(tokenizer=Path('fake')))
+                converter.sft_export(self.args(tokenizer=Path('fake')))
         self.assertFalse((self.root / 'sft').exists())
 
     def test_existing_output_is_preserved(self):
         for i in range(1, 4): self.source(i, i)
         output = self.root / 'sft'; output.mkdir(); (output / 'keep').write_text('original')
         with self.assertRaisesRegex(ValueError, 'Output exists'):
-            converter.export(self.args())
+            converter.sft_export(self.args())
         self.assertEqual((output / 'keep').read_text(), 'original')
 
     def test_unknown_outcome_and_bad_price_rejected(self):
