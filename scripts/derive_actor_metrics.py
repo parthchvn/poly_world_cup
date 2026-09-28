@@ -496,6 +496,8 @@ def compute_metrics(trades, closed, returns, query_us, lookback_seconds=None,
         },
         'minimum_return_periods': min_return_periods,
         'risk_ratios_annualized': False,
+        'return_period_seconds': (None if series_problem else
+            _metric_decimal_text(Decimal(prior_returns[0]['end_us'] - prior_returns[0]['start_us']) / Decimal(1000000))),
         'metric_scope': {
             'execution_metrics': 'captured_actor_market_executions',
             'performance_metrics': 'completed_positions_only',
@@ -503,6 +505,59 @@ def compute_metrics(trades, closed, returns, query_us, lookback_seconds=None,
         },
     }
 
+
+
+def select_features(value):
+    """Validate an optional comma-separated model feature subset."""
+    if value is None:
+        return list(ACTOR_METRIC_NAMES)
+    names = [part.strip() for part in value.split(',')]
+    require(names and all(names) and len(names) == len(set(names)),
+            '--features must contain distinct comma-separated metric names')
+    require(set(names) <= set(ACTOR_METRIC_NAMES),
+            'Unknown features: ' + ', '.join(sorted(set(names) - set(ACTOR_METRIC_NAMES))))
+    return [name for name in ACTOR_METRIC_NAMES if name in names]
+
+
+def model_metric_fields(core, config):
+    """Round derived prompt values only, retaining full precision in raw audit rows."""
+    digits = config.get('metric_significant_digits', 10)
+    require(type(digits) is int and 4 <= digits <= 16,
+            '--metric-significant-digits must be between 4 and 16')
+    names = config.get('selected_features', list(core['values']))
+    require(isinstance(names, list) and names and len(names) == len(set(names))
+            and set(names) <= set(core['values']), 'Invalid selected metric names')
+    values = {}
+    for name in names:
+        value = core['values'][name]
+        if value is None:
+            continue
+        if type(value) is int:
+            values[name] = value
+        else:
+            value = number(value, name)
+            values[name] = str(Decimal(format(value, f'.{digits}g')).normalize()) if value else '0'
+    counts = core['sample_counts']
+    if 'selected_features' in config:
+        execution_names = {'average_execution_notional', 'execution_notional_cv',
+                           'executions_per_day', 'buy_notional_share'}
+        risk_names = {'sharpe_ratio', 'sortino_ratio', 'maximum_drawdown', 'return_volatility'}
+        completed_names = set(ACTOR_METRIC_NAMES) - execution_names - risk_names
+        keep_counts = set()
+        for family, count in ((execution_names, 'captured_executions'),
+                              (risk_names, 'eligible_return_periods'),
+                              (completed_names, 'completed_positions')):
+            if set(names) & family:
+                keep_counts.add(count)
+        counts = {name: count for name, count in counts.items() if name in keep_counts}
+    result = {'values': values, 'sample_counts': counts}
+    scope = config.get('history_scope')
+    if scope in ('actor_and_binary_market', 'actor_across_all_markets'):
+        result['scope'] = ('current_market' if scope == 'actor_and_binary_market' else 'global_wallet')
+    if core.get('return_period_seconds') is not None and set(names) & {
+            'sharpe_ratio', 'sortino_ratio', 'maximum_drawdown', 'return_volatility'}:
+        result['return_period_seconds'] = core['return_period_seconds']
+    return result
 
 
 def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> dict:
@@ -626,7 +681,8 @@ def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> d
                         require(isinstance(context, dict), f'{split}: user context must be JSON object')
                         require('actor_metrics' not in context,
                                 f'{split}: user context already contains actor_metrics')
-                        if offset == 1:
+                        compact_context = manifest.get('prompt_schema_version') == 2
+                        if offset == 1 and not compact_context:
                             require(isinstance(context.get('actor_id'), str)
                                     and context['actor_id'].lower() == actor,
                                     f'{split}: context actor_id differs from conversation')
@@ -640,7 +696,8 @@ def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> d
                                     f'{split}: later context changes actor_id')
                             require('market' not in context
                                     or (isinstance(context['market'], dict)
-                                        and context['market'].get('market_id') == market),
+                                        and (context['market'].get('market_id') == market
+                                             or (compact_context and 'market_id' not in context['market']))),
                                     f'{split}: later context changes market_id')
                         query = timestamp_us(context.get('query_time'))
                         require(previous_query is None or query > previous_query,
@@ -665,7 +722,7 @@ def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> d
                         require(isinstance(core.get('values'), dict)
                                 and isinstance(core.get('sample_counts'), dict),
                                 f'Invalid metric values or sample counts at {key}')
-                        prompt_metrics = {name: core[name] for name in ('values', 'sample_counts')}
+                        prompt_metrics = model_metric_fields(core, config)
                         # Preserve all existing context number types and literal text.
                         # The validated object is nonempty because query_time exists.
                         content = user['content'].rstrip()
@@ -717,6 +774,7 @@ def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> d
         output_manifest = copy.deepcopy(manifest)
         output_manifest['created_at'] = datetime.now(timezone.utc).isoformat()
         output_manifest['converter_sha256'] = sha256(Path(__file__))
+        output_manifest['feature_variant'] = config.get('feature_variant', 'inmarket')
         output_manifest['token_lengths_checked'] = False
         output_manifest['max_length_checked'] = None
         for stats in output_manifest['stats'].values():
@@ -730,11 +788,14 @@ def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> d
             'source_dataset_manifest_sha256': sha256(original_manifest_copy),
             'source_split_sha256': split_digests,
             'join': 'exact_actor_market_query_time_and_matching_execution_labels',
-            'history_scope': 'same_actor_and_binary_market_only',
+            'history_scope': config.get('history_scope', 'actor_and_binary_market'),
             'actor_snapshots_used_as_model_input': False,
             'features_added_only_to_user_messages': True,
-            'prompt_fields': ['values', 'sample_counts'],
+            'prompt_fields': (['values', 'sample_counts', 'scope', 'return_period_seconds_when_available']
+                              if config.get('history_scope') in ('actor_and_binary_market', 'actor_across_all_markets')
+                              else ['values', 'sample_counts']),
             'target_messages_unchanged': True,
+            'unavailable_values': 'omitted_from_prompt_not_zero_retained_in_raw_audit',
         }
         write_json(dest_dir / 'manifest.json', output_manifest)
         return {'output': 'sft', 'splits': counts, 'token_lengths_checked': False,
@@ -747,6 +808,10 @@ def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> d
 def derive(args):
     require(args.min_return_periods >= 2, '--min-return-periods must be at least 2')
     require(args.lookback_seconds is None or args.lookback_seconds > 0, '--lookback-seconds must be positive')
+    selected_features = select_features(getattr(args, 'features', None))
+    significant_digits = getattr(args, 'metric_significant_digits', 10)
+    require(type(significant_digits) is int and 4 <= significant_digits <= 16,
+            '--metric-significant-digits must be between 4 and 16')
     sources = discover_exports(args.exports, args.input_root)
     output = args.out.resolve()
     require(not output.exists(), f'Output already exists: {output}. Choose a new --out.')
@@ -759,7 +824,9 @@ def derive(args):
         require(output != sft_path and not output.is_relative_to(sft_path) and not sft_path.is_relative_to(output),
                 'Output must be separate from the source SFT dataset')
     closed, returns = load_closed_positions(args.closed_positions), load_returns(args.returns_file)
-    config = {'version': 1, 'strict_prior': True, 'history_scope': 'actor_and_binary_market',
+    config = {'version': 2, 'strict_prior': True, 'history_scope': 'actor_and_binary_market',
+              'feature_variant': 'inmarket', 'selected_features': selected_features,
+              'metric_significant_digits': significant_digits,
               'lookback_seconds': args.lookback_seconds, 'min_return_periods': args.min_return_periods,
               'completed_position_ledger_supplied': args.closed_positions is not None,
               'capital_adjusted_returns_supplied': args.returns_file is not None,
@@ -862,6 +929,9 @@ def main(argv=None):
     parser.add_argument('--lookback-seconds', type=int, help='Use only this trailing window; default all prior supplied history')
     parser.add_argument('--min-return-periods', type=int, default=30, help='Minimum periods for Sharpe/Sortino/volatility (default: 30)')
     parser.add_argument('--sft-dir', type=Path, help='Prepared SFT dataset to enrich into OUT/sft, preserving splits and targets')
+    parser.add_argument('--features', help='Comma-separated model feature subset; raw audit keeps all 18 metrics')
+    parser.add_argument('--metric-significant-digits', type=int, default=10,
+                        help='Significant digits for derived prompt metrics only, 4..16 (default: 10)')
     args = parser.parse_args(argv)
     try:
         return derive(args)

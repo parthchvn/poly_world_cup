@@ -18,8 +18,10 @@ git pull --ff-only origin main
 
 The former preparation script is now included in `build_actor_dataset.py`.
 The core pipeline uses this builder and `train_world_cup_multigpu.py`.
-The optional `derive_actor_metrics.py` postprocessor adds prior-history metrics;
-see [actor metrics](actor_metrics.md).
+The optional `derive_actor_metrics.py` and `derive_global_actor_metrics.py`
+postprocessors add earlier actor history within the current market or across
+markets. For a controlled comparison of all three datasets, follow
+[the three-model workflow](actor_dataset_variants.md).
 
 To rebuild existing RunPod exports with market-price context and actor snapshots,
 use a new actor output root and the **same existing cache**:
@@ -251,6 +253,10 @@ probability under the $1/$0 payout convention, and the user message's
 `query_time` supplies the reference time. This avoids repeating equivalent
 probabilities, timestamps, and source descriptions in every turn, saving tokens.
 The full raw context and audit timeline retain those fields for inspection.
+The SFT prompts also omit wallet/market identifiers, ESPN identifiers, and source
+URLs. Those remain in outer records or audit files for joins and verification.
+News text and times, market meaning, prior actions, and price freshness remain
+readable model inputs.
 Thus missing order lifecycle data does not become a fabricated immediate-fill
 label, and later payoff analysis is not inserted into the decision input. The
 block-time limitation above still applies to interpreting the price context.
@@ -430,12 +436,18 @@ run that exits. Starting a separate full command afterward reloads the weights.
 ## Conversation and supervision contract
 
 Each conversation starts with a system instruction and a user message containing
-the actor ID, market question/outcomes, query time, first interval news, an empty
-`past_observed_trades` list, and compact `market_context` for enriched exports.
+the fixture name, market question/outcomes, query time, first interval news, and
+compact `market_context` for enriched exports. Opaque actor/market/ESPN IDs and
+empty history placeholders are omitted from prompts; identifiers stay in the
+outer conversation record and audit files.
 Later user messages contain the next query time, new interval news, and that
 time's earlier YES/NO prices and ages. Earlier assistant messages provide the
 actor's previous trade history within this market. Legacy-only conversion omits
-market context and records that limitation.
+market context and records that limitation. The shared system instruction also
+defines absent derived metrics as unavailable, not zero, and risk ratios as
+not annualized. Both derived variants use that same instruction so only their
+feature inputs differ. Unavailable derived metric values and detailed audit
+counts are not repeated in model messages.
 
 Each assistant answer is JSON:
 

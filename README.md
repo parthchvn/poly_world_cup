@@ -118,8 +118,10 @@ zero balances or empty positions. Successful zero values and empty lists are val
 
 The core workflow has two steps: `build_actor_dataset.py` collects actor exports
 and prepares SFT conversations; `train_world_cup_multigpu.py` trains them.
-The optional `derive_actor_metrics.py` adds strictly prior actor metrics between
-preparation and training.
+For feature comparisons, keep that basic dataset and derive two additional
+versions: `derive_actor_metrics.py` uses earlier activity in the current market;
+`derive_global_actor_metrics.py` uses earlier wallet activity across markets.
+See [the three-model comparison workflow](docs/actor_dataset_variants.md).
 
 Collect three distinct matches and prepare the dataset in one command. On RunPod,
 use a new data directory to rebuild earlier exports with market prices and actor
@@ -194,32 +196,48 @@ The trainer performs single-machine data-parallel QLoRA, with one model replica
 per GPU and one resulting shared adapter. Actual H100/NCCL execution still needs
 the smoke test. Generated runs, checkpoints, and adapters must stay outside Git.
 
-## Add actor performance and behavior metrics
+## Compare basic, in-market, and global features
 
-`scripts/derive_actor_metrics.py` is a separate, standard-library-only postprocessor.
-It calculates 18 metrics for each actor and market using information strictly
-before each execution timestamp. It excludes time since the previous trade and
-historical markout. It does not fetch APIs, use collection-time actor snapshots,
-or change the source exports.
+Three dataset generators share one set of actors, targets, and splits:
 
-```bash
-python3 scripts/derive_actor_metrics.py data/market_1897059 \
-  --out data/market_1897059_metrics
-```
+| Dataset | Generator | Information added to the basic context |
+|---|---|---|
+| Basic | `scripts/build_actor_dataset.py` | Existing news, market prices, and earlier actor trades in the conversation. |
+| Basic + in-market | `scripts/derive_actor_metrics.py` | Up to 18 summaries of this actor's earlier history in the current binary market. |
+| Basic + global | `scripts/derive_global_actor_metrics.py` | The same summaries using the actor's earlier wallet history across markets, including the current market. |
+
+Prepare the basic dataset once, then pass it as `--sft-dir` to each derived
+script. Each writes a new `sft/` directory with the original target labels.
+Use `tools/compare_actor_variants.py` to check the three datasets before training.
+The comparison requires chronological split boundaries as well as identical
+cohorts; see [the full workflow](docs/actor_dataset_variants.md) for preparing a
+shared cohort when fixture time ranges overlap.
+
+Both derived scripts use information strictly before each query timestamp,
+exclude current and same-timestamp fills, and retain unavailable metrics as
+`null` with reasons in raw audit files. Unavailable derived values are omitted
+from model prompts; the shared instruction defines absence as unavailable, not
+zero.
+They omit time since the previous trade and historical markout. The global
+script fetches and caches wallet executions across markets, or reads a supplied
+wallet-execution file. An API traversal is captured history, not proof of a
+complete accounting ledger or the actor's historical information exposure.
 
 Execution notional, notional variability, frequency, and buy share can use the
-captured fills directly. Realized performance and holding duration need a supplied
-completed-position ledger; Sharpe, Sortino, drawdown, and return volatility need
-a supplied, capital-flow-adjusted equity-return series. Missing inputs produce
-`null` metrics with reasons and sample counts. The script does not invent a
-portfolio Sharpe from execution prices or assume public trade capture is complete.
+captured fills directly. Realized performance and holding duration need a
+historical completed-position ledger. Sharpe, Sortino, drawdown, and return
+volatility need a capital-flow-adjusted equity-return series at the relevant
+scope. Global returns must describe the whole wallet; market returns cannot be
+pooled into wallet returns. Collection-time holdings and P&L never fill gaps.
 
-To add the metrics to an existing prepared SFT dataset, pass
-`--sft-dir datasets/world_cup_sft`. The enriched dataset is written under the new
-output's `sft/` directory; point the trainer's `--dataset-dir` there. Each user
-turn gets only its strictly prior metrics, with original splits and targets
-preserved. See [actor metrics](docs/actor_metrics.md) for the input schemas,
-formulas, time cutoffs, and complete training example.
+Model inputs omit source URLs, ESPN IDs, wallet and market IDs, and repeated
+audit metadata. News content, query times, price ages, previous actions, and
+readable feature names remain. Derived inputs keep only supporting counts for
+the selected metric families; detailed counts and unavailable reasons stay in
+raw audit files. Raw files retain source details for verification.
+The optional `--features` argument selects a comma-separated subset of metrics
+for controlled feature experiments. See [metric definitions and input schemas](docs/actor_metrics.md)
+and [the three-dataset workflow](docs/actor_dataset_variants.md).
 
 ## Current entry points
 
@@ -228,7 +246,8 @@ The `scripts/` directory contains only the current SFT workflow:
 | Script | Purpose |
 |---|---|
 | `scripts/build_actor_dataset.py` | Collect actor rows, prepare existing exports, or collect multiple markets and prepare SFT in one command. |
-| `scripts/derive_actor_metrics.py` | Add strictly prior actor behavior/performance metrics; optionally enrich prepared SFT conversations. |
+| `scripts/derive_actor_metrics.py` | Generate basic + in-market metrics from earlier actor history in the current binary market. |
+| `scripts/derive_global_actor_metrics.py` | Generate basic + global metrics from earlier wallet history across markets. |
 | `scripts/train_world_cup_multigpu.py` | Run QLoRA training on one or multiple GPUs. |
 
 Additional collection, recovery, reporting, and historical workflow utilities
@@ -242,7 +261,7 @@ external pre-cleanup Git backup.
 
 ## Repository layout and local development
 
-- `scripts/`: the current dataset builder, optional actor-metrics postprocessor, and trainer.
+- `scripts/`: three dataset generators and the shared trainer.
 - `tools/`: additional and historical collection, recovery, validation, and reporting utilities.
 - `poly_world_cup/`: supporting modules imported by the repository's scripts.
 - `configs/`: small configuration files and reviewed mappings used by the code.

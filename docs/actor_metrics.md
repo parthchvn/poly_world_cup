@@ -1,4 +1,4 @@
-# Strictly prior actor metrics
+# Strictly prior actor metrics: definitions and input schemas
 
 `scripts/derive_actor_metrics.py` adds 18 actor behavior and performance metrics
 to the existing World Cup dataset. It is a separate Python 3.11+ script using
@@ -10,7 +10,10 @@ The scope is one actor in one binary market, identified by `actor_id` and
 `condition_id`. It does not pool actor history across markets, combine training
 and validation performance, use collection-time actor snapshots, or infer missing
 capital and cost basis. Time since the previous trade and historical markout are
-deliberately excluded.
+deliberately excluded. `scripts/derive_global_actor_metrics.py` uses the same
+formulas across a wallet's captured markets. See [the three-dataset workflow](actor_dataset_variants.md)
+for the scope comparison, shared cohort, chronological split requirements, and
+three independent training runs.
 
 ## Run against an existing export
 
@@ -35,7 +38,7 @@ Use a fresh `--out`. Each market's actor metrics are written beneath
 trade timestamp. Each row has an `actor_metrics` object containing `values`,
 `unavailable_reasons`, `sample_counts`, `window`, and metric-scope metadata.
 Numeric metric values are decimal strings, except the integer loss streak;
-unavailable values are JSON `null`. Counts and reasons distinguish an unavailable
+unavailable raw values are JSON `null`. Counts and reasons distinguish an unavailable
 value from zero. The output manifest records source hashes and configuration.
 
 With no extra financial input files, the four execution-based metrics are
@@ -159,7 +162,8 @@ observations for the selected minimum sample size:
 
 Do not annualize daily values before supplying them. Keep return intervals,
 capital allocation, fee accounting, and benchmark conventions consistent within
-each actor-market series. Overlapping periods are rejected. Unequal durations or
+each actor-market series. Use a common return-period duration across actors and
+compared variants to keep risk statistics on the same timescale. Overlapping periods are rejected. Unequal durations or
 gaps in the eligible prior window make risk metrics `null` with an explicit
 reason; they are not silently treated as a regular series. A series cannot
 continue after a `-1` return, since its capital has reached zero.
@@ -220,13 +224,30 @@ python3 scripts/train_world_cup_multigpu.py \
 ```
 
 Omit the two financial-input options if you do not have those histories yet;
-their metrics will be `null`. On a Mac, use local paths instead of `/workspace`.
+their raw metrics will be `null`, and unavailable values will be omitted from
+model inputs. On a Mac, use local paths instead of `/workspace`.
 Without `--sft-dir`, the script produces metrics files for inspection only.
 
 The SFT copy adds a compact `actor_metrics` object to each matching user context:
-the 18 `values` and their `sample_counts`. Full window boundaries, unavailable
-reasons, and scope remain in the separate actor-metrics JSONL files; the manifest
-records the shared configuration, scope, and minimum return-period threshold.
+a `scope` label (`current_market` or `global_wallet`), the available selected
+`values`, and supporting `sample_counts`. Unavailable values are omitted from
+model messages; the shared system instruction defines absence as unavailable,
+not zero. An initial row can have `values: {}` while retaining scope and counts.
+
+Only `captured_executions`, `completed_positions`, and `eligible_return_periods`
+can appear as model sample counts, and only for metric families selected by
+`--features`. Profitable, losing, and breakeven position counts stay in raw
+audits so a feature subset cannot accidentally restore excluded win-rate
+information through its count fields. Raw outputs always retain all 18 metric
+values, including nulls and reasons, and all diagnostic counts.
+
+When an eligible regular return series supports a selected risk metric, `return_period_seconds` identifies its time basis.
+By default all 18 are selected; `--features` accepts a comma-separated subset of
+metric names. Derived numbers in model inputs use 10 significant digits by default, adjustable with
+`--metric-significant-digits` from 4 to 16. Raw metric values keep full precision.
+Original execution labels and market prices are unchanged. Full window boundaries,
+unavailable reasons, and scope metadata remain in the separate actor-metrics
+JSONL files; the manifest records the shared configuration, scope, and minimum return-period threshold.
 This avoids repeating the full audit metadata in every model turn. The copy
 preserves original split assignments, target trades, news, and conversation order.
 It checks that a target corresponds to the raw export; it does not silently
@@ -239,3 +260,66 @@ The task remains prediction of observed trade attributes, conditional on an
 execution. These metrics do not supply labels for whether an actor should trade,
 and realized historical performance is not a guaranteed prediction of future
 performance.
+
+## Global wallet inputs
+
+The global variant uses `scripts/derive_global_actor_metrics.py` with the same
+raw actor exports and `--sft-dir` as the in-market variant. The exported actors
+and query times identify who to summarize and when. Their history is gathered
+across markets, including the queried market. Raw actor filtering for the current
+market does not remove other markets from a retained actor's global history.
+
+Without `--wallet-trades`, the script requests wallet executions from the public
+`/v2/trades` API without a condition filter. It follows pagination using
+resumable captures beneath `--cache` (default `data/market_actor_cache`). Saved
+captures record their time bounds and request provenance. Reuse the same cache
+after an interrupted request. A partial traversal, including one stopped by
+`--wallet-max-pages`, fails instead of becoming a completed global history.
+Use a new cache for a fresh capture; there is no implicit refresh of exhausted
+captures. This fetch can be much larger than the current-market export.
+
+Alternatively, pass `--wallet-trades PATH` with normalized JSONL or gzip JSONL:
+
+| Field | Meaning |
+|---|---|
+| `actor_id` | Wallet being summarized. |
+| `condition_id` | Binary market where this execution occurred. |
+| `execution_id` | Unique identifier for this captured execution within the actor's supplied history. |
+| `timestamp` | Explicitly zoned execution time. |
+| `known_at` | Explicitly zoned time the observation became available, at or after execution. |
+| `side` | `BUY` or `SELL`. |
+| `shares`, `price` | Positive fill size and execution price in `[0, 1]`. |
+| `outcome` | Optional outcome label. |
+
+A hypothetical normalized record:
+
+```json
+{"actor_id":"0x0000cccf1d05a843fefa1913eccf62a57040348e","condition_id":"0x18f73aca12019d3fc2a03e7af28f6ebcec12634413819605d7cfa3db20073f26","execution_id":"example-fill-1","timestamp":"2026-06-14T16:00:00Z","known_at":"2026-06-14T16:00:03Z","side":"BUY","shares":"10","price":"0.15","outcome":"Yes"}
+```
+
+Both execution time and `known_at` must precede the query. In automatic API
+capture, recorded execution time is an information-availability proxy, not
+verified feed-publication time. The script records that limitation. All-market
+execution capture cannot itself certify complete wallet accounting.
+
+Global `--closed-positions` uses the completed-position schema above, retaining
+condition IDs to distinguish accounting positions from different markets. The
+script pools eligible completed positions by actor, regardless of condition.
+Its realized metrics still cover only supplied completed positions, not realized
+partial exits from positions still open.
+
+Global `--returns-file` requires a **whole-wallet** equity series. Use the return
+schema above with `actor_id` and `scope: "wallet"`, and omit `condition_id` and
+`market_id`. All other timing, capital-flow, duration, and minimum-observation
+requirements still apply. Market-scoped returns are rejected rather than summed
+or averaged into a wallet Sharpe ratio.
+
+```json
+{"actor_id":"0x0000cccf1d05a843fefa1913eccf62a57040348e","scope":"wallet","period_start":"2026-06-12T00:00:00Z","period_end":"2026-06-13T00:00:00Z","known_at":"2026-06-13T00:00:05Z","period_return":"0.012","benchmark_return":"0","target_return":"0","capital_flow_adjusted":true}
+```
+
+A whole-wallet capital base includes allocated cash and marked holdings across
+markets, with external deposits and withdrawals adjusted out. Its return is not
+the sum of separate markets' percentage returns. Supply this financial history
+only when it can be reconstructed under consistent accounting and availability
+rules; otherwise the risk metrics remain unavailable.

@@ -137,7 +137,7 @@ class ActorSFTTests(unittest.TestCase):
         messages = record['messages']
         self.assertEqual([m['role'] for m in messages], ['system', 'user', 'assistant', 'user', 'assistant'])
         first, later = json.loads(messages[1]['content']), json.loads(messages[3]['content'])
-        self.assertEqual(first['past_observed_trades'], [])
+        self.assertNotIn('past_observed_trades', first)
         self.assertNotIn('trades', first)
         self.assertNotIn('label', later)
         self.assertEqual(len(json.loads(messages[2]['content'])['trades']), 2)
