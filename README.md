@@ -122,6 +122,8 @@ For feature comparisons, keep that basic dataset and derive two additional
 versions: `derive_actor_metrics.py` uses earlier activity in the current market;
 `derive_global_actor_metrics.py` uses earlier wallet activity across markets.
 See [the three-model comparison workflow](docs/actor_dataset_variants.md).
+For three two-GPU RunPod jobs sharing one volume, use the
+[40k-decision launchers](docs/runpod_three_pods.md).
 
 Collect three distinct matches and prepare the dataset in one command. On RunPod,
 use a new data directory to rebuild earlier exports with market prices and actor

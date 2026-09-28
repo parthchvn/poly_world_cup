@@ -17,9 +17,10 @@ Each execution timestamp has an open-interval NO_TRADE row and a TRADE row.
 Both carry interval news. Simultaneous executions share one TRADE row.
 Earlier rows are actor history; history is not copied into every later row.
 Default: at most 20 captured executions per actor in the selected binary market.
-Each row references actor_snapshots/<wallet>.json with API market value and
+By default each row references actor_snapshots/<wallet>.json with API market value and
 open/closed positions at collection time. These are analysis-only snapshots;
 SFT preparation preserves them separately and never inserts them into prompts.
+Use --skip-actor-snapshots to omit those collection-time audit requests and files.
 
 NO_TRADE describes an observed gap, not a verified conscious decision. Interval
 ends use the next observed trade, so these are retrospective sequence records.
@@ -2068,6 +2069,9 @@ def collect_actor_snapshots(actors, market, args, output_dir):
 
 
 def export(args):
+    skip_actor_snapshots = getattr(args, 'skip_actor_snapshots', False)
+    if skip_actor_snapshots and getattr(args, 'actor_snapshots_dir', None):
+        raise ValueError('--skip-actor-snapshots cannot be combined with --actor-snapshots-dir')
     snapshot_workers = getattr(args, 'actor_snapshot_workers', 8)
     if type(snapshot_workers) is not int or not 1 <= snapshot_workers <= 8:
         raise ValueError('--actor-snapshot-workers must be between 1 and 8')
@@ -2192,7 +2196,8 @@ def export(args):
                         for row in actor_records(actor, trades, market, events, event_times, origin,
                                                  lambda instant: market_context_at(db, instant, version=2,
                                                      max_age_seconds=price_max_age), fill_window):
-                            row['actor_snapshot_ref'] = f'actor_snapshots/{actor}.json'
+                            if not skip_actor_snapshots:
+                                row['actor_snapshot_ref'] = f'actor_snapshots/{actor}.json'
                             stream.write(compact(row) + "\n")
                             actor_count["rows"] += 1
                             actor_count["news_entries"] += len(row["news"])
@@ -2207,8 +2212,10 @@ def export(args):
                                         price_coverage[outcome + '_' + row['market_context']['missing_reasons'][outcome]] += 1
                                 actor_count["distinct_trade_times"] += 1
                                 actor_count["trade_observations"] += len(row["label"]["trades"])
-                    index_stream.write(compact({"actor_id": actor, "path": "actors/" + filename,
-                        "actor_snapshot_ref": f'actor_snapshots/{actor}.json', **dict(actor_count)}) + "\n")
+                    index_entry = {"actor_id": actor, "path": "actors/" + filename, **dict(actor_count)}
+                    if not skip_actor_snapshots:
+                        index_entry['actor_snapshot_ref'] = f'actor_snapshots/{actor}.json'
+                    index_stream.write(compact(index_entry) + "\n")
                     exported_actors.append(actor)
                     counts.update(actor_count)
                     counts["actors"] += 1
@@ -2228,7 +2235,8 @@ def export(args):
         finally:
             db.close()
         db_path.unlink()
-        snapshot_report = collect_actor_snapshots(exported_actors, market, args, work)
+        snapshot_report = (None if skip_actor_snapshots else
+                           collect_actor_snapshots(exported_actors, market, args, work))
         write_json(work / "market.json", market)
         write_events(work / "espn_events.jsonl", context["timed_events"])
         write_events(work / "espn_unplaced_events.jsonl", context["untimed_events"])
@@ -2246,6 +2254,7 @@ def export(args):
             "key_events_only": args.key_events_only, "source": source_report,
             "market_context_version": 2, "market_price_history": price_timeline,
             "actor_snapshots": snapshot_report,
+            "actor_snapshots_skipped": skip_actor_snapshots,
             "market_price_max_age_seconds": price_max_age, "market_price_coverage": dict(price_coverage),
             "price_context_complete_for_exported_rows": price_coverage['both_outcomes_available'] == price_coverage['trade_rows'],
             "market_context_boundary_rule": "price_timestamp < row trade timestamp (interval end for gap rows)",
@@ -2864,6 +2873,8 @@ def sft_export(args):
 
 
 def add_collection_options(parser):
+    parser.add_argument('--skip-actor-snapshots', action='store_true',
+                        help='Skip collection-time value/position snapshots used only for auditing, not SFT prompts')
     parser.add_argument('--actor-snapshot-workers', type=int, default=8,
                         help='Concurrent actor value/position collectors, 1 to 8 (default: 8)')
     parser.add_argument('--actor-snapshots-dir', type=Path,
@@ -2948,6 +2959,9 @@ def prepare_main(argv):
 
 
 def build_sft(args):
+    skip_actor_snapshots = getattr(args, 'skip_actor_snapshots', False)
+    sft_require(not (skip_actor_snapshots and getattr(args, 'actor_snapshots_dir', None)),
+                '--skip-actor-snapshots cannot be combined with --actor-snapshots-dir')
     ids = args.market_ids
     sft_require(all(re.fullmatch(r'[1-9][0-9]*', value) for value in ids),
                 'The sft command expects numeric market IDs. Use collection mode for slugs/condition IDs.')
@@ -2990,9 +3004,13 @@ def build_sft(args):
             sft_require(str(source['market']['market_id']) == market_id,
                         f'Existing export does not match requested market {market_id}: {path}')
             snapshot_report = source['manifest'].get('actor_snapshots')
-            sft_require(isinstance(snapshot_report, dict) and snapshot_report.get('version') == 1,
+            snapshots_present = isinstance(snapshot_report, dict) and snapshot_report.get('version') == 1
+            snapshots_explicitly_skipped = (snapshot_report is None and
+                source['manifest'].get('actor_snapshots_skipped') is True and skip_actor_snapshots)
+            sft_require(snapshots_present or snapshots_explicitly_skipped,
                         f'Existing export lacks actor snapshots: {path}. Rebuild into a new --data-root '
-                        'with the SAME --cache to reuse saved trade captures, then prepare again.')
+                        'with the SAME --cache to reuse saved trade captures, or use --skip-actor-snapshots '
+                        'when this export explicitly recorded that snapshots were skipped.')
             sources.append(source)
             reuse.add(market_id)
         else:
