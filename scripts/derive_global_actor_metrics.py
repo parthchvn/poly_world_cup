@@ -17,14 +17,19 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
 from datetime import datetime, timezone
 from decimal import InvalidOperation
 import hashlib
+import math
+import os
 from pathlib import Path
 import shutil
 import sqlite3
 import sys
 import tempfile
+import threading
+import time
 
 # Sibling scripts are shared implementations, even when imported by test tools.
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -221,11 +226,13 @@ def staged_actor_trades(database_path, actor):
         connection.close()
 
 
-def fetch_actor_history(args, actor, max_query_us, client):
+def fetch_actor_history(args, actor, max_query_us, client, budget=None):
     manifest = wallet_history.ingest_wallet(client, actor_id=actor,
         output_dir=args.cache.resolve() / 'wallet_histories',
         end_seconds=max_query_us // 1_000_000, start_seconds=1,
-        max_pages=args.wallet_max_pages, progress=True)
+        max_pages=args.wallet_max_pages, progress=False, compress=True,
+        before_page=budget.check if budget else None,
+        after_page=budget.record_page if budget else None)
     capture = Path(manifest['capture_dir'])
     trades, seen = [], set()
     for row in wallet_history.iter_wallet_observations(capture):
@@ -243,12 +250,179 @@ def fetch_actor_history(args, actor, max_query_us, client):
                     'source_capture_complete': False}
 
 
+def cache_size(path):
+    """Logical bytes of durable files; symlinks are never followed."""
+    total = 0
+    for directory, _, names in os.walk(path, followlinks=False):
+        for name in names:
+            file = Path(directory) / name
+            try:
+                if not file.is_symlink():
+                    total += file.stat().st_size
+            except FileNotFoundError:
+                pass  # another worker atomically replaced a temporary file
+    return total
+
+
+class CollectionBudget:
+    """Shared limits and observable progress, independent of wallet ordering.
+
+    Storage is checked at startup and every 30 seconds. A stop takes effect at
+    page boundaries; writes between checks and in-flight responses can overshoot
+    a storage limit. The limit applies to the cache, not temporary/final outputs.
+    No partial history is accepted as a completed feature record.
+    """
+    def __init__(self, args, total, path, client=None):
+        self.args, self.total, self.path, self.client = args, total, path, client
+        self.cancel = threading.Event()
+        self.lock = threading.RLock()
+        self.started = time.monotonic()
+        self.last_report = self.last_scan = self.started
+        self.completed = self.resumed = self.new_requests = self.pages = self.rows = 0
+        args.cache.mkdir(parents=True, exist_ok=True)
+        self.bytes = cache_size(args.cache) if not args.wallet_trades else 0
+        self.free_bytes = min(shutil.disk_usage(args.cache).free, shutil.disk_usage(args.out.parent).free)
+        self.seconds_limit = getattr(args, 'max_runtime_seconds', 7200)
+        self.pages_limit = getattr(args, 'max_new_pages', None)
+        self.bytes_limit = int(getattr(args, 'max_cache_gib', 20) * 1024 ** 3)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        self.report(force=True)
+
+    def check(self):
+        with self.lock:
+            if self.cancel.is_set():
+                raise ValueError('Global collection stopped; completed pages and wallet metrics remain cached')
+            elapsed = time.monotonic() - self.started
+            reason = None
+            if self.seconds_limit and elapsed >= self.seconds_limit:
+                reason = f'Global runtime budget reached ({self.seconds_limit:g} seconds)'
+            if not self.args.wallet_trades and time.monotonic() - self.last_scan >= 30:
+                self.bytes = cache_size(self.args.cache)
+                self.free_bytes = min(shutil.disk_usage(self.args.cache).free,
+                                      shutil.disk_usage(self.args.out.parent).free)
+                self.last_scan = time.monotonic()
+            if self.bytes_limit and self.bytes >= self.bytes_limit:
+                reason = f'Global cache storage budget reached ({self.bytes_limit / 1024**3:g} GiB)'
+            if self.free_bytes < 1024**3:
+                reason = 'Global collection stopped with less than 1 GiB free on its cache/output disk'
+            if reason:
+                self.cancel.set()
+                advice = ('rerun with the same cache to continue within a fresh runtime budget'
+                          if reason.startswith('Global runtime') else
+                          'check free disk space and the cache budget before resuming with the same cache')
+                raise ValueError(reason + '; ' + advice + '. No incomplete dataset was exported.')
+
+    def get_json(self, url, params):
+        with self.lock:
+            self.check()
+            if self.pages_limit is not None and self.new_requests >= self.pages_limit:
+                self.cancel.set()
+                raise ValueError('Global new-page request budget reached; resume with the same cache. '
+                                 'No incomplete dataset was exported.')
+            self.new_requests += 1
+        return self.client.get_json(url, params=params)
+
+    def record_page(self, **page):
+        with self.lock:
+            self.pages += 1
+            self.rows += page['new_rows']
+            self.report()
+
+    def finish_wallet(self, resumed):
+        with self.lock:
+            self.completed += 1
+            self.resumed += int(resumed)
+            self.report(force=self.completed == self.total)
+
+    def report(self, *, force=False, status='running', error=None):
+        with self.lock:
+            now = time.monotonic()
+            if not force and now - self.last_report < 30:
+                return
+            elapsed = now - self.started
+            processed = self.completed - self.resumed
+            rate = processed / elapsed if elapsed > 0 else None
+            eta = ((self.total - self.completed) / rate
+                   if processed >= 5 and elapsed >= 30 and rate else None)
+            state = {'schema': 'global_collection_progress_v1', 'status': status,
+                'updated_at': datetime.now(timezone.utc).isoformat(),
+                'completed_wallets': self.completed, 'total_wallets': self.total,
+                'resumed_metric_wallets': self.resumed, 'processed_wallets_this_run': processed,
+                'elapsed_seconds': round(elapsed, 3), 'wallets_per_second': rate,
+                'estimated_remaining_seconds': eta,
+                'estimate_note': 'Observed completed-wallet rate; wallet histories vary greatly. Not a guarantee.',
+                'cache_bytes': self.bytes, 'storage_checked_every_seconds': 30,
+                'free_disk_bytes': self.free_bytes,
+                'new_page_requests': self.new_requests, 'new_pages_saved': self.pages,
+                'new_executions_saved': self.rows,
+                'http': self.client.stats() if self.client and hasattr(self.client, 'stats') else None,
+                'error': error}
+            wallet_history._write(self.path, state)
+            remaining = f'{eta / 3600:.1f}h estimated remaining' if eta is not None else 'ETA warming up'
+            print(f'Global metrics: {self.completed:,}/{self.total:,} wallets '
+                  f'({self.resumed:,} metric checkpoints reused); elapsed {elapsed / 60:.1f}m; '
+                  f'{remaining}; {self.pages:,} new pages / {self.rows:,} executions; '
+                  f'cache {self.bytes / 1024**3:.2f} GiB; status={status}', flush=True)
+            self.last_report = now
+
+
+def process_wallet(args, actor, queries, closed, returns, database, client, budget,
+                   checkpoint_root, checkpoint_identity):
+    """One independent wallet, saved atomically before the next is scheduled."""
+    budget.check()
+    checkpoint = checkpoint_root / (actor + '.json.gz')
+    resumed = checkpoint.is_file()
+    if resumed:
+        result = wallet_history._read(checkpoint)
+        base.require(result.get('identity') == checkpoint_identity and result.get('actor_id') == actor,
+                     'Global metric checkpoint identity mismatch')
+        capture = result['capture']
+        if capture is not None:
+            directory = Path(capture['capture_dir'])
+            base.require(base.sha256(directory / 'manifest.json') == capture['manifest_sha256'],
+                         'Wallet capture changed since its metric checkpoint')
+            # Retain the same checksum checks as a fresh capture. Reuse avoids
+            # parsing/normalizing executions and recomputing every query metric.
+            state = wallet_history._validated_state(directory)
+            base.require(state['api_traversal_status'] == 'exhausted', 'Checkpoint wallet is incomplete')
+        return result, True
+    if args.wallet_trades:
+        trades, capture = staged_actor_trades(database, actor), None
+    else:
+        max_query = max(group['time_us'] for target in queries for group in target['groups'])
+        trades, capture = fetch_actor_history(args, actor, max_query, client, budget)
+    entries = []
+    for target in queries:
+        source, groups = target['source'], target['groups']
+        records = []
+        for group in groups:
+            budget.check()
+            metrics = compute_global_metrics(trades, closed.get(actor, []), returns.get(actor, []),
+                group['time_us'], args.lookback_seconds, args.min_return_periods)
+            records.append({'actor_id': actor, 'market_id': source['market_id'],
+                'condition_id': source['condition_id'], 'timestamp': group['timestamp'],
+                'source_trade_row_index': group['row_index'], 'actor_metrics': metrics})
+        entries.append({'market_id': source['market_id'], 'condition_id': source['condition_id'],
+                        'source_actor_sha256': target['source_actor_sha256'], 'records': records})
+    result = {'identity': checkpoint_identity, 'actor_id': actor, 'capture': capture, 'entries': entries}
+    wallet_history._write(checkpoint, result)
+    return result, False
+
+
 def derive(args):
     base.require(args.min_return_periods >= 2, '--min-return-periods must be at least 2')
     base.require(args.lookback_seconds is None or args.lookback_seconds > 0,
                  '--lookback-seconds must be positive')
     base.require(args.wallet_max_pages is None or args.wallet_max_pages > 0,
                  '--wallet-max-pages must be positive')
+    workers = getattr(args, 'wallet_workers', 4)
+    base.require(type(workers) is int and 1 <= workers <= 8, '--wallet-workers must be between 1 and 8')
+    for name in ('max_runtime_seconds', 'max_cache_gib'):
+        value = getattr(args, name, 7200 if name == 'max_runtime_seconds' else 20)
+        base.require(math.isfinite(value) and value >= 0, f'--{name.replace("_", "-")} must be nonnegative')
+    max_pages = getattr(args, 'max_new_pages', None)
+    base.require(max_pages is None or type(max_pages) is int and max_pages > 0,
+                 '--max-new-pages must be a positive integer')
     selected = base.select_features(args.features)
     base.require(type(args.metric_significant_digits) is int and 4 <= args.metric_significant_digits <= 16,
                  '--metric-significant-digits must be between 4 and 16')
@@ -303,46 +477,83 @@ def derive(args):
     work = Path(tempfile.mkdtemp(prefix='global-actor-metrics-', dir=output.parent))
     index, captures = {}, []
     database = work / 'wallet_history.sqlite'
+    budget = executor = run_lock = None
     try:
         if args.wallet_trades:
             supplements['wallet_trades'] = stage_wallet_trades(args.wallet_trades, database, targets)
-            client = None
-        else:
+        checkpoint_identity = hashlib.sha256(base.json_text(
+            {'config': config, 'sources': reports, 'supplements': supplements,
+             'shared_metrics_sha256': base.sha256(base.__file__)}).encode()).hexdigest()
+        checkpoint_root = args.cache.resolve() / 'metric_checkpoints' / checkpoint_identity
+        checkpoint_root.mkdir(parents=True, exist_ok=True)
+        candidate_lock = wallet_history._lock(checkpoint_root)
+        try:
+            candidate_lock.__enter__()
+        except ValueError as error:
+            raise ValueError('Another Global collector is already using this cohort and cache') from error
+        run_lock = candidate_lock
+        budget = CollectionBudget(args, len(targets),
+                                  args.cache.resolve() / 'global_progress' / (checkpoint_identity + '.json'))
+        budget.check()
+        if not args.wallet_trades:
             import build_actor_dataset as builder
-            client = builder.HttpClient(args.cache.resolve() / 'http', compress=True,
+            budget.client = builder.HttpClient(args.cache.resolve() / 'http', compress=True,
                 transport=args.http_transport, timeout=args.http_timeout, retries=args.http_retries,
-                retry_delay=args.http_retry_delay, min_interval=args.http_min_interval, log_retries=True)
-        with (work / 'actor_index.jsonl').open('w', encoding='utf-8') as inventory:
-            for actor_number, actor in enumerate(sorted(targets), 1):
-                queries = targets[actor]
-                if args.wallet_trades:
-                    trades = staged_actor_trades(database, actor)
-                else:
-                    max_query = max(group['time_us'] for target in queries for group in target['groups'])
-                    trades, capture = fetch_actor_history(args, actor, max_query, client)
-                    captures.append(capture)
-                for target in queries:
+                retry_delay=args.http_retry_delay, min_interval=args.http_min_interval, log_retries=True,
+                retry_budget=getattr(args, 'http_retry_budget', 90), cancel_event=budget.cancel)
+        inventory_rows = {}
+        executor = ThreadPoolExecutor(max_workers=workers, thread_name_prefix='wallet')
+        actors = iter(sorted(targets))
+        pending = {}
+        def schedule():
+            actor = next(actors, None)
+            if actor is not None:
+                future = executor.submit(process_wallet, args, actor, targets[actor], closed, returns,
+                    database, budget, budget, checkpoint_root, checkpoint_identity)
+                pending[future] = actor
+        for _ in range(workers):
+            schedule()
+        while pending:
+            budget.check()
+            finished, _ = wait(pending, timeout=1, return_when=FIRST_COMPLETED)
+            budget.report()
+            for future in finished:
+                actor = pending.pop(future)
+                result, resumed = future.result()
+                if result['capture'] is not None:
+                    captures.append(result['capture'])
+                inventory_rows[actor] = []
+                for entry, target in zip(result['entries'], targets[actor], strict=True):
                     source, groups = target['source'], target['groups']
+                    base.require(entry['market_id'] == source['market_id'] and
+                                 entry['condition_id'] == source['condition_id'] and
+                                 entry['source_actor_sha256'] == target['source_actor_sha256'] and
+                                 len(entry['records']) == len(groups), 'Metric checkpoint source mismatch')
                     relative = f'markets/{source["condition_id"]}/actors/{actor}.jsonl'
                     destination = work / relative
                     destination.parent.mkdir(parents=True, exist_ok=True)
                     with destination.open('w', encoding='utf-8') as stream:
-                        for group in groups:
-                            metrics = compute_global_metrics(trades, closed.get(actor, []), returns.get(actor, []),
-                                group['time_us'], args.lookback_seconds, args.min_return_periods)
-                            record = {'actor_id': actor, 'market_id': source['market_id'],
-                                'condition_id': source['condition_id'], 'timestamp': group['timestamp'],
-                                'source_trade_row_index': group['row_index'], 'actor_metrics': metrics}
+                        for record, group in zip(entry['records'], groups, strict=True):
+                            base.require(record['actor_id'] == actor and record['timestamp'] == group['timestamp']
+                                         and record['source_trade_row_index'] == group['row_index'],
+                                         'Metric checkpoint target mismatch')
                             stream.write(base.json_text(record) + '\n')
                             if args.sft_dir:
                                 index[(actor, source['market_id'], group['time_us'])] = {
-                                    'actor_metrics': metrics, 'trades': group['expected']}
-                    inventory.write(base.json_text({'actor_id': actor, 'market_id': source['market_id'],
+                                    'actor_metrics': record['actor_metrics'], 'trades': group['expected']}
+                    inventory_rows[actor].append({'actor_id': actor, 'market_id': source['market_id'],
                         'condition_id': source['condition_id'], 'path': relative, 'rows': len(groups),
                         'source_actor_sha256': target['source_actor_sha256'],
-                        'sha256': base.sha256(destination)}) + '\n')
-                if actor_number % 100 == 0 or actor_number == len(targets):
-                    print(f'Global metrics: {actor_number:,}/{len(targets):,} wallets', flush=True)
+                        'sha256': base.sha256(destination)})
+                budget.finish_wallet(resumed)
+                schedule()
+        executor.shutdown(wait=True)
+        executor = None
+        with (work / 'actor_index.jsonl').open('w', encoding='utf-8') as inventory:
+            for actor in sorted(inventory_rows):
+                for row in inventory_rows[actor]:
+                    inventory.write(base.json_text(row) + '\n')
+        captures.sort(key=lambda item: item['actor_id'])
         if database.exists():
             database.unlink()
         metadata = {'format': 'actor_prior_metrics_v1', 'created_at': datetime.now(timezone.utc).isoformat(),
@@ -363,7 +574,23 @@ def derive(args):
         base.write_json(work / 'manifest.json', metadata)
         base.require(not output.exists(), 'Output appeared during processing')
         work.rename(output)
+        budget.report(force=True, status='completed')
+    except BaseException as error:
+        if budget:
+            budget.cancel.set()
+            if executor:
+                executor.shutdown(wait=True, cancel_futures=True)
+                executor = None
+            try:
+                budget.report(force=True, status='stopped', error=str(error) or type(error).__name__)
+            except OSError as report_error:
+                print(f'Could not write final progress report: {report_error}', file=sys.stderr, flush=True)
+        raise
     finally:
+        if executor:
+            executor.shutdown(wait=True, cancel_futures=True)
+        if run_lock:
+            run_lock.__exit__(None, None, None)
         if work.exists():
             shutil.rmtree(work)
     print(base.json_text({'output': str(output), 'actors': counts['actors'],
@@ -392,11 +619,24 @@ def main(argv=None):
     parser.add_argument('--cache', type=Path, default=Path('data/market_actor_cache'), help='Resumable API history cache')
     parser.add_argument('--wallet-max-pages', type=int,
                         help='Stop at this page budget; partial captures are not exported as completed histories')
-    parser.add_argument('--http-transport', choices=('urllib', 'curl'), default='urllib')
+    parser.add_argument('--wallet-workers', type=int, default=4,
+                        help='Concurrent wallets with one shared HTTP rate limiter (1..8, default 4)')
+    parser.add_argument('--max-runtime-seconds', type=float, default=7200,
+                        help='Collection/metric phase budget after local source validation; '
+                             'default 7200 seconds, 0 disables; stop is resumable')
+    parser.add_argument('--max-new-pages', type=int,
+                        help='Maximum new page requests across wallets; stopping never exports partial histories')
+    parser.add_argument('--max-cache-gib', type=float, default=20,
+                        help='Total cache budget in GiB, checked every 30 seconds; default 20, 0 disables. '
+                             'Writes between checks and in-flight responses can overshoot; '
+                             'temporary/final output sizes are separate.')
+    parser.add_argument('--http-transport', choices=('urllib', 'curl'), default='curl')
     parser.add_argument('--http-timeout', type=float, default=45)
-    parser.add_argument('--http-retries', type=int, default=8)
+    parser.add_argument('--http-retries', type=int, default=3)
     parser.add_argument('--http-retry-delay', type=float, default=2)
-    parser.add_argument('--http-min-interval', type=float, default=0.1)
+    parser.add_argument('--http-retry-budget', type=float, default=90,
+                        help='Maximum elapsed seconds per HTTP request including retries (default 90)')
+    parser.add_argument('--http-min-interval', type=float, default=0.25)
     args = parser.parse_args(argv)
     try:
         return derive(args)

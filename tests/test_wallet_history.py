@@ -1,4 +1,5 @@
 import hashlib
+import gzip
 import importlib.util
 import json
 from pathlib import Path
@@ -147,6 +148,40 @@ class WalletHistoryTests(unittest.TestCase):
         self.assertEqual(len(list(wallet.iter_wallet_observations(result))), 2)
         again = self.ingest(Client([]))
         self.assertEqual(again, result)
+
+    def test_compressed_pages_resume_legacy_capture_and_keep_exact_observations(self):
+        first = self.ingest(Client([page([trade()], 'next')]), max_pages=1)
+        before = (Path(first['capture_dir']) / first['pages'][0]['file']).read_bytes()
+        callbacks = []
+        result = self.ingest(Client([page([trade(99)])]), compress=True,
+                             after_page=lambda **values: callbacks.append(values))
+        self.assertEqual([item['file'] for item in result['pages']],
+                         ['pages/00000000.json', 'pages/00000001.json.gz'])
+        self.assertEqual((Path(result['capture_dir']) / result['pages'][0]['file']).read_bytes(), before)
+        self.assertEqual(len(list(wallet.iter_wallet_observations(result))), 2)
+        self.assertTrue(callbacks[0]['exhausted'])
+        self.assertEqual(callbacks[0]['new_rows'], 1)
+        self.assertEqual(self.ingest(Client([]), compress=True), result)
+
+    def test_compressed_page_checksum_still_detects_changes(self):
+        result = self.ingest(Client([page([trade()])]), compress=True)
+        path = Path(result['capture_dir']) / result['pages'][0]['file']
+        changed = json.loads(gzip.decompress(path.read_bytes()))
+        changed['rows'][0]['price'] = '0.9'
+        path.write_bytes(gzip.compress(json.dumps(changed).encode()))
+        with self.assertRaisesRegex(ValueError, 'checksum'):
+            list(wallet.iter_wallet_observations(result))
+
+    def test_budget_callback_stops_before_next_page_without_losing_first(self):
+        attempts = []
+        def budget():
+            attempts.append(None)
+            if len(attempts) > 1:
+                raise ValueError('budget reached')
+        with self.assertRaisesRegex(ValueError, 'budget reached'):
+            self.ingest(Client([page([trade()], 'next')]), before_page=budget, compress=True)
+        resumed = self.ingest(Client([page([trade(99)])]), compress=True)
+        self.assertEqual(resumed['row_count'], 2)
 
     def test_network_failure_does_not_commit_partial_page(self):
         with self.assertRaises(OSError):

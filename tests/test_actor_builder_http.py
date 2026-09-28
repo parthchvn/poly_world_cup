@@ -6,7 +6,9 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import threading
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from unittest.mock import patch
 from urllib.error import HTTPError, URLError
 
@@ -88,26 +90,126 @@ class CurlHTTPTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'requires the curl executable'):
                 builder.HttpClient(Path('unused'), transport='curl')
 
-    def test_persistent_reset_has_bounded_backoff_and_no_cache_entry(self):
+    def test_persistent_reset_has_elapsed_budget_and_no_cache_entry(self):
+        clock = [0.0]
+        def pause(seconds):
+            clock[0] += seconds
         with tempfile.TemporaryDirectory() as directory, \
                 patch.object(builder.HttpClient, '_fetch', side_effect=URLError('Connection reset')) as fetch, \
-                patch.object(builder.time, 'sleep') as sleep, \
+                patch.object(builder.time, 'monotonic', side_effect=lambda: clock[0]), \
+                patch.object(builder.time, 'sleep', side_effect=pause) as sleep, \
                 patch('sys.stderr', new_callable=io.StringIO) as log:
-            client = builder.HttpClient(Path(directory), retries=8, retry_delay=2, log_retries=True)
-            with self.assertRaises(URLError):
+            client = builder.HttpClient(Path(directory), retries=8, retry_delay=2, retry_budget=30, log_retries=True)
+            with self.assertRaisesRegex(URLError, '30s request budget'):
                 client.get_json('https://example.org/trades')
-            self.assertEqual(fetch.call_count, 9)
-            self.assertEqual([call.args[0] for call in sleep.call_args_list], [2, 4, 8, 16, 32, 60, 60, 60])
-            self.assertIn('retry 8/8 in 60s', log.getvalue())
+            self.assertEqual(fetch.call_count, 4)
+            self.assertEqual([call.args[0] for call in sleep.call_args_list], [2, 4, 8])
+            self.assertIn('connection reset from example.org', log.getvalue())
+            self.assertIn('request budget left', log.getvalue())
             self.assertFalse((Path(directory) / 'requests').exists())
+
+    def test_attempt_timeouts_shrink_to_remaining_budget(self):
+        clock, timeouts = [0.0], []
+        with tempfile.TemporaryDirectory() as directory:
+            client = builder.HttpClient(Path(directory), timeout=45, retry_delay=2, retry_budget=10)
+            def fetch(request):
+                timeouts.append(client._local.attempt_timeout)
+                clock[0] += 4
+                raise TimeoutError('timed out')
+            with patch.object(builder.time, 'monotonic', side_effect=lambda: clock[0]), \
+                    patch.object(builder.time, 'sleep', side_effect=lambda s: clock.__setitem__(0, clock[0] + s)), \
+                    patch.object(client, '_fetch', side_effect=fetch):
+                with self.assertRaisesRegex(URLError, 'request budget'):
+                    client.get_json('https://example.org/trades')
+            self.assertEqual(timeouts, [10, 4])
+            self.assertEqual(clock[0], 10)
+
+    def test_shared_host_stops_after_repeated_transport_failures(self):
+        with tempfile.TemporaryDirectory() as directory, \
+                patch.object(builder.HttpClient, '_fetch', side_effect=URLError('Connection reset')) as fetch, \
+                patch.object(builder.time, 'sleep'):
+            client = builder.HttpClient(Path(directory), retries=8, host_failure_limit=3)
+            with self.assertRaisesRegex(URLError, 'stopped after 3 attempts'):
+                client.get_json('https://example.org/first')
+            with self.assertRaisesRegex(URLError, 'Stopped requests to example.org'):
+                client.get_json('https://example.org/second')
+            self.assertEqual(fetch.call_count, 3)
 
     def test_retry_after_is_respected(self):
         error = HTTPError('https://example.org/trades', 429, 'rate limit', {'retry-after': '15'}, None)
+        clock = [0.0]
         with tempfile.TemporaryDirectory() as directory, \
                 patch.object(builder.HttpClient, '_fetch', side_effect=[error, (b'{}', {})]), \
-                patch.object(builder.time, 'sleep') as sleep:
+                patch.object(builder.time, 'monotonic', side_effect=lambda: clock[0]), \
+                patch.object(builder.time, 'sleep', side_effect=lambda seconds: clock.__setitem__(0, clock[0] + seconds)) as sleep:
             builder.HttpClient(Path(directory), retry_delay=2).get_json('https://example.org/trades')
             sleep.assert_called_once_with(15)
+
+    def test_long_retry_after_stops_instead_of_waiting_or_retrying_early(self):
+        error = HTTPError('https://example.org/trades', 429, 'rate limit', {'Retry-After': '300'}, None)
+        with tempfile.TemporaryDirectory() as directory, \
+                patch.object(builder.HttpClient, '_fetch', side_effect=error) as fetch, \
+                patch.object(builder.time, 'sleep') as sleep:
+            with self.assertRaisesRegex(URLError, 'cannot accommodate the next 300s wait'):
+                builder.HttpClient(Path(directory), retry_budget=90).get_json('https://example.org/trades')
+            self.assertEqual(fetch.call_count, 1)
+            sleep.assert_not_called()
+
+    def test_certificate_failures_are_not_retried(self):
+        with tempfile.TemporaryDirectory() as directory, \
+                patch.object(builder.shutil, 'which', return_value='/usr/bin/curl'), \
+                patch.object(builder.subprocess, 'run', return_value=subprocess.CompletedProcess([], 60, b'000', b'certificate verification failed')) as run:
+            with self.assertRaises(builder.HttpTransportError) as error:
+                builder.HttpClient(Path(directory), transport='curl').get_json('https://example.org/trades')
+            self.assertEqual(run.call_count, 1)
+            self.assertEqual(error.exception.category, 'TLS certificate verification')
+            self.assertFalse(error.exception.retryable)
+            self.assertFalse((Path(directory) / 'requests').exists())
+
+    def test_dns_and_tls_reset_have_distinct_diagnostics(self):
+        for curl_code, category in ((6, 'DNS resolution'), (35, 'TLS connection'), (56, 'receive/reset failure')):
+            with self.subTest(curl_code=curl_code), tempfile.TemporaryDirectory() as directory, \
+                    patch.object(builder.shutil, 'which', return_value='/usr/bin/curl'), \
+                    patch.object(builder.subprocess, 'run', return_value=subprocess.CompletedProcess([], curl_code, b'000', b'failed')) as run, \
+                    patch.object(builder.time, 'sleep'), patch('sys.stderr', new_callable=io.StringIO) as log:
+                with self.assertRaisesRegex(URLError, category):
+                    builder.HttpClient(Path(directory), transport='curl', retries=1, log_retries=True).get_json('https://example.org/trades')
+                self.assertEqual(run.call_count, 2)
+                self.assertIn(f'{category} (curl {curl_code})', log.getvalue())
+
+    def test_concurrent_identical_requests_share_one_capture(self):
+        with tempfile.TemporaryDirectory() as directory, \
+                patch.object(builder.HttpClient, '_fetch', return_value=(b'{"n":1}', {})) as fetch:
+            client = builder.HttpClient(Path(directory), compress=True)
+            with ThreadPoolExecutor(max_workers=4) as pool:
+                results = list(pool.map(lambda _: client.get_json('https://example.org/shared'), range(8)))
+            self.assertEqual(fetch.call_count, 1)
+            self.assertEqual(sum(row.from_cache for row in results), 7)
+            self.assertEqual(len({row.retrieved_at for row in results}), 1)
+            self.assertEqual(client.stats()['live_attempts'], 1)
+            self.assertEqual(client.stats()['cache_hits'], 7)
+            self.assertEqual(client.stats()['response_bytes'], len(b'{"n":1}'))
+
+    def test_distinct_requests_can_transfer_concurrently(self):
+        barrier = threading.Barrier(2)
+        def fetch(request):
+            barrier.wait(timeout=2)
+            return b'{}', {}
+        with tempfile.TemporaryDirectory() as directory, \
+                patch.object(builder.HttpClient, '_fetch', side_effect=fetch):
+            client = builder.HttpClient(Path(directory))
+            with ThreadPoolExecutor(max_workers=2) as pool:
+                results = list(pool.map(client.get_json, ['https://example.org/one', 'https://example.org/two']))
+            self.assertEqual(len(results), 2)
+            self.assertEqual(client.stats()['responses'], 2)
+
+    def test_cancellation_stops_before_network_request(self):
+        canceled = threading.Event()
+        canceled.set()
+        with tempfile.TemporaryDirectory() as directory, patch.object(builder.HttpClient, '_fetch') as fetch:
+            with self.assertRaisesRegex(URLError, 'collection canceled'):
+                builder.HttpClient(Path(directory), cancel_event=canceled).get_json('https://example.org/trades')
+            fetch.assert_not_called()
 
     def test_only_live_attempts_are_paced(self):
         clock = [100.0]

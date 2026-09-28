@@ -27,7 +27,7 @@ class RunPodActorLauncherTests(unittest.TestCase):
         self.args = launcher.parse_args([
             '--variant', 'basic', '--root', str(self.base / 'experiment'),
             '--model', str(self.model), '--cache', str(self.base / 'capture_cache'),
-            '--targets', '40', '--validation-targets', '20', '--test-targets', '20'])
+            '--targets', '40', '--validation-targets', '20', '--test-targets', '20', '--collect'])
         self.args.root.mkdir()
         # Keep this suite independent of the preparation helper's construction.
         self.code_patch = mock.patch.object(launcher, 'CODE_FILES', ('tools/runpod_actor_experiment.py',))
@@ -65,6 +65,41 @@ class RunPodActorLauncherTests(unittest.TestCase):
             self.assertEqual(len({paths[key] for paths in variants}), 1)
         for key in ('features', 'run', 'token_cache', 'receipt'):
             self.assertEqual(len({paths[key] for paths in variants}), 3)
+
+    def test_default_launcher_requires_dataset_before_loading_gpu_or_fetching(self):
+        self.args.collect = False
+        with mock.patch.object(launcher, 'preflight') as gpu, mock.patch.object(launcher, 'wait_ready') as wait:
+            with self.assertRaisesRegex(ValueError, 'No dataset supplied'):
+                launcher.run(self.args)
+        gpu.assert_not_called()
+        wait.assert_not_called()
+
+    def test_prepared_training_does_not_collect_or_wait(self):
+        ready, data = self.ready_fixture()
+        self.args.dataset_dir = Path(ready['basic_path'])
+        self.args.collect = False
+        with mock.patch.object(launcher, 'scan_dataset', return_value=data), \
+             mock.patch.object(launcher, 'validate_chronological_splits', return_value={}), \
+             mock.patch.object(launcher, 'preflight'), \
+             mock.patch.object(launcher, 'wait_ready', side_effect=AssertionError('must not wait')), \
+             mock.patch.object(launcher, 'enrich', side_effect=AssertionError('must not collect')), \
+             mock.patch.object(launcher.subprocess, 'run') as run:
+            launcher.run(self.args)
+        command = run.call_args.args[0]
+        self.assertIn('train_world_cup_multigpu.py', command[1])
+        self.assertEqual(command[command.index('--dataset-dir') + 1], ready['basic_path'])
+
+    def test_prepared_wrong_variant_fails_before_gpu_load(self):
+        ready, data = self.ready_fixture()
+        self.args.dataset_dir = Path(ready['basic_path'])
+        self.args.collect = False
+        self.args.variant = 'global'
+        with mock.patch.object(launcher, 'scan_dataset', return_value=data), \
+             mock.patch.object(launcher, 'validate_chronological_splits', return_value={}), \
+             mock.patch.object(launcher, 'preflight') as gpu:
+            with self.assertRaisesRegex(ValueError, 'Dataset variant'):
+                launcher.run(self.args)
+        gpu.assert_not_called()
 
     def test_configuration_is_variant_independent_but_tracks_seed_model_and_code(self):
         initial = launcher.experiment_config(self.args)

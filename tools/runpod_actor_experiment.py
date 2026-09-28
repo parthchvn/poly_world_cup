@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Run one of three independent two-GPU experiments on a shared /workspace.
 
-The basic pod prepares the common immutable cohort; the other pods wait for it.
-Use the same --root and model on all pods. No packages are installed or upgraded.
+Prefer --dataset-dir with a completed, transferred variant. Collection on GPU
+pods is explicit via --collect. No packages are installed or upgraded.
 """
 from __future__ import annotations
 
@@ -240,13 +240,21 @@ def enrich(args, ready):
                '--sft-dir', ready['basic_path'], '--out', str(location),
                '--features', ','.join(FEATURES)]
     if args.variant == 'global':
-        command += ['--http-transport', 'curl', '--cache', str(args.root / 'wallet_cache')]
+        command += ['--http-transport', 'curl', '--cache', str(args.root / 'wallet_cache'),
+                    '--wallet-workers', str(args.wallet_workers),
+                    '--max-runtime-seconds', str(args.max_runtime_seconds),
+                    '--max-cache-gib', str(args.max_cache_gib)]
     subprocess.run(command, check=True)
     scan_dataset(sft)
     return sft
 
 
 def run(args):
+    if args.dataset_dir:
+        return run_prepared(args)
+    metrics.require(args.collect,
+                    'No dataset supplied. Use --dataset-dir with completed Basic/In-market/Global SFT data. '
+                    'To explicitly collect on this GPU pod, add --collect after checking the network and collection estimate.')
     args.root.mkdir(parents=True, exist_ok=True)
     files = paths(args)
     with variant_lock(args):
@@ -291,6 +299,38 @@ def run(args):
         print('Finished. Adapter: ' + str(files['run'] / 'adapter'), flush=True)
 
 
+def run_prepared(args):
+    """Training-only path: never calls the market collector or waits on a pod."""
+    dataset = args.dataset_dir
+    data = scan_dataset(dataset)
+    validate_chronological_splits(dataset)
+    actual = data['manifest'].get('feature_variant', 'basic')
+    metrics.require(actual == args.variant, f'Dataset variant is {actual}, requested {args.variant}')
+    args.root.mkdir(parents=True, exist_ok=True)
+    with variant_lock(args):
+        files = paths(args)
+        config = experiment_config(args)
+        identity = {'variant': args.variant, 'dataset': str(dataset),
+                    'dataset_split_sha256': data['manifest']['split_sha256'], 'config': config}
+        if files['receipt'].is_file():
+            old = metrics.read_json(files['receipt'])
+            metrics.require(all(old.get(key) == value for key, value in identity.items()),
+                            'Run receipt differs from dataset/settings/code. Choose a fresh --root.')
+        metadata = files['run'] / 'training_metadata.json'
+        if metadata.is_file() and metrics.read_json(metadata).get('status') == 'completed':
+            metrics.require(files['receipt'].is_file(), 'Completed run lacks its dataset receipt')
+            print(f'Already completed: {files["run"] / "adapter"}', flush=True)
+            return
+        if files['run'].exists() and any(files['run'].iterdir()) and not args.resume:
+            raise ValueError(f'Training output is nonempty: {files["run"]}. Use --resume or a fresh --root.')
+        preflight(args)
+        command = training_command(args, dataset)
+        atomic_json(files['receipt'], {**identity, 'command': command})
+        print(f'Training prepared {args.variant} data; no API collection: {dataset}', flush=True)
+        subprocess.run(command, check=True)
+        print('Finished. Adapter: ' + str(files['run'] / 'adapter'), flush=True)
+
+
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--variant', required=True, choices=('basic', 'inmarket', 'global'))
@@ -302,9 +342,17 @@ def parse_args(argv=None):
     parser.add_argument('--test-targets', type=int, default=2000)
     parser.add_argument('--seed', type=int, default=42)
     parser.add_argument('--resume', action='store_true', help='Resume the latest complete checkpoint for this variant')
+    parser.add_argument('--dataset-dir', type=Path, help='Completed variant SFT directory; train without any API collection')
+    parser.add_argument('--collect', action='store_true', help='Explicitly allow legacy collection/waiting on GPU pods')
+    parser.add_argument('--wallet-workers', type=int, default=4)
+    parser.add_argument('--max-runtime-seconds', type=float, default=7200)
+    parser.add_argument('--max-cache-gib', type=float, default=20)
     args = parser.parse_args(argv)
     for name in ('root', 'model', 'cache'):
         setattr(args, name, getattr(args, name).expanduser().resolve())
+    if args.dataset_dir:
+        args.dataset_dir = args.dataset_dir.expanduser().resolve()
+    metrics.require(not (args.dataset_dir and args.collect), 'Choose --dataset-dir or --collect')
     metrics.require(min(args.targets, args.validation_targets, args.test_targets) > 0, 'Target counts must be positive')
     metrics.require(not args.model.is_relative_to(args.root), 'Keep model weights outside the experiment output')
     return args

@@ -14,6 +14,7 @@ from __future__ import annotations
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation
+import gzip
 import hashlib
 import json
 import os
@@ -59,7 +60,8 @@ def _write(path, value):
     temporary = path.with_name('.' + path.name + '.' + uuid.uuid4().hex + '.tmp')
     try:
         with temporary.open('xb') as stream:
-            stream.write(_bytes(value))
+            content = _bytes(value)
+            stream.write(gzip.compress(content, compresslevel=6, mtime=0) if path.suffix == '.gz' else content)
             stream.flush()
             os.fsync(stream.fileno())
         os.replace(temporary, path)
@@ -69,7 +71,8 @@ def _write(path, value):
 
 def _read(path):
     _require(path.is_file() and not path.is_symlink(), f'Missing or unsafe capture file: {path}')
-    return json.loads(path.read_text(encoding='utf-8'))
+    content = path.read_bytes()
+    return json.loads(gzip.decompress(content) if path.suffix == '.gz' else content)
 
 
 @contextmanager
@@ -204,9 +207,9 @@ def _check_page(page, parameters, index, cursor, seen_cursors):
     return rows
 
 
-def _commit(state, page, directory):
+def _commit(state, page, directory, path):
     index = len(state['pages'])
-    filename = f'pages/{index:08d}.json'
+    filename = str(path.relative_to(directory))
     state['pages'].append({'file': filename, 'sha256': _hash((directory / filename).read_bytes()),
                            'row_count': len(page['rows'])})
     state['row_count'] += len(page['rows'])
@@ -222,7 +225,7 @@ def _commit(state, page, directory):
     _write(directory / 'manifest.json', state)
 
 
-def _validated_state(directory, expected=None):
+def _validated_state(directory, expected=None, *, with_cursor_state=False):
     state = _read(directory / 'manifest.json')
     _require(state.get('schema') == SCHEMA, 'Unsupported wallet capture format')
     parameters = state.get('parameters', {})
@@ -232,13 +235,17 @@ def _validated_state(directory, expected=None):
              'Wallet capture parameters differ from the requested capture')
     pages = state.get('pages')
     _require(isinstance(pages, list) and len(pages) == state.get('page_count'), 'Invalid wallet page count')
-    cursor, count, seen, ids, times = None, 0, set(), set(), []
+    cursor, count, seen, ids = None, 0, set(), set()
+    earliest = latest = None
     for index, item in enumerate(pages):
-        filename = f'pages/{index:08d}.json'
-        _require(item.get('file') == filename, 'Invalid wallet page path')
+        filename = item.get('file')
+        _require(filename in (f'pages/{index:08d}.json', f'pages/{index:08d}.json.gz'),
+                 'Invalid wallet page path')
         path = directory / filename
-        page = _read(path)
-        _require(_hash(path.read_bytes()) == item.get('sha256'), 'Wallet page checksum mismatch')
+        _require(path.is_file() and not path.is_symlink(), f'Missing or unsafe capture file: {path}')
+        content = path.read_bytes()
+        _require(_hash(content) == item.get('sha256'), 'Wallet page checksum mismatch')
+        page = json.loads(gzip.decompress(content) if path.suffix == '.gz' else content)
         rows = _check_page(page, parameters, index, cursor, seen)
         _require(len(rows) == item.get('row_count'), 'Wallet page row count mismatch')
         _require(page['has_more'] or index == len(pages) - 1, 'Pages occur after wallet feed exhaustion')
@@ -247,24 +254,27 @@ def _validated_state(directory, expected=None):
             _require(isinstance(identity, str) and identity and identity not in ids,
                      'Duplicate wallet execution identity across captured pages')
             ids.add(identity)
-            times.append(row['timestamp'])
+            stamp = row['timestamp']
+            earliest = min(earliest, stamp) if earliest else stamp
+            latest = max(latest, stamp) if latest else stamp
         seen.add(cursor)
         cursor = page['next_cursor']
         count += len(rows)
     status = 'exhausted' if pages and not page['has_more'] else 'paused'
     _require(state.get('next_cursor') == cursor and state.get('row_count') == count
              and state.get('api_traversal_status') == status
-             and state.get('earliest_execution') == (min(times) if times else None)
-             and state.get('latest_execution') == (max(times) if times else None),
+             and state.get('earliest_execution') == earliest
+             and state.get('latest_execution') == latest,
              'Wallet manifest summary differs from its pages')
     _require(state.get('historical_completeness_verified') is False
              and state.get('availability_semantics') == AVAILABILITY, 'Invalid wallet coverage claims')
-    return state
+    return (state, seen, ids) if with_cursor_state else state
 
 
 def ingest_wallet(client, *, actor_id, output_dir, end_seconds, start_seconds=1,
                   limit=1000, max_pages=None, minimum_size='0.000001',
-                  progress=False, require_nonempty=True):
+                  progress=False, require_nonempty=True, compress=False,
+                  before_page=None, after_page=None):
     """Return a resumable capture manifest plus ``capture_dir`` for the reader.
 
     Each capture is immutable for a given parameter set. ``max_pages`` bounds
@@ -278,7 +288,7 @@ def ingest_wallet(client, *, actor_id, output_dir, end_seconds, start_seconds=1,
     (directory / 'pages').mkdir(parents=True, exist_ok=True)
     with _lock(directory):
         if (directory / 'manifest.json').exists():
-            state = _validated_state(directory, parameters)
+            state, seen, ids = _validated_state(directory, parameters, with_cursor_state=True)
         else:
             state = {'schema': SCHEMA, 'actor_id': actor_id.lower(), 'parameters': parameters,
                      'api_url': API_URL, 'api_traversal_status': 'paused', 'next_cursor': None,
@@ -290,14 +300,17 @@ def ingest_wallet(client, *, actor_id, output_dir, end_seconds, start_seconds=1,
                      'missing_accounting': ['deposits', 'withdrawals', 'transfers', 'redemptions',
                                             'splits', 'merges', 'fees', 'combo_activity']}
             _write(directory / 'manifest.json', state)
-        added, seen, ids = 0, set(), set()
-        for item in state['pages']:
-            saved = _read(directory / item['file'])
-            seen.add(saved['requested_cursor'])
-            ids.update(row['execution_id'] for row in saved['rows'])
+            seen, ids = set(), set()
+        added = 0
         while state['api_traversal_status'] != 'exhausted' and (max_pages is None or added < max_pages):
+            if before_page is not None:
+                before_page()
             index, cursor = state['page_count'], state['next_cursor']
-            path = directory / 'pages' / f'{index:08d}.json'
+            choices = [directory / 'pages' / f'{index:08d}.json',
+                       directory / 'pages' / f'{index:08d}.json.gz']
+            existing = [candidate for candidate in choices if candidate.exists()]
+            _require(len(existing) <= 1, 'Conflicting orphan wallet pages')
+            path = existing[0] if existing else choices[1 if compress else 0]
             if path.exists():
                 page = _read(path)  # recover a page committed before an interrupted manifest update
                 _check_page(page, parameters, index, cursor, seen)
@@ -312,10 +325,15 @@ def ingest_wallet(client, *, actor_id, output_dir, end_seconds, start_seconds=1,
                      'Duplicate source execution identity in wallet traversal')
             if not path.exists():
                 _write(path, page)
-            _commit(state, page, directory)
+            _commit(state, page, directory, path)
             seen.add(cursor)
             ids.update(page_ids)
             added += 1
+            if after_page is not None:
+                after_page(actor_id=actor_id, page_count=state['page_count'],
+                           row_count=state['row_count'], new_rows=len(page['rows']),
+                           page_bytes=path.stat().st_size,
+                           exhausted=state['api_traversal_status'] == 'exhausted')
             if progress:
                 print(f"Wallet {actor_id}: {state['page_count']:,} pages / {state['row_count']:,} executions; "
                       f"status={state['api_traversal_status']}", flush=True)

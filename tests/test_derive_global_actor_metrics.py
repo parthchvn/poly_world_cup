@@ -8,6 +8,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import threading
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
@@ -229,7 +230,7 @@ class GlobalCLITests(unittest.TestCase):
 
     def run_cli(self, output, history, *flags):
         return subprocess.run([sys.executable, str(SCRIPT), str(self.source), '--out', str(output),
-                               '--wallet-trades', str(history), *map(str, flags)],
+                               '--wallet-trades', str(history), '--cache', str(self.root / 'cache'), *map(str, flags)],
                               text=True, capture_output=True, timeout=30)
 
     def records(self, output):
@@ -369,9 +370,116 @@ class GlobalCLITests(unittest.TestCase):
         self.assertEqual(second['actor_metrics']['sample_counts']['captured_executions'], 3)
         self.assertAlmostEqual(float(second['actor_metrics']['values']['average_execution_notional']), 14/3)
         cached_args = self.global_args(out=self.root / 'global_cached')
-        with patch.object(build_actor_dataset, 'HttpClient', return_value=Client([])):
+        with patch.object(build_actor_dataset, 'HttpClient', return_value=Client([])), \
+             patch.object(global_metrics, 'compute_global_metrics', side_effect=AssertionError('recomputed checkpoint')):
             global_metrics.derive(cached_args)
         self.assertEqual(self.records(cached_args.out), [first, second])
+        progress = json.loads(next((args.cache / 'global_progress').glob('*.json')).read_text())
+        self.assertEqual(progress['resumed_metric_wallets'], 1)
+        self.assertEqual(progress['new_page_requests'], 0)
+
+    def test_new_page_budget_keeps_partial_capture_and_resumes_exactly(self):
+        import build_actor_dataset
+        from tests.test_wallet_history import Client, page, trade
+        prior = base.timestamp_us('2026-06-01T15:59:00Z') // 1_000_000
+        args = self.global_args(max_new_pages=1)
+        client = Client([page([trade(prior, proxy_wallet=ACTOR)], 'next')])
+        with patch.object(build_actor_dataset, 'HttpClient', return_value=client):
+            with self.assertRaisesRegex(ValueError, 'budget reached'):
+                global_metrics.derive(args)
+        self.assertFalse(args.out.exists())
+        progress = json.loads(next((args.cache / 'global_progress').glob('*.json')).read_text())
+        self.assertEqual(progress['status'], 'stopped')
+        self.assertEqual(progress['new_pages_saved'], 1)
+        resumed = Client([page([trade(prior-60, proxy_wallet=ACTOR)])])
+        with patch.object(build_actor_dataset, 'HttpClient', return_value=resumed):
+            global_metrics.derive(args)
+        self.assertEqual(resumed.requests[0][1]['cursor'], 'next')
+        self.assertEqual(self.records(args.out)[0]['actor_metrics']['sample_counts']['captured_executions'], 2)
+
+    def test_storage_budget_fails_before_network_without_changing_cohort(self):
+        import build_actor_dataset
+        args = self.global_args(max_cache_gib=1 / 1024**3)
+        args.cache.mkdir()
+        (args.cache / 'existing').write_bytes(b'existing data')
+        with patch.object(build_actor_dataset, 'HttpClient') as factory:
+            with self.assertRaisesRegex(ValueError, 'storage budget'):
+                global_metrics.derive(args)
+        factory.assert_not_called()
+        self.assertFalse(args.out.exists())
+        self.assertEqual((args.cache / 'existing').read_bytes(), b'existing data')
+
+    def test_parallel_wallets_preserve_independent_cutoffs_and_sorted_inventory(self):
+        import build_actor_dataset
+        from tests.test_wallet_history import Client, page, trade
+        second = copy.deepcopy(self.rows)
+        for row in second:
+            row['actor_id'] = OTHER_ACTOR
+        (self.source / 'actors' / (OTHER_ACTOR + '.jsonl')).write_text(
+            ''.join(json.dumps(row) + '\n' for row in second))
+        manifest_path = self.source / 'manifest.json'
+        manifest = json.loads(manifest_path.read_text())
+        manifest['counts'] = {name: 2 * value for name, value in manifest['counts'].items()}
+        manifest_path.write_text(json.dumps(manifest))
+        barrier = threading.Barrier(2)
+        current = base.timestamp_us(self.rows[1]['timestamp']) // 1_000_000
+        class ParallelClient:
+            def get_json(self, url, params):
+                barrier.wait(timeout=3)  # proves requests overlap instead of silently running serially
+                return Client([page([trade(current-60, proxy_wallet=params['user']),
+                                      trade(current, proxy_wallet=params['user'])])]).get_json(url, params)
+        args = self.global_args(wallet_workers=2)
+        with patch.object(build_actor_dataset, 'HttpClient', return_value=ParallelClient()):
+            global_metrics.derive(args)
+        rows = list(base.iter_jsonl(args.out / 'actor_index.jsonl'))
+        self.assertEqual([row['actor_id'] for row in rows], [ACTOR, OTHER_ACTOR])
+        for row in rows:
+            records = list(base.iter_jsonl(args.out / row['path']))
+            self.assertEqual(records[0]['actor_metrics']['sample_counts']['captured_executions'], 1)
+            self.assertEqual(records[1]['actor_metrics']['sample_counts']['captured_executions'], 2)
+
+    def test_runtime_budget_is_resumable_and_reports_no_unmeasured_eta(self):
+        args = self.global_args(max_runtime_seconds=1)
+        budget = global_metrics.CollectionBudget(args, 100, args.cache / 'progress.json')
+        budget.started -= 2
+        with self.assertRaisesRegex(ValueError, 'runtime budget'):
+            budget.check()
+        self.assertTrue(budget.cancel.is_set())
+        progress = json.loads((args.cache / 'progress.json').read_text())
+        self.assertIsNone(progress['estimated_remaining_seconds'])
+
+    def test_disk_reserve_blocks_collection_even_with_unlimited_cache_budget(self):
+        args = self.global_args(max_cache_gib=0)
+        with patch.object(global_metrics.shutil, 'disk_usage', return_value=SimpleNamespace(free=512*1024**2)):
+            budget = global_metrics.CollectionBudget(args, 1, args.cache / 'progress.json')
+            with self.assertRaisesRegex(ValueError, 'less than 1 GiB free'):
+                budget.check()
+
+    def test_cohort_lock_rejects_second_collector_without_http(self):
+        import build_actor_dataset
+        from tests.test_wallet_history import Client, page, trade
+        prior = base.timestamp_us('2026-06-01T15:59:00Z') // 1_000_000
+        args = self.global_args()
+        with patch.object(build_actor_dataset, 'HttpClient', return_value=Client([page([trade(prior, proxy_wallet=ACTOR)])])):
+            global_metrics.derive(args)
+        checkpoint = next((args.cache / 'metric_checkpoints').iterdir())
+        with global_metrics.wallet_history._lock(checkpoint), \
+             patch.object(build_actor_dataset, 'HttpClient', side_effect=AssertionError('unexpected network')):
+            with self.assertRaisesRegex(ValueError, 'Another Global collector'):
+                global_metrics.derive(self.global_args(out=self.root / 'second_collector'))
+
+    def test_metric_checkpoint_cannot_hide_changed_raw_capture(self):
+        import build_actor_dataset
+        from tests.test_wallet_history import Client, page, trade
+        prior = base.timestamp_us('2026-06-01T15:59:00Z') // 1_000_000
+        args = self.global_args()
+        with patch.object(build_actor_dataset, 'HttpClient', return_value=Client([page([trade(prior, proxy_wallet=ACTOR)])])):
+            global_metrics.derive(args)
+        raw_page = next((args.cache / 'wallet_histories').glob('*/*/pages/*.json.gz'))
+        raw_page.write_bytes(raw_page.read_bytes() + b'changed')
+        with patch.object(build_actor_dataset, 'HttpClient', return_value=Client([])):
+            with self.assertRaisesRegex(ValueError, 'checksum'):
+                global_metrics.derive(self.global_args(out=self.root / 'tampered'))
 
     def prepare_three_fixtures(self, reverse=False):
         from tests.test_prepare_actor_sft import ActorSFTTests, builder

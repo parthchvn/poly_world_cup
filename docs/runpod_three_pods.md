@@ -1,28 +1,45 @@
-# Three shared-volume RunPod jobs
+# Three RunPod training jobs using prepared data
 
 Use one two-GPU pod per variant and the same shared `/workspace` volume. The
 model is expected at `/workspace/models/Qwen3.6-27B`, using the same installed
-training environment as the earlier successful QLoRA smoke test. The launcher
-checks packages, GPUs, tokenizer and local weight files before collection. It
-does not install or upgrade packages.
+training environment as the earlier successful QLoRA smoke test. Collect data
+once on a CPU machine with working API access, then transfer the completed
+datasets. Read [collection reliability and capacity planning](collection_reliability.md)
+before starting a new capture. The launcher checks packages, GPUs, tokenizer
+and local weight files. It does not install or upgrade packages.
 
 Run from the same pinned repository commit on all pods:
 
 ```bash
-# Base pod
-bash tools/runpod_basic.sh
+# Basic pod, after uploading the completed dataset
+bash tools/runpod_basic.sh \
+  --dataset-dir /workspace/world_cup_40k_transfer/common/prepared/basic \
+  --root /workspace/world_cup_runs_v2
 
-# Base + in_market pod
-bash tools/runpod_inmarket.sh
+# In-market pod
+bash tools/runpod_inmarket.sh \
+  --dataset-dir /workspace/world_cup_40k_transfer/inmarket/sft \
+  --root /workspace/world_cup_runs_v2
 
-# Base + all_history pod
-bash tools/runpod_global.sh
+# Global pod, after Global collection and comparison have completed
+bash tools/runpod_global.sh \
+  --dataset-dir /workspace/world_cup_40k_transfer/global/sft \
+  --root /workspace/world_cup_runs_v2
 ```
 
-These are separate terminal commands, one per pod. The Base pod collects and
-freezes the common dataset. The other two wait for its `common_ready.json`, check
-the same code/configuration/source hashes and package versions, then enrich their own copy and train.
-The Base pod can begin training while the other pods derive their features.
+These are separate terminal commands, one per pod. With `--dataset-dir`, the
+launcher validates the dataset and starts training without making API requests
+or waiting for another pod. Basic and In-market can train while Global is still
+being collected elsewhere. Outputs are separate under
+`/workspace/world_cup_runs_v2/runs/{basic,inmarket,global}/adapter`.
+Keep the same code, model, training parameters and installed packages for all
+three models. The comparison helper checks the completed datasets' matching
+targets and splits. Existing datasets do not need to be regenerated for the
+transport fixes. Add `--resume` to the same command after an interrupted training
+run with a complete checkpoint.
+
+The wrappers now require `--dataset-dir` or an explicit `--collect`. An accidental
+bare launch cannot start a large API collection on rented GPUs.
 
 Defaults are about **40,000 training decisions**, **2,000 validation decisions**
 and **2,000 test decisions**. A decision is one distinct actor/market trade
@@ -64,7 +81,22 @@ steps and continues the same run without loading the weights again. Validation
 is used during training; the held-out test split is not trained on. Conversations
 over 8192 tokens fail rather than being silently truncated.
 
-The shared experiment root is `/workspace/world_cup_40k_v1`:
+## Optional legacy collect-and-train mode
+
+Only use this mode on hosts whose bounded endpoint check succeeds:
+
+```bash
+python3 tools/check_collection_network.py
+bash tools/runpod_basic.sh --collect
+```
+
+The Basic pod collects and freezes the common dataset. The other pods use
+`bash tools/runpod_inmarket.sh --collect` and
+`bash tools/runpod_global.sh --collect`; they wait for `common_ready.json` and
+check the same code/configuration/source hashes and package versions. This mode
+still spends GPU rental time on CPU/network preparation. Prefer prepared data.
+
+The legacy shared experiment root is `/workspace/world_cup_40k_v1`:
 
 | Location | Contents |
 |---|---|
@@ -88,7 +120,7 @@ exports and wallet capture pages are reused. If training already created a
 checkpoint, add `--resume`, for example:
 
 ```bash
-bash tools/runpod_global.sh --resume
+bash tools/runpod_global.sh --collect --resume
 ```
 
 The launcher selects the latest complete two-GPU checkpoint and lets the trainer

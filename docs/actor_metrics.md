@@ -278,6 +278,15 @@ after an interrupted request. A partial traversal, including one stopped by
 Use a new cache for a fresh capture; there is no implicit refresh of exhausted
 captures. This fetch can be much larger than the current-market export.
 
+For unattended collection, use the curl transport and read
+[collection reliability and estimates](collection_reliability.md). The Global
+collector uses four wallet workers by default, a shared request limiter, gzip
+for new capture pages and cached per-wallet metric results. It preserves old
+plain JSON capture pages. The default two-hour collection budget stops and
+retains progress; it does not claim the dataset is complete. Inspect
+`wallet_cache/global_progress/` and run the offline estimator before increasing
+time or storage allowances. These controls do not shorten historical windows.
+
 Wallet executions accept both 31-byte and 32-byte hexadecimal condition IDs,
 matching the [official Polymarket SDK's condition ID schema](https://github.com/Polymarket/ts-sdk/blob/main/packages/bindings/src/shared.ts).
 This retains executions such as combination-market trades in wallet-wide

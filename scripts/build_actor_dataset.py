@@ -77,7 +77,8 @@ def write_jsonl(path: Path, rows: list[dict]) -> None:
 """Public HTTP JSON retrieval with immutable response bodies and provenance.
 
 A retrieval timestamp means 'we captured this now', never 'known then'. Cache
-replays retain the original capture timestamp. Run one writer per cache directory.
+replays retain the original capture timestamp. Threads may share one client;
+independent processes must still use separate cache directories.
 """
 
 
@@ -87,6 +88,10 @@ import json
 import time
 import shutil
 import subprocess
+import socket
+import ssl
+import threading
+import math
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from decimal import Decimal
@@ -121,8 +126,36 @@ def request_url(url: str, params: dict | None = None) -> str:
     return urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(sorted(pairs)), ""))
 
 
+class HttpTransportError(URLError):
+    def __init__(self, reason, *, category="transport", retryable=True, curl_code=None):
+        super().__init__(reason)
+        self.category = category
+        self.retryable = retryable
+        self.curl_code = curl_code
+
+
+def http_failure(error):
+    """Return a diagnostic category and whether another attempt could help."""
+    if isinstance(error, HTTPError):
+        return f"HTTP {error.code}", error.code in {408, 425, 429} or (500 <= error.code < 600 and error.code not in {501, 505, 511})
+    if isinstance(error, HttpTransportError):
+        return error.category, error.retryable
+    reason = getattr(error, "reason", error)
+    if isinstance(reason, ssl.SSLCertVerificationError):
+        return "TLS certificate verification", False
+    if isinstance(reason, socket.gaierror):
+        return "DNS resolution", True
+    if isinstance(reason, (TimeoutError, socket.timeout)):
+        return "request timeout", True
+    if isinstance(reason, ssl.SSLError):
+        return "TLS connection", True
+    if isinstance(reason, ConnectionResetError) or "reset" in str(reason).lower():
+        return "connection reset", True
+    return "connection/transfer", True
+
+
 class HttpClient:
-    def __init__(self, cache_dir: Path, refresh: bool = False, *, timeout: float = 30, retries: int = 3, compress: bool = False, transport: str = "urllib", retry_delay: float = 1, min_interval: float = 0, log_retries: bool = False):
+    def __init__(self, cache_dir: Path, refresh: bool = False, *, timeout: float = 30, retries: int = 3, compress: bool = False, transport: str = "urllib", retry_delay: float = 1, min_interval: float = 0, log_retries: bool = False, retry_budget: float = 90, cancel_event=None, host_failure_limit: int = 6):
         self.cache_dir = Path(cache_dir)
         self.refresh = refresh
         self.timeout = timeout
@@ -132,10 +165,23 @@ class HttpClient:
         self.retry_delay = retry_delay
         self.min_interval = min_interval
         self.log_retries = log_retries
-        self._next_request_at = 0.0
-        if retries < 0 or timeout <= 0:
+        self.retry_budget = retry_budget
+        self.cancel_event = cancel_event
+        self.host_failure_limit = host_failure_limit
+        self._state_lock = threading.Lock()
+        self._url_locks = [threading.Lock() for _ in range(64)]
+        self._local = threading.local()
+        self._next_request_at = {}
+        self._host_not_before = {}
+        self._host_failures = {}
+        self._started_at = time.monotonic()
+        self._stats = {"live_attempts": 0, "responses": 0, "cache_hits": 0,
+                       "response_bytes": 0, "retry_sleep_seconds": 0.0}
+        if retries < 0 or not math.isfinite(timeout) or timeout <= 0:
             raise ValueError("retries must be nonnegative and timeout positive")
-        if retry_delay < 0 or min_interval < 0:
+        if not math.isfinite(retry_budget) or retry_budget <= 0 or host_failure_limit < 1:
+            raise ValueError("HTTP retry budget and host failure limit must be positive")
+        if not all(math.isfinite(value) and value >= 0 for value in (retry_delay, min_interval)):
             raise ValueError("HTTP retry delay and minimum interval must be nonnegative")
         if transport not in {"urllib", "curl"}:
             raise ValueError("HTTP transport must be urllib or curl")
@@ -143,9 +189,56 @@ class HttpClient:
         if transport == "curl" and self.curl is None:
             raise ValueError("--http-transport curl requires the curl executable on PATH")
 
+    def stats(self):
+        with self._state_lock:
+            return {**self._stats, "elapsed_seconds": time.monotonic() - self._started_at}
+
+    def _count(self, **counts):
+        with self._state_lock:
+            for key, value in counts.items():
+                self._stats[key] += value
+
+    def _pause(self, seconds):
+        if self.cancel_event is not None:
+            if self.cancel_event.wait(max(0, seconds)):
+                raise HttpTransportError("HTTP collection canceled; saved cache is reusable", category="canceled", retryable=False)
+        elif seconds > 0:
+            time.sleep(seconds)
+
+    def _pace(self, host, deadline):
+        self._pause(0)
+        with self._state_lock:
+            if self._host_failures.get(host, 0) >= self.host_failure_limit:
+                raise HttpTransportError(
+                    f"Stopped requests to {host} after {self.host_failure_limit} consecutive failures. "
+                    "Check connectivity before resuming; saved cache is reusable.",
+                    category="host circuit open", retryable=False)
+            now = time.monotonic()
+            start = max(now, self._next_request_at.get(host, now), self._host_not_before.get(host, now))
+            if start >= deadline:
+                raise HttpTransportError(f"HTTP pacing exhausted the {self.retry_budget:g}s request budget for {host}",
+                                         category="request budget", retryable=False)
+            self._next_request_at[host] = start + self.min_interval
+        self._pause(start - now)
+        # Another in-flight worker may have received Retry-After while this
+        # worker waited for its reserved slot. Respect that shared cooldown.
+        while True:
+            with self._state_lock:
+                now = time.monotonic()
+                not_before = self._host_not_before.get(host, now)
+            if not_before <= now:
+                break
+            if not_before >= deadline:
+                raise HttpTransportError(f"Server cooldown exceeds the {self.retry_budget:g}s request budget for {host}",
+                                         category="request budget", retryable=False)
+            self._pause(not_before - now)
+
     def _fetch(self, request: Request) -> tuple[bytes, dict]:
+        timeout = getattr(self._local, "attempt_timeout", self.timeout)
         if self.transport == "urllib":
-            with urlopen(request, timeout=self.timeout) as response:
+            # urllib's timeout is a socket timeout; curl additionally enforces
+            # a total transfer deadline and is preferred for unattended pulls.
+            with urlopen(request, timeout=timeout) as response:
                 return response.read(), {key: response.headers.get(key) for key in ("Date", "ETag", "Last-Modified")}
         # Use curl's normal user agent and TLS stack, as in a terminal request.
         # Each attempt has fresh files; failed/partial bodies never enter cache.
@@ -156,16 +249,24 @@ class HttpClient:
                 result = subprocess.run([
                     self.curl, "--disable", "--silent", "--show-error", "--location",
                     "--proto", "=https", "--proto-redir", "=https", "--max-redirs", "5",
-                    "--connect-timeout", str(min(self.timeout, 15)), "--max-time", str(self.timeout),
+                    "--connect-timeout", str(min(timeout, 15)), "--max-time", str(timeout),
                     "--header", "Accept: application/json", "--output", str(body_path),
                     "--dump-header", str(header_path), "--write-out", "%{http_code}",
                     "--url", request.full_url,
-                ], capture_output=True, timeout=self.timeout + 5)
+                ], capture_output=True, timeout=timeout + 1)
             except subprocess.TimeoutExpired as error:
-                raise URLError(f"curl timed out for {request.full_url}") from error
+                raise HttpTransportError(f"curl process timed out for {request.full_url}", category="request timeout") from error
             if result.returncode:
                 detail = result.stderr.decode("utf-8", errors="replace").strip()
-                raise URLError(f"curl failed for {request.full_url}: {detail}")
+                categories = {5: "proxy DNS resolution", 6: "DNS resolution", 7: "connection refused/unreachable",
+                              18: "partial transfer", 28: "request timeout", 35: "TLS connection",
+                              51: "TLS certificate verification", 52: "empty server response", 55: "send failure",
+                              56: "receive/reset failure", 58: "local TLS certificate", 60: "TLS certificate verification",
+                              77: "TLS CA file", 90: "TLS certificate pin", 91: "TLS certificate status"}
+                permanent = {1, 2, 3, 4, 23, 26, 27, 43, 48, 51, 58, 59, 60, 77, 90, 91}
+                raise HttpTransportError(f"curl ({result.returncode}) for {request.full_url}: {detail}",
+                    category=categories.get(result.returncode, "curl transfer"),
+                    retryable=result.returncode not in permanent, curl_code=result.returncode)
             try:
                 status = int(result.stdout.strip())
             except ValueError as error:
@@ -184,6 +285,12 @@ class HttpClient:
     def get_json(self, url: str, params: dict | None = None) -> FetchResult:
         full_url = request_url(url, params)
         key = hashlib.sha256(full_url.encode()).hexdigest()
+        # The same URL is fetched once even when multiple wallet workers need
+        # it. Atomic body/index writes retain the existing on-disk format.
+        with self._url_locks[int(key[:8], 16) % len(self._url_locks)]:
+            return self._get_json(full_url, key)
+
+    def _get_json(self, full_url, key):
         index_path = self.cache_dir / "requests" / f"{key}.json"
         if index_path.exists() and not self.refresh:
             metadata = json.loads(index_path.read_text())
@@ -194,27 +301,45 @@ class HttpClient:
                 body = gzip.decompress(body)
             if metadata["url"] != full_url or hashlib.sha256(body).hexdigest() != metadata["body_sha256"]:
                 raise ValueError(f"Cache integrity failure: {index_path}")
+            self._count(cache_hits=1)
             return FetchResult(json.loads(body, parse_float=Decimal), full_url, metadata["retrieved_at"], metadata["body_sha256"], True)
 
         request = Request(full_url, headers={
             "User-Agent": "Mozilla/5.0 (compatible; PolyWorldCupResearch/0.1)",
             "Accept": "application/json",
         })
+        host = urlsplit(full_url).netloc
+        started = time.monotonic()
+        deadline = started + self.retry_budget
         for attempt in range(self.retries + 1):
             try:
-                wait = self._next_request_at - time.monotonic()
-                if wait > 0:
-                    time.sleep(wait)
+                self._pace(host, deadline)
+                if time.monotonic() >= deadline:
+                    raise HttpTransportError(f"HTTP request exceeded its {self.retry_budget:g}s budget before another attempt to {host}",
+                                             category="request budget", retryable=False)
+                self._local.attempt_timeout = max(0.001, min(self.timeout, deadline - time.monotonic()))
+                self._count(live_attempts=1)
                 try:
                     body, response_headers = self._fetch(request)
                 finally:
                     # Leave a gap after each live attempt, including failures.
-                    self._next_request_at = time.monotonic() + self.min_interval
+                    with self._state_lock:
+                        self._next_request_at[host] = max(self._next_request_at.get(host, 0), time.monotonic() + self.min_interval)
+                with self._state_lock:
+                    self._host_failures[host] = 0
                 break
-            except (HTTPError, URLError, TimeoutError, ConnectionError) as error:
-                retryable = not isinstance(error, HTTPError) or error.code == 429 or error.code >= 500
-                if not retryable or attempt == self.retries:
+            except (HTTPError, URLError, TimeoutError, ConnectionError, ssl.SSLError) as error:
+                reason, retryable = http_failure(error)
+                if not retryable:
                     raise
+                with self._state_lock:
+                    failures = self._host_failures.get(host, 0) + 1
+                    self._host_failures[host] = failures
+                elapsed = time.monotonic() - started
+                if attempt == self.retries or failures >= self.host_failure_limit:
+                    raise HttpTransportError(
+                        f"{reason} from {host}; stopped after {attempt + 1} attempts in {elapsed:.1f}s. "
+                        f"Saved cache is reusable. Last error: {error}", category=reason, retryable=False) from error
                 delay = min(self.retry_delay * (2 ** min(attempt, 10)), 60)
                 if isinstance(error, HTTPError) and error.headers:
                     retry_after = error.headers.get("Retry-After") or error.headers.get("retry-after")
@@ -224,17 +349,28 @@ class HttpClient:
                             seconds = float(retry_after) if retry_after.strip().isdigit() else (
                                 parsedate_to_datetime(retry_after).timestamp() - time.time())
                             delay = max(delay, seconds)
+                            with self._state_lock:
+                                self._host_not_before[host] = max(self._host_not_before.get(host, 0), time.monotonic() + delay)
                         except (TypeError, ValueError, OverflowError):
                             pass
+                remaining = deadline - time.monotonic()
+                if delay >= remaining:
+                    raise HttpTransportError(
+                        f"{reason} from {host}; {self.retry_budget:g}s request budget cannot accommodate "
+                        f"the next {delay:g}s wait. Saved cache is reusable. Last error: {error}",
+                        category="request budget", retryable=False) from error
                 if self.log_retries:
-                    reason = f"HTTP {error.code}" if isinstance(error, HTTPError) else "connection/transfer error"
-                    print(f"{reason} from {urlsplit(full_url).netloc}; retry {attempt + 1}/{self.retries} in {delay:g}s",
+                    curl_code = f" (curl {error.curl_code})" if getattr(error, "curl_code", None) else ""
+                    print(f"{reason}{curl_code} from {host}; retry {attempt + 1}/{self.retries} in {delay:g}s "
+                          f"({remaining:.0f}s request budget left)",
                           file=sys.stderr, flush=True)
-                time.sleep(delay)
+                self._count(retry_sleep_seconds=delay)
+                self._pause(delay)
 
         # Invalid payloads never replace a valid cached response.
         # Amounts/prices must not pass through a binary floating-point round trip.
         data = json.loads(body, parse_float=Decimal)
+        self._count(responses=1, response_bytes=len(body))
         body_hash = hashlib.sha256(body).hexdigest()
         retrieved_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
         suffix = ".json.gz" if self.compress else ".json"
@@ -2021,7 +2157,8 @@ def collect_actor_snapshots(actors, market, args, output_dir):
                 local.client = SnapshotHttpClient(Path(args.cache) / 'http', compress=True,
                     transport=args.http_transport, timeout=args.http_timeout,
                     retries=args.http_retries, retry_delay=args.http_retry_delay,
-                    min_interval=max(1, args.http_min_interval), log_retries=True)
+                    min_interval=max(1, args.http_min_interval), log_retries=True,
+                    retry_budget=getattr(args, 'http_retry_budget', 90))
             snapshot = _actor_snapshot_fetch(local.client, actor, market, stop)
         if not stop.is_set():
             atomic_write(destination / (actor + '.json'), compact(snapshot) + '\n')
@@ -2100,7 +2237,7 @@ def export(args):
     client = HttpClient(cache / "http", compress=True, transport=args.http_transport,
                         timeout=args.http_timeout, retries=args.http_retries,
                         retry_delay=args.http_retry_delay, min_interval=args.http_min_interval,
-                        log_retries=True)
+                        log_retries=True, retry_budget=getattr(args, 'http_retry_budget', 90))
     print(f"Resolving market {args.market_id}", flush=True)
     market = resolve_market(args.market_id, client=client, metadata_file=args.market_metadata)
     event_id = args.espn_event_id or market.get("espn_event_id")
@@ -2889,7 +3026,9 @@ def add_collection_options(parser):
     parser.add_argument("--http-transport", choices=("urllib", "curl"), default="urllib",
                         help="HTTP client for live APIs; choose curl if Python requests reset but terminal curl works")
     parser.add_argument("--http-timeout", type=float, default=45, help="Seconds allowed for each live HTTP attempt (default: 45)")
-    parser.add_argument("--http-retries", type=int, default=8, help="Retries per failed live request (default: 8)")
+    parser.add_argument("--http-retries", type=int, default=3, help="Maximum retries per failed live request (default: 3)")
+    parser.add_argument("--http-retry-budget", type=float, default=90,
+                        help="Total seconds budgeted per live URL, including retry waits (default: 90; use curl for a transfer deadline)")
     parser.add_argument("--http-retry-delay", type=float, default=2,
                         help="Initial retry delay in seconds, doubles up to 60; honors Retry-After (default: 2)")
     parser.add_argument("--http-min-interval", type=float, default=1,
@@ -3018,7 +3157,7 @@ def build_sft(args):
                 client = HttpClient(cache / 'http', compress=True, transport=args.http_transport,
                                     timeout=args.http_timeout, retries=args.http_retries,
                                     retry_delay=args.http_retry_delay, min_interval=args.http_min_interval,
-                                    log_retries=True)
+                                    log_retries=True, retry_budget=getattr(args, 'http_retry_budget', 90))
             market = resolve_market(market_id, client=client, metadata_file=args.market_metadata)
             event_id = str(args.espn_event_id or market.get('espn_event_id') or '')
             sft_require(event_id.isdigit(), f'Market {market_id} needs an ESPN fixture ID before SFT collection. '

@@ -127,9 +127,18 @@ def collect_export(args, expected, path, cache):
     if path.exists():
         print(f'Reusing complete experiment capture: {path}', flush=True)
         return
+    if not args.skip_network_check and not getattr(args, '_network_checked', False):
+        from check_collection_network import require_network
+        event = expected['fixture_id'].split(':')[-1]
+        snapshots = cache / 'espn_snapshots'
+        saved_espn = any((snapshots / ('fifa.world_' + event + suffix)).is_file()
+                         for suffix in ('.json', '.json.gz'))
+        require_network(expected['market_id'], include_espn=not saved_espn)
+        args._network_checked = True
     builder.collect_main([expected['market_id'], '--out', str(path), '--cache', str(cache),
         '--http-transport', args.http_transport, '--http-timeout', str(args.http_timeout),
         '--http-retries', str(args.http_retries), '--http-retry-delay', str(args.http_retry_delay),
+        '--http-retry-budget', str(args.http_retry_budget),
         '--http-min-interval', str(args.http_min_interval), '--max-trades-per-actor', '20',
         '--skip-actor-snapshots', '--gzip'])
 
@@ -330,9 +339,13 @@ def parse_args(argv=None):
     parser.add_argument('--cache', type=Path)
     parser.add_argument('--http-transport', choices=('curl', 'urllib'), default='curl')
     parser.add_argument('--http-timeout', type=float, default=45)
-    parser.add_argument('--http-retries', type=int, default=8)
+    parser.add_argument('--http-retries', type=int, default=3)
+    parser.add_argument('--http-retry-budget', type=float, default=90,
+                        help='Maximum retry time per URL, including attempts and backoff')
     parser.add_argument('--http-retry-delay', type=float, default=2)
     parser.add_argument('--http-min-interval', type=float, default=1)
+    parser.add_argument('--skip-network-check', action='store_true',
+                        help='Skip live endpoint probes, for example when rebuilding entirely from cache')
     return parser.parse_args(argv)
 
 
