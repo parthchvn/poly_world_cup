@@ -23,7 +23,7 @@ class PipelineTests(unittest.TestCase):
                              '--out', str(self.output), *extra])
 
     def source(self, market_id=1, fixture=1):
-        return self.fixture.source(market_id, fixture, with_market_context=True)
+        return self.fixture.source(market_id, fixture, with_market_context=True, context_version=2)
 
     def metadata(self, market_id, **kwargs):
         return {'espn_event_id': market_id,
@@ -89,7 +89,7 @@ class PipelineTests(unittest.TestCase):
         self.fixture.source()
         with patch('sys.stderr', new_callable=io.StringIO) as error, self.assertRaises(SystemExit):
             self.command('--reuse-existing')
-        self.assertIn('lacks market context', error.getvalue())
+        self.assertIn('lacks official market context', error.getvalue())
         self.assertIn('SAME --cache', error.getvalue())
         self.assertFalse(self.output.exists())
 

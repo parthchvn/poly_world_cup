@@ -1564,17 +1564,141 @@ def build_price_timeline(db, path):
             'canonical_history_complete': False}
 
 
-def market_context_at(db, instant):
-    result = {'version': 1, 'as_of': utc_time(instant),
-              'price_semantics': 'prior_execution_vwap_not_quote',
+def build_clob_price_timeline(db, path, market, client, history_file=None, max_age_seconds=300):
+    """Fetch official token histories once, before traversing individual actors.
+
+    The CLOB API does not define these as executable quotes or exact website
+    displays. Its sample timestamps precede the recorded execution block proxy,
+    not a known order-submission timestamp. No execution-VWAP/v2 fallback is used.
+    """
+    if type(max_age_seconds) is not int or max_age_seconds <= 0:
+        raise ValueError('--market-price-max-age-seconds must be a positive integer')
+    tokens = market.get('tokens', [])
+    mapping = {}
+    for token in tokens:
+        outcome, token_id = str(token.get('outcome', '')).casefold(), str(token.get('token_id', ''))
+        if outcome not in ('yes', 'no') or outcome in mapping or not re.fullmatch(r'[1-9][0-9]*', token_id):
+            raise ValueError('Official price history requires distinct binary Yes/No token IDs')
+        mapping[outcome] = token_id
+    if set(mapping) != {'yes', 'no'} or len(set(mapping.values())) != 2:
+        raise ValueError('Official price history requires distinct binary Yes/No token IDs')
+    minimum, maximum = db.execute('SELECT MIN(instant),MAX(instant) FROM trades').fetchone()
+    if minimum is None:
+        raise ValueError('Cannot request market prices without captured trades')
+    begin = max(0, minimum // 1_000_000 - max_age_seconds)
+    end = maximum // 1_000_000 + 1
+    db.execute('CREATE TABLE market_prices (outcome TEXT, instant INTEGER, payload TEXT, PRIMARY KEY(outcome,instant))')
+    sources = []
+
+    def insert(outcome, points, start, stop):
+        if not isinstance(points, list):
+            raise ValueError('CLOB price history must contain a history array')
+        for point in points:
+            if not isinstance(point, dict) or type(point.get('t')) is not int or point['t'] < 0:
+                raise ValueError('CLOB history timestamps must be nonnegative integer epoch seconds')
+            raw = point.get('p')
+            if isinstance(raw, bool) or not isinstance(raw, (str, int, float, Decimal)):
+                raise ValueError('CLOB history prices must be finite numbers between 0 and 1')
+            try:
+                price = Decimal(str(raw))
+            except InvalidOperation as error:
+                raise ValueError('Invalid CLOB history price') from error
+            if not price.is_finite() or not 0 <= price <= 1:
+                raise ValueError('CLOB history prices must be finite numbers between 0 and 1')
+            # Responses may include a boundary point. Apply our explicit window
+            # after validation, then de-duplicate the intentionally overlapped requests.
+            if not start <= point['t'] < stop or not begin <= point['t'] < end:
+                continue
+            instant = point['t'] * 1_000_000
+            snapshot = {'price': decimal_text(price), 'implied_probability': decimal_text(price),
+                        'observed_at': utc_time(instant), 'source': 'polymarket_clob_prices_history',
+                        'token_id': mapping[outcome], 'requested_fidelity_minutes': 1}
+            payload = compact(snapshot)
+            old = db.execute('SELECT payload FROM market_prices WHERE outcome=? AND instant=?',
+                             (outcome, instant)).fetchone()
+            if old and old[0] != payload:
+                raise ValueError(f'Conflicting CLOB history prices for {outcome} at {point["t"]}')
+            db.execute('INSERT OR IGNORE INTO market_prices VALUES (?,?,?)', (outcome, instant, payload))
+
+    if history_file is not None:
+        history_file = Path(history_file)
+        document = json.loads(history_file.read_text(encoding='utf-8'), parse_float=Decimal)
+        if (not isinstance(document, dict) or document.get('format') != 'polymarket_clob_price_history_v1'
+                or document.get('condition_id') != market['condition_id']
+                or type(document.get('fidelity_minutes')) is not int or document['fidelity_minutes'] != 1):
+            raise ValueError('Price-history file must declare format, matching condition_id, and fidelity_minutes=1')
+        histories = document.get('histories')
+        if not isinstance(histories, list) or len(histories) != 2:
+            raise ValueError('Price-history file must contain both outcome token histories')
+        by_token = {}
+        for entry in histories:
+            if not isinstance(entry, dict) or type(entry.get('token_id')) is not str or entry['token_id'] in by_token:
+                raise ValueError('Price-history file has invalid or duplicate token IDs')
+            by_token[entry['token_id']] = entry.get('history')
+        if set(by_token) != set(mapping.values()):
+            raise ValueError('Price-history file token IDs do not match this market')
+        for outcome, token_id in mapping.items():
+            insert(outcome, by_token[token_id], begin, end)
+        sources.append({'source': 'supplied_price_history_file', 'path': str(history_file.resolve()),
+                        'sha256': sft_sha(history_file), 'historical_availability_verified': False})
+    else:
+        for outcome, token_id in mapping.items():
+            start = begin
+            while start < end:
+                # One-second overlap makes equality at chunk boundaries explicit.
+                request_start = max(begin, start - 1)
+                stop = min(request_start + 7 * 86400, end)
+                params = {'market': token_id, 'startTs': request_start, 'endTs': stop, 'fidelity': 1}
+                result = client.get_json('https://clob.polymarket.com/prices-history', params)
+                if not isinstance(result.data, dict) or not isinstance(result.data.get('history'), list):
+                    raise ValueError('CLOB price-history response is missing its history array')
+                insert(outcome, result.data['history'], request_start, stop)
+                sources.append({'outcome': outcome, 'token_id': token_id, 'url': result.url,
+                    'retrieved_at': result.retrieved_at, 'body_sha256': result.body_sha256,
+                    'from_cache': result.from_cache, 'returned_points': len(result.data['history']),
+                    'historical_availability_verified': False})
+                start = stop
+    counts = {outcome: db.execute('SELECT COUNT(*) FROM market_prices WHERE outcome=?', (outcome,)).fetchone()[0]
+              for outcome in ('yes', 'no')}
+    if not all(counts.values()):
+        missing = ', '.join(outcome for outcome, n in counts.items() if not n)
+        raise ValueError(f'No official CLOB price history returned for {missing} in the captured trade window. '
+                         'No actor export published. Supply --price-history-file with saved token histories; '
+                         'there is no automatic previous-trade approximation.')
+    path = Path(path)
+    with path.open('w', encoding='utf-8') as stream:
+        for outcome, payload in db.execute('SELECT outcome,payload FROM market_prices ORDER BY instant,outcome'):
+            stream.write(compact({'outcome': outcome, **json.loads(payload)}) + '\n')
+    db.commit()
+    sources_path = path.with_name('market_price_sources.json')
+    write_json(sources_path, {'endpoint': 'https://clob.polymarket.com/prices-history',
+                            'requested_fidelity_minutes': 1, 'requests': sources})
+    return {'file': path.name, 'sha256': sft_sha(path), 'observations': sum(counts.values()),
+            'outcome_observations': counts, 'source': 'polymarket_clob_prices_history',
+            'sources_file': sources_path.name, 'sources_sha256': sft_sha(sources_path),
+            'requested_fidelity_minutes': 1, 'window_start': begin, 'window_end_exclusive': end,
+            'canonical_history_complete': False, 'exact_website_display_verified': False}
+
+
+def market_context_at(db, instant, version=1, max_age_seconds=300):
+    result = {'version': version, 'as_of': utc_time(instant),
+              'price_semantics': 'prior_execution_vwap_not_quote' if version == 1 else 'clob_historical_price_not_quote',
               'yes': None, 'no': None,
               'winning_payout_per_share': '1', 'losing_payout_per_share': '0'}
+    if version == 2:
+        result.update(max_age_seconds=max_age_seconds, missing_reasons={'yes': None, 'no': None})
     for outcome in ('yes', 'no'):
         row = db.execute('SELECT instant,payload FROM market_prices WHERE outcome=? AND instant<? '
                          'ORDER BY instant DESC LIMIT 1', (outcome, instant)).fetchone()
         if row is not None:
+            age = Decimal(instant - row[0]) / Decimal(1000000)
+            if version == 2 and age > max_age_seconds:
+                result['missing_reasons'][outcome] = 'stale'
+                continue
             result[outcome] = {**json.loads(row[1]),
-                'age_seconds': decimal_text(Decimal(instant - row[0]) / Decimal(1000000))}
+                'age_seconds': decimal_text(age)}
+        elif version == 2:
+            result['missing_reasons'][outcome] = 'no_earlier_observation'
     return result
 
 
@@ -1614,6 +1738,9 @@ def actor_records(actor, trades, market, events, event_times, origin,
 
 def export(args):
     fill_window = getattr(args, 'fill_window_seconds', 5)
+    price_max_age = getattr(args, 'market_price_max_age_seconds', 300)
+    if type(price_max_age) is not int or price_max_age <= 0:
+        raise ValueError('--market-price-max-age-seconds must be a positive integer')
     if type(fill_window) is not int or fill_window < 0:
         raise ValueError('--fill-window-seconds must be a nonnegative integer')
     if args.max_trades_per_actor < 0:
@@ -1696,8 +1823,9 @@ def export(args):
             observations = stage_trades(db, iterator)
             if not observations:
                 raise ValueError("No captured trades found for this market")
-            print('Building shared prior-price timeline from all captured market trades', flush=True)
-            price_timeline = build_price_timeline(db, work / 'market_price_history.jsonl')
+            print('Loading official YES/NO price histories once for this market', flush=True)
+            price_timeline = build_clob_price_timeline(db, work / 'market_price_history.jsonl', market, client,
+                history_file=getattr(args, 'price_history_file', None), max_age_seconds=price_max_age)
             minimum = db.execute("SELECT MIN(instant) FROM trades").fetchone()[0]
             origin = timestamp_us(args.start) if args.start else (
                 timestamp_us(market["market_open_utc"]) if market.get("market_open_utc") else None)
@@ -1714,6 +1842,10 @@ def export(args):
             actors_dir = work / "actors"
             actors_dir.mkdir()
             counts = Counter()
+            price_coverage = Counter({name: 0 for name in (
+                'trade_rows', 'both_outcomes_available', 'yes_available', 'no_available',
+                'yes_missing', 'no_missing', 'yes_stale', 'no_stale',
+                'yes_no_earlier_observation', 'no_no_earlier_observation')})
             with (work / "actor_index.jsonl").open("w", encoding="utf-8") as index_stream:
                 for actor, actor_rows in groupby(rows, lambda item: item[0]):
                     filename = actor + (".jsonl.gz" if args.gzip else ".jsonl")
@@ -1723,11 +1855,20 @@ def export(args):
                     trades = (json.loads(item[1]) for item in actor_rows)
                     with opener(path, "wt", encoding="utf-8") as stream:
                         for row in actor_records(actor, trades, market, events, event_times, origin,
-                                                 lambda instant: market_context_at(db, instant), fill_window):
+                                                 lambda instant: market_context_at(db, instant, version=2,
+                                                     max_age_seconds=price_max_age), fill_window):
                             stream.write(compact(row) + "\n")
                             actor_count["rows"] += 1
                             actor_count["news_entries"] += len(row["news"])
                             if row["record_type"] == "trade":
+                                price_coverage['trade_rows'] += 1
+                                price_coverage['both_outcomes_available'] += int(all(
+                                    row['market_context'][outcome] is not None for outcome in ('yes', 'no')))
+                                for outcome in ('yes', 'no'):
+                                    available = row['market_context'][outcome] is not None
+                                    price_coverage[outcome + ('_available' if available else '_missing')] += 1
+                                    if not available:
+                                        price_coverage[outcome + '_' + row['market_context']['missing_reasons'][outcome]] += 1
                                 actor_count["distinct_trade_times"] += 1
                                 actor_count["trade_observations"] += len(row["label"]["trades"])
                     index_stream.write(compact({"actor_id": actor, "path": "actors/" + filename, **dict(actor_count)}) + "\n")
@@ -1735,6 +1876,15 @@ def export(args):
                     counts["actors"] += 1
                     if counts["actors"] % 1000 == 0:
                         print(f"Wrote {counts['actors']:,} actors / {counts['rows']:,} rows", flush=True)
+            if price_coverage['trade_rows'] and any(not price_coverage[outcome + '_available'] for outcome in ('yes', 'no')):
+                raise ValueError('Official history has no usable earlier prices for at least one outcome '
+                                 'across the exported trade rows. No actor export published. '
+                                 'Inspect history coverage and --market-price-max-age-seconds; '
+                                 'do not substitute execution prices for missing context.')
+            if price_coverage['both_outcomes_available'] < price_coverage['trade_rows']:
+                print(f"Warning: both official prices available for {price_coverage['both_outcomes_available']:,}/"
+                      f"{price_coverage['trade_rows']:,} trade rows. Missing/stale samples remain null; "
+                      'see market_price_coverage in the manifest.', file=sys.stderr, flush=True)
             all_actors = db.execute("SELECT COUNT(*) FROM actor_counts").fetchone()[0]
             excluded = db.execute("SELECT COUNT(*) FROM actor_counts WHERE ?!=0 AND n>?", (threshold, threshold)).fetchone()[0]
         finally:
@@ -1755,9 +1905,11 @@ def export(args):
             "origin_utc": utc_time(origin) if origin is not None else None, "origin_basis": origin_basis,
             "espn_timed_items": len(events), "espn_unplaced_items": len(context["untimed_events"]),
             "key_events_only": args.key_events_only, "source": source_report,
-            "market_context_version": 1, "market_price_history": price_timeline,
+            "market_context_version": 2, "market_price_history": price_timeline,
+            "market_price_max_age_seconds": price_max_age, "market_price_coverage": dict(price_coverage),
+            "price_context_complete_for_exported_rows": price_coverage['both_outcomes_available'] == price_coverage['trade_rows'],
             "market_context_boundary_rule": "price_timestamp < row trade timestamp (interval end for gap rows)",
-            "market_context_semantics": "independent prior Yes/No execution VWAPs; not quotes or normalized true probabilities",
+            "market_context_semantics": "official CLOB historical samples strictly before recorded execution block time; not exact quotes or verified pre-submission knowledge",
             "fill_window_seconds": fill_window,
             "execution_info_semantics": "captured executions only; submission, limit order and full-fill status unknown",
             "payoff_analysis_semantics": "BUY hypothetical hold-to-resolution gross payoff; fees, probability-weighted expected profit and SELL cost basis unknown",
@@ -1781,7 +1933,7 @@ def export(args):
     except BaseException:
         shutil.rmtree(work, ignore_errors=True)
         raise
-    print(json.dumps({"output": str(output), **dict(counts)}, indent=2), flush=True)
+    print(json.dumps({"output": str(output), **dict(counts), 'market_price_coverage': dict(price_coverage)}, indent=2), flush=True)
     return manifest
 
 
@@ -1882,6 +2034,16 @@ SFT_MARKET_CONTEXT_SYSTEM = (
     "fees. YES and NO are independent observations and are not normalized to sum "
     "to one. Submission time and order type are unknown."
 )
+SFT_CLOB_CONTEXT_SYSTEM = (
+    " Market context reports independent YES/NO samples from Polymarket's official "
+    "CLOB price-history API, requested at one-minute fidelity. Prices are market-implied "
+    "probabilities for shares paying 1 if the outcome wins and 0 if it loses, before "
+    "fees; they are not true winning probabilities or executable quotes. age_seconds "
+    "measures time since the API sample. Null means no sufficiently recent earlier "
+    "sample. YES and NO are not normalized to sum to one. Samples precede the recorded "
+    "execution block-time proxy, not a verified order-submission time, and may not "
+    "match what the actor saw. Order type, submission time and full-fill status are unknown."
+)
 
 
 def sft_prompt_market_context(context):
@@ -1895,11 +2057,15 @@ def sft_market_context_version(manifest):
     if 'market_context_version' not in manifest:
         return 0
     version = manifest['market_context_version']
-    sft_require(type(version) is int and version == 1,
+    sft_require(type(version) is int and version in (1, 2),
                 'Unsupported market_context_version; rebuild with the current builder')
     window = manifest.get('fill_window_seconds')
     sft_require(type(window) is int and window >= 0,
                 'Context-enabled exports require an integer fill_window_seconds >= 0')
+    if version == 2:
+        max_age = manifest.get('market_price_max_age_seconds')
+        sft_require(type(max_age) is int and max_age > 0,
+                    'Official price context requires a positive market_price_max_age_seconds')
     return version
 
 
@@ -1911,6 +2077,10 @@ def sft_validate_source_context_versions(sources, warn_legacy=False):
     if warn_legacy and version == 0:
         print('Warning: preparing legacy exports without market-price context. '
               'Rebuild actor exports to include historical prices; prices cannot be recovered from retained actor rows alone.',
+              file=sys.stderr, flush=True)
+    elif warn_legacy and version == 1:
+        print('Warning: preparing legacy execution-derived price context, not official price history. '
+              'Rebuild actor exports with the current builder and reuse the SAME --cache for trade captures.',
               file=sys.stderr, flush=True)
     return version
 
@@ -1950,23 +2120,38 @@ def sft_validate_market_features(gap, trade, source, when):
     sft_require(all(feature_keys.issubset(row) for row in (gap, trade)),
                 'Context-enabled export is missing market_context, execution_info, or payoff_analysis')
     context = trade['market_context']
-    sft_require(isinstance(context, dict) and set(context) == {
+    context_keys = {
         'version', 'as_of', 'price_semantics', 'yes', 'no',
-        'winning_payout_per_share', 'losing_payout_per_share'},
+        'winning_payout_per_share', 'losing_payout_per_share'}
+    if version == 2:
+        context_keys |= {'max_age_seconds', 'missing_reasons'}
+    sft_require(isinstance(context, dict) and set(context) == context_keys,
         'Invalid market_context fields')
     sft_exact_generated_value(gap['market_context'], context, 'adjacent market_context')
-    sft_require(type(context['version']) is int and context['version'] == 1,
+    sft_require(type(context['version']) is int and context['version'] == version,
                 'Invalid row market_context version')
     sft_require(sft_instant(context['as_of']) == when, 'Market context as_of differs from query_time')
-    sft_require(context['price_semantics'] == 'prior_execution_vwap_not_quote',
+    sft_require(context['price_semantics'] == ('prior_execution_vwap_not_quote' if version == 1
+                                             else 'clob_historical_price_not_quote'),
                 'Unsupported market-context price semantics')
     sft_require(context['winning_payout_per_share'] == '1' and context['losing_payout_per_share'] == '0',
                 'Unexpected binary payout terms')
     sft_require({outcome.casefold() for outcome in source['outcomes']} == {'yes', 'no'},
                 'Market-price context requires binary YES/NO outcome mapping')
-    snapshot_keys = {'price', 'implied_probability', 'observed_at', 'age_seconds', 'source', 'observation_count'}
+    snapshot_keys = {'price', 'implied_probability', 'observed_at', 'age_seconds', 'source'}
+    snapshot_keys |= {'observation_count'} if version == 1 else {'token_id', 'requested_fidelity_minutes'}
+    if version == 2:
+        sft_require(type(context['max_age_seconds']) is int
+                    and context['max_age_seconds'] == source['manifest']['market_price_max_age_seconds'],
+                    'Context max_age_seconds differs from manifest')
+        sft_require(isinstance(context['missing_reasons'], dict)
+                    and set(context['missing_reasons']) == {'yes', 'no'}, 'Invalid missing price reasons')
     for outcome in ('yes', 'no'):
         item = context[outcome]
+        if version == 2:
+            reason = context['missing_reasons'][outcome]
+            sft_require(reason in ('no_earlier_observation', 'stale') if item is None else reason is None,
+                        'Missing price reason disagrees with snapshot presence')
         if item is None:
             continue
         sft_require(isinstance(item, dict) and set(item) == snapshot_keys,
@@ -1981,9 +2166,18 @@ def sft_validate_market_features(gap, trade, source, when):
         delta = when - observed
         expected_age = Decimal(delta.days * 86400 + delta.seconds) + Decimal(delta.microseconds) / Decimal(1_000_000)
         sft_require(age == expected_age, f'{outcome}.age_seconds does not match its observation timestamp')
-        sft_require(item['source'] == 'captured_execution_timestamp_vwap', 'Unsupported market-price source')
-        sft_require(type(item['observation_count']) is int and item['observation_count'] > 0,
-                    'Market-price observation_count must be a positive integer')
+        if version == 1:
+            sft_require(item['source'] == 'captured_execution_timestamp_vwap', 'Unsupported market-price source')
+            sft_require(type(item['observation_count']) is int and item['observation_count'] > 0,
+                        'Market-price observation_count must be a positive integer')
+        else:
+            sft_require(item['source'] == 'polymarket_clob_prices_history', 'Unsupported market-price source')
+            sft_require(type(item['requested_fidelity_minutes']) is int and item['requested_fidelity_minutes'] == 1,
+                        'Official price history must request one-minute fidelity')
+            tokens = [str(token['token_id']) for token in source['market']['tokens']
+                      if str(token['outcome']).casefold() == outcome]
+            sft_require(len(tokens) == 1 and item['token_id'] == tokens[0], 'Price token ID does not match outcome')
+            sft_require(age <= context['max_age_seconds'], 'Stale market-price observation exceeds maximum age')
     window = source['manifest']['fill_window_seconds']
     instant = timestamp_us(trade['timestamp'])
     for row, is_trade in ((gap, False), (trade, True)):
@@ -2100,8 +2294,9 @@ def sft_convert_actor(path, source):
     sft_require(isinstance(actor, str) and re.fullmatch(r'0x[0-9a-fA-F]{40}', actor), f'{path}: invalid actor ID')
     sft_require(path.name in (actor + '.jsonl', actor + '.jsonl.gz'), f'{path}: actor/file mismatch')
     market = source['market']
+    version = sft_market_context_version(source['manifest'])
     messages = [{'role': 'system', 'content': SFT_SYSTEM + (
-        SFT_MARKET_CONTEXT_SYSTEM if sft_market_context_version(source['manifest']) else '')}]
+        SFT_CLOB_CONTEXT_SYSTEM if version == 2 else SFT_MARKET_CONTEXT_SYSTEM if version == 1 else '')}]
     previous = None
     totals = Counter(rows=len(rows))
     first_time = last_time = None
@@ -2281,6 +2476,10 @@ def sft_export(args):
 
 
 def add_collection_options(parser):
+    parser.add_argument('--price-history-file', type=Path,
+                        help='Saved official CLOB histories for both outcome tokens; see docs for offline JSON format')
+    parser.add_argument('--market-price-max-age-seconds', type=int, default=300,
+                        help='Maximum age of an earlier API price sample; older samples become null (default: 300)')
     parser.add_argument('--fill-window-seconds', type=int, default=5,
                         help='Submission-to-fill window to describe (default 5); public trades cannot determine the flag, so it remains null')
     parser.add_argument("--cache", type=Path, default=None, help="HTTP/trade cache; default data/market_actor_cache (under --data-root in sft mode)")
@@ -2361,7 +2560,8 @@ def build_sft(args):
     sft_require(all(re.fullmatch(r'[1-9][0-9]*', value) for value in ids),
                 'The sft command expects numeric market IDs. Use collection mode for slugs/condition IDs.')
     sft_require(len(ids) == len(set(ids)), 'Duplicate market IDs were supplied')
-    per_market = ('espn_event_id', 'date', 'teams', 'espn_file', 'time_map', 'market_metadata', 'trades_file')
+    per_market = ('espn_event_id', 'date', 'teams', 'espn_file', 'time_map', 'market_metadata', 'trades_file',
+                  'price_history_file')
     sft_require(len(ids) == 1 or not any(getattr(args, name) for name in per_market),
                 'Match-specific files/overrides cannot be shared across multiple market IDs. '
                 'Collect those markets individually, then use prepare.')
@@ -2373,6 +2573,7 @@ def build_sft(args):
     sft_require(args.max_length > 0, '--max-length must be positive')
     sft_require(args.max_trades_per_actor >= 0, '--max-trades-per-actor must be nonnegative')
     sft_require(args.fill_window_seconds >= 0, '--fill-window-seconds must be nonnegative')
+    sft_require(args.market_price_max_age_seconds > 0, '--market-price-max-age-seconds must be positive')
     for path in paths:
         sft_require(output != path and not output.is_relative_to(path) and not path.is_relative_to(output),
                     'SFT output must be separate from every actor export')
@@ -2390,8 +2591,8 @@ def build_sft(args):
             sft_require(args.reuse_existing,
                         f'Actor export exists: {path}. Use --reuse-existing to use it as-is, or another --data-root.')
             source = sft_discover([path], None)[0]
-            sft_require(sft_market_context_version(source['manifest']) == 1,
-                        f'Existing export lacks market context: {path}. Rebuild into a new --data-root '
+            sft_require(sft_market_context_version(source['manifest']) == 2,
+                        f'Existing export lacks official market context (version 2): {path}. Rebuild into a new --data-root '
                         'with the SAME --cache to reuse saved trade captures, then prepare again.')
             sft_require(str(source['market']['market_id']) == market_id,
                         f'Existing export does not match requested market {market_id}: {path}')

@@ -209,7 +209,22 @@ class ActorMarketContextTests(unittest.TestCase):
             self.assertEqual(Decimal(payoff['potential_profit_if_win_before_fees']), gain)
             self.assertEqual(Decimal(payoff['winning_payout']), Decimal(shares))
 
-    def export_fixture(self):
+    def official_history_file(self, condition_id=None):
+        path = self.root / 'official_history.json'
+        path.write_text(json.dumps({
+            'format': 'polymarket_clob_price_history_v1',
+            'condition_id': condition_id or self.market['condition_id'],
+            'fidelity_minutes': 1,
+            'histories': [
+                {'token_id': '101', 'history': [
+                    {'t': self.instant(0) // 1_000_000, 'p': '0.21'},
+                    {'t': self.instant(15) // 1_000_000, 'p': '0.46'}]},
+                {'token_id': '102', 'history': [
+                    {'t': self.instant(5) // 1_000_000, 'p': '0.71'}]},
+            ]}))
+        return path
+
+    def export_fixture(self, history_file=None):
         rows = [self.trade(0, '0.20', actor=self.other),
                 self.trade(5, '0.70', actor=self.other, outcome='No'),
                 self.trade(10, '0.90'), self.trade(15, '0.45', actor=self.other),
@@ -226,32 +241,62 @@ class ActorMarketContextTests(unittest.TestCase):
                 patch.object(builder.HttpClient, 'get_json', side_effect=AssertionError('No network')), \
                 patch('sys.stdout', new_callable=io.StringIO):
             builder.main(['1', '--out', str(output), '--cache', str(self.root / 'cache'),
-                          '--max-trades-per-actor', '2'])
+                          '--max-trades-per-actor', '2',
+                          '--price-history-file', str(history_file or self.official_history_file())])
         return output
 
-    def test_export_uses_excluded_wallet_prices_and_sft_keeps_only_prior_context(self):
+    def test_unusable_equal_time_history_never_publishes_or_deletes_cached_data(self):
+        cache_file = self.root / 'cache/trade_capture/saved_page.json.gz'
+        cache_file.parent.mkdir(parents=True)
+        cache_file.write_bytes(b'previously saved trade capture')
+        previous = self.root / 'existing_dataset/manifest.json'
+        previous.parent.mkdir()
+        previous.write_text('{"previous_export": true}\n')
+        original_cache, original_export = cache_file.read_bytes(), previous.read_bytes()
+        # Even when one token has valid earlier prices, the other token being
+        # equal to the last execution makes it unusable for every exported row.
+        for yes_time in (20, 0):
+            source = self.official_history_file()
+            payload = json.loads(source.read_text())
+            for item, seconds in zip(payload['histories'], (yes_time, 20)):
+                item['history'] = [{'t': self.instant(seconds) // 1_000_000, 'p': '0.5'}]
+            source.write_text(json.dumps(payload))
+            with self.subTest(yes_time=yes_time), \
+                    patch('sys.stderr', new_callable=io.StringIO) as error, \
+                    self.assertRaises(SystemExit):
+                self.export_fixture(history_file=source)
+            self.assertIn('no usable earlier prices', error.getvalue())
+            self.assertIn('No actor export published', error.getvalue())
+            self.assertFalse((self.root / 'market_1').exists())
+            self.assertEqual(list(self.root.glob('market-actor-build-*')), [])
+            self.assertEqual(cache_file.read_bytes(), original_cache)
+            self.assertEqual(previous.read_bytes(), original_export)
+
+    def test_export_uses_official_prices_and_sft_keeps_only_prior_context(self):
         output = self.export_fixture()
         manifest = json.loads((output / 'manifest.json').read_text())
+        self.assertEqual(manifest['market_context_version'], 2)
+        self.assertTrue(manifest['price_context_complete_for_exported_rows'])
         self.assertEqual(manifest['actors_excluded_above_trade_limit'], 1)
         self.assertFalse((output / 'actors' / (self.other + '.jsonl')).exists())
         actor_file = output / 'actors' / (self.actor + '.jsonl')
         rows = [json.loads(line) for line in actor_file.read_text().splitlines()]
         self.assertTrue(all('market_context' in row for row in rows))
-        self.assertEqual(Decimal(rows[1]['market_context']['yes']['price']), Decimal('0.20'))
-        self.assertEqual(Decimal(rows[3]['market_context']['yes']['price']), Decimal('0.45'))
-        self.assertEqual(Decimal(rows[1]['market_context']['no']['price']), Decimal('0.70'))
+        self.assertEqual(Decimal(rows[1]['market_context']['yes']['price']), Decimal('0.21'))
+        self.assertEqual(Decimal(rows[3]['market_context']['yes']['price']), Decimal('0.46'))
+        self.assertEqual(Decimal(rows[1]['market_context']['no']['price']), Decimal('0.71'))
         source = builder.sft_discover([output], None)[0]
         record, _, _ = builder.sft_convert_actor(actor_file, source)
         users = [json.loads(message['content']) for message in record['messages'] if message['role'] == 'user']
         assistants = [json.loads(message['content']) for message in record['messages'] if message['role'] == 'assistant']
         self.assertEqual(len(users), 2)
         self.assertEqual(users[0]['market_context'], {
-            'yes': {'price': '0.2', 'age_seconds': '10'},
-            'no': {'price': '0.7', 'age_seconds': '5'},
+            'yes': {'price': '0.21', 'age_seconds': '10'},
+            'no': {'price': '0.71', 'age_seconds': '5'},
         })
         self.assertEqual(users[1]['market_context'], {
-            'yes': {'price': '0.45', 'age_seconds': '5'},
-            'no': {'price': '0.7', 'age_seconds': '15'},
+            'yes': {'price': '0.46', 'age_seconds': '5'},
+            'no': {'price': '0.71', 'age_seconds': '15'},
         })
         self.assertEqual(assistants[0]['trades'][0]['price'], '0.90')
         for context in users:
@@ -298,7 +343,8 @@ class ActorMarketContextTests(unittest.TestCase):
                 builder.main([str(market_id), '--market-metadata', str(metadata_file),
                               '--espn-file', str(espn_file), '--trades-file', str(trades_file),
                               '--out', str(output), '--cache', str(self.root / 'cache'),
-                              '--max-trades-per-actor', '2', '--fill-window-seconds', '7'])
+                              '--max-trades-per-actor', '2', '--fill-window-seconds', '7',
+                              '--price-history-file', str(self.official_history_file(market['condition_id']))])
                 exported = [json.loads(line) for line in
                             (output / 'actors' / (self.actor + '.jsonl')).read_text().splitlines()]
                 self.assertEqual(exported[1]['execution_info']['fill_window_seconds'], 7)
@@ -316,7 +362,7 @@ class ActorMarketContextTests(unittest.TestCase):
             record = conversations[0]
             self.assertEqual(record['target_count'], 2)
             first = json.loads(record['messages'][1]['content'])
-            self.assertEqual(Decimal(first['market_context']['yes']['price']), Decimal('0.20'))
+            self.assertEqual(Decimal(first['market_context']['yes']['price']), Decimal('0.21'))
             self.assertNotIn('payoff_analysis', first)
             self.assertNotIn('execution_info', first)
 

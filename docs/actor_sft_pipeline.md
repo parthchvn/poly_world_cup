@@ -27,11 +27,11 @@ cd /poly_world_cup
 git pull --ff-only origin main
 
 python3 scripts/build_actor_dataset.py sft 1897035 1897038 1897059 \
-  --data-root /workspace/world_cup_actor_data/data_with_market_context \
+  --data-root /workspace/world_cup_actor_data/data_with_api_prices \
   --cache /workspace/world_cup_actor_data/data/market_actor_cache \
   --reuse-existing \
   --http-transport curl \
-  --out /workspace/datasets/world_cup_sft_with_market_context \
+  --out /workspace/datasets/world_cup_sft_with_api_prices \
   --tokenizer /workspace/models/Qwen3.6-27B
 ```
 
@@ -42,23 +42,25 @@ under `--data-root/market_<ID>`. The cache defaults to
 is checked before trade collection: normally at least three distinct matches,
 or two with `--train-validation-only`.
 
-`--reuse-existing` explicitly reuses completed matching exports that contain
-market context (`market_context_version: 1`). It rejects older exports that lack
-these features. Collection filters and source options apply only to new exports.
-Without this flag, existing actor exports cause an error. If collection fails
-partway through, rerun with the same cache and `--reuse-existing`: finished
-exports are retained, and unfinished trade captures resume. An exhausted capture
-is reused without scraping its trade pages again. Building the price timeline
-itself makes no additional API requests. An existing SFT output is never
-overwritten; choose another `--out` when preparing a new version.
+`--reuse-existing` explicitly reuses completed matching exports with official
+price history (`market_context_version: 2`). It rejects version-1 exports based
+on previous executions and older exports without market context. Collection
+filters and source options apply only to new exports. Without this flag,
+existing actor exports cause an error. If collection fails partway through,
+rerun with the same cache and `--reuse-existing`: finished exports are retained,
+and unfinished trade captures resume. An exhausted capture is reused without
+scraping its trade pages again. Official token price history is a separate
+cached source; an old trade capture alone does not contain it. An existing SFT
+output is never overwritten; choose another `--out` when preparing a new version.
 
-The separate `prepare` mode still accepts a set of entirely legacy exports, with
-a warning that their conversations lack market context. Mixing legacy and
-enriched exports is rejected. Preparation does not add prices to legacy actor
-files; rebuild them from the saved captures using the command above. Already
+The separate `prepare` mode remains compatible with version-0 exports (no price
+context) and version-1 exports (previous-execution price estimates), with a
+warning describing the older context. All selected exports must use the same
+version. Preparation does not fetch new price history or upgrade old actor
+files; rebuild them from saved trade captures using the command above. Already
 trained adapters are unchanged. Train a new run with
-`--dataset-dir /workspace/datasets/world_cup_sft_with_market_context` to learn
-from the added inputs.
+`--dataset-dir /workspace/datasets/world_cup_sft_with_api_prices` to learn from
+the added inputs.
 
 Match-specific files or overrides, such as `--espn-file`, cannot be shared across
 multiple market IDs. Collect those markets individually, then run `prepare`.
@@ -116,38 +118,90 @@ minimum for a train/validation/test smoke pipeline, not a robust benchmark.
 
 ## Market prices, execution evidence, and payoff fields
 
-The actor-by-actor layout is unchanged. The builder first creates one shared
-price timeline per market from **all captured wallets**, including wallets that
-will be excluded by the actor filter. It then looks up that timeline when
-writing each actor's rows. Other actors' individual histories are not copied
-into the training conversation. A completed trade capture can supply this
-context without an additional price-history API request.
+The actor-by-actor layout is unchanged. The builder fetches Polymarket's official
+CLOB `/prices-history` series separately for the YES and NO token IDs, requesting
+one-minute fidelity. HTTP responses are cached. The shared timeline is loaded
+once per market and reused for every actor; the builder does not request prices
+separately for each wallet or trade. Other actors' individual histories are not
+copied into the training conversation.
 
-Every new actor row carries `market_context`. YES and NO are identified by their
-outcome token IDs and tracked separately. For a row at query time `t`, each
-outcome uses only observations whose timestamps are **strictly less than `t`**.
-Trades at `t`, including the target trade, cannot affect that row's context.
-There is no plus-or-minus time tolerance for model inputs.
+Every new actor row carries `market_context`. For a row at query time `t`, each
+outcome uses only history points whose timestamps are **strictly less than `t`**.
+The same-time point is excluded because ordering relative to the execution is
+not established. There is no nearest-point matching, interpolation, or
+plus-or-minus time tolerance. The builder does not fall back to execution VWAP
+or derive one outcome from the complement of the other.
 
-If several executions of the same outcome share an earlier timestamp, their
-price is the share-volume-weighted average for that timestamp. The builder
-aggregates exactly, then rounds the published price to 12 decimal places with
-round-half-even. It does not invent an ordering within a timestamp. The latest
-earlier price for each outcome comes with its observation timestamp and age in
-seconds. If no prior observation exists for an outcome, its value is `null`.
-`market_price_history.jsonl` records the timestamp/outcome observations for audit.
-The export manifest records `market_context_version: 1` and the captured source
-scope; an exhausted API traversal does not prove that every historical trade
-was captured.
+A price is eligible only when its age is at most
+`--market-price-max-age-seconds` (default 300 seconds). Missing and stale prices
+remain `null`; `missing_reasons` distinguishes `no_earlier_observation` from
+`stale`. Exported coverage records make these gaps visible. The age
+limit is a freshness policy, not a claim that a five-minute-old price was still
+available when the actor traded. A one-minute fidelity request does not
+establish second-by-second historical coverage or guarantee a point in every
+minute. API/network failures are errors, not successful empty histories. An
+outcome with no returned history stops the export. The export also stops if
+either outcome has zero usable prices across the retained trade rows, even if
+some history was returned. Partial coverage prints a warning and preserves
+missing values rather than silently presenting complete market context.
+
+`market_price_history.jsonl` records the shared observations for audit, and
+`market_price_sources.json` records request/cache provenance. Each available
+raw snapshot has `price`, equal `implied_probability`, `observed_at`,
+`age_seconds`, `source: "polymarket_clob_prices_history"`, `token_id`, and
+`requested_fidelity_minutes: 1`. The context also records `max_age_seconds`
+and per-outcome `missing_reasons`.
+
+The export manifest records `market_context_version: 2`,
+`market_price_max_age_seconds`, and `market_price_coverage`. Coverage uses flat
+counts: `trade_rows`, `both_outcomes_available`, `yes_available`, `no_available`,
+`yes_missing`, `no_missing`, and per-outcome reasons such as `yes_stale` and
+`yes_no_earlier_observation` (with the corresponding `no_` fields). The manifest's
+`price_context_complete_for_exported_rows` is true only when both outcomes have
+usable context in every retained trade row. These counts refer to grouped
+execution-time rows, not every individual fill or duplicated interval row.
+The requested fidelity and actual observation times must be retained when
+interpreting the data. An exhausted trade traversal does not prove complete
+on-chain history, and a returned price series does not prove complete historical
+quote coverage.
 
 Under the binary contract's $1 winning and $0 losing payout convention, a price
 of $0.40 corresponds to a price-implied probability of 0.40 (40%). This is not a
-measured true winning probability. The YES and NO observations may come from
-different times and need not sum to one. Neither outcome is filled in from the
-complement of the other, and the two values are not normalized. These are
-historical execution-price estimates, not historical best bids/asks, order-book
-depth, or a verified record of the probability displayed to the actor. Retain the
-observation ages when inspecting or using the data.
+measured true winning probability. YES and NO observations may come from
+different times and need not sum to one; the two values are not normalized.
+These historical prices are not archived best bids/asks, order-book depth, or a
+verified record of the exact probability displayed to the actor. Current wallet
+positions, present-day order books and eventual resolution are not inserted as
+historical pre-trade features.
+
+The strict boundary is relative to the captured **execution block-time proxy**.
+Order submission and matching may have happened earlier. A series point before
+the block timestamp can therefore still be after the actual decision, or reflect
+an execution before it was mined. This collector cannot certify a causally prior
+order-entry quote for arbitrary historical wallets. It records the available
+price series and timing limits rather than claiming exact information exposure.
+
+For offline collection, supply `--price-history-file prices.json` with both
+outcome tokens in this format (replace the placeholders with the market's real
+condition and token IDs):
+
+```json
+{
+  "format": "polymarket_clob_price_history_v1",
+  "condition_id": "0xCONDITION_ID",
+  "fidelity_minutes": 1,
+  "histories": [
+    {"token_id": "YES_TOKEN_ID", "history": [{"t": 1781456764, "p": "0.043"}]},
+    {"token_id": "NO_TOKEN_ID", "history": [{"t": 1781456765, "p": "0.957"}]}
+  ]
+}
+```
+
+`t` is integer Unix seconds and `p` is a decimal price in [0, 1]. Both histories
+must belong to the selected market. A supplied file is an explicit caller
+snapshot, not proof of original API provenance or complete coverage. Supply it
+when collecting a single market; match-specific source files cannot be shared
+across a multi-market `sft` invocation.
 
 Each row also carries `execution_info` and `payoff_analysis` for analysis.
 On a `TRADE` row, payoff entries follow the order of the executions in `trades`.
@@ -191,7 +245,8 @@ probability under the $1/$0 payout convention, and the user message's
 probabilities, timestamps, and source descriptions in every turn, saving tokens.
 The full raw context and audit timeline retain those fields for inspection.
 Thus missing order lifecycle data does not become a fabricated immediate-fill
-label, and future resolution does not leak into the decision input.
+label, and later payoff analysis is not inserted into the decision input. The
+block-time limitation above still applies to interpreting the price context.
 
 ## 2. Convert actor files to conversations
 
@@ -373,7 +428,9 @@ markers. A failed build does not publish a partial output directory. Existing
 outputs are never overwritten.
 
 Market questions and mappings are retrospective metadata, explicitly marked as
-not time-verified in prompts and the manifest. ESPN timestamps remain occurrence
+not time-verified in prompts and the manifest. Full rules text stays in
+`market.json`; it is not inserted into the prompt because this collector does
+not establish which version of those rules was visible at the decision time. ESPN timestamps remain occurrence
 proxies rather than verified publication times. This conversion preserves those
 limitations; it does not certify historical information availability or causal
 news attribution. The new prompts and splits need fresh evaluation rather than

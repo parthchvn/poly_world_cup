@@ -32,12 +32,21 @@ Earlier actor trades remain in preceding rows rather than being copied into
 every later row. The default actor filter is **at most 20 captured executions**
 in the selected binary market.
 
-Each row also carries `market_context`: the latest earlier YES and NO execution
-prices, their price-implied probabilities, and their timestamps/ages. A shared
-price timeline is built once from all captured wallets **before** the actor
-filter. Training still runs actor by actor; other wallets' trade histories are
-not inserted into the conversation. These prices are historical executions,
-not executable quotes or verified screenshots of what the actor saw.
+Each row also carries `market_context`: the latest eligible earlier YES and NO
+prices from Polymarket's official CLOB `/prices-history` series, their
+price-implied probabilities, and their timestamps/ages. The builder fetches and
+caches each outcome token's history once for the market, requesting one-minute
+fidelity, then shares it across actors. It does not estimate these prices from
+captured trades, interpolate, or use future observations. Prices older than
+300 seconds are unavailable by default; change this with
+`--market-price-max-age-seconds`. Missing or stale row context remains `null`;
+an outcome with no usable prices across the retained trade rows stops the
+export instead of producing an apparently enriched dataset. Partial coverage
+prints a warning and preserves the missing values.
+Training still runs actor by actor. Historical series points are not executable
+quotes or verified screenshots of what the actor saw. The timestamp cutoff uses
+the recorded execution block time, which can follow order submission and
+matching; it does not certify that a point predates the actual decision.
 
 `execution_info` records observed fills and explicitly leaves unavailable order
 submission times, limit-order status, and submission-to-fill delays unknown.
@@ -64,9 +73,10 @@ PY
 ```
 
 The same output directory contains `manifest.json`, `market.json`, an actor index,
-ESPN event/source files, and `market_price_history.jsonl` for auditing the shared
-price timeline. The manifest records `market_context_version: 1`. These are
-generated locally, not committed.
+ESPN event/source files, `market_price_history.jsonl`, and
+`market_price_sources.json` for auditing the shared prices and request sources.
+The manifest records `market_context_version: 2`. These are generated locally,
+not committed.
 
 ## Source availability and cache behavior
 
@@ -99,24 +109,26 @@ cd /poly_world_cup
 git pull --ff-only origin main
 
 python3 scripts/build_actor_dataset.py sft 1897035 1897038 1897059 \
-  --data-root /workspace/world_cup_actor_data/data_with_market_context \
+  --data-root /workspace/world_cup_actor_data/data_with_api_prices \
   --cache /workspace/world_cup_actor_data/data/market_actor_cache \
   --reuse-existing \
   --http-transport curl \
-  --out /workspace/datasets/world_cup_sft_with_market_context \
+  --out /workspace/datasets/world_cup_sft_with_api_prices \
   --tokenizer /workspace/models/Qwen3.6-27B
 
 python3 scripts/train_world_cup_multigpu.py \
   --gpus 2 --gpu-ids 0,1 \
   --model /workspace/models/Qwen3.6-27B \
-  --dataset-dir /workspace/datasets/world_cup_sft_with_market_context \
+  --dataset-dir /workspace/datasets/world_cup_sft_with_api_prices \
   --smoke-then-full
 ```
 
-`--reuse-existing` uses completed matching exports with market context as-is and
-builds missing ones. It rejects older exports without this context. Collection
-options apply only to newly built exports. An already exhausted trade capture
-is reused without another trade scrape; incomplete captures resume. Choose a new
+`--reuse-existing` uses completed matching version-2 exports as-is and builds
+missing ones. It rejects version-1 exports based on previous executions and
+older exports without price context. Collection options apply only to newly
+built exports. An already exhausted trade capture is reused without another
+trade scrape; incomplete captures resume. Official price history is a separate
+cached source, so rebuilding old captures may still require price API requests. Choose a new
 `--out` if the SFT dataset already exists. Earlier trained adapters do not gain
 these inputs automatically: prepare the enriched dataset and train a new run.
 
@@ -124,7 +136,7 @@ To prepare existing exports without collection, use:
 
 ```bash
 python3 scripts/build_actor_dataset.py prepare \
-  --input-root /workspace/world_cup_actor_data/data_with_market_context \
+  --input-root /workspace/world_cup_actor_data/data_with_api_prices \
   --out /workspace/datasets/world_cup_sft_new \
   --tokenizer /workspace/models/Qwen3.6-27B
 ```
@@ -142,7 +154,9 @@ that time's earlier YES/NO prices and their ages alongside news and actor histor
 SFT uses a compact `market_context` containing only `price` and `age_seconds`
 for each available outcome; the full timestamps, probabilities, and provenance
 remain in the actor files and audit timeline.
-Execution and payoff metadata are retained for analysis, not inserted into SFT
+Current wallet positions, present-day order books, and later resolution outcomes
+are not substituted for historical context. Execution and payoff metadata are
+retained for analysis, not inserted into SFT
 inputs or targets. The converter checks but does not train on retrospective
 `NO_TRADE` intervals. Earlier trades stay in preceding conversation turns;
 interval news appears once per turn. All markets from one match stay in one split.

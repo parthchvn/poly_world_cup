@@ -57,14 +57,14 @@ class ActorSFTTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def source(self, market_id=1, fixture=1, compressed=False, with_market_context=False):
+    def source(self, market_id=1, fixture=1, compressed=False, with_market_context=False, context_version=1):
         path = self.root / ('market_' + str(market_id))
         (path / 'actors').mkdir(parents=True)
         market = {'market_id': str(market_id), 'condition_id': '0x' + f'{market_id:064x}',
                   'fixture_id': f'espn:{fixture}', 'espn_event_id': str(fixture),
                   'kickoff_utc': f'2026-06-{fixture:02d}T17:00:00Z',
                   'question': 'Will the match end in a draw?', 'fixture_title': f'Match {fixture}',
-                  'tokens': [{'outcome': 'Yes'}, {'outcome': 'No'}]}
+                  'tokens': [{'outcome': 'Yes', 'token_id': '101'}, {'outcome': 'No', 'token_id': '102'}]}
         origin = builder.timestamp_us(f'2026-06-{fixture:02d}T16:00:00Z')
         times = [origin + i * 60_000_000 for i in (1, 3)]
         events = [dict(timestamp_us=origin + i * 60_000_000, time_utc=builder.utc_time(origin + i * 60_000_000),
@@ -79,9 +79,21 @@ class ActorSFTTests(unittest.TestCase):
             import sqlite3
             with sqlite3.connect(':memory:') as db:
                 builder.stage_trades(db, ({'actor_id': actor, **trade} for trade in trades))
-                builder.build_price_timeline(db, path / 'market_price_history.jsonl')
+                if context_version == 1:
+                    builder.build_price_timeline(db, path / 'market_price_history.jsonl')
+                else:
+                    history_file = path / 'history_fixture.json'
+                    history_file.write_text(json.dumps({
+                        'format': 'polymarket_clob_price_history_v1',
+                        'condition_id': market['condition_id'], 'fidelity_minutes': 1,
+                        'histories': [
+                            {'token_id': '101', 'history': [{'t': origin // 1_000_000, 'p': '0.3'}]},
+                            {'token_id': '102', 'history': [{'t': origin // 1_000_000, 'p': '0.7'}]},
+                        ]}))
+                    builder.build_clob_price_timeline(db, path / 'market_price_history.jsonl',
+                                                     market, None, history_file=history_file)
                 rows = list(builder.actor_records(actor, trades, market, events,
-                    [e['timestamp_us'] for e in events], origin, lambda instant: builder.market_context_at(db, instant)))
+                    [e['timestamp_us'] for e in events], origin, lambda instant: builder.market_context_at(db, instant, version=context_version)))
         text = ''.join(converter.sft_compact(row) + '\n' for row in rows)
         name = actor + ('.jsonl.gz' if compressed else '.jsonl')
         actor_file = path / 'actors' / name
@@ -92,7 +104,9 @@ class ActorSFTTests(unittest.TestCase):
                     'condition_id': market['condition_id'], 'espn_event_id': str(fixture),
                     'origin_utc': builder.utc_time(origin), 'max_trades_per_actor': 20, 'counts': counts}
         if with_market_context:
-            manifest.update(market_context_version=1, fill_window_seconds=5)
+            manifest.update(market_context_version=context_version, fill_window_seconds=5)
+            if context_version == 2:
+                manifest['market_price_max_age_seconds'] = 300
         (path / 'market.json').write_text(json.dumps(market))
         (path / 'manifest.json').write_text(json.dumps(manifest))
         return path, actor_file, rows

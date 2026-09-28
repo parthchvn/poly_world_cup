@@ -159,7 +159,7 @@ class SFTMarketContextTests(unittest.TestCase):
             builder.sft_discover([], self.root)
         manifest_path = path / 'manifest.json'
         manifest = json.loads(manifest_path.read_text())
-        for version in (None, 0, 2, True, '1'):
+        for version in (None, 0, 3, True, '1'):
             manifest['market_context_version'] = version
             manifest_path.write_text(json.dumps(manifest))
             with self.subTest(version=version), self.assertRaisesRegex(ValueError, 'Unsupported market_context_version'):

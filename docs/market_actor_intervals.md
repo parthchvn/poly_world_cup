@@ -13,8 +13,8 @@ numeric market ID, condition ID, or binary-market slug. An entire Polymarket
 event containing several binary markets is not a single market ID.
 
 The script resolves the fixture, fetches ESPN match commentary once, collects
-the market's captured trades, and writes one chronologically ordered JSONL
-file per actor. The default keeps actors with **at most 20 captured trades in
+the market's captured trades and official outcome-token price histories, and
+writes one chronologically ordered JSONL file per actor. The default keeps actors with **at most 20 captured trades in
 that market**, including exactly 20. To include every actor:
 
 ```bash
@@ -44,6 +44,31 @@ matching this requested format.
 Each row includes `actor_id`, `market_id`, `condition_id`, `record_type`,
 `row_index`, `news`, and `label`. Interval rows have `interval`. Trade rows have
 `timestamp` and `context_interval`. Shares and prices remain decimal strings.
+
+Each row also includes `market_context`, `execution_info` and `payoff_analysis`.
+Version-2 market context comes from the official CLOB `/prices-history` API,
+requested separately for YES and NO at one-minute fidelity. The latest point
+strictly before the execution is used only if it is no older than
+`--market-price-max-age-seconds` (default 300). Otherwise that outcome is `null`.
+No future point, interpolation, complementary price or previous-trade estimate
+fills the gap. Observation timestamps, ages and collection coverage remain
+available for audit; these points do not reconstruct the exact trader screen.
+The boundary uses the execution block-time proxy, not the unknown order-entry
+time, so it cannot prove the price was available before the actual decision.
+A wholly unavailable YES or NO history stops collection. Export also stops if
+either outcome has no usable prices across the retained trade rows. Partial
+coverage prints a warning and keeps null values. `missing_reasons` and
+`market_price_coverage` report gaps and staleness; the manifest's
+`price_context_complete_for_exported_rows` states whether every retained trade
+row has both prices.
+
+`execution_info` records the observed execution time, with unknown order
+submission, order type, full-fill status and delay left as `null`. A public
+execution is not enough to establish those fields. BUY payoff analysis reports
+conditional win/loss before fees if held to normal binary resolution; it does
+not infer expected profit, actual realized profit, fees or sale cost basis.
+See [the training guide](actor_sft_pipeline.md#market-prices-execution-evidence-and-payoff-fields)
+for the field semantics and which information enters SFT.
 
 ## Actual ESPN content
 
@@ -82,6 +107,8 @@ The output directory contains:
 
 - `actors/<wallet>.jsonl`: the requested interval and trade rows.
 - `actor_index.jsonl`: actor file paths and row/trade counts.
+- `market_price_history.jsonl`: shared official price observations used for context.
+- `market_price_sources.json`: price request/cache provenance.
 - `espn_events.jsonl`: shared timestamped event text and source IDs.
 - `espn_unplaced_events.jsonl`: text that could not be placed in a UTC interval.
 - `market.json`, `espn_sources.json`, `manifest.json`: mappings and collection details.
@@ -136,10 +163,13 @@ with the corresponding Polymarket market. Otherwise supply the matching
 ESPN ID, or let the script find a unique fixture from the teams and date.
 
 For offline operation, combine `--market-metadata market.json`,
-`--trades-file trades.jsonl`, and one or more `--espn-file summary.json`
-arguments. The metadata input must be a saved Gamma/registry market object,
-not this exporter's normalized `market.json`. ESPN files can be saved summary
+`--trades-file trades.jsonl`, `--price-history-file prices.json`, and one or more
+`--espn-file summary.json` arguments. The metadata input must be a saved
+Gamma/registry market object, not this exporter's normalized `market.json`. ESPN files can be saved summary
 JSON, core-play pages, or normalized JSONL with `text` and `time_utc`.
+The [price-file schema](actor_sft_pipeline.md#market-prices-execution-evidence-and-payoff-fields)
+requires the selected condition, one-minute fidelity, and histories for both
+outcome token IDs.
 
 `--time-map times.json` accepts explicit event times, for example the schema
 `{"events": {"PLAY_ID": "ISO_UTC_TIMESTAMP"}}`. Optional `period_anchors`
@@ -150,8 +180,9 @@ or extra time as a continuous countdown from scheduled kickoff.
 
 ## Efficiency and interpretation
 
-ESPN is fetched once per match, not once per actor. HTTP responses and the
-cursor-based trade capture are cached for reuse. Trade sorting uses temporary
+ESPN is fetched once per match, not once per actor. Official token histories
+are also shared across actors. HTTP responses and the cursor-based trade
+capture are cached for reuse. Trade sorting uses temporary
 SQLite storage, and news windows use binary search over the shared event
 timeline. Memory usage does not scale with the full market's trade count.
 Actors are filtered only after all supplied market observations are counted.
@@ -170,7 +201,10 @@ ordering separate training rows does not create attention between them.
 
 Source endpoints used by the script:
 
-- Polymarket: `https://data-api.polymarket.com/v2/trades` and the Gamma market API.
+- Polymarket trades: `https://data-api.polymarket.com/v2/trades`.
+- Polymarket historical prices: `https://clob.polymarket.com/prices-history`,
+  using each outcome's token ID, not the numeric Gamma market ID.
+- Polymarket market metadata: the Gamma market API.
 - ESPN: `https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/summary?event={id}`.
 - Optional ESPN core plays: `https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/events/{id}/competitions/{id}/plays`.
 
