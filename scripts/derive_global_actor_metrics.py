@@ -32,6 +32,11 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 import derive_actor_metrics as base
 
+TOOL_DIR = SCRIPT_DIR.parent / 'tools'
+if str(TOOL_DIR) not in sys.path:
+    sys.path.insert(0, str(TOOL_DIR))
+import wallet_history
+
 
 def actor_identity(value):
     base.require(isinstance(value, str) and base.ADDRESS.fullmatch(value), 'Invalid actor_id')
@@ -44,7 +49,8 @@ def normalize_wallet_row(row, *, api_proxy=False):
 Offline histories must provide real availability timestamps. Only the explicit
 API adapter may use execution time as an unverified availability proxy.
 """
-    actor, condition = base.identity(row)
+    actor = actor_identity(row.get('actor_id'))
+    condition = wallet_history.normalize_condition_id(row.get('condition_id'))
     execution = row.get('execution_id')
     base.require(isinstance(execution, str) and execution.strip(), 'Missing execution_id')
     stamp = base.timestamp_us(row.get('timestamp'))
@@ -216,10 +222,6 @@ def staged_actor_trades(database_path, actor):
 
 
 def fetch_actor_history(args, actor, max_query_us, client):
-    tool_dir = SCRIPT_DIR.parent / 'tools'
-    if str(tool_dir) not in sys.path:
-        sys.path.insert(0, str(tool_dir))
-    import wallet_history
     manifest = wallet_history.ingest_wallet(client, actor_id=actor,
         output_dir=args.cache.resolve() / 'wallet_histories',
         end_seconds=max_query_us // 1_000_000, start_seconds=1,

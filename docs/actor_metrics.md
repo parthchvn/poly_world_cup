@@ -278,12 +278,19 @@ after an interrupted request. A partial traversal, including one stopped by
 Use a new cache for a fresh capture; there is no implicit refresh of exhausted
 captures. This fetch can be much larger than the current-market export.
 
+Wallet executions accept both 31-byte and 32-byte hexadecimal condition IDs,
+matching the [official Polymarket SDK's condition ID schema](https://github.com/Polymarket/ts-sdk/blob/main/packages/bindings/src/shared.ts).
+This retains executions such as combination-market trades in wallet-wide
+execution metrics. IDs are lowercased without padding; transaction hashes still
+require 32 bytes. This does not reconstruct combo settlements or whole-wallet
+PnL. Existing captures remain reusable after this parser update.
+
 Alternatively, pass `--wallet-trades PATH` with normalized JSONL or gzip JSONL:
 
 | Field | Meaning |
 |---|---|
 | `actor_id` | Wallet being summarized. |
-| `condition_id` | Binary market where this execution occurred. |
+| `condition_id` | Market or combination condition where this execution occurred; a 31-byte or 32-byte hexadecimal ID. |
 | `execution_id` | Unique identifier for this captured execution within the actor's supplied history. |
 | `timestamp` | Explicitly zoned execution time. |
 | `known_at` | Explicitly zoned time the observation became available, at or after execution. |

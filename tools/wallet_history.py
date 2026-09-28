@@ -25,12 +25,25 @@ API_URL = 'https://data-api.polymarket.com/v2/trades'
 SCHEMA = 'wallet_execution_capture_v1'
 AVAILABILITY = 'execution_timestamp_proxy_not_verified_publication_time'
 ADDRESS = re.compile(r'0x[0-9a-fA-F]{40}')
-CONDITION = re.compile(r'0x[0-9a-fA-F]{64}')
+WALLET_CONDITION = re.compile(r'0x(?:[0-9a-fA-F]{62}|[0-9a-fA-F]{64})')
+TRANSACTION_HASH = re.compile(r'0x[0-9a-fA-F]{64}')
 
 
 def _require(condition, message):
     if not condition:
         raise ValueError(message)
+
+
+def normalize_condition_id(value):
+    """Preserve 31-byte and 32-byte condition IDs served in wallet executions.
+
+    Polymarket's SDK accepts both lengths, including combo conditions. Do not
+    pad the shorter IDs or exclude those executions from wallet-wide metrics.
+    Transaction hashes still require 32 bytes.
+    """
+    _require(isinstance(value, str) and WALLET_CONDITION.fullmatch(value),
+             'Invalid condition_id: expected a 31-byte or 32-byte hex string')
+    return value.lower()
 
 
 def _bytes(value):
@@ -110,8 +123,7 @@ def _normalize(row, parameters, source, row_index):
     actor = row.get('proxy_wallet')
     _require(isinstance(actor, str) and actor.lower() == parameters['user'],
              'Wallet API returned a different actor')
-    condition = row.get('condition_id')
-    _require(isinstance(condition, str) and CONDITION.fullmatch(condition), 'Invalid condition_id')
+    condition = normalize_condition_id(row.get('condition_id'))
     seconds = row.get('timestamp')
     timestamp = _iso(seconds)
     _require(parameters['start'] <= seconds <= parameters['end'],
@@ -121,7 +133,7 @@ def _normalize(row, parameters, source, row_index):
     _require(isinstance(token, str) and token.isascii() and token.isdigit() and int(token) > 0,
              'Invalid token_id')
     transaction = row.get('transaction_hash')
-    _require(isinstance(transaction, str) and CONDITION.fullmatch(transaction), 'Invalid transaction_hash')
+    _require(isinstance(transaction, str) and TRANSACTION_HASH.fullmatch(transaction), 'Invalid transaction_hash')
     source_ids = {name: str(row[name]) for name in
                   ('execution_id', 'trade_id', 'fill_id', 'id', 'sequence', 'log_index')
                   if row.get(name) is not None}
@@ -132,7 +144,7 @@ def _normalize(row, parameters, source, row_index):
     identity = ('api_' + unique + ':' + source_ids[unique] if unique else
                 'api_observation:' + _hash(_bytes([source['request_url'], row_index])))
     normalized = {
-        'actor_id': parameters['user'], 'condition_id': condition.lower(),
+        'actor_id': parameters['user'], 'condition_id': condition,
         'execution_id': identity, 'timestamp': timestamp, 'side': row['side'],
         'shares': _decimal(row.get('size'), 'size', positive=True),
         'price': _decimal(row.get('price'), 'price', maximum=Decimal(1)),

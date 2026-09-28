@@ -23,6 +23,7 @@ ACTOR = '0x' + 'a' * 40
 OTHER_ACTOR = '0x' + 'b' * 40
 MARKET = '0x' + '1' * 64
 OTHER_MARKET = '0x' + '2' * 64
+COMBO_CONDITION = '0x03c536d68f3e625e61e694424ca23fa0740000000000000000000000000000'
 DAY = 86_400_000_000
 D = Decimal
 
@@ -109,6 +110,21 @@ class GlobalCoreTests(unittest.TestCase):
                     {key: value for key, value in execution().items() if key != 'known_at'}):
             with self.subTest(row=row), self.assertRaises(ValueError):
                 global_metrics.normalize_wallet_row(row)
+
+    def test_short_conditions_keep_strict_execution_and_availability_cutoffs(self):
+        query = base.timestamp_us('2026-06-01T16:01:00Z')
+        prior = execution('prior')
+        excluded = [
+            execution('current', timestamp='2026-06-01T16:01:00Z', condition=COMBO_CONDITION),
+            execution('future', timestamp='2026-06-01T16:02:00Z', condition=COMBO_CONDITION),
+            execution('delayed', known='2026-06-01T16:01:00Z', condition=COMBO_CONDITION),
+        ]
+        parsed = [global_metrics.normalize_wallet_row(row)[1] for row in [prior, *excluded]]
+        expected = global_metrics.compute_global_metrics(parsed[:1], [], [], query)
+        self.assertEqual(global_metrics.compute_global_metrics(parsed, [], [], query), expected)
+        self.assertTrue(all(row['condition_id'] == COMBO_CONDITION for row in parsed[1:]))
+        with self.assertRaisesRegex(ValueError, 'condition_id'):
+            global_metrics.normalize_wallet_row(execution(condition='0x' + 'a' * 63))
 
     def test_api_proxy_must_be_explicit_and_cannot_have_manufactured_known_at(self):
         row = execution()
@@ -331,6 +347,32 @@ class GlobalCLITests(unittest.TestCase):
                          'execution_timestamp_proxy_not_verified_publication_time')
         self.assertEqual(metadata['wallet_captures'][0]['captured_executions'], 3)
 
+    def test_automatic_combo_capture_is_counted_only_before_query_and_reuses_cache(self):
+        import build_actor_dataset
+        from tests.test_wallet_history import Client, page, trade
+        prior = base.timestamp_us('2026-06-01T15:59:00Z') // 1_000_000
+        current = base.timestamp_us('2026-06-01T16:01:00Z') // 1_000_000
+        client = Client([page([
+            trade(current, proxy_wallet=ACTOR, condition_id=COMBO_CONDITION,
+                  size='10', price='.8', outcome='', fill_id='combo-current'),
+            trade(prior, proxy_wallet=ACTOR, condition_id=COMBO_CONDITION,
+                  size='10', price='.2', outcome='', fill_id='combo-prior'),
+            trade(prior - 60, proxy_wallet=ACTOR, condition_id=OTHER_MARKET,
+                  size='10', price='.4', fill_id='binary-prior'),
+        ])])
+        args = self.global_args()
+        with patch.object(build_actor_dataset, 'HttpClient', return_value=client):
+            global_metrics.derive(args)
+        first, second = self.records(args.out)
+        self.assertEqual(D(first['actor_metrics']['values']['average_execution_notional']), 3)
+        self.assertEqual(first['actor_metrics']['sample_counts']['captured_executions'], 2)
+        self.assertEqual(second['actor_metrics']['sample_counts']['captured_executions'], 3)
+        self.assertAlmostEqual(float(second['actor_metrics']['values']['average_execution_notional']), 14/3)
+        cached_args = self.global_args(out=self.root / 'global_cached')
+        with patch.object(build_actor_dataset, 'HttpClient', return_value=Client([])):
+            global_metrics.derive(cached_args)
+        self.assertEqual(self.records(cached_args.out), [first, second])
+
     def prepare_three_fixtures(self, reverse=False):
         from tests.test_prepare_actor_sft import ActorSFTTests, builder
         fixture = ActorSFTTests()
@@ -359,7 +401,7 @@ class GlobalCLITests(unittest.TestCase):
 
     def test_three_split_enrichment_preserves_targets_and_selects_global_prompt_features(self):
         paths, source_sft = self.prepare_three_fixtures()
-        history = self.wallet_file()
+        history = self.wallet_file([execution('combo-prior', condition=COMBO_CONDITION)])
         args = self.global_args(exports=paths, wallet_trades=history, sft_dir=source_sft,
                                 features='average_execution_notional,buy_notional_share')
         metadata = global_metrics.derive(args)

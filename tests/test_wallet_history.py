@@ -17,6 +17,7 @@ ACTOR = '0x' + '1' * 40
 OTHER = '0x' + '2' * 40
 CONDITION = '0x' + 'a' * 64
 CONDITION2 = '0x' + 'b' * 64
+COMBO_CONDITION = '0x03c536d68f3e625e61e694424ca23fa0740000000000000000000000000000'
 
 
 def trade(when=100, **changes):
@@ -80,6 +81,41 @@ class WalletHistoryTests(unittest.TestCase):
         self.assertEqual(len(rows), 3)
         self.assertEqual(len({r['execution_id'] for r in rows}), 3)
         self.assertTrue(all(r['shares'] == '2.5' for r in rows))
+
+    def test_reported_combo_execution_is_retained_without_padding_or_outcome(self):
+        row = trade(100, condition_id=COMBO_CONDITION,
+                    token_id='1705385896327775440347894695719834322871254396457394571926279144725081489408',
+                    size='8.932559', price='0.2238998925', outcome='',
+                    transaction_hash='0xfbeec34f01e8a78e14910f3dbb29d4d55e3f15f21358e241c28cdcfff1275602')
+        result = self.ingest(Client([page([trade(99), row])]))
+        rows = list(wallet.iter_wallet_observations(result))
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(rows[1]['condition_id'], COMBO_CONDITION)
+        self.assertEqual(len(bytes.fromhex(rows[1]['condition_id'][2:])), 31)
+        self.assertEqual(rows[1]['shares'], '8.932559')
+        self.assertEqual(rows[1]['price'], '0.2238998925')
+        self.assertEqual(rows[1]['token_id'], row['token_id'])
+        self.assertNotIn('outcome', rows[1])
+
+    def test_short_condition_resumes_after_existing_binary_page_and_reuses_cache(self):
+        first = self.ingest(Client([page([trade()], 'second')]), max_pages=1)
+        first_page = Path(first['capture_dir']) / first['pages'][0]['file']
+        original = first_page.read_bytes()
+        client = Client([page([trade(99, condition_id=COMBO_CONDITION)])])
+        result = self.ingest(client)
+        self.assertEqual(client.requests[0][1]['cursor'], 'second')
+        self.assertEqual(first_page.read_bytes(), original)
+        self.assertEqual([r['condition_id'] for r in wallet.iter_wallet_observations(result)],
+                         [CONDITION, COMBO_CONDITION])
+        self.assertEqual(self.ingest(Client([])), result)
+
+    def test_malformed_condition_ids_and_short_transaction_hashes_still_fail(self):
+        for condition in (None, '', '0x' + 'a' * 60, '0x' + 'a' * 63,
+                          '0x' + 'a' * 66, '0x' + 'g' * 62):
+            with self.subTest(condition=condition), self.assertRaisesRegex(ValueError, 'condition_id'):
+                self.ingest(Client([page([trade(condition_id=condition)])]))
+        with self.assertRaisesRegex(ValueError, 'transaction_hash'):
+            self.ingest(Client([page([trade(transaction_hash=COMBO_CONDITION)])]))
 
     def test_no_fake_publication_time_or_accounting(self):
         result = self.ingest(Client([page([trade()])]))
