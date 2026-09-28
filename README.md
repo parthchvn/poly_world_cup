@@ -116,8 +116,10 @@ zero balances or empty positions. Successful zero values and empty lists are val
 
 ## Train on local conversation files
 
-Two scripts handle the current workflow: `build_actor_dataset.py` collects actor
-exports and prepares SFT conversations; `train_world_cup_multigpu.py` trains them.
+The core workflow has two steps: `build_actor_dataset.py` collects actor exports
+and prepares SFT conversations; `train_world_cup_multigpu.py` trains them.
+The optional `derive_actor_metrics.py` adds strictly prior actor metrics between
+preparation and training.
 
 Collect three distinct matches and prepare the dataset in one command. On RunPod,
 use a new data directory to rebuild earlier exports with market prices and actor
@@ -192,6 +194,33 @@ The trainer performs single-machine data-parallel QLoRA, with one model replica
 per GPU and one resulting shared adapter. Actual H100/NCCL execution still needs
 the smoke test. Generated runs, checkpoints, and adapters must stay outside Git.
 
+## Add actor performance and behavior metrics
+
+`scripts/derive_actor_metrics.py` is a separate, standard-library-only postprocessor.
+It calculates 18 metrics for each actor and market using information strictly
+before each execution timestamp. It excludes time since the previous trade and
+historical markout. It does not fetch APIs, use collection-time actor snapshots,
+or change the source exports.
+
+```bash
+python3 scripts/derive_actor_metrics.py data/market_1897059 \
+  --out data/market_1897059_metrics
+```
+
+Execution notional, notional variability, frequency, and buy share can use the
+captured fills directly. Realized performance and holding duration need a supplied
+completed-position ledger; Sharpe, Sortino, drawdown, and return volatility need
+a supplied, capital-flow-adjusted equity-return series. Missing inputs produce
+`null` metrics with reasons and sample counts. The script does not invent a
+portfolio Sharpe from execution prices or assume public trade capture is complete.
+
+To add the metrics to an existing prepared SFT dataset, pass
+`--sft-dir datasets/world_cup_sft`. The enriched dataset is written under the new
+output's `sft/` directory; point the trainer's `--dataset-dir` there. Each user
+turn gets only its strictly prior metrics, with original splits and targets
+preserved. See [actor metrics](docs/actor_metrics.md) for the input schemas,
+formulas, time cutoffs, and complete training example.
+
 ## Current entry points
 
 The `scripts/` directory contains only the current SFT workflow:
@@ -199,6 +228,7 @@ The `scripts/` directory contains only the current SFT workflow:
 | Script | Purpose |
 |---|---|
 | `scripts/build_actor_dataset.py` | Collect actor rows, prepare existing exports, or collect multiple markets and prepare SFT in one command. |
+| `scripts/derive_actor_metrics.py` | Add strictly prior actor behavior/performance metrics; optionally enrich prepared SFT conversations. |
 | `scripts/train_world_cup_multigpu.py` | Run QLoRA training on one or multiple GPUs. |
 
 Additional collection, recovery, reporting, and historical workflow utilities
@@ -212,7 +242,7 @@ external pre-cleanup Git backup.
 
 ## Repository layout and local development
 
-- `scripts/`: the two current dataset-building and training entry points.
+- `scripts/`: the current dataset builder, optional actor-metrics postprocessor, and trainer.
 - `tools/`: additional and historical collection, recovery, validation, and reporting utilities.
 - `poly_world_cup/`: supporting modules imported by the repository's scripts.
 - `configs/`: small configuration files and reviewed mappings used by the code.

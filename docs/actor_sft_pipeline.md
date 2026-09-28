@@ -17,7 +17,9 @@ git pull --ff-only origin main
 ## Collect and prepare in one command
 
 The former preparation script is now included in `build_actor_dataset.py`.
-`scripts/` contains only this builder and `train_world_cup_multigpu.py`.
+The core pipeline uses this builder and `train_world_cup_multigpu.py`.
+The optional `derive_actor_metrics.py` postprocessor adds prior-history metrics;
+see [actor metrics](actor_metrics.md).
 
 To rebuild existing RunPod exports with market-price context and actor snapshots,
 use a new actor output root and the **same existing cache**:
