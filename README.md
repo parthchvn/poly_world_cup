@@ -32,6 +32,19 @@ Earlier actor trades remain in preceding rows rather than being copied into
 every later row. The default actor filter is **at most 20 captured executions**
 in the selected binary market.
 
+Each row also carries `market_context`: the latest earlier YES and NO execution
+prices, their price-implied probabilities, and their timestamps/ages. A shared
+price timeline is built once from all captured wallets **before** the actor
+filter. Training still runs actor by actor; other wallets' trade histories are
+not inserted into the conversation. These prices are historical executions,
+not executable quotes or verified screenshots of what the actor saw.
+
+`execution_info` records observed fills and explicitly leaves unavailable order
+submission times, limit-order status, and submission-to-fill delays unknown.
+`payoff_analysis` records a BUY's potential profit if held to a winning
+resolution, before fees. It does not claim an expected profit or reconstruct
+unobserved orders. See the guide for the exact limitations.
+
 Inspect the first two records:
 
 ```bash
@@ -51,7 +64,9 @@ PY
 ```
 
 The same output directory contains `manifest.json`, `market.json`, an actor index,
-and ESPN event/source files. These are generated locally, not committed.
+ESPN event/source files, and `market_price_history.jsonl` for auditing the shared
+price timeline. The manifest records `market_context_version: 1`. These are
+generated locally, not committed.
 
 ## Source availability and cache behavior
 
@@ -76,32 +91,40 @@ Two scripts handle the current workflow: `build_actor_dataset.py` collects actor
 exports and prepares SFT conversations; `train_world_cup_multigpu.py` trains them.
 
 Collect three distinct matches and prepare the dataset in one command. On RunPod,
-from the repository root in your existing training environment:
+use a new data directory to rebuild earlier exports with market context while
+reusing the existing trade cache:
 
 ```bash
+cd /poly_world_cup
+git pull --ff-only origin main
+
 python3 scripts/build_actor_dataset.py sft 1897035 1897038 1897059 \
-  --data-root /workspace/world_cup_actor_data/data \
+  --data-root /workspace/world_cup_actor_data/data_with_market_context \
+  --cache /workspace/world_cup_actor_data/data/market_actor_cache \
   --reuse-existing \
   --http-transport curl \
-  --out /workspace/datasets/world_cup_sft \
+  --out /workspace/datasets/world_cup_sft_with_market_context \
   --tokenizer /workspace/models/Qwen3.6-27B
 
 python3 scripts/train_world_cup_multigpu.py \
   --gpus 2 --gpu-ids 0,1 \
   --model /workspace/models/Qwen3.6-27B \
-  --dataset-dir /workspace/datasets/world_cup_sft \
+  --dataset-dir /workspace/datasets/world_cup_sft_with_market_context \
   --smoke-then-full
 ```
 
-`--reuse-existing` uses completed matching actor exports as-is and collects only
-missing ones. Collection options apply only to newly built exports. Trade caches
-remain resumable. Choose a new `--out` if the SFT dataset already exists.
+`--reuse-existing` uses completed matching exports with market context as-is and
+builds missing ones. It rejects older exports without this context. Collection
+options apply only to newly built exports. An already exhausted trade capture
+is reused without another trade scrape; incomplete captures resume. Choose a new
+`--out` if the SFT dataset already exists. Earlier trained adapters do not gain
+these inputs automatically: prepare the enriched dataset and train a new run.
 
 To prepare existing exports without collection, use:
 
 ```bash
 python3 scripts/build_actor_dataset.py prepare \
-  --input-root /workspace/world_cup_actor_data/data \
+  --input-root /workspace/world_cup_actor_data/data_with_market_context \
   --out /workspace/datasets/world_cup_sft_new \
   --tokenizer /workspace/models/Qwen3.6-27B
 ```
@@ -114,11 +137,16 @@ These commands require your local model files and working training dependencies.
 conversion can run without `--tokenizer`, deferring exact length checks to the
 trainer. Conversion does not truncate conversations or discard targets.
 
-The converter predicts observed **trade attributes only**. It checks but does
-not train on retrospective `NO_TRADE` intervals. Earlier trades stay in preceding
-conversation turns; interval news appears once per turn. All markets from one
-match stay in one split. Three matches are a smoke pipeline, not a sufficient
-performance benchmark.
+The converter predicts observed **trade attributes only**. Each user turn gets
+that time's earlier YES/NO prices and their ages alongside news and actor history.
+SFT uses a compact `market_context` containing only `price` and `age_seconds`
+for each available outcome; the full timestamps, probabilities, and provenance
+remain in the actor files and audit timeline.
+Execution and payoff metadata are retained for analysis, not inserted into SFT
+inputs or targets. The converter checks but does not train on retrospective
+`NO_TRADE` intervals. Earlier trades stay in preceding conversation turns;
+interval news appears once per turn. All markets from one match stay in one split.
+Three matches are a smoke pipeline, not a sufficient performance benchmark.
 
 See [the complete collection-to-training guide](docs/actor_sft_pipeline.md) for
 input selection, split reuse, output inspection, token limits, and limitations.

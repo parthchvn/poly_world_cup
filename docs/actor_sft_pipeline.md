@@ -19,12 +19,19 @@ git pull --ff-only origin main
 The former preparation script is now included in `build_actor_dataset.py`.
 `scripts/` contains only this builder and `train_world_cup_multigpu.py`.
 
+To rebuild existing RunPod exports with market-price context, use a new actor
+output root and the **same existing cache**:
+
 ```bash
+cd /poly_world_cup
+git pull --ff-only origin main
+
 python3 scripts/build_actor_dataset.py sft 1897035 1897038 1897059 \
-  --data-root /workspace/world_cup_actor_data/data \
+  --data-root /workspace/world_cup_actor_data/data_with_market_context \
+  --cache /workspace/world_cup_actor_data/data/market_actor_cache \
   --reuse-existing \
   --http-transport curl \
-  --out /workspace/datasets/world_cup_sft \
+  --out /workspace/datasets/world_cup_sft_with_market_context \
   --tokenizer /workspace/models/Qwen3.6-27B
 ```
 
@@ -35,12 +42,23 @@ under `--data-root/market_<ID>`. The cache defaults to
 is checked before trade collection: normally at least three distinct matches,
 or two with `--train-validation-only`.
 
-`--reuse-existing` explicitly reuses completed matching exports as captured.
-Collection filters and source options apply only to new exports. Without this
-flag, existing actor exports cause an error. If collection fails partway through,
-rerun with the same cache and `--reuse-existing`: finished exports are retained,
-and unfinished trade captures resume. An existing SFT output is never overwritten;
-choose another `--out` when preparing a new version.
+`--reuse-existing` explicitly reuses completed matching exports that contain
+market context (`market_context_version: 1`). It rejects older exports that lack
+these features. Collection filters and source options apply only to new exports.
+Without this flag, existing actor exports cause an error. If collection fails
+partway through, rerun with the same cache and `--reuse-existing`: finished
+exports are retained, and unfinished trade captures resume. An exhausted capture
+is reused without scraping its trade pages again. Building the price timeline
+itself makes no additional API requests. An existing SFT output is never
+overwritten; choose another `--out` when preparing a new version.
+
+The separate `prepare` mode still accepts a set of entirely legacy exports, with
+a warning that their conversations lack market context. Mixing legacy and
+enriched exports is rejected. Preparation does not add prices to legacy actor
+files; rebuild them from the saved captures using the command above. Already
+trained adapters are unchanged. Train a new run with
+`--dataset-dir /workspace/datasets/world_cup_sft_with_market_context` to learn
+from the added inputs.
 
 Match-specific files or overrides, such as `--espn-file`, cannot be shared across
 multiple market IDs. Collect those markets individually, then run `prepare`.
@@ -95,6 +113,85 @@ cache to retry. These controls do not change the requested trade filters.
 All completed exports live under `data/market_<id>/` by default. Keep these local.
 For a substantial experiment, collect more matches. Three matches are only the
 minimum for a train/validation/test smoke pipeline, not a robust benchmark.
+
+## Market prices, execution evidence, and payoff fields
+
+The actor-by-actor layout is unchanged. The builder first creates one shared
+price timeline per market from **all captured wallets**, including wallets that
+will be excluded by the actor filter. It then looks up that timeline when
+writing each actor's rows. Other actors' individual histories are not copied
+into the training conversation. A completed trade capture can supply this
+context without an additional price-history API request.
+
+Every new actor row carries `market_context`. YES and NO are identified by their
+outcome token IDs and tracked separately. For a row at query time `t`, each
+outcome uses only observations whose timestamps are **strictly less than `t`**.
+Trades at `t`, including the target trade, cannot affect that row's context.
+There is no plus-or-minus time tolerance for model inputs.
+
+If several executions of the same outcome share an earlier timestamp, their
+price is the share-volume-weighted average for that timestamp. The builder
+aggregates exactly, then rounds the published price to 12 decimal places with
+round-half-even. It does not invent an ordering within a timestamp. The latest
+earlier price for each outcome comes with its observation timestamp and age in
+seconds. If no prior observation exists for an outcome, its value is `null`.
+`market_price_history.jsonl` records the timestamp/outcome observations for audit.
+The export manifest records `market_context_version: 1` and the captured source
+scope; an exhausted API traversal does not prove that every historical trade
+was captured.
+
+Under the binary contract's $1 winning and $0 losing payout convention, a price
+of $0.40 corresponds to a price-implied probability of 0.40 (40%). This is not a
+measured true winning probability. The YES and NO observations may come from
+different times and need not sum to one. Neither outcome is filled in from the
+complement of the other, and the two values are not normalized. These are
+historical execution-price estimates, not historical best bids/asks, order-book
+depth, or a verified record of the probability displayed to the actor. Retain the
+observation ages when inspecting or using the data.
+
+Each row also carries `execution_info` and `payoff_analysis` for analysis.
+On a `TRADE` row, payoff entries follow the order of the executions in `trades`.
+On a `NO_TRADE` row, the observed execution time is `null` and payoff entries
+are empty; the row describes only the observed open interval.
+
+| Feature | What the export can establish |
+|---|---|
+| Observed execution | A captured trade execution and its recorded time; `observed_execution_time` remains a block-time proxy, not a verified order-entry clock. |
+| Order submission time and type | Unknown from public executions alone. In particular, an execution does not identify whether the order was a resting limit order. |
+| Submission-to-fill window | `--fill-window-seconds` records the requested nonnegative window (default 5). `filled_within_seconds_of_submission` remains `null` without submission evidence. |
+| Entire order filled, or filled later | `order_fully_filled` and `full_fill_time` remain `null`. An execution can be a partial fill of an unseen larger order. |
+| Canceled or unfilled orders | Not reconstructible from the captured executions. A `NO_TRADE` interval is not an unfilled order. |
+| Expected or actual realized profit | `expected_profit` and `realized_profit` remain `null`; the export does not infer an independent winning probability or complete position cost basis. |
+
+The payoff calculation is per observed execution, separate from model inputs.
+For a BUY of `shares` at execution `price`, if those shares are held to normal
+binary resolution:
+
+- `winning_payout = shares`.
+- `potential_profit_if_win_before_fees = shares * (1 - price)`.
+- `pnl_if_lose_before_fees = -shares * price`.
+- `cash_flow_before_fees = -shares * price`.
+
+These are conditional payout calculations, not an expected-profit forecast or
+proof the actor held until resolution. For a SELL, only positive sale proceeds
+(`cash_flow_before_fees = shares * price`) are established. Profit fields remain
+`null` because proceeds alone do not reveal acquisition cost or position
+history. Fees remain unknown (`null`), rather than silently assumed to be zero.
+Winning payout and profit-if-win values are explicitly **before fees** where
+applicable.
+
+The current trade's execution price, quantity, fulfillment metadata, and payoff
+calculations are not inserted into the SFT user message. The target remains the
+observed trade attributes. A compact form of the earlier `market_context` is
+added to every user turn, with news and that actor's preceding conversation.
+Each `yes` or `no` entry is either `null` or an object with only `price` and
+`age_seconds`. The system instruction defines each price as the implied
+probability under the $1/$0 payout convention, and the user message's
+`query_time` supplies the reference time. This avoids repeating equivalent
+probabilities, timestamps, and source descriptions in every turn, saving tokens.
+The full raw context and audit timeline retain those fields for inspection.
+Thus missing order lifecycle data does not become a fabricated immediate-fill
+label, and future resolution does not leak into the decision input.
 
 ## 2. Convert actor files to conversations
 
@@ -214,10 +311,12 @@ run that exits. Starting a separate full command afterward reloads the weights.
 ## Conversation and supervision contract
 
 Each conversation starts with a system instruction and a user message containing
-the actor ID, market question/outcomes, query time, first interval news, and an
-empty `past_observed_trades` list. Later user messages contain the next query
-time and new interval news. Earlier assistant messages provide the actor's
-previous trade history within this market.
+the actor ID, market question/outcomes, query time, first interval news, an empty
+`past_observed_trades` list, and compact `market_context` for enriched exports.
+Later user messages contain the next query time, new interval news, and that
+time's earlier YES/NO prices and ages. Earlier assistant messages provide the
+actor's previous trade history within this market. Legacy-only conversion omits
+market context and records that limitation.
 
 Each assistant answer is JSON:
 
@@ -268,9 +367,10 @@ python scripts/build_actor_dataset.py prepare --input-root data \
 ```
 
 Conversion checks actor/market identities, interval continuity, grouped execution
-times, decimal validity, strict prior news timestamps, manifest counts, duplicate
-market inputs, and reserved chat markers. A failed build does not publish a
-partial output directory. Existing outputs are never overwritten.
+times, decimal validity, strict prior news timestamps, market-context timestamps
+and structure, manifest counts, duplicate market inputs, and reserved chat
+markers. A failed build does not publish a partial output directory. Existing
+outputs are never overwritten.
 
 Market questions and mappings are retrospective metadata, explicitly marked as
 not time-verified in prompts and the manifest. ESPN timestamps remain occurrence

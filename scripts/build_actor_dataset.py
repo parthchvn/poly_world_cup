@@ -1475,7 +1475,111 @@ def stage_trades(db, iterator):
     return count
 
 
-def actor_records(actor, trades, market, events, event_times, origin):
+def decimal_text(value):
+    text = format(value, 'f')
+    return (text.rstrip('0').rstrip('.') if '.' in text else text) if value else '0'
+
+
+def exact_product(left, right):
+    # Preserve finite input decimals, including large quantities and tiny prices.
+    from decimal import localcontext
+    with localcontext() as ctx:
+        ctx.prec = max(80, len(left.as_tuple().digits) + len(right.as_tuple().digits) + 4)
+        return left * right
+
+
+def execution_payoff(trade):
+    """Conditional BUY payoff, never a probability-weighted or realized profit."""
+    from decimal import localcontext
+    shares, price = Decimal(trade['shares']), Decimal(trade['price'])
+    cost = exact_product(shares, price)
+    with localcontext() as ctx:
+        ctx.prec = max(80, len(price.as_tuple().digits) + abs(price.as_tuple().exponent) + 4)
+        upside = exact_product(shares, Decimal(1) - price)
+    buy = trade['side'] == 'BUY'
+    return {'basis': 'hypothetical_buy_held_to_binary_resolution' if buy else 'sale_proceeds_only_cost_basis_unknown',
+            'cash_flow_before_fees': decimal_text(cost.copy_negate() if buy else cost),
+            'winning_payout': decimal_text(shares) if buy else None,
+            'potential_profit_if_win_before_fees': decimal_text(upside) if buy else None,
+            'pnl_if_lose_before_fees': decimal_text(cost.copy_negate()) if buy else None,
+            'expected_profit': None, 'fees': None, 'realized_profit': None,
+            'unknown_reason': 'winning_probability_and_fees_unknown' if buy else 'sale_cost_basis_and_fees_unknown'}
+
+
+def execution_evidence(instant, is_trade, window):
+    """A fill observation cannot establish order submission or full fulfillment."""
+    return {'status': 'observed_execution' if is_trade else 'no_observed_execution_in_open_interval',
+            'observed_execution_time': utc_time(instant) if is_trade else None,
+            'timestamp_semantics': 'captured_execution_block_time_proxy',
+            'order_submitted_at': None, 'order_type': None, 'order_fully_filled': None,
+            'filled_within_seconds_of_submission': None, 'fill_window_seconds': window,
+            'full_fill_time': None, 'submission_to_execution_seconds': None,
+            'unknown_reason': 'public_trade_feed_has_no_order_lifecycle'}
+
+
+def build_price_timeline(db, path):
+    """Aggregate all captured wallets once, on disk, before filtering actors.
+
+    Equal-time prices have no known execution order. Their volume-weighted mean
+    is a historical summary, not a quote. Fraction sums avoid float drift and
+    depend neither on source order nor chunk size. Prices round to 12 places.
+    """
+    from fractions import Fraction
+    db.execute('CREATE INDEX market_time ON trades(instant,ordinal)')
+    db.execute('CREATE TABLE market_prices (outcome TEXT, instant INTEGER, payload TEXT, PRIMARY KEY(outcome,instant))')
+    rows = db.execute('SELECT instant,payload FROM trades ORDER BY instant,ordinal')
+    count = 0
+    with Path(path).open('w', encoding='utf-8') as stream:
+        for instant, group in groupby(rows, lambda row: row[0]):
+            aggregates = {}
+            for _, payload in group:
+                trade = json.loads(payload)['trade']
+                outcome = trade['outcome'].casefold()
+                if outcome not in ('yes', 'no'):
+                    raise ValueError('Market price context requires binary Yes/No outcomes')
+                size, price = Fraction(Decimal(trade['shares'])), Fraction(Decimal(trade['price']))
+                if size <= 0 or not 0 <= price <= 1:
+                    raise ValueError('Invalid quantity or price in staged market trades')
+                numerator, denominator, n = aggregates.get(outcome, (Fraction(0), Fraction(0), 0))
+                aggregates[outcome] = (numerator + size * price, denominator + size, n + 1)
+            for outcome, (numerator, denominator, n) in sorted(aggregates.items()):
+                vwap = numerator / denominator
+                # Round the exact rational once, without a finite-precision
+                # intermediate division that could double-round a boundary.
+                scaled, remainder = divmod(vwap.numerator * 10**12, vwap.denominator)
+                if 2 * remainder > vwap.denominator or (2 * remainder == vwap.denominator and scaled % 2):
+                    scaled += 1
+                price = Decimal(scaled) / Decimal(10**12)
+                snapshot = {'price': decimal_text(price), 'implied_probability': decimal_text(price),
+                            'observed_at': utc_time(instant),
+                            'source': 'captured_execution_timestamp_vwap', 'observation_count': n}
+                db.execute('INSERT INTO market_prices VALUES (?,?,?)', (outcome, instant, compact(snapshot)))
+                stream.write(compact({'outcome': outcome, **snapshot}) + '\n')
+                count += 1
+    db.commit()
+    return {'file': Path(path).name, 'observations': count,
+            'sha256': sft_sha(path), 'aggregation': 'volume_weighted_price_per_outcome_per_timestamp',
+            'decimal_places': 12, 'rounding': 'ROUND_HALF_EVEN',
+            'scope': 'all_supplied_captured_trades_before_actor_and_start_filters',
+            'canonical_history_complete': False}
+
+
+def market_context_at(db, instant):
+    result = {'version': 1, 'as_of': utc_time(instant),
+              'price_semantics': 'prior_execution_vwap_not_quote',
+              'yes': None, 'no': None,
+              'winning_payout_per_share': '1', 'losing_payout_per_share': '0'}
+    for outcome in ('yes', 'no'):
+        row = db.execute('SELECT instant,payload FROM market_prices WHERE outcome=? AND instant<? '
+                         'ORDER BY instant DESC LIMIT 1', (outcome, instant)).fetchone()
+        if row is not None:
+            result[outcome] = {**json.loads(row[1]),
+                'age_seconds': decimal_text(Decimal(instant - row[0]) / Decimal(1000000))}
+    return result
+
+
+def actor_records(actor, trades, market, events, event_times, origin,
+                  market_context_lookup=None, fill_window_seconds=5):
     """Yield exactly two records per distinct execution timestamp.
 
     News uses strict lower < news time < current execution time. Equal-time
@@ -1491,17 +1595,27 @@ def actor_records(actor, trades, market, events, event_times, origin):
         interval = {"start": utc_time(previous) if previous is not None else None,
                     "end": utc_time(instant), "start_inclusive": False, "end_inclusive": False}
         base = {"actor_id": actor, "market_id": market["market_id"], "condition_id": market["condition_id"]}
+        if market_context_lookup is not None:
+            base['market_context'] = market_context_lookup(instant)
+        gap_features = ({'execution_info': execution_evidence(instant, False, fill_window_seconds),
+                         'payoff_analysis': []} if market_context_lookup is not None else {})
         yield {**base, "record_type": "interval", "row_index": 2 * index - 2,
-               "interval": interval, "news": news, "label": {"action": "NO_TRADE"}}
+               "interval": interval, "news": news, "label": {"action": "NO_TRADE"}, **gap_features}
         values = list(executions)
+        trade_features = ({'execution_info': execution_evidence(instant, True, fill_window_seconds),
+                           'payoff_analysis': [execution_payoff(value['trade']) for value in values]}
+                          if market_context_lookup is not None else {})
         yield {**base, "record_type": "trade", "row_index": 2 * index - 1,
                "timestamp": utc_time(instant), "context_interval": interval,
                "news": news, "label": {"action": "TRADE", "trades": [
-                   {"time": value["time"], **value["trade"]} for value in values]}}
+                   {"time": value["time"], **value["trade"]} for value in values]}, **trade_features}
         previous = instant
 
 
 def export(args):
+    fill_window = getattr(args, 'fill_window_seconds', 5)
+    if type(fill_window) is not int or fill_window < 0:
+        raise ValueError('--fill-window-seconds must be a nonnegative integer')
     if args.max_trades_per_actor < 0:
         raise ValueError("--max-trades-per-actor must be nonnegative; 0 includes all actors")
     if args.trade_capture and (args.trades_file or args.sqlite):
@@ -1582,6 +1696,8 @@ def export(args):
             observations = stage_trades(db, iterator)
             if not observations:
                 raise ValueError("No captured trades found for this market")
+            print('Building shared prior-price timeline from all captured market trades', flush=True)
+            price_timeline = build_price_timeline(db, work / 'market_price_history.jsonl')
             minimum = db.execute("SELECT MIN(instant) FROM trades").fetchone()[0]
             origin = timestamp_us(args.start) if args.start else (
                 timestamp_us(market["market_open_utc"]) if market.get("market_open_utc") else None)
@@ -1606,7 +1722,8 @@ def export(args):
                     actor_count = Counter()
                     trades = (json.loads(item[1]) for item in actor_rows)
                     with opener(path, "wt", encoding="utf-8") as stream:
-                        for row in actor_records(actor, trades, market, events, event_times, origin):
+                        for row in actor_records(actor, trades, market, events, event_times, origin,
+                                                 lambda instant: market_context_at(db, instant), fill_window):
                             stream.write(compact(row) + "\n")
                             actor_count["rows"] += 1
                             actor_count["news_entries"] += len(row["news"])
@@ -1638,6 +1755,12 @@ def export(args):
             "origin_utc": utc_time(origin) if origin is not None else None, "origin_basis": origin_basis,
             "espn_timed_items": len(events), "espn_unplaced_items": len(context["untimed_events"]),
             "key_events_only": args.key_events_only, "source": source_report,
+            "market_context_version": 1, "market_price_history": price_timeline,
+            "market_context_boundary_rule": "price_timestamp < row trade timestamp (interval end for gap rows)",
+            "market_context_semantics": "independent prior Yes/No execution VWAPs; not quotes or normalized true probabilities",
+            "fill_window_seconds": fill_window,
+            "execution_info_semantics": "captured executions only; submission, limit order and full-fill status unknown",
+            "payoff_analysis_semantics": "BUY hypothetical hold-to-resolution gross payoff; fees, probability-weighted expected profit and SELL cost basis unknown",
             "record_order": ["open_interval_before_trade", "trade_timestamp"],
             "equal_time_trades": "one_trade_row_containing_all_same_time_observations",
             "news_boundary_rule": "start < news_timestamp < trade_timestamp; equal-time news excluded",
@@ -1750,6 +1873,127 @@ def sft_instant(value):
     return result.astimezone(timezone.utc)
 
 
+SFT_MARKET_CONTEXT_SYSTEM = (
+    " Market context reports prices of earlier captured executions aggregated by "
+    "outcome and timestamp. Price-based implied probabilities are not true winning "
+    "probabilities or executable quotes. Their ages show staleness; null means no "
+    "earlier captured observation. Each price is numerically the market-implied "
+    "probability for a share paying 1 if that outcome wins and 0 if it loses, before "
+    "fees. YES and NO are independent observations and are not normalized to sum "
+    "to one. Submission time and order type are unknown."
+)
+
+
+def sft_prompt_market_context(context):
+    # Query time is already present in the turn; static semantics are in the
+    # system prompt. Full timestamps, source and counts remain in raw actor rows.
+    return {outcome: ({key: context[outcome][key] for key in ('price', 'age_seconds')}
+                      if context[outcome] is not None else None) for outcome in ('yes', 'no')}
+
+
+def sft_market_context_version(manifest):
+    if 'market_context_version' not in manifest:
+        return 0
+    version = manifest['market_context_version']
+    sft_require(type(version) is int and version == 1,
+                'Unsupported market_context_version; rebuild with the current builder')
+    window = manifest.get('fill_window_seconds')
+    sft_require(type(window) is int and window >= 0,
+                'Context-enabled exports require an integer fill_window_seconds >= 0')
+    return version
+
+
+def sft_validate_source_context_versions(sources, warn_legacy=False):
+    versions = {sft_market_context_version(source['manifest']) for source in sources}
+    sft_require(len(versions) == 1,
+                'Mixed market-context versions. Rebuild every actor export with the current builder before combining them.')
+    version = next(iter(versions))
+    if warn_legacy and version == 0:
+        print('Warning: preparing legacy exports without market-price context. '
+              'Rebuild actor exports to include historical prices; prices cannot be recovered from retained actor rows alone.',
+              file=sys.stderr, flush=True)
+    return version
+
+
+def sft_exact_generated_value(actual, expected, name):
+    """Validate derived audit features without allowing extra future information."""
+    sft_require(type(actual) is type(expected), f'{name}: unexpected value type')
+    if isinstance(expected, dict):
+        sft_require(actual.keys() == expected.keys(), f'{name}: unexpected or missing fields')
+        for key in expected:
+            sft_exact_generated_value(actual[key], expected[key], f'{name}.{key}')
+    elif isinstance(expected, list):
+        sft_require(len(actual) == len(expected), f'{name}: inconsistent length')
+        for index, value in enumerate(expected):
+            sft_exact_generated_value(actual[index], value, f'{name}[{index}]')
+    else:
+        sft_require(actual == expected, f'{name}: inconsistent derived value')
+
+
+def sft_context_decimal(value, name):
+    sft_require(isinstance(value, str) and re.fullmatch(
+        r'[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?', value),
+        f'{name} must be a decimal string')
+    number = Decimal(value)
+    sft_require(number.is_finite(), f'{name} must be finite')
+    return number
+
+
+def sft_validate_market_features(gap, trade, source, when):
+    """Return validated prior context only; execution and payoff audits stay out of prompts."""
+    version = sft_market_context_version(source['manifest'])
+    feature_keys = {'market_context', 'execution_info', 'payoff_analysis'}
+    if version == 0:
+        sft_require(not any(feature_keys.intersection(row) for row in (gap, trade)),
+                    'Legacy manifest cannot contain undeclared market-context features')
+        return None
+    sft_require(all(feature_keys.issubset(row) for row in (gap, trade)),
+                'Context-enabled export is missing market_context, execution_info, or payoff_analysis')
+    context = trade['market_context']
+    sft_require(isinstance(context, dict) and set(context) == {
+        'version', 'as_of', 'price_semantics', 'yes', 'no',
+        'winning_payout_per_share', 'losing_payout_per_share'},
+        'Invalid market_context fields')
+    sft_exact_generated_value(gap['market_context'], context, 'adjacent market_context')
+    sft_require(type(context['version']) is int and context['version'] == 1,
+                'Invalid row market_context version')
+    sft_require(sft_instant(context['as_of']) == when, 'Market context as_of differs from query_time')
+    sft_require(context['price_semantics'] == 'prior_execution_vwap_not_quote',
+                'Unsupported market-context price semantics')
+    sft_require(context['winning_payout_per_share'] == '1' and context['losing_payout_per_share'] == '0',
+                'Unexpected binary payout terms')
+    sft_require({outcome.casefold() for outcome in source['outcomes']} == {'yes', 'no'},
+                'Market-price context requires binary YES/NO outcome mapping')
+    snapshot_keys = {'price', 'implied_probability', 'observed_at', 'age_seconds', 'source', 'observation_count'}
+    for outcome in ('yes', 'no'):
+        item = context[outcome]
+        if item is None:
+            continue
+        sft_require(isinstance(item, dict) and set(item) == snapshot_keys,
+                    f'Invalid {outcome} price snapshot fields')
+        price = sft_context_decimal(item['price'], f'{outcome}.price')
+        sft_require(0 <= price <= 1, f'{outcome}.price must lie between 0 and 1')
+        sft_require(type(item['implied_probability']) is str and item['implied_probability'] == item['price'],
+                    f'{outcome}.implied_probability must equal its observed price')
+        observed = sft_instant(item['observed_at'])
+        sft_require(observed < when, 'Market-price observations must be strictly before query_time')
+        age = sft_context_decimal(item['age_seconds'], f'{outcome}.age_seconds')
+        delta = when - observed
+        expected_age = Decimal(delta.days * 86400 + delta.seconds) + Decimal(delta.microseconds) / Decimal(1_000_000)
+        sft_require(age == expected_age, f'{outcome}.age_seconds does not match its observation timestamp')
+        sft_require(item['source'] == 'captured_execution_timestamp_vwap', 'Unsupported market-price source')
+        sft_require(type(item['observation_count']) is int and item['observation_count'] > 0,
+                    'Market-price observation_count must be a positive integer')
+    window = source['manifest']['fill_window_seconds']
+    instant = timestamp_us(trade['timestamp'])
+    for row, is_trade in ((gap, False), (trade, True)):
+        sft_exact_generated_value(row['execution_info'], execution_evidence(instant, is_trade, window), 'execution_info')
+    sft_exact_generated_value(gap['payoff_analysis'], [], 'interval payoff_analysis')
+    expected_payoffs = [execution_payoff(execution) for execution in trade['label']['trades']]
+    sft_exact_generated_value(trade['payoff_analysis'], expected_payoffs, 'trade payoff_analysis')
+    return context
+
+
 def sft_discover(exports, input_root):
     sft_require(not (exports and input_root), 'Use explicit export directories OR --input-root')
     if exports:
@@ -1790,6 +2034,7 @@ def sft_discover(exports, input_root):
         kickoff = sft_instant(market['kickoff_utc']) if market.get('kickoff_utc') else None
         sources.append(dict(path=path, manifest=manifest, market=market, fixture_id=fixture,
                             kickoff=kickoff, outcomes=outcomes))
+    sft_validate_source_context_versions(sources)
     return sorted(sources, key=lambda x: (x['fixture_id'], str(x['market']['market_id'])))
 
 
@@ -1855,7 +2100,8 @@ def sft_convert_actor(path, source):
     sft_require(isinstance(actor, str) and re.fullmatch(r'0x[0-9a-fA-F]{40}', actor), f'{path}: invalid actor ID')
     sft_require(path.name in (actor + '.jsonl', actor + '.jsonl.gz'), f'{path}: actor/file mismatch')
     market = source['market']
-    messages = [{'role': 'system', 'content': SFT_SYSTEM}]
+    messages = [{'role': 'system', 'content': SFT_SYSTEM + (
+        SFT_MARKET_CONTEXT_SYSTEM if sft_market_context_version(source['manifest']) else '')}]
     previous = None
     totals = Counter(rows=len(rows))
     first_time = last_time = None
@@ -1898,8 +2144,11 @@ def sft_convert_actor(path, source):
                 number = Decimal(value)
                 sft_require(number.is_finite() and (number > 0 if name == 'shares' else 0 <= number <= 1), f'{path}: invalid {name}')
             values.append({key: execution[key] for key in ('side', 'outcome', 'shares', 'price')})
+        market_context = sft_validate_market_features(gap, trade, source, when)
         context = {'query_time': trade['timestamp'],
                    'news': [{key: item.get(key) for key in ('time', 'type', 'text')} for item in news]}
+        if market_context is not None:
+            context['market_context'] = sft_prompt_market_context(market_context)
         if index == 0:
             context = {'actor_id': actor, 'market': {
                 'market_id': str(market['market_id']), 'fixture': market.get('fixture_title'),
@@ -1943,6 +2192,7 @@ def sft_token_checker(model_path, max_length):
 
 def sft_export(args):
     sources = sft_discover(args.exports, args.input_root)
+    context_version = sft_validate_source_context_versions(sources, warn_legacy=True)
     train_validation_only = getattr(args, 'train_validation_only', False)
     active_splits = SFT_SPLITS[:2] if train_validation_only else SFT_SPLITS
     mapping, method = sft_assign_splits(sources, args.split_file, args.validation_fraction, args.test_fraction, train_validation_only)
@@ -1993,13 +2243,18 @@ def sft_export(args):
                     'split': split, 'actors': actor_count, 'counts': dict(totals), 'manifest_sha256': sft_sha(path / 'manifest.json'),
                     'market_sha256': sft_sha(path / 'market.json'), 'actor_inventory_sha256': source_hash.hexdigest(),
                     'source_trade_coverage': source['manifest'].get('source'),
-                    'timestamp_semantics': source['manifest'].get('timestamp_semantics')})
+                    'timestamp_semantics': source['manifest'].get('timestamp_semantics'),
+                    'market_context_version': sft_market_context_version(source['manifest']),
+                    'fill_window_seconds': source['manifest'].get('fill_window_seconds'),
+                    'market_price_history': source['manifest'].get('market_price_history')})
                 print(f'Market {source["market"]["market_id"]}: {actor_count:,} conversations / {totals["distinct_trade_times"]:,} targets -> {split}', flush=True)
         for stream in streams.values():
             stream.close()
         sft_require(all(stats[s]['conversations'] > 0 for s in active_splits), 'Every enabled split needs nonempty conversations')
         metadata = {'format': 'actor_market_trade_messages_v1', 'created_at': datetime.now(timezone.utc).isoformat(),
             'task': 'execution_attributes_conditional_on_observed_execution', 'no_trade_targets': False,
+            'market_context_version': context_version,
+            'execution_and_payoff_audit_used_as_model_input': False,
             'history': 'earlier_turns_of_same_actor_and_binary_market; no_cross_market_history',
             'news': 'one_copy_per_gap_from_trade_row; no_extra_news_added',
             'fixture_to_split': mapping, 'split_method': method, 'global_query_time_separation_enforced': False,
@@ -2026,6 +2281,8 @@ def sft_export(args):
 
 
 def add_collection_options(parser):
+    parser.add_argument('--fill-window-seconds', type=int, default=5,
+                        help='Submission-to-fill window to describe (default 5); public trades cannot determine the flag, so it remains null')
     parser.add_argument("--cache", type=Path, default=None, help="HTTP/trade cache; default data/market_actor_cache (under --data-root in sft mode)")
     parser.add_argument("--http-transport", choices=("urllib", "curl"), default="urllib",
                         help="HTTP client for live APIs; choose curl if Python requests reset but terminal curl works")
@@ -2115,6 +2372,7 @@ def build_sft(args):
     sft_require(not output.exists(), f'Output exists: {output}. Choose a new --out directory.')
     sft_require(args.max_length > 0, '--max-length must be positive')
     sft_require(args.max_trades_per_actor >= 0, '--max-trades-per-actor must be nonnegative')
+    sft_require(args.fill_window_seconds >= 0, '--fill-window-seconds must be nonnegative')
     for path in paths:
         sft_require(output != path and not output.is_relative_to(path) and not path.is_relative_to(output),
                     'SFT output must be separate from every actor export')
@@ -2132,6 +2390,9 @@ def build_sft(args):
             sft_require(args.reuse_existing,
                         f'Actor export exists: {path}. Use --reuse-existing to use it as-is, or another --data-root.')
             source = sft_discover([path], None)[0]
+            sft_require(sft_market_context_version(source['manifest']) == 1,
+                        f'Existing export lacks market context: {path}. Rebuild into a new --data-root '
+                        'with the SAME --cache to reuse saved trade captures, then prepare again.')
             sft_require(str(source['market']['market_id']) == market_id,
                         f'Existing export does not match requested market {market_id}: {path}')
             sources.append(source)

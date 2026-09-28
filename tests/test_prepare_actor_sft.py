@@ -57,7 +57,7 @@ class ActorSFTTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def source(self, market_id=1, fixture=1, compressed=False):
+    def source(self, market_id=1, fixture=1, compressed=False, with_market_context=False):
         path = self.root / ('market_' + str(market_id))
         (path / 'actors').mkdir(parents=True)
         market = {'market_id': str(market_id), 'condition_id': '0x' + f'{market_id:064x}',
@@ -75,6 +75,13 @@ class ActorSFTTests(unittest.TestCase):
         trades = [dict(time_us=t, time=builder.utc_time(t), trade={'side': side, 'outcome': 'Yes',
                   'shares': '13.123456789', 'price': '0.31'}) for t, side in ((times[0], 'BUY'), (times[0], 'SELL'), (times[1], 'BUY'))]
         rows = list(builder.actor_records(actor, trades, market, events, [e['timestamp_us'] for e in events], origin))
+        if with_market_context:
+            import sqlite3
+            with sqlite3.connect(':memory:') as db:
+                builder.stage_trades(db, ({'actor_id': actor, **trade} for trade in trades))
+                builder.build_price_timeline(db, path / 'market_price_history.jsonl')
+                rows = list(builder.actor_records(actor, trades, market, events,
+                    [e['timestamp_us'] for e in events], origin, lambda instant: builder.market_context_at(db, instant)))
         text = ''.join(converter.sft_compact(row) + '\n' for row in rows)
         name = actor + ('.jsonl.gz' if compressed else '.jsonl')
         actor_file = path / 'actors' / name
@@ -84,6 +91,8 @@ class ActorSFTTests(unittest.TestCase):
         manifest = {'format': 'actor_market_intervals_v1', 'market_id': str(market_id),
                     'condition_id': market['condition_id'], 'espn_event_id': str(fixture),
                     'origin_utc': builder.utc_time(origin), 'max_trades_per_actor': 20, 'counts': counts}
+        if with_market_context:
+            manifest.update(market_context_version=1, fill_window_seconds=5)
         (path / 'market.json').write_text(json.dumps(market))
         (path / 'manifest.json').write_text(json.dumps(manifest))
         return path, actor_file, rows
