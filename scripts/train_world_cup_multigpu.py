@@ -11,6 +11,7 @@ Based on this project's train_market_qlora.py; see MULTIGPU_README.md for source
 from __future__ import annotations
 
 import argparse
+import csv
 import gzip
 import hashlib
 import importlib.metadata
@@ -167,6 +168,62 @@ def atomic_json(path, value):
     tmp.replace(path)
 
 
+def make_loss_callback(output_dir):
+    """Persist Trainer's reduced losses on rank zero, independently of checkpoints."""
+    from transformers import TrainerCallback
+
+    directory = Path(output_dir)
+    fields = ("timestamp_utc", "event", "step", "epoch", "loss", "eval_loss",
+              "smoke_eval_loss", "learning_rate", "grad_norm")
+
+    class LossLogger(TrainerCallback):
+        def write(self, state, logs, event="log"):
+            if not state.is_world_process_zero:
+                return
+            directory.mkdir(parents=True, exist_ok=True)
+            row = {**logs, "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+                   "event": event, "step": state.global_step,
+                   "epoch": logs.get("epoch", state.epoch)}
+            with (directory / "metrics.jsonl").open("a", encoding="utf-8") as target:
+                target.write(json.dumps(row) + "\n")
+                target.flush()
+                os.fsync(target.fileno())
+            if event == "train_begin" or any(key in logs for key in ("loss", "eval_loss", "smoke_eval_loss")):
+                with (directory / "losses.csv").open("a", newline="", encoding="utf-8") as target:
+                    writer = csv.DictWriter(target, fieldnames=fields, extrasaction="ignore")
+                    if target.tell() == 0:
+                        writer.writeheader()
+                    writer.writerow(row)
+                    target.flush()
+                    os.fsync(target.fileno())
+
+        def on_train_begin(self, args, state, control, **kwargs):
+            if state.is_world_process_zero:
+                # A killed process can leave an incomplete final record. Drop only
+                # that uncommitted tail before appending the new resume marker.
+                for name in ("metrics.jsonl", "losses.csv"):
+                    path = directory / name
+                    if path.exists():
+                        with path.open("rb+") as target:
+                            target.seek(0, os.SEEK_END)
+                            end = target.tell()
+                            while end:
+                                target.seek(end - 1)
+                                if target.read(1) == b"\n":
+                                    break
+                                end -= 1
+                            target.truncate(end)
+            # Trainer has restored global_step here. Plotting uses this marker
+            # to discard the abandoned tail after a checkpoint rewind.
+            self.write(state, {}, event="train_begin")
+
+        def on_log(self, args, state, control, logs=None, **kwargs):
+            if logs:
+                self.write(state, logs)
+
+    return LossLogger()
+
+
 def sha256_file(path):
     digest = hashlib.sha256()
     with Path(path).open("rb") as source:
@@ -205,6 +262,8 @@ def parse_args(argv=None):
     p.add_argument("--dropout", type=float, default=0.05)
     p.add_argument("--max-length", type=int, default=8192, help="Fail on longer conversations; never silently truncate")
     p.add_argument("--eval-steps", type=int, default=277)
+    p.add_argument("--logging-steps", type=int, default=1,
+                   help="Save live training loss every N optimizer updates to metrics.jsonl and losses.csv")
     p.add_argument("--save-steps", type=int, default=100, help="Keep optimizer/scheduler/RNG for interruption recovery")
     p.add_argument("--eval-batch", type=int, default=1)
     p.add_argument("--workers", type=int, default=0, help="DataLoader workers PER GPU; tokenization is cached")
@@ -231,7 +290,7 @@ def parse_args(argv=None):
     p.add_argument("--prepared-cache", type=Path, help=argparse.SUPPRESS)
     args = p.parse_args(argv)
     if min(args.gpus, args.micro_batch, args.rank, args.alpha, args.max_length,
-           args.eval_steps, args.save_steps, args.eval_batch) < 1:
+           args.eval_steps, args.save_steps, args.eval_batch, args.logging_steps) < 1:
         p.error("GPU counts, batches, lengths and intervals must be positive")
     if args.global_batch is not None and args.global_batch < 1:
         p.error("--global-batch must be positive")
@@ -588,7 +647,8 @@ def train_worker(args):
         eval_strategy="no" if args.benchmark else "steps", eval_steps=cadence,
         save_strategy="no" if args.benchmark else "steps", save_steps=save_cadence,
         save_total_limit=2, save_only_model=False, load_best_model_at_end=False,
-        logging_steps=1 if args.smoke or args.benchmark else 10, logging_first_step=True,
+        logging_strategy="steps", logging_steps=args.logging_steps, logging_first_step=True,
+        logging_nan_inf_filter=False,
         report_to="none", prediction_loss_only=True, remove_unused_columns=False,
         label_names=["labels"], average_tokens_across_devices=True,
         dataloader_num_workers=args.workers, dataloader_pin_memory=True,
@@ -643,6 +703,7 @@ def train_worker(args):
                                   ("torch", "transformers", "peft", "accelerate", "datasets", "bitsandbytes")},
                         requested_training=kwargs, estimated_optimizer_steps=total_steps)
         atomic_json(metadata_path, metadata)
+        print(f"Live losses: {args.out / 'losses.csv'} (all metrics: {args.out / 'metrics.jsonl'})", flush=True)
 
     class RunProgress(TrainerCallback):
         def __init__(self):
@@ -656,16 +717,13 @@ def train_worker(args):
             if args.benchmark:
                 torch.cuda.synchronize(local_rank)
             self.times.append(time.perf_counter() - self.step_start)
+            if state.global_step >= state.max_steps:
+                control.should_log = True  # Include a final partial logging window.
             if args.smoke_then_full and trainer.smoke_check_result is None:
                 control.should_log = True
                 if state.global_step >= min(10, total_steps):
                     control.should_evaluate = True
             return control
-
-        def on_log(self, args_, state, control, logs=None, **kw):
-            if main and logs:
-                with (args.out / "metrics.jsonl").open("a") as f:
-                    f.write(json.dumps({"step": state.global_step, **logs}) + "\n")
 
         def on_save(self, args_, state, control, **kw):
             # At on_save, every rank has finished writing its own RNG state.
@@ -694,7 +752,7 @@ def train_worker(args):
                            data_collator=collate, selected_logits=args.selected_logits,
                            smoke_check_step=min(10, total_steps) if args.smoke_then_full else None,
                            smoke_reporter=record_smoke_check,
-                           callbacks=[progress])
+                           callbacks=[progress, make_loss_callback(args.out)])
     torch.cuda.reset_peak_memory_stats(local_rank)
     try:
         result = trainer.train(resume_from_checkpoint=str(args.resume) if args.resume else None)

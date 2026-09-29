@@ -148,6 +148,19 @@ python3 scripts/train_world_cup_multigpu.py \
   --smoke-then-full
 ```
 
+Training saves live losses after every optimizer step in `losses.csv` and
+`metrics.jsonl` inside the run's output directory. Plot them during or after
+training (this also reads `metrics.jsonl` from older runs; no retraining needed):
+
+```bash
+python3 scripts/plot_training_losses.py --run-dir /workspace/runs/YOUR_RUN
+```
+
+This writes `YOUR_RUN/loss_curve.png`. Add `--watch 10` to refresh it every ten
+seconds. Plotting requires `matplotlib`; loss logging has no extra dependencies.
+See [loss logging and plotting](docs/actor_sft_pipeline.md#live-loss-logging-and-plotting)
+for cadence, validation curves, and existing runs.
+
 `--reuse-existing` requires completed matching exports with both version-2 market
 context and version-1 actor snapshots. Rebuild older exports into a new directory;
 collection options apply only to newly built exports. An exhausted trade capture
@@ -251,6 +264,7 @@ The `scripts/` directory contains only the current SFT workflow:
 | `scripts/derive_actor_metrics.py` | Generate basic + in-market metrics from earlier actor history in the current binary market. |
 | `scripts/derive_global_actor_metrics.py` | Generate basic + global metrics from earlier wallet history across markets. |
 | `scripts/train_world_cup_multigpu.py` | Run QLoRA training on one or multiple GPUs. |
+| `scripts/plot_training_losses.py` | Plot saved training/validation losses, including existing runs; optionally refresh live. |
 
 Additional collection, recovery, reporting, and historical workflow utilities
 are in [`tools/`](tools/README.md). Run them from the repository root with

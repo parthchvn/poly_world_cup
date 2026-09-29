@@ -433,6 +433,55 @@ Always specify the new `--dataset-dir`; the trainer's historical default points
 to the older pilot export. The original `--smoke` remains a standalone ten-step
 run that exits. Starting a separate full command afterward reloads the weights.
 
+### Live loss logging and plotting
+
+The trainer writes `metrics.jsonl` (all logged metrics) and `losses.csv` (loss
+records) inside `--out`. The default is one training-loss record per optimizer
+step, after gradient accumulation; use `--logging-steps 10` to average/log over
+longer windows. The first and last steps are logged, and `--smoke-then-full`
+also logs each step until its initial validation check. These are Trainer's
+reported, distributed training losses, not individual microbatch losses.
+Validation loss is recorded at evaluations, not at every training step.
+
+Rows include UTC time, optimizer step, epoch, and available loss, learning rate,
+and gradient norm. Only the main GPU process writes, with each record flushed
+and synced to disk immediately, independently of checkpoint saves. Blank CSV
+cells mean that metric was not measured for that row. Nonfinite logged losses
+are retained instead of being replaced by a previous finite average.
+
+```bash
+# Use the output directory printed by the trainer, or your explicit --out.
+python3 scripts/plot_training_losses.py --run-dir /workspace/runs/YOUR_RUN
+
+# Refresh the PNG during training; Ctrl-C stops only the plot watcher.
+python3 scripts/plot_training_losses.py --run-dir /workspace/runs/YOUR_RUN --watch 10
+```
+
+The default output is `YOUR_RUN/loss_curve.png`. Use `--output figure.pdf` or
+`--output figure.svg` for other formats. If needed, install `matplotlib` in the
+environment where you plot with `python3 -m pip install matplotlib`; the trainer
+does not need it. Plotting runs on CPU without loading model weights or CUDA.
+The chart distinguishes training loss, full-validation loss, and the early
+smoke subset. The final cumulative `train_loss` summary is not a curve point.
+
+**Existing models do not need retraining.** Earlier trainer versions already
+wrote `metrics.jsonl` in the output directory (usually step 1 and then every 10
+steps for full runs). The plotting command reads those files directly, even if
+training is still running. It cannot reconstruct unlogged intermediate losses.
+Copy the log to another machine if you prefer to plot there. If only
+`losses.csv` is present, the plotter uses it instead.
+
+For runs made with this version, a `train_begin` event records the restored
+step on resume. Raw completed records are retained, while the plot discards the
+abandoned tail after the restored checkpoint and uses the latest value for each
+metric/step. A partially written last line is ignored during plotting and
+removed before resumed logging. Earlier logs lack these explicit resume
+markers; repeated metric/step pairs use their latest value. Logs and plots are
+local run outputs: keep them on your persistent RunPod volume if you need them
+after deleting a pod. Use the original training checkout/settings to resume an
+older run: the existing trainer and launchers enforce code/data signatures;
+plotting older logs does not require resuming or changing them.
+
 ## Conversation and supervision contract
 
 Each conversation starts with a system instruction and a user message containing
