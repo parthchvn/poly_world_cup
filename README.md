@@ -5,6 +5,26 @@ supervised fine-tuning. This repository keeps scripts, their supporting Python
 modules, configuration, documentation, and tests. Generated datasets, captures,
 download archives, model weights, and run outputs belong outside Git.
 
+## One command after uploading prepared data
+
+Use `scripts/run_world_cup_experiments.py` to train and evaluate Basic and In-market,
+then automatically save their paired comparison and loss curves. It resumes saved
+checkpoints/predictions, accepts prepared directories or `.tar.gz` uploads, and
+can create the four In-market execution summaries from a prepared Basic dataset
+without API calls. GPU groups keep training and evaluation isolated.
+
+```bash
+python3 scripts/run_world_cup_experiments.py \
+  --data /workspace/world_cup_basic_sft.tar.gz \
+  --model /workspace/models/Qwen3.6-27B \
+  --out /workspace/experiments/world_cup_v1 \
+  --gpu-group 0,1 --background
+```
+
+Read [the automated workflow](docs/automated_experiments.md) for optional dependency
+setup, four-GPU or two-pod execution, status, recovery, and reusing completed adapters.
+This is for prepared SFT datasets with train/validation/test splits, not raw actor files.
+
 ## Generate an actor dataset
 
 Python 3.11+ on Linux/macOS. The standalone collector uses the standard library.
