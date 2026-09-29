@@ -24,8 +24,12 @@ from train_world_cup_multigpu import CHAT_KWARGS, kernel_probe
 
 def validate_run(run, model_path, variant, bundle):
     metadata = json.loads((run / 'training_metadata.json').read_text())
-    require(metadata.get('status') == 'completed' and metadata.get('mode') == 'full',
-            'Use a COMPLETED full training run, not a smoke run/checkpoint or an active run')
+    # --smoke-then-full is a full run with an early validation check. The trainer
+    # preserves that mode name after all optimization and final saving complete.
+    status, mode = metadata.get('status'), metadata.get('mode')
+    require(status == 'completed' and mode in ('full', 'smoke_then_full'),
+            'Use a COMPLETED full or smoke-then-full training run, not a smoke '
+            f'run/checkpoint or an active run (status={status!r}, mode={mode!r})')
     require(metadata.get('test_used') is False, 'Training run does not declare test_used=false')
     signature = metadata['signature']
     reference = bundle['reference'][variant]

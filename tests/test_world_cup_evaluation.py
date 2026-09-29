@@ -190,11 +190,29 @@ class EvaluationTests(unittest.TestCase):
     def test_run_rejects_incomplete_and_smoke(self):
         meta = prepare.prepare(self.args())
         model, run, training = self.fake_training(meta)
-        for update in ({'status': 'running'}, {'status': 'completed', 'mode': 'smoke'}):
+        for update in ({'status': 'running'}, {'status': 'completed', 'mode': 'smoke'},
+                       {'status': 'running', 'mode': 'smoke_then_full'},
+                       {'status': 'failed', 'mode': 'smoke_then_full'},
+                       {'status': 'completed', 'mode': 'benchmark'}):
             training.update(update)
             common.write_json(run / 'training_metadata.json', training)
             with self.assertRaisesRegex(ValueError, 'COMPLETED full'):
                 evaluate.validate_run(run, model, 'basic', meta)
+
+    def test_completed_smoke_then_full_is_a_valid_full_run(self):
+        meta = prepare.prepare(self.args())
+        model, run, training = self.fake_training(meta)
+        training.update(mode='smoke_then_full', completed_steps=2712,
+                        smoke_check={'status': 'passed', 'step': 10})
+        training['signature']['smoke_then_full'] = True
+        common.write_json(run / 'training_metadata.json', training)
+        result, adapter = evaluate.validate_run(run, model, 'basic', meta)
+        self.assertEqual(result['completed_steps'], 2712)
+        self.assertEqual(adapter, run / 'adapter')
+        training['signature']['data']['sources']['train']['sha256'] = 'wrong'
+        common.write_json(run / 'training_metadata.json', training)
+        with self.assertRaisesRegex(ValueError, 'differs'):
+            evaluate.validate_run(run, model, 'basic', meta)
 
 
 class ScoringTests(unittest.TestCase):
