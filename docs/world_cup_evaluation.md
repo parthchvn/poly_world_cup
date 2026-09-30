@@ -1,10 +1,18 @@
 # Compare Basic and In-market adapters on held-out matches
 
 Here **Basic** means your fine-tuned Basic adapter, not the unadapted Qwen model.
-Both models predict the same execution targets using their respective input
-features. This is conditional execution prediction: the time is an observed
-trade time. It does not test whether a trader chooses to trade, profitability,
-winning outcomes, or a deployment policy.
+Both models predict the same targets using their respective input features.
+Legacy datasets contain only execution targets. Corrected datasets also retain
+each preceding open-interval `NO_TRADE` target. Action accuracy and class recalls
+are reported separately; trade-detail metrics and numeric coverage use only
+ground-truth TRADE targets. Correct NO_TRADE answers cannot inflate those metrics.
+
+Neither dataset tests a prospective trading policy: the corrected intervals end
+at observed trades and alternate with execution queries, revealing the action
+class through query scope/order. These are reconstruction checks, not evidence
+that the model can forecast trading at random times. See [the correction](no_trade_supervision.md).
+Existing completed evaluations remain associated with their original code and
+datasets; use that pinned checkout to resume them.
 
 ## 1. Mac: freeze the evaluation data
 

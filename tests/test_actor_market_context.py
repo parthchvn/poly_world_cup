@@ -296,7 +296,7 @@ class ActorMarketContextTests(unittest.TestCase):
         self.assertEqual(Decimal(rows[3]['market_context']['yes']['price']), Decimal('0.46'))
         self.assertEqual(Decimal(rows[1]['market_context']['no']['price']), Decimal('0.71'))
         source = builder.sft_discover([output], None)[0]
-        record, _, _ = builder.sft_convert_actor(actor_file, source)
+        record, _, _ = builder.sft_convert_actor(actor_file, source, include_no_trade=False)
         users = [json.loads(message['content']) for message in record['messages'] if message['role'] == 'user']
         assistants = [json.loads(message['content']) for message in record['messages'] if message['role'] == 'assistant']
         self.assertEqual(len(users), 2)
@@ -325,7 +325,7 @@ class ActorMarketContextTests(unittest.TestCase):
         actor_file.write_text(''.join(json.dumps(row) + '\n' for row in rows))
         source = builder.sft_discover([output], None)[0]
         with self.assertRaises(ValueError):
-            builder.sft_convert_actor(actor_file, source)
+            builder.sft_convert_actor(actor_file, source, include_no_trade=False)
 
     def test_full_offline_file_collection_then_prepare_cli(self):
         """Exercise real file readers, CLI options, exports, and published SFT files."""
@@ -373,7 +373,8 @@ class ActorMarketContextTests(unittest.TestCase):
             conversations = [json.loads(line) for line in (sft_out / (split + '.jsonl')).read_text().splitlines()]
             self.assertEqual(len(conversations), 1)
             record = conversations[0]
-            self.assertEqual(record['target_count'], 2)
+            self.assertEqual(record['target_count'], 4)
+            self.assertEqual(record['no_trade_target_count'], 2)
             first = json.loads(record['messages'][1]['content'])
             self.assertEqual(Decimal(first['market_context']['yes']['price']), Decimal('0.21'))
             self.assertNotIn('payoff_analysis', first)

@@ -6,6 +6,13 @@ Polymarket or ESPN requests**. Basic means the fine-tuned Basic adapter, not an
 unadapted Qwen baseline. This runner supports Basic and In-market; Global wallet
 collection and Global evaluation are not part of this pipeline.
 
+Preparation now retains `NO_TRADE` intervals and execution answers. The runner
+requires both by default; `--allow-trade-only` is an explicit override for old
+datasets and completed legacy runs. Existing datasets/adapters are not upgraded
+by pulling code. Follow [the migration](no_trade_supervision.md) before a new run.
+The mixed-label evaluation is historical reconstruction, not a random-time
+trade/no-trade forecasting benchmark.
+
 ## What to upload
 
 Upload a **prepared Basic SFT dataset** containing `manifest.json` and all three

@@ -203,7 +203,10 @@ def derive_inmarket(basic, destination):
                     groups = []
                     for offset in range(1, len(record['messages']), 2):
                         context = json.loads(record['messages'][offset]['content'])
-                        trades = json.loads(record['messages'][offset + 1]['content'])['trades']
+                        label = json.loads(record['messages'][offset + 1]['content'])
+                        if label['action'] == 'NO_TRADE':
+                            continue
+                        trades = label['trades']
                         when = timestamp_us(context['query_time'])
                         normalized = [{**t, 'time_us': when, 'shares': Decimal(t['shares']),
                                        'price': Decimal(t['price'])} for t in trades]
@@ -464,7 +467,8 @@ def train_command(args, variant, group, run, dataset):
             '--micro-batch', '1', '--max-length', str(args.max_length),
             '--learning-rate', str(args.learning_rate), '--rank', str(args.rank),
             '--alpha', str(args.alpha), '--save-steps', str(args.save_steps),
-            '--logging-steps', '1', '--no-group-by-length', '--smoke-then-full']
+            '--logging-steps', '1', '--no-group-by-length', '--smoke-then-full',
+            *(['--allow-trade-only'] if args.allow_trade_only else [])]
 
 
 def check_test_lengths(args):
@@ -500,6 +504,13 @@ def initialize(args, controller):
     log('Checking uploaded datasets and paired splits; this uses CPU only.')
     with file_lock(args.out / 'locks/prepare.lock'):
         datasets = stage_data(args)
+        for variant, path in datasets.items():
+            manifest = read_json(path / 'manifest.json')
+            require(manifest.get('no_trade_targets') is True or args.allow_trade_only,
+                    f'{variant}: uploaded SFT omits NO_TRADE labels. Rebuild from the saved raw actor exports '
+                    'with build_actor_dataset.py prepare into a NEW dataset/output. '
+                    'Use --allow-trade-only only to explicitly reproduce the old conditional-execution experiment.')
+            log(f'{variant} training targets: ' + json.dumps(manifest['stats'], sort_keys=True))
         config = {'format': 'world_cup_experiment_v1', 'model': str(args.model),
             'model_config_sha256': sha(args.model / 'config.json'), 'packages': versions,
             'data': {v: inventory(p) for v, p in datasets.items()},
@@ -740,6 +751,8 @@ def parse_args(argv=None):
     parser.add_argument('--basic-run', type=Path, help='Reuse an already COMPLETED Basic training run')
     parser.add_argument('--inmarket-run', type=Path, help='Reuse an already COMPLETED In-market training run')
     parser.add_argument('--install-deps', action='store_true', help='Install missing pinned packages on torch2.8/CUDA12.8; never replace existing versions')
+    parser.add_argument('--allow-trade-only', action='store_true',
+                        help='Explicit legacy experiment: permit prepared data with no NO_TRADE targets')
     parser.add_argument('--background', action='store_true', help='Detach from terminal; logs persist under --out/logs')
     parser.add_argument('--status', action='store_true', help='Print saved stage status; no GPU/packages/data required')
     parser.add_argument('--check-only', action='store_true', help='Validate data and tokenize all splits; do not load weights')

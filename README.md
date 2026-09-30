@@ -5,6 +5,12 @@ supervised fine-tuning. This repository keeps scripts, their supporting Python
 modules, configuration, documentation, and tests. Generated datasets, captures,
 download archives, model weights, and run outputs belong outside Git.
 
+**NO_TRADE supervision correction:** preparation now retains each open-interval
+`NO_TRADE` answer followed by its `TRADE` answer. Earlier prepared SFT datasets
+omitted interval answers despite retaining them in the raw exports. Rebuild from
+those saved exports into a new dataset; existing adapters do not change. Training
+rejects trade-only inputs by default. See [the correction and migration steps](docs/no_trade_supervision.md).
+
 ## One command after uploading prepared data
 
 Use `scripts/run_world_cup_experiments.py` to train and evaluate Basic and In-market,
@@ -217,8 +223,8 @@ remain in the actor files and audit timeline.
 Collection-time actor value and positions, present-day order books, and later
 resolution outcomes are not substituted for historical context. Actor snapshots,
 execution metadata, and payoff metadata are retained for analysis, not inserted
-into SFT inputs or targets. The converter checks but does not train on
-retrospective `NO_TRADE` intervals. Earlier trades stay in preceding conversation turns;
+into SFT inputs or targets. The converter now trains on both retrospective
+`NO_TRADE` intervals and `TRADE` timestamps. Earlier trades stay in preceding conversation turns;
 interval news appears once per turn. All markets from one match stay in one split.
 Three matches are a smoke pipeline, not a sufficient performance benchmark.
 

@@ -41,17 +41,22 @@ def references(basic_path, inmarket_path):
 
 def enrich_record(record, groups, config):
     result = copy.deepcopy(record)
-    require(len(groups) == record['target_count'], 'Raw groups differ from conversation')
+    mixed = record.get('target_protocol') == 'observed_interval_and_execution_v1'
+    require(len(groups) == record.get('trade_target_count', record['target_count']), 'Raw groups differ from conversation')
     history = []
-    for group, offset in zip(groups, range(1, len(result['messages']), 2)):
+    for group, offset in zip(groups, range(1, len(result['messages']), 4 if mixed else 2)):
         context = json.loads(result['messages'][offset]['content'])
         require(timestamp_us(context['query_time']) == group['time_us'], 'Feature query time mismatch')
-        require(json.loads(result['messages'][offset + 1]['content'])['trades'] == group['expected'],
+        require(json.loads(result['messages'][offset + (3 if mixed else 1)]['content'])['trades'] == group['expected'],
                 'Feature execution labels differ')
         core = metrics.compute_metrics(history, [], [], group['time_us'],
                     config.get('lookback_seconds'), config.get('min_return_periods', 30))
         context['actor_metrics'] = metrics.model_metric_fields(core, config)
         result['messages'][offset]['content'] = metrics.json_text(context)
+        if mixed:
+            execution_context = json.loads(result['messages'][offset + 2]['content'])
+            execution_context['actor_metrics'] = metrics.model_metric_fields(core, config)
+            result['messages'][offset + 2]['content'] = metrics.json_text(execution_context)
         history.extend(group['trades'])  # Add this execution only AFTER constructing its input.
     check_pair(record, result)
     return result
@@ -84,7 +89,8 @@ def collect_new(args, datasets, excluded_fixtures, excluded_markets, cutoff):
         source, candidates, _ = inspect_export(path, expected)
         metric_source = metrics.discover_exports([path], None)[0]
         for item in candidates:
-            basic, audit, _ = builder.sft_convert_actor(item['path'], source)
+            basic, audit, _ = builder.sft_convert_actor(item['path'], source,
+                include_no_trade=bool(datasets['basic']['manifest'].get('no_trade_targets')))
             if timestamp_us(audit['first_query_time']) <= cutoff:
                 args.excluded_early += 1
                 continue  # Whole conversation excluded by time only; no label-based selection.
@@ -144,6 +150,9 @@ def prepare(args):
             'inmarket_config': datasets['inmarket']['manifest']['actor_metrics']['config'],
             'history_protocol': 'observed_prior_actions_only; current_and_future_answers_excluded',
             'base_model_pretraining_contamination': 'unknown; fine_tuning_holdout_only'}
+        if datasets['basic']['manifest'].get('no_trade_targets'):
+            meta.update(task='observed_interval_and_execution_reconstruction',
+                        prospective_trade_timing_benchmark=False)
         write_json(work / 'manifest.json', meta)
         work.rename(args.out)
     finally:

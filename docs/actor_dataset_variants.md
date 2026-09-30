@@ -178,8 +178,10 @@ instead of truncating history or targets.
 The trainer uses validation during training and leaves test files untouched.
 Use validation to select feature subsets and settings, then compare the chosen
 models once on the same test examples. Report the predictive task and dataset
-coverage alongside loss or action-attribute accuracy. This remains conditional
-on an observed execution; it is not a test of when to trade or of strategy P&L.
+coverage alongside loss or action-attribute accuracy. Corrected preparation keeps
+both NO_TRADE intervals and execution answers across all three variants. The
+intervals are event-bounded historical gaps, not prospective samples. Their action
+accuracy is not a test of when to trade or of strategy P&L. See [migration](no_trade_supervision.md).
 
 ## Feature subsets and token length
 

@@ -51,7 +51,15 @@ class PipelineTests(unittest.TestCase):
     def args(self, *extra):
         return pipeline.parse_args(['--data', str(self.fixture.datasets['basic']),
             '--data', str(self.fixture.datasets['inmarket']), '--model', str(self.model),
-            '--out', str(self.root / 'experiment'), *extra])
+            '--out', str(self.root / 'experiment'), '--allow-trade-only', *extra])
+
+    def test_default_rejects_old_trade_only_upload_before_training(self):
+        with self.stack:
+            args = self.args()
+            args.allow_trade_only = False
+            with self.assertRaisesRegex(ValueError, 'omits NO_TRADE'):
+                pipeline.run(args)
+        self.assertFalse(any('train_' in str(call) for call in self.calls))
 
     def checkpoint(self, run, step, gpus=2):
         checkpoint = run / f'checkpoint-{step}'

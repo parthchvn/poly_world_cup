@@ -34,8 +34,8 @@ class ActorExperimentTests(unittest.TestCase):
         self.tmp.cleanup()
 
     def args(self, **changes):
-        args = experiment.parse_args(['--out', str(self.root / 'experiment'), '--targets', '3',
-                                      '--validation-targets', '3', '--test-targets', '3'])
+        args = experiment.parse_args(['--out', str(self.root / 'experiment'), '--targets', '5',
+                                      '--validation-targets', '5', '--test-targets', '5'])
         for name, value in changes.items():
             setattr(args, name, value)
         return args
@@ -78,7 +78,7 @@ class ActorExperimentTests(unittest.TestCase):
         sources = [self.source(i, compressed=i == 2) for i in range(1, 4)]
         before = {str(p): p.read_bytes() for s in sources for p in (s / 'actors').iterdir()}
         result = self.run_prepare()
-        self.assertEqual(result['counts']['train']['targets'], 4)
+        self.assertEqual(result['counts']['train']['targets'], 8)
         self.assertEqual(result['counts']['train']['conversations'], 2)
         selected = Path(result['exports_path'])
         for i in range(1, 4):
@@ -125,7 +125,7 @@ class ActorExperimentTests(unittest.TestCase):
 
     def test_insufficient_candidates_keep_captures_without_publishing(self):
         source = self.source(1, actors=1)
-        with self.assertRaisesRegex(ValueError, 'only 2 eligible targets'):
+        with self.assertRaisesRegex(ValueError, 'only 4 eligible targets'):
             self.run_prepare()
         self.assertTrue(source.is_dir())
         self.assertFalse((self.root / 'experiment/prepared').exists())
@@ -160,7 +160,7 @@ class ActorExperimentTests(unittest.TestCase):
             self.source(i)
         self.run_prepare()
         with self.assertRaisesRegex(ValueError, 'settings differ'):
-            self.run_prepare(self.args(targets=5))
+            self.run_prepare(self.args(targets=9))
 
     def test_frozen_actor_tampering_is_detected(self):
         for i in range(1, 4):

@@ -510,14 +510,17 @@ decimal strings. The target's execution values are not inserted into its user
 message. Causal training attention prevents later answers from being used to
 predict earlier ones.
 
-The converter validates interval rows, but creates no `NO_TRADE` targets. Those
-rows are retrospective gaps ending at the next trade; they are not prospective
-samples of a decision to abstain. Each gap's news is taken once from the trade
-row, avoiding duplication from its adjacent interval row. No additional news is
-retrieved or invented during conversion.
+The default converter preserves every interval answer as `{"action":"NO_TRADE"}`,
+followed by its endpoint execution answer. The interval prompt carries its open
+boundaries, news and earlier market prices; the following timestamp prompt reuses
+that context without repeating the news. Equal query times are allowed only for
+this validated interval/execution pair. Counts for both label classes are printed
+and stored. `--trade-only` explicitly reproduces the old converter that omitted
+interval answers. See [migration and limitations](no_trade_supervision.md).
 
-This predicts execution attributes conditional on a trade being observed. It
-does not predict whether/when a trade occurs, P&L, match resolution, or verified
+These labels reconstruct event-bounded historical gaps. Their alternating order
+and query scope reveal the action class, so this is not a prospective trade-timing
+benchmark. It does not establish conscious abstention, P&L, match resolution, or
 human reasoning. History is within this actor/market conversation, not across
 the actor's other markets. Source rows before an export's start boundary cannot
 be reconstructed by the converter.

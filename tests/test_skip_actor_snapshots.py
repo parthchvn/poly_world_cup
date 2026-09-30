@@ -73,7 +73,7 @@ class SkipActorSnapshotsTests(unittest.TestCase):
             for line in file.read_text().splitlines():
                 self.assertNotIn('actor_snapshot_ref', json.loads(line))
         source = builder.sft_discover([output], None)[0]
-        record, audit, counts = builder.sft_convert_actor(next((output / 'actors').iterdir()), source)
+        record, audit, counts = builder.sft_convert_actor(next((output / 'actors').iterdir()), source, include_no_trade=False)
         self.assertEqual(record['target_count'], 2)
         self.assertNotIn('actor_snapshot_ref', audit)
 
@@ -113,7 +113,8 @@ class SkipActorSnapshotsTests(unittest.TestCase):
             self.assertIn('lacks actor snapshots', error.getvalue())
             result = builder.main([*command, '--skip-actor-snapshots'])
         self.assertFalse(result['actor_snapshots_used_as_model_input'])
-        self.assertEqual(result['stats']['train']['targets'], 2)
+        self.assertEqual(result['stats']['train']['targets'], 4)
+        self.assertEqual(result['stats']['train']['no_trade_targets'], 2)
 
     def test_skip_flag_does_not_silently_accept_missing_snapshot_provenance(self):
         self.fixture.source(with_market_context=True, context_version=2)

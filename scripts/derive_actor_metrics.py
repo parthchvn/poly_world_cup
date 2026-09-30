@@ -646,6 +646,13 @@ def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> d
                 for original in iter_jsonl(split_paths[split]):
                     require(isinstance(original, dict), f'{split}: invalid conversation')
                     record = copy.deepcopy(original)
+                    interval_protocol = record.get('target_protocol') == 'observed_interval_and_execution_v1'
+                    if interval_protocol:
+                        # Shared validation checks alternation, equal-time endpoint
+                        # pairing, gap continuity and both label counts.
+                        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
+                        from compare_actor_variants import conversation
+                        conversation(record)
                     actor = record.get('actor_id')
                     market = record.get('market_id')
                     require(isinstance(actor, str) and bool(actor)
@@ -681,7 +688,7 @@ def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> d
                         require(isinstance(context, dict), f'{split}: user context must be JSON object')
                         require('actor_metrics' not in context,
                                 f'{split}: user context already contains actor_metrics')
-                        compact_context = manifest.get('prompt_schema_version') == 2
+                        compact_context = manifest.get('prompt_schema_version', 0) >= 2
                         if offset == 1 and not compact_context:
                             require(isinstance(context.get('actor_id'), str)
                                     and context['actor_id'].lower() == actor,
@@ -700,11 +707,13 @@ def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> d
                                              or (compact_context and 'market_id' not in context['market']))),
                                     f'{split}: later context changes market_id')
                         query = timestamp_us(context.get('query_time'))
-                        require(previous_query is None or query > previous_query,
+                        require(previous_query is None or query > previous_query or (interval_protocol and query == previous_query),
                                 f'{split}: query times must strictly increase within an actor')
                         key = (actor, market, query)
-                        require(key not in seen_queries, f'Duplicate SFT query: {key}')
-                        seen_queries.add(key)
+                        is_interval = interval_protocol and 'interval' in context
+                        unique_key = (*key, is_interval)
+                        require(unique_key not in seen_queries, f'Duplicate SFT query: {key}')
+                        seen_queries.add(unique_key)
                         require(key in index, f'No exact raw-history metrics match for SFT query: {key}')
                         entry = index[key]
                         require(isinstance(entry, dict) and isinstance(entry.get('actor_metrics'), dict)
@@ -716,7 +725,7 @@ def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> d
                                 and window['end_us'] == query
                                 and window.get('end_inclusive') is False,
                                 f'Derived metrics do not have a strict prior cutoff at {key}')
-                        expected = {'action': 'TRADE', 'trades': entry['trades']}
+                        expected = {'action': 'NO_TRADE'} if is_interval else {'action': 'TRADE', 'trades': entry['trades']}
                         require(label == expected, f'SFT assistant trades differ from the raw source at {key}')
                         core = entry['actor_metrics']
                         require(isinstance(core.get('values'), dict)
@@ -731,7 +740,7 @@ def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> d
                                            + json_text(prompt_metrics) + '}')
                         previous_query = query
                         target_count += 1
-                        execution_count += len(entry['trades'])
+                        execution_count += 0 if is_interval else len(entry['trades'])
                     require(type(record.get('target_count')) is int
                             and record['target_count'] == target_count,
                             f'{split}: conversation target_count mismatch')

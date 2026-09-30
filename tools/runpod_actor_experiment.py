@@ -217,6 +217,8 @@ def training_command(args, dataset):
                '--no-group-by-length', '--smoke-then-full']
     if args.resume:
         command.extend(['--resume', str(choose_resume(locations['run']))])
+    if getattr(args, 'allow_trade_only', False):
+        command.append('--allow-trade-only')
     return command
 
 
@@ -343,6 +345,7 @@ def parse_args(argv=None):
     parser.add_argument('--seed', type=int, default=42)
     parser.add_argument('--resume', action='store_true', help='Resume the latest complete checkpoint for this variant')
     parser.add_argument('--dataset-dir', type=Path, help='Completed variant SFT directory; train without any API collection')
+    parser.add_argument('--allow-trade-only', action='store_true', help='Explicit legacy reproduction without NO_TRADE targets')
     parser.add_argument('--collect', action='store_true', help='Explicitly allow legacy collection/waiting on GPU pods')
     parser.add_argument('--wallet-workers', type=int, default=4)
     parser.add_argument('--max-runtime-seconds', type=float, default=7200)

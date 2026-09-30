@@ -62,7 +62,7 @@ def compare(basic_path, inmarket_path):
     paired_numeric = {'targets': 0, 'trades': 0, 'basic': defaultdict(float), 'inmarket': defaultdict(float)}
     for b, m in zip(basic, inmarket):
         scores = {'basic': score(b['answer'], b['prediction']), 'inmarket': score(m['answer'], m['prediction'])}
-        if all(s['side_outcome_multiset_correct'] for s in scores.values()):
+        if all(s['side_outcome_multiset_correct'] and s['numeric_matched_trades'] for s in scores.values()):
             paired_numeric['targets'] += 1
             paired_numeric['trades'] += scores['basic']['numeric_matched_trades']
             for v, s in scores.items():
@@ -75,7 +75,8 @@ def compare(basic_path, inmarket_path):
     settings_differ = {k: {'basic': bi['training_signature'].get(k), 'inmarket': mi['training_signature'].get(k)}
         for k in set(bi['training_signature']) | set(mi['training_signature'])
         if k not in excluded and bi['training_signature'].get(k) != mi['training_signature'].get(k)}
-    report = {'task': 'conditional_execution', 'metrics': summaries,
+    mixed = summaries['basic'].get('no_trade_targets', 0) > 0
+    report = {'task': 'observed_interval_and_execution_reconstruction' if mixed else 'conditional_execution', 'metrics': summaries,
         'delta_inmarket_minus_basic': differences, 'by_fixture': per_fixture,
         'match_cluster_bootstrap_95ci': ci,
         'paired_numeric_errors_on_jointly_correct_categories': paired_numeric,
@@ -84,7 +85,9 @@ def compare(basic_path, inmarket_path):
                                 (('basic', bi), ('inmarket', mi))},
         'pilot': bool(bi['limit']),
         'notes': ['Basic means the BASIC fine-tuned adapter, not the untrained base model.',
-            'All labels are TRADE. Scores do not measure trade timing, abstention, profit or forecasting.',
+            ('NO_TRADE intervals are selected by observed trade endpoints. Alternation/query scope reveals the action class; '
+             'action accuracy is a reconstruction check, NOT evidence of prospective trade timing. Trade-detail metrics use TRADE targets only.'
+             if mixed else 'All labels are TRADE. Scores do not measure trade timing, abstention, profit or forecasting.'),
             'Prior observed actions are provided; predictions are not rolled into later history.',
             'Exact trade metrics ignore within-timestamp ordering and preserve duplicates.',
             'Numeric errors are conditional; use joint categorical accuracy and coverage alongside them.',

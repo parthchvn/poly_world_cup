@@ -59,7 +59,8 @@ def candidate_plan():
 
 
 def request_config(args, plan):
-    return {'version': 1, 'targets': args.targets, 'validation_targets': args.validation_targets,
+    return {'version': 2, 'target_protocol': 'observed_interval_and_execution_v1',
+            'targets': args.targets, 'validation_targets': args.validation_targets,
             'test_targets': args.test_targets, 'seed': args.seed, 'max_trades_per_actor': 20,
             'selection': 'registered_fixture_order_then_sha256_seed_sequence_id',
             'complete_conversations_only': True, 'strict_split_chronology': True,
@@ -319,7 +320,7 @@ def prepare(args, *, plan=None):
             'split_sha256': manifest['split_sha256'],
             'financial_input_files_supplied': False,
             'raw_actor_files_unchanged': True, 'token_lengths_checked': False,
-            'count_semantics': 'whole_conversations_until_at_least_requested_execution_timestamp_targets'}
+            'count_semantics': 'whole_conversations_until_at_least_requested_interval_plus_execution_targets'}
         write_json(staging / 'selection_manifest.json', frozen)
         require(not bundle.exists(), 'Prepared experiment appeared while building. Use a single collector.')
         staging.rename(bundle)
@@ -332,7 +333,7 @@ def prepare(args, *, plan=None):
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out', type=Path, required=True, help='Shared experiment root containing original exports and frozen prepared bundle')
-    parser.add_argument('--targets', type=int, default=40000, help='Minimum train execution targets, retaining whole conversations')
+    parser.add_argument('--targets', type=int, default=40000, help='Minimum total train targets (NO_TRADE intervals plus TRADE timestamps), retaining whole conversations')
     parser.add_argument('--validation-targets', type=int, default=2000)
     parser.add_argument('--test-targets', type=int, default=2000)
     parser.add_argument('--seed', type=int, default=42)

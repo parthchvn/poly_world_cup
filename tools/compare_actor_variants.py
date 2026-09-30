@@ -66,6 +66,10 @@ def conversation(record):
                 for message in messages), 'Invalid conversation messages')
     require(messages[0].get('role') == 'system', 'First conversation message must be system')
     queries, executions = [], 0
+    interval_protocol = record.get('target_protocol') == 'observed_interval_and_execution_v1'
+    if interval_protocol:
+        require((len(messages) - 1) % 4 == 0, 'Expected complete interval/execution target pairs')
+    previous_execution = None
     for offset in range(1, len(messages), 2):
         user, assistant = messages[offset:offset + 2]
         require(user.get('role') == 'user' and assistant.get('role') == 'assistant',
@@ -80,13 +84,32 @@ def conversation(record):
                 require(context['market']['market_id'] == record['market_id'],
                         'User market_id differs from conversation')
         query = timestamp_us(context.get('query_time'))
-        require(not queries or query > queries[-1], 'Conversation queries must strictly increase')
-        require(isinstance(label, dict) and label.get('action') == 'TRADE'
+        is_interval = interval_protocol and offset % 4 == 1
+        if is_interval:
+            interval = context.get('interval')
+            require(isinstance(interval, dict) and set(interval) == {'start', 'end', 'start_inclusive', 'end_inclusive'},
+                    'Missing or invalid open interval')
+            require(interval['start_inclusive'] is False and interval['end_inclusive'] is False
+                    and timestamp_us(interval['end']) == query, 'Invalid interval endpoint semantics')
+            start = timestamp_us(interval['start']) if interval['start'] is not None else None
+            require(start is None or start <= query, 'Reversed interval')
+            require(previous_execution is None or start == previous_execution, 'Interval gap continuity failure')
+            require(not queries or query > queries[-1], 'Interval endpoints must strictly increase')
+            require(label == {'action': 'NO_TRADE'}, 'Missing NO_TRADE interval target')
+        else:
+            require((queries and query == queries[-1]) if interval_protocol else (not queries or query > queries[-1]),
+                    'Conversation queries must strictly increase, except an interval followed by its endpoint execution')
+            require('interval' not in context, 'Execution query cannot carry an interval')
+            require(isinstance(label, dict) and label.get('action') == 'TRADE'
                 and isinstance(label.get('trades'), list) and label['trades'],
                 'Expected a nonempty TRADE execution target')
-        require(all(isinstance(trade, dict) for trade in label['trades']), 'Invalid target trade')
+            require(all(isinstance(trade, dict) for trade in label['trades']), 'Invalid target trade')
+            executions += len(label['trades'])
+            previous_execution = query
         queries.append(query)
-        executions += len(label['trades'])
+    if interval_protocol:
+        require(record.get('trade_target_count') == record.get('no_trade_target_count') == len(queries) // 2,
+                'Interval/execution target count mismatch')
     require(type(record.get('target_count')) is int and record['target_count'] == len(queries),
             'Conversation target_count mismatch')
     require(type(record.get('execution_count')) is int and record['execution_count'] == executions,
@@ -116,6 +139,9 @@ def scan_dataset(source_dir):
         for line, record in lines(path):
             digest.update(line)
             queries, fills = conversation(record)
+            require(bool(manifest.get('no_trade_targets')) ==
+                    (record.get('target_protocol') == 'observed_interval_and_execution_v1'),
+                    'Manifest and conversation NO_TRADE target protocol differ')
             sequence = record['sequence_id']
             actor_market = (record['actor_id'].lower(), record['market_id'])
             require(sequence not in seen_sequences, f'Duplicate sequence_id: {sequence}')

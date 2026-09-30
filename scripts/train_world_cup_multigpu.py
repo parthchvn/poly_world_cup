@@ -127,6 +127,7 @@ def read_split(path, tokenizer, max_length):
     rows, fixtures = [], set()
     stats = {"conversations": 0, "targets": 0, "tokens": 0, "loss_tokens": 0, "max_tokens": 0}
     digest = hashlib.sha256()
+    action_counts = {}
     open_source = gzip.open if path.suffix == ".gz" else open
     with open_source(path, "rb") as source:
         for number, line in enumerate(source, 1):
@@ -134,6 +135,14 @@ def read_split(path, tokenizer, max_length):
             if not line.strip():
                 continue
             record = json.loads(line)
+            if record.get('target_protocol') == 'observed_interval_and_execution_v1':
+                sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
+                from compare_actor_variants import conversation
+                conversation(record)
+            for message in record['messages']:
+                if message['role'] == 'assistant':
+                    action = json.loads(message['content']).get('action', 'UNKNOWN')
+                    action_counts[action] = action_counts.get(action, 0) + 1
             encoded, targets = encode_conversation(record, tokenizer, max_length, f"{path}:{number}")
             if not record.get("fixture_id"):
                 raise ValueError(f"{path}:{number}: fixture_id metadata is required")
@@ -147,7 +156,8 @@ def read_split(path, tokenizer, max_length):
             stats["max_tokens"] = max(stats["max_tokens"], length)
     if not rows:
         raise ValueError(f"{path}: no conversations")
-    stats.update(sha256=digest.hexdigest(), sha256_scope="uncompressed_jsonl_bytes", fixtures=sorted(fixtures))
+    stats.update(sha256=digest.hexdigest(), sha256_scope="uncompressed_jsonl_bytes", fixtures=sorted(fixtures),
+                 action_counts=action_counts)
     return rows, stats
 
 
@@ -155,6 +165,13 @@ def split_path(directory, split):
     """Prefer an unpacked split if present, otherwise read the published gzip."""
     plain = directory / f"{split}.jsonl"
     return plain if plain.exists() else directory / f"{split}.jsonl.gz"
+
+
+def validate_target_counts(stats, allow_trade_only=False):
+    counts = stats.get('action_counts', {})
+    if not counts.get('NO_TRADE') and not allow_trade_only:
+        raise ValueError('SFT contains no NO_TRADE targets. Rebuild from saved raw actor exports with '
+                         'build_actor_dataset.py prepare. Use --allow-trade-only only for explicit legacy reproduction.')
 
 
 DEFAULT_DATASET = "/workspace/world_cup_15k_qlora/datasets/world_cup_2026_pilot_15k"
@@ -278,6 +295,8 @@ def parse_args(argv=None):
     p.add_argument("--kernel-check", action=argparse.BooleanOptionalAction, default=True,
                    help="Check installed Qwen FLA/causal-conv CUDA forward and backward before loading weights")
     p.add_argument("--smoke", action="store_true", help="10 optimizer steps plus up to 32 validation conversations")
+    p.add_argument('--allow-trade-only', action='store_true',
+                   help='Explicit legacy reproduction: permit training without NO_TRADE targets')
     p.add_argument("--smoke-then-full", action="store_true",
                    help="Check up to 32 validation conversations after 10 steps, then continue the same full run without reloading weights")
     p.add_argument("--benchmark", action="store_true", help="20 optimizer steps, no evaluation or checkpoint writes; no final adapter")
@@ -347,6 +366,8 @@ def prepare_cache(args):
     key = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
     destination = args.cache_dir / key
     if (destination / "prepared.json").is_file():
+        for stats in json.loads((destination / 'prepared.json').read_text())['splits'].values():
+            validate_target_counts(stats, args.allow_trade_only)
         print(f"Reusing tokenized cache: {destination}", flush=True)
         return destination
     args.cache_dir.mkdir(parents=True, exist_ok=True)
@@ -356,6 +377,12 @@ def prepare_cache(args):
         for split, path in paths.items():
             print(f"Tokenizing {split} once (all actor conversations retained)", flush=True)
             rows, stats[split] = read_split(path, tokenizer, args.max_length)
+            validate_target_counts(stats[split], args.allow_trade_only)
+            manifest_path = args.dataset_dir / 'manifest.json'
+            if manifest_path.is_file() and json.loads(manifest_path.read_text()).get('no_trade_targets'):
+                counts = stats[split]['action_counts']
+                if not (counts.get('NO_TRADE', 0) == counts.get('TRADE', 0) > 0):
+                    raise ValueError(f'{split}: missing NO_TRADE interval supervision: {counts}')
             lengths = sorted(len(row["input_ids"]) for row in rows)
             stats[split]["p50_tokens"] = lengths[len(lengths) // 2]
             stats[split]["p95_tokens"] = lengths[min(len(lengths)-1, int(.95 * len(lengths)))]
@@ -578,7 +605,8 @@ def launch(args):
     if not args.resume:
         atomic_json(args.out / "training_metadata.json", {
             "status": "prepared", "signature": signature, "data": prepared["splits"],
-            "task": "conditional_execution", "test_used": False,
+            "task": ("observed_interval_and_execution_reconstruction"
+                     if prepared['splits']['train'].get('action_counts', {}).get('NO_TRADE') else "conditional_execution"), "test_used": False,
             "script_sha256": sha256_file(__file__), "prepared_cache": str(prepared_cache),
             "mode": "benchmark" if args.benchmark else "smoke" if args.smoke else "smoke_then_full" if args.smoke_then_full else "full",
             "smoke_check": {"status": "pending"} if args.smoke_then_full else None,

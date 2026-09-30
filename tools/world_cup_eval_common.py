@@ -9,7 +9,7 @@ from pathlib import Path
 from compare_actor_variants import conversation, lines, _metric_context, require, loads
 
 FORMAT = 'world_cup_paired_evaluation_v1'
-METRICS = ('valid_json', 'trade_count_correct', 'side_multiset_correct',
+METRICS = ('valid_json', 'action_correct', 'trade_count_correct', 'side_multiset_correct',
            'outcome_multiset_correct', 'side_outcome_multiset_correct', 'exact_trade_multiset')
 
 
@@ -53,6 +53,8 @@ def targets(record):
     for offset in range(2, len(record['messages']), 2):
         context = loads(record['messages'][offset - 1]['content'])
         key = [record['sequence_id'], context['query_time']]
+        if record.get('target_protocol') == 'observed_interval_and_execution_v1':
+            key.append('interval' if 'interval' in context else 'execution')
         yield {'id': hashlib.sha256(dump(key).encode()).hexdigest(),
                'sequence_id': record['sequence_id'], 'actor_id': record['actor_id'],
                'fixture_id': record['fixture_id'], 'market_id': record['market_id'],
@@ -87,6 +89,8 @@ def read_bundle(root):
 
 def parsed_trades(text):
     value = loads(text.strip())
+    if value == {'action': 'NO_TRADE'}:
+        return []
     require(isinstance(value, dict) and set(value) == {'action', 'trades'} and
             value['action'] == 'TRADE', 'Expected TRADE JSON with only action/trades')
     trades = value['trades']
@@ -116,6 +120,7 @@ def score(answer, prediction):
     except (ValueError, TypeError, ArithmeticError):
         return result
     result['valid_json'] = 1  # Includes strict schema and finite numeric ranges.
+    result['action_correct'] = int(bool(truth) == bool(pred))
     result['trade_count_correct'] = int(len(truth) == len(pred))
     for indices, key in (((0,), 'side_multiset_correct'), ((1,), 'outcome_multiset_correct'),
                          ((0, 1), 'side_outcome_multiset_correct'), ((0, 1, 2, 3), 'exact_trade_multiset')):
@@ -123,7 +128,7 @@ def score(answer, prediction):
                           Counter(tuple(t[i] for i in indices) for t in pred))
     # Conditional numeric errors: exact category/count match required. Within each
     # side/outcome category sort by shares, then price; do not use oracle assignment.
-    if result['side_outcome_multiset_correct']:
+    if truth and result['side_outcome_multiset_correct']:
         for a, b in zip(sorted(truth), sorted(pred)):
             result['numeric_matched_trades'] += 1
             result['price_abs_error_sum'] += float(abs(a[3] - b[3]))
@@ -137,10 +142,27 @@ def summarize(rows):
     scores = [score(r['answer'], r['prediction']) for r in rows]
     total = len(scores)
     matched = sum(s['numeric_matched_trades'] for s in scores)
-    result = {'targets': total, **{k: sum(s[k] for s in scores) / total for k in METRICS},
+    trade_mask = [bool(parsed_trades(r['answer'])) for r in rows]
+    trade_scores = [s for s, is_trade in zip(scores, trade_mask) if is_trade]
+    trade_total = len(trade_scores)
+    result = {'targets': total, **{k: (sum(s[k] for s in (scores if k in ('valid_json', 'action_correct') else trade_scores)) /
+                                      (total if k in ('valid_json', 'action_correct') else trade_total)
+                                      if k in ('valid_json', 'action_correct') or trade_total else None) for k in METRICS},
               'numeric_matched_trades': matched,
-              'numeric_target_coverage': sum(s['side_outcome_multiset_correct'] for s in scores) / total,
+              'numeric_target_coverage': (sum(s['side_outcome_multiset_correct'] for s in trade_scores) / trade_total
+                                          if trade_total else None),
               'generation_limit_hits': sum(bool(r.get('hit_generation_limit')) for r in rows)}
+    if trade_total != total:
+        tp = sum(s['valid_json'] and s['action_correct'] for s, t in zip(scores, trade_mask) if t)
+        fp = sum(s['valid_json'] and not s['action_correct'] for s, t in zip(scores, trade_mask) if not t)
+        tn = sum(s['valid_json'] and s['action_correct'] for s, t in zip(scores, trade_mask) if not t)
+        result.update(trade_targets=trade_total, no_trade_targets=total-trade_total,
+            trade_precision=tp / (tp + fp) if tp + fp else None,
+            trade_recall=tp / trade_total if trade_total else None,
+            no_trade_recall=tn / (total-trade_total),
+            invalid_predictions=total-sum(s['valid_json'] for s in scores),
+            trade_detail_metric_denominator='TRADE targets only; invalid predictions remain errors',
+            prospective_trade_timing_benchmark=False)
     for k in ('price', 'shares', 'notional'):
         result[k + '_mae_conditional'] = (sum(s[k + '_abs_error_sum'] for s in scores) / matched
                                          if matched else None)

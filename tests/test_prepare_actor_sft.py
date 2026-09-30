@@ -122,16 +122,17 @@ class ActorSFTTests(unittest.TestCase):
 
     def args(self, **kw):
         value = dict(exports=[], input_root=self.root, out=self.root / 'sft', split_file=None,
-                     validation_fraction=0.1, test_fraction=0.1, tokenizer=None, max_length=8192)
+                     validation_fraction=0.1, test_fraction=0.1, tokenizer=None, max_length=8192,
+                     trade_only=True)  # Legacy compatibility fixtures; new defaults tested separately.
         value.update(kw)
         return SimpleNamespace(**value)
 
     def record(self, path):
         source = converter.sft_discover([path], None)[0]
         file = next((path / 'actors').iterdir())
-        return converter.sft_convert_actor(file, source)
+        return converter.sft_convert_actor(file, source, include_no_trade=False)
 
-    def test_target_groups_history_and_news_match_builder(self):
+    def test_explicit_legacy_target_groups_history_and_news_match_builder(self):
         path, _, _ = self.source()
         record, audit, counts = self.record(path)
         messages = record['messages']
