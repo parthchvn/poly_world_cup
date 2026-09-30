@@ -11,6 +11,14 @@ omitted interval answers despite retaining them in the raw exports. Rebuild from
 those saved exports into a new dataset; existing adapters do not change. Training
 rejects trade-only inputs by default. See [the correction and migration steps](docs/no_trade_supervision.md).
 
+For a separate **unseen-wallet TRADE/NO_TRADE activity test**, use
+[`scripts/test_actor_activity.py`](scripts/test_actor_activity.py). It keeps the
+requested at-most-20-trades cohort, excludes wallets from both models' training
+and validation data, samples fixed time windows independently of execution
+labels, and compares the two adapters with activity baselines. Preparation uses
+saved captures offline; one command then evaluates both sequentially on an idle
+GPU. See [Mac-to-RunPod commands and test limitations](docs/actor_activity_testing.md).
+
 ## One command after uploading prepared data
 
 Use `scripts/run_world_cup_experiments.py` to train and evaluate Basic and In-market,
