@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Prepare on a Mac, then test unseen-wallet activity on an idle GPU. No API fetches.
 
-Subcommands: prepare, evaluate (one adapter), run (both sequentially), compare.
+Subcommands: prepare, evaluate, run (both sequentially), report (CPU only), compare.
 This future-window diagnostic is a different task from predicting trade details.
 """
 from __future__ import annotations
@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
 sys.path.insert(0, str(ROOT / 'scripts'))
 import actor_activity_common as common
-from actor_activity_common import dump, sha, write_json, require, digest, read_bundle, summarize
+from actor_activity_common import dump, sha, write_json, require, digest, read_bundle, summarize, probability
 from evaluate_world_cup import validate_run
 from train_world_cup_multigpu import CHAT_KWARGS, kernel_probe
 
@@ -57,6 +57,87 @@ def recover(path, prompts, labels, resume):
                 and row['prompt_sha256'] == digest(prompt['messages']), 'Resume prompt/label mismatch')
         require(math.isfinite(row['trade_score']) and 0 <= row['trade_score'] <= 1, 'Invalid journal score')
     return rows
+
+
+def write_summary(meta, rows, variant, out, *, offline=False):
+    """Reporting never changes the predictions or their original inference identity."""
+    truth = [r['label'] for r in rows]
+    summary = {'status': 'completed', 'variant': variant, 'pilot': len(rows) < meta['targets'],
+        'task': meta['task'], 'metrics': summarize(truth, [r['trade_score'] for r in rows]),
+        'baselines': {'always_no_trade': summarize(truth, [0.0] * len(rows)),
+                      'prior_repeat_event_rate': summarize(truth, [r['prior_rate_score'] for r in rows])},
+        'mean_unconstrained_choice_mass': sum(probability(r['unconstrained_choice_mass']) for r in rows) / len(rows),
+        'predictions_sha256': sha(out / 'predictions.jsonl'), 'identity_sha256': sha(out / 'identity.json'),
+        'probability_calibrated': False, 'limitations': meta['limitations'],
+        'retrospectively_filtered_actor_cohort': meta['retrospectively_filtered_actor_cohort'],
+        'postprocessing': {'offline_recovery': offline, 'script_sha256': sha(Path(__file__)),
+                           'common_sha256': sha(ROOT / 'tools/actor_activity_common.py')}}
+    write_json(out / 'summary.json', summary)
+    print(json.dumps(summary, indent=2), flush=True)
+    return summary
+
+
+def report(args):
+    """Finalize complete legacy/current journals without torch, tokenizers or weights.
+
+    Inference code hashes remain untouched. We validate the frozen bundle and
+    every saved target/prompt, then write a separately versioned report.
+    """
+    meta, records = read_bundle(args.bundle)
+    paths = ([args.results] if (args.results / 'identity.json').is_file() else
+             [args.results / v for v in ('basic', 'inmarket') if (args.results / v / 'identity.json').is_file()])
+    require(paths, f'No saved activity prediction identities under {args.results}')
+    completed, pending = {}, []
+    print('Reporting saved predictions on CPU. No model packages, weights or GPU will be loaded.', flush=True)
+    for path in paths:
+        with (path / 'evaluation.lock').open('a') as lock:
+            try:
+                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                print(f'{path}: evaluator is still active; left untouched', flush=True)
+                pending.append(str(path))
+                continue
+            identity = json.loads((path / 'identity.json').read_text())
+            variant = identity.get('variant')
+            require(identity.get('format') == 'world_cup_activity_scores_v1' and variant in ('basic', 'inmarket'),
+                    f'{path}: unsupported inference identity')
+            require(variant not in completed, 'Duplicate variant result directories')
+            require(identity.get('bundle_sha256') == sha(args.bundle / 'manifest.json') and
+                    identity.get('target_sha256') == meta['target_sha256'], 'Saved predictions belong to a different bundle')
+            limit = identity.get('limit')
+            require(type(limit) is int and 0 <= limit <= meta['targets'], 'Invalid saved evaluation limit')
+            labels, prompts = records['labels'][:limit or meta['targets']], records[variant][:limit or meta['targets']]
+            require(identity.get('selected_ids_sha256') == digest([r['id'] for r in labels]), 'Saved target selection changed')
+            require(identity.get('score_protocol') ==
+                    'single_forward_next_token_P(B)/(P(A)+P(B)); A=NO_TRADE; B=TRADE' and identity.get('threshold') == .5,
+                    'Unsupported saved scoring protocol; refusing to reinterpret predictions')
+            journal = path / 'predictions.jsonl'
+            raw = journal.read_bytes() if journal.exists() else b''
+            if raw and not raw.endswith(b'\n'):
+                print(f'{variant}: unfinished last journal line; resume inference with its original checkout first', flush=True)
+                pending.append(str(path))
+                continue
+            rows = [json.loads(line) for line in raw.splitlines()]
+            require(len(rows) <= len(labels), 'Journal exceeds selected target count')
+            for row, prompt, target in zip(rows, prompts, labels):
+                require(type(row.get('label')) is int and all(row.get(k) == target[k] for k in
+                        ('id', 'actor_id', 'market_id', 'fixture_id', 'query_time', 'end_time', 'label')),
+                        'Saved prediction target/label mismatch')
+                require(row.get('prompt_sha256') == digest(prompt['messages']), 'Saved prediction prompt mismatch')
+                require(probability(row['prior_rate_score']) == target['prior_rate_score'], 'Saved baseline score mismatch')
+                p = probability(row['trade_score'])
+                probability(row['unconstrained_choice_mass'])
+                require(row.get('prediction') == ('TRADE' if p >= .5 else 'NO_TRADE'), 'Prediction disagrees with saved score')
+            if len(rows) < len(labels):
+                print(f'{variant}: {len(rows)}/{len(labels)} predictions saved; no complete summary written', flush=True)
+                pending.append(str(path))
+                continue
+            write_summary(meta, rows, variant, path, offline=True)
+            completed[variant] = path
+    if set(completed) == {'basic', 'inmarket'}:
+        compare(argparse.Namespace(basic=completed['basic'], inmarket=completed['inmarket'],
+                                   out=args.results / 'comparison.json'))
+    return {'completed': {k: str(v) for k, v in completed.items()}, 'pending': pending}
 
 
 def evaluate(args):
@@ -161,18 +242,7 @@ def evaluate(args):
             del model, base
             gc.collect()
             torch.cuda.empty_cache()
-        truth = [r['label'] for r in rows]
-        summary = {'status': 'completed', 'variant': args.variant, 'pilot': len(rows) < meta['targets'],
-            'task': meta['task'], 'metrics': summarize(truth, [r['trade_score'] for r in rows]),
-            'baselines': {'always_no_trade': summarize(truth, [0.0] * len(rows)),
-                          'prior_repeat_event_rate': summarize(truth, [r['prior_rate_score'] for r in rows])},
-            'mean_unconstrained_choice_mass': sum(r['unconstrained_choice_mass'] for r in rows) / len(rows),
-            'predictions_sha256': sha(journal), 'identity_sha256': sha(identity_path),
-            'probability_calibrated': False, 'limitations': meta['limitations'],
-            'retrospectively_filtered_actor_cohort': meta['retrospectively_filtered_actor_cohort']}
-        write_json(args.out / 'summary.json', summary)
-        print(json.dumps(summary, indent=2), flush=True)
-        return summary
+        return write_summary(meta, rows, args.variant, args.out)
 
 
 def compare(args):
@@ -252,11 +322,15 @@ def parse_args(argv=None):
         parser.add_argument('--resume', action='store_true')
         parser.add_argument('--check-only', action='store_true', help='Tokenizers/identities/lengths only; no weights')
         parser.set_defaults(func=func)
-    report = sub.add_parser('compare')
-    report.add_argument('--basic', type=Path, required=True)
-    report.add_argument('--inmarket', type=Path, required=True)
-    report.add_argument('--out', type=Path, required=True)
-    report.set_defaults(func=compare)
+    comparison = sub.add_parser('compare')
+    comparison.add_argument('--basic', type=Path, required=True)
+    comparison.add_argument('--inmarket', type=Path, required=True)
+    comparison.add_argument('--out', type=Path, required=True)
+    comparison.set_defaults(func=compare)
+    recovery = sub.add_parser('report', help='CPU-only summary recovery from complete saved journals; no inference')
+    recovery.add_argument('--bundle', type=Path, required=True)
+    recovery.add_argument('--results', type=Path, required=True, help='One result directory, or parent containing basic/ and inmarket/')
+    recovery.set_defaults(func=report)
     return p.parse_args(argv)
 
 

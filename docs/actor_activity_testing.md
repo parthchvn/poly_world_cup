@@ -10,6 +10,50 @@ trade-detail evaluation did not measure abstention, and even the corrected
 interval-reconstruction training is a different task from future-window
 prediction. This script does not change weights or retrain either adapter.
 
+## Recover a completed evaluation whose summary failed
+
+The initial activity evaluator could finish every prediction and then fail with
+`TypeError: must be real number, not str` in the baseline summary. Its shared
+JSON reader preserved decimal numbers as strings; the baseline scorer expected
+numeric values. The score parser now normalizes and validates those values.
+Existing bundles do not need to be rebuilt and saved predictions remain usable.
+
+Use the new **CPU-only `report` subcommand**, rather than rerunning inference.
+It verifies the frozen bundle, original target selection, each saved label and
+prompt hash, and the baseline scores. It requires every selected prediction to
+be complete. It never rewrites `predictions.jsonl` or `identity.json`, never
+imports model packages, and never loads model weights. The summary separately
+records the reporting code version. Original inference code hashes are retained,
+so both evaluations can still be compared under their original protocol.
+
+If the other evaluator is still running, use a separate reporting checkout:
+
+```bash
+(
+set -e
+repo=/root/poly_world_cup_activity_report
+[ -d "$repo/.git" ] || git clone https://github.com/parthchvn/poly_world_cup.git "$repo"
+cd "$repo"
+git fetch origin main
+git checkout --detach origin/main
+
+python3 scripts/test_actor_activity.py report \
+  --bundle /root/eval_data/world_cup_actor_activity \
+  --results /workspace/evaluation/actor_activity
+)
+```
+
+It writes `basic/summary.json` and/or `inmarket/summary.json` for complete saved
+runs, plus `comparison.json` when both are complete and compatible. Active,
+incomplete or partially written journals are left untouched and reported as
+pending. Rerun the same report command after the other evaluation finishes.
+Use `--results /workspace/evaluation/actor_activity/basic` to recover Basic only.
+
+For a genuinely incomplete inference journal, resume inference from the original
+checkout and settings. Do not change an existing `identity.json` to bypass a code
+mismatch. The reporting command performs no missing predictions. A completed
+pilot remains a pilot with its original saved target limit.
+
 ## Sampling and exclusions
 
 - Keep wallets with **at most 20 captured executions in that binary market**, as

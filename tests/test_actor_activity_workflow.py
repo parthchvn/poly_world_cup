@@ -1,4 +1,6 @@
+import builtins
 import copy
+import fcntl
 import gzip
 import io
 import json
@@ -260,6 +262,122 @@ class ActivityTests(unittest.TestCase):
         self.assertEqual(perfect['average_precision'], 1)
         with self.assertRaisesRegex(ValueError, 'finite'):
             activity.summarize([1], [float('nan')])
+
+    def test_round_tripped_baseline_scores_are_numeric_and_summarizable(self):
+        self.prepare()
+        meta, records = activity.read_bundle(self.root / 'activity')
+        rows = records['labels']
+        self.assertTrue(all(type(r['prior_rate_score']) is float for r in rows))
+        result = activity.summarize([r['label'] for r in rows], [r['prior_rate_score'] for r in rows])
+        self.assertEqual(result['windows'], meta['targets'])
+        self.assertEqual(result, activity.summarize([r['label'] for r in rows], [str(r['prior_rate_score']) for r in rows]))
+
+    def test_probability_rejects_bad_saved_scores_and_accepts_decimal_strings(self):
+        for value in (True, None, {}, [], 'nan', 'Infinity', '-0.1', '1.1', 'not a score', float('inf')):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                activity.probability(value)
+        for value in ('0.125', .125, activity.metrics.Decimal('.125')):
+            self.assertEqual(activity.probability(value), .125)
+
+    def saved_predictions(self, variant='basic', count=None, limit=0):
+        meta, records = activity.read_bundle(self.root / 'activity')
+        path = self.root / 'results' / variant
+        path.mkdir(parents=True)
+        targets, prompts = records['labels'][:limit or meta['targets']], records[variant][:limit or meta['targets']]
+        identity = {'format': 'world_cup_activity_scores_v1', 'variant': variant,
+            'bundle_sha256': activity.sha(self.root / 'activity/manifest.json'),
+            'target_sha256': meta['target_sha256'], 'selected_ids_sha256': activity.digest([r['id'] for r in targets]),
+            'limit': limit, 'threshold': .5,
+            'score_protocol': 'single_forward_next_token_P(B)/(P(A)+P(B)); A=NO_TRADE; B=TRADE',
+            'max_context': 16384, 'seed': 42, 'code': {'old_inference_code': 'preserve_this'}, 'versions': {}}
+        activity.write_json(path / 'identity.json', identity)
+        rows = []
+        for target, prompt in zip(targets, prompts):
+            rows.append({**target, 'prior_rate_score': str(target['prior_rate_score']),
+                'trade_score': .8 if target['label'] else .2,
+                'prediction': 'TRADE' if target['label'] else 'NO_TRADE', 'unconstrained_choice_mass': .02,
+                'prompt_sha256': activity.digest(prompt['messages'])})
+        if count is not None:
+            rows = rows[:count]
+        (path / 'predictions.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in rows))
+        return path
+
+    def run_report(self, path=None):
+        args = cli.parse_args(['report', '--bundle', str(self.root / 'activity'),
+                              '--results', str(path or self.root / 'results')])
+        with patch('sys.stdout', new_callable=io.StringIO):
+            return args.func(args)
+
+    def test_offline_report_recovers_old_string_scores_without_weights_or_rewriting_journals(self):
+        self.prepare()
+        roots = [self.saved_predictions(variant) for variant in ('basic', 'inmarket')]
+        before = {p: p.read_bytes() for root in roots for p in (root / 'identity.json', root / 'predictions.jsonl')}
+        real_import = builtins.__import__
+        def cpu_only(name, *args, **kwargs):
+            if name.split('.')[0] in {'torch', 'transformers', 'peft', 'bitsandbytes'}:
+                raise AssertionError('No ML imports allowed in offline reporting')
+            return real_import(name, *args, **kwargs)
+        with patch('builtins.__import__', side_effect=cpu_only), patch.object(cli, 'evaluate', side_effect=AssertionError('No inference')):
+            result = self.run_report()
+        self.assertEqual(set(result['completed']), {'basic', 'inmarket'})
+        self.assertEqual(result['pending'], [])
+        self.assertEqual(before, {p: p.read_bytes() for p in before})
+        for root in roots:
+            summary = json.loads((root / 'summary.json').read_text())
+            self.assertEqual(summary['metrics']['windows'], 12)
+            self.assertEqual(summary['baselines']['prior_repeat_event_rate']['windows'], 12)
+            self.assertTrue(summary['postprocessing']['offline_recovery'])
+            self.assertEqual(summary['identity_sha256'], activity.sha(root / 'identity.json'))
+        self.assertTrue((self.root / 'results/comparison.json').is_file())
+        summaries = {root: (root / 'summary.json').read_bytes() for root in roots}
+        self.run_report()
+        self.assertEqual(summaries, {root: (root / 'summary.json').read_bytes() for root in roots})
+
+    def test_offline_report_refuses_wrong_prompt_or_baseline_or_bundle(self):
+        self.prepare()
+        path = self.saved_predictions()
+        journal = path / 'predictions.jsonl'
+        original = journal.read_bytes()
+        for field, value, reason in (('prompt_sha256', 'wrong', 'prompt mismatch'),
+                                     ('prior_rate_score', '0.999999', 'baseline score mismatch'),
+                                     ('label', 2, 'target/label mismatch')):
+            rows = [json.loads(line) for line in original.splitlines()]
+            rows[0][field] = value
+            journal.write_text(''.join(json.dumps(r)+'\n' for r in rows))
+            with self.assertRaisesRegex(ValueError, reason):
+                self.run_report(path)
+            self.assertFalse((path / 'summary.json').exists())
+        journal.write_bytes(original)
+        identity = json.loads((path / 'identity.json').read_text())
+        identity['bundle_sha256'] = 'other_bundle'
+        activity.write_json(path / 'identity.json', identity)
+        with self.assertRaisesRegex(ValueError, 'different bundle'):
+            self.run_report(path)
+
+    def test_offline_report_leaves_incomplete_and_active_journals_untouched(self):
+        self.prepare()
+        path = self.saved_predictions(count=5)
+        journal = path / 'predictions.jsonl'
+        original = journal.read_bytes()
+        self.assertEqual(self.run_report(path)['completed'], {})
+        self.assertFalse((path / 'summary.json').exists())
+        self.assertEqual(journal.read_bytes(), original)
+        journal.write_bytes(original + b'{"id":')
+        self.assertEqual(self.run_report(path)['completed'], {})
+        self.assertEqual(journal.read_bytes(), original + b'{"id":')
+        with (path / 'evaluation.lock').open('a') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            result = self.run_report(path)
+        self.assertEqual(result['completed'], {})
+        self.assertEqual(result['pending'], [str(path)])
+
+    def test_offline_report_respects_saved_pilot_limit(self):
+        self.prepare()
+        path = self.saved_predictions(limit=3)
+        self.run_report(path)
+        summary = json.loads((path / 'summary.json').read_text())
+        self.assertEqual(summary['metrics']['windows'], 3)
+        self.assertTrue(summary['pilot'])
 
     def test_resume_keeps_complete_lines_only_and_refuses_mismatched_prompt(self):
         prompt = {'id': 'one', 'messages': [{'role': 'user', 'content': 'past only'}]}

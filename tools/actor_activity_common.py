@@ -49,6 +49,15 @@ def native(value):
     return json.loads(metrics.json_text(value))
 
 
+def probability(value):
+    """Normalize JSON numbers and decimal strings, including old saved journals."""
+    require(isinstance(value, (str, int, float, metrics.Decimal)) and not isinstance(value, bool),
+            'Invalid finite probability score')
+    number = metrics.number(str(value), 'probability score')
+    require(0 <= number <= 1, 'Probability score outside [0,1]')
+    return float(number)
+
+
 def candidate_id(actor, market, query, horizon):
     return digest([actor.lower(), str(market), query, horizon])
 
@@ -328,6 +337,9 @@ def read_bundle(root):
         require(basic['id'] == inmarket['id'] == label['id'] and label['id'] not in ids, 'Unpaired/duplicate windows')
         ids.add(label['id'])
         require(type(label['label']) is int and label['label'] in (0, 1), 'Invalid activity label')
+        # The shared decimal-preserving reader converts JSON floats to Decimal,
+        # and native() preserves those as strings. Baselines are numeric scores.
+        label['prior_rate_score'] = probability(label['prior_rate_score'])
         require(label['actor_id'].lower() not in excluded, 'Test wallet overlaps train/validation')
         require(label['fixture_id'] not in meta['excluded_fixtures'] and
                 label['market_id'] not in meta['excluded_markets'], 'Test market/fixture overlaps training/validation')
@@ -358,7 +370,7 @@ def read_bundle(root):
 def summarize(labels, scores):
     require(len(labels) == len(scores) > 0, 'Need aligned, nonempty labels/scores')
     require(all(type(y) is int and y in (0, 1) for y in labels), 'Invalid binary labels')
-    require(all(math.isfinite(s) and 0 <= s <= 1 for s in scores), 'Invalid finite scores')
+    scores = [probability(s) for s in scores]
     tp = sum(y == 1 and s >= .5 for y, s in zip(labels, scores))
     fp = sum(y == 0 and s >= .5 for y, s in zip(labels, scores))
     positives, n = sum(labels), len(labels)
