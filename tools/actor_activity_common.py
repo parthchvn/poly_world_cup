@@ -134,6 +134,12 @@ def context_at(source, timeline, groups, query, horizon, config, history_groups,
         'news': [row[1] for row in timeline['news'][news_start:news_end]],
         'prior_executions': [{'time': g['timestamp'], 'trades': g['expected']} for g in prior[-history_groups:]],
         'earlier_execution_groups_omitted': max(0, len(prior) - history_groups)}
+    pnl = metrics.pnl_state_for_export(source['manifest'], {
+        'interval': {'start': source['manifest'].get('origin_utc')},
+        'in_market_pnl_opening_history': groups[0].get('pnl_opening_history', [])})
+    for group in prior:
+        pnl.apply(group['expected'])
+    context.update(metrics.pnl_prompt_fields(pnl.snapshot(prices, utc(query))))
     enriched = copy.deepcopy(context)
     core = metrics.compute_metrics(history, [], [], query, config.get('lookback_seconds'),
                                    config.get('min_return_periods', 30))

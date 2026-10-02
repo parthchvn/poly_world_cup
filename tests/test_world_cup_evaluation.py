@@ -164,10 +164,10 @@ class EvaluationTests(unittest.TestCase):
                  patch('urllib.request.urlopen', side_effect=AssertionError('No network')):
                 meta = prepare.prepare(args)
             self.assertEqual(meta['source'], 'fresh_markets')
-            self.assertEqual(meta['targets'], 2)
+            self.assertEqual(meta['targets'], 4)
             _, records = common.read_bundle(args.out)
             first, second = [json.loads(records['inmarket'][0]['messages'][i]['content'])
-                             for i in (1, 3)]
+                             for i in (1, 5)]
             self.assertEqual(first['actor_metrics']['sample_counts']['captured_executions'], 0)
             self.assertEqual(second['actor_metrics']['sample_counts']['captured_executions'], 2)
         finally:

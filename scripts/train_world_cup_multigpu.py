@@ -135,6 +135,10 @@ def read_split(path, tokenizer, max_length):
             if not line.strip():
                 continue
             record = json.loads(line)
+            has_intervals = any(m.get('role') == 'assistant' and
+                json.loads(m['content']).get('action') == 'NO_TRADE' for m in record['messages'])
+            if has_intervals and record.get('target_protocol') != 'observed_interval_and_execution_v1':
+                raise ValueError(f'{path}:{number}: NO_TRADE targets require the interval/execution protocol')
             if record.get('target_protocol') == 'observed_interval_and_execution_v1':
                 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
                 from compare_actor_variants import conversation
@@ -172,6 +176,8 @@ def validate_target_counts(stats, allow_trade_only=False):
     if not counts.get('NO_TRADE') and not allow_trade_only:
         raise ValueError('SFT contains no NO_TRADE targets. Rebuild from saved raw actor exports with '
                          'build_actor_dataset.py prepare. Use --allow-trade-only only for explicit legacy reproduction.')
+    if counts.get('NO_TRADE') and counts.get('NO_TRADE') != counts.get('TRADE'):
+        raise ValueError('Every TRADE target must retain its NO_TRADE interval: target counts differ.')
 
 
 DEFAULT_DATASET = "/workspace/world_cup_15k_qlora/datasets/world_cup_2026_pilot_15k"

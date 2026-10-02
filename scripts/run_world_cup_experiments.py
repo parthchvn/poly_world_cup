@@ -44,7 +44,7 @@ CODE = (
     'scripts/run_world_cup_experiments.py', 'scripts/train_world_cup_multigpu.py',
     'scripts/evaluate_world_cup.py', 'scripts/prepare_world_cup_evaluation.py',
     'scripts/compare_world_cup_evaluations.py', 'scripts/plot_training_losses.py',
-    'scripts/derive_actor_metrics.py', 'tools/world_cup_eval_common.py',
+    'scripts/derive_actor_metrics.py', 'scripts/build_actor_dataset.py', 'tools/world_cup_eval_common.py',
     'tools/compare_actor_variants.py',
 )
 PINS = {

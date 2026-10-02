@@ -17,9 +17,11 @@ Source numbers, split assignments and full actor histories are retained.
 
 1. User: open interval boundaries, query_time equal to its end, interval news,
    and official price samples strictly before that end. Market description is
-   included on the first user turn.
+   included on the first user turn. `unrealized_in_market_pnl` uses remaining
+   inventory from strictly earlier executions.
 2. Assistant: `{"action":"NO_TRADE"}`.
-3. User: the endpoint query_time. Context from the preceding turn remains visible.
+3. User: the endpoint query_time and the same unrealized P&L. Context from the
+   preceding turn remains visible.
 4. Assistant: the captured TRADE answer at that time.
 
 Repeat for the next interval. News is not duplicated. Current execution values
@@ -31,7 +33,9 @@ The manifest reports `no_trade_targets: true`, `prompt_schema_version: 3`, and
 `target_protocol: observed_interval_and_execution_v1`. Each split reports total,
 TRADE and NO_TRADE target counts. The trainer also reports actual `action_counts`
 and rejects missing NO_TRADE supervision by default before loading model weights.
-The automated runner rejects old trade-only uploads by default.
+The automated runner rejects old trade-only uploads by default. Fresh-market
+evaluation keeps interval labels even for legacy trade-only reference adapters.
+See [unrealized in-market P&L](in_market_pnl.md) for accounting and migration.
 
 ## Rebuild the existing Mac cohort without API calls
 

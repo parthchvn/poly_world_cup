@@ -155,7 +155,10 @@ and prepares SFT conversations; `train_world_cup_multigpu.py` trains them.
 For feature comparisons, keep that basic dataset and derive two additional
 versions: `derive_actor_metrics.py` uses earlier activity in the current market;
 `derive_global_actor_metrics.py` uses earlier wallet activity across markets.
-See [the three-model comparison workflow](docs/actor_dataset_variants.md).
+All three variants include strictly prior `unrealized_in_market_pnl` and preserve
+NO_TRADE labels for intervals between executions. See [P&L accounting and rebuilding
+existing datasets](docs/in_market_pnl.md) and
+[the three-model comparison workflow](docs/actor_dataset_variants.md).
 For three two-GPU RunPod jobs sharing one volume, use the
 [40k-decision launchers](docs/runpod_three_pods.md).
 
@@ -251,7 +254,7 @@ Three dataset generators share one set of actors, targets, and splits:
 
 | Dataset | Generator | Information added to the basic context |
 |---|---|---|
-| Basic | `scripts/build_actor_dataset.py` | Existing news, market prices, and earlier actor trades in the conversation. |
+| Basic | `scripts/build_actor_dataset.py` | News, market prices, earlier actor trades, and unrealized in-market P&L. |
 | Basic + in-market | `scripts/derive_actor_metrics.py` | Up to 18 summaries of this actor's earlier history in the current binary market. |
 | Basic + global | `scripts/derive_global_actor_metrics.py` | The same summaries using the actor's earlier wallet history across markets, including the current market. |
 

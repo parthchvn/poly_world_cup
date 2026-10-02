@@ -29,6 +29,12 @@ import tempfile
 ADDRESS = re.compile(r'0x[0-9a-fA-F]{40}')
 CONDITION = re.compile(r'0x[0-9a-fA-F]{64}')
 
+# Reuse the standalone collector's inventory accounting in all feature paths.
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+from build_actor_dataset import InMarketPnL, pnl_prompt_fields, pnl_state_for_export, validate_pnl_features
+
 
 def require(condition, message):
     if not condition:
@@ -219,6 +225,7 @@ def actor_trade_groups(path, source):
     rows = iter(iter_jsonl(path))
     previous, index, execution_count = None, 0, 0
     groups = []
+    pnl = None
     while True:
         gap = next(rows, None)
         if gap is None:
@@ -253,8 +260,16 @@ def actor_trade_groups(path, source):
                     'Actor export amounts must preserve decimal strings')
             normalized.append({'time_us': when, 'side': item['side'], 'shares': shares, 'price': price})
             expected.append({key: item[key] for key in ('side', 'outcome', 'shares', 'price')})
-        groups.append({'time_us': when, 'timestamp': trade['timestamp'], 'row_index': index + 1,
+        if pnl is None:
+            pnl = pnl_state_for_export(source['manifest'], gap)
+        require(gap.get('market_context') == trade.get('market_context'), 'Adjacent market prices disagree')
+        pnl_features = pnl.snapshot(trade.get('market_context'), trade['timestamp'])
+        validate_pnl_features(gap, trade, pnl_features, source['manifest'])
+        groups.append({'pnl_features': pnl_features,
+                       'pnl_opening_history': gap.get('in_market_pnl_opening_history', []) if index == 0 else [],
+                       'time_us': when, 'timestamp': trade['timestamp'], 'row_index': index + 1,
                        'trades': normalized, 'expected': expected})
+        pnl.apply(expected)
         execution_count += len(normalized)
         previous, index = when, index + 2
     require(groups, f'Empty actor export: {path}')
@@ -732,6 +747,14 @@ def enrich_sft(source_dir: Path, dest_dir: Path, index: dict, config: dict) -> d
                                 and isinstance(core.get('sample_counts'), dict),
                                 f'Invalid metric values or sample counts at {key}')
                         prompt_metrics = model_metric_fields(core, config)
+                        if 'pnl_features' in entry:
+                            pnl_fields = pnl_prompt_fields(entry['pnl_features'])
+                            if 'unrealized_in_market_pnl' in context:
+                                require(all(context.get(k) == v for k, v in pnl_fields.items()),
+                                        'SFT P&L differs from raw prior inventory')
+                            else:
+                                context.update(pnl_fields)
+                                user['content'] = json_text(context)
                         # Preserve all existing context number types and literal text.
                         # The validated object is nonempty because query_time exists.
                         content = user['content'].rstrip()
@@ -869,11 +892,13 @@ def derive(args):
                                 group['time_us'], args.lookback_seconds, args.min_return_periods)
                             record = {'actor_id': actor, 'market_id': source['market_id'],
                                 'condition_id': source['condition_id'], 'timestamp': group['timestamp'],
-                                'source_trade_row_index': group['row_index'], 'actor_metrics': metrics}
+                                'source_trade_row_index': group['row_index'], 'actor_metrics': metrics,
+                                **group['pnl_features']}
                             stream.write(json_text(record) + '\n')
                             if args.sft_dir:
                                 index[(actor, source['market_id'], group['time_us'])] = {
-                                    'actor_metrics': metrics, 'trades': group['expected']}
+                                    'actor_metrics': metrics, 'trades': group['expected'],
+                                    'pnl_features': group['pnl_features']}
                             # Update only after producing this whole timestamp group's features.
                             history.extend(group['trades'])
                     file_hash = sha256(path)

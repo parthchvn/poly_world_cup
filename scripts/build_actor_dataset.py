@@ -14,7 +14,8 @@ Other matches use locally cached or supplied ESPN data, or live public APIs. ESP
 
 Output: actors/<wallet>.jsonl, one actor per file in chronological order.
 Each execution timestamp has an open-interval NO_TRADE row and a TRADE row.
-Both carry interval news. Simultaneous executions share one TRADE row.
+Both carry interval news and strictly prior unrealized_in_market_pnl.
+Simultaneous executions share one TRADE row.
 Earlier rows are actor history; history is not copied into every later row.
 Default: at most 20 captured executions per actor in the selected binary market.
 By default each row references actor_snapshots/<wallet>.json with API market value and
@@ -1842,6 +1843,143 @@ def market_context_at(db, instant, version=1, max_age_seconds=300):
     return result
 
 
+class InMarketPnL:
+    """Average-cost open inventory from captured executions, per binary outcome.
+
+    Fractions avoid cumulative rounding; only serialized features are rounded.
+    A timestamp group is applied after its features. Mixed BUY/SELL groups with
+    residual inventory have unknowable average cost without an execution order.
+    """
+    def __init__(self, opening_unknown=False):
+        from fractions import Fraction
+        self.positions = {o: {'shares': Fraction(0), 'cost': Fraction(0),
+                             'reason': 'opening_inventory_unknown' if opening_unknown else None}
+                          for o in ('yes', 'no')}
+
+    @staticmethod
+    def text(value):
+        from decimal import localcontext
+        with localcontext() as ctx:
+            ctx.prec = 40
+            return decimal_text(Decimal(value.numerator) / Decimal(value.denominator))
+
+    def apply(self, executions):
+        from fractions import Fraction
+        grouped = {}
+        for trade in executions:
+            outcome = str(trade.get('outcome', '')).casefold()
+            if outcome not in self.positions or trade.get('side') not in ('BUY', 'SELL'):
+                raise ValueError('P&L requires binary outcomes and BUY/SELL executions')
+            shares, price = Decimal(str(trade['shares'])), Decimal(str(trade['price']))
+            if not shares.is_finite() or not price.is_finite() or shares <= 0 or not 0 <= price <= 1:
+                raise ValueError('P&L requires finite positive shares and prices in [0,1]')
+            amounts = grouped.setdefault(outcome, [Fraction(0), Fraction(0), Fraction(0)])
+            if trade['side'] == 'BUY':
+                amounts[0] += Fraction(shares)
+                amounts[1] += Fraction(shares) * Fraction(price)
+            else:
+                amounts[2] += Fraction(shares)
+        for outcome, (bought, spending, sold) in grouped.items():
+            position = self.positions[outcome]
+            if position['reason'] in ('opening_inventory_unknown', 'unmatched_sell'):
+                continue  # An unknown initial/uncaptured holding cannot be repaired by later fills.
+            old_shares, old_cost = position['shares'], position['cost']
+            remaining = old_shares + bought - sold
+            if remaining < 0:
+                position.update(reason='unmatched_sell')
+            elif not remaining:
+                position.update(shares=Fraction(0), cost=Fraction(0), reason=None)
+            elif bought and sold:
+                position.update(shares=remaining, reason='same_timestamp_cost_basis_ambiguous')
+            elif position['reason']:
+                position['shares'] = remaining
+            elif sold:
+                position.update(shares=remaining, cost=old_cost * remaining / old_shares)
+            else:
+                position.update(shares=remaining, cost=old_cost + spending)
+
+    def snapshot(self, context, as_of):
+        from fractions import Fraction
+        total, holdings, missing = Fraction(0), {}, {}
+        query = timestamp_us(as_of)
+        for outcome, position in self.positions.items():
+            shares, cost, reason = position['shares'], position['cost'], position['reason']
+            mark = (context or {}).get(outcome)
+            price = None
+            if mark is not None:
+                raw = Decimal(str(mark['price']))
+                if not raw.is_finite() or not 0 <= raw <= 1:
+                    raise ValueError('Invalid P&L mark price')
+                # Both raw historical context and compact prompt context are supported.
+                if 'observed_at' in mark:
+                    if timestamp_us(mark['observed_at']) >= query:
+                        raise ValueError('P&L mark must strictly precede query time')
+                else:
+                    age = Decimal(str(mark.get('age_seconds', 'NaN')))
+                    if not age.is_finite() or age <= 0:
+                        raise ValueError('P&L mark must have a strictly positive age')
+                price = Fraction(raw)
+            if not reason and shares and price is None:
+                reason = 'missing_prior_price'
+            value = None if reason else (shares * price - cost if shares else Fraction(0))
+            if reason:
+                missing[outcome] = reason
+            else:
+                total += value
+            holdings[outcome] = {
+                'shares': None if position['reason'] in ('opening_inventory_unknown', 'unmatched_sell') else self.text(shares),
+                'remaining_cost_basis': None if position['reason'] else self.text(cost),
+                'mark_price': self.text(price) if price is not None else None,
+                'unrealized_pnl': self.text(value) if value is not None else None}
+        return {'unrealized_in_market_pnl': None if missing else self.text(total),
+                'in_market_pnl_context': {'version': 1, 'as_of': as_of,
+                    'method': 'average_cost_remaining_captured_inventory_before_fees',
+                    'opening_assumption': 'zero_before_supplied_history; transfers_splits_merges_redemptions_unobserved',
+                    'holdings': holdings, 'missing_reasons': missing}}
+
+
+def pnl_prompt_fields(features):
+    """Small model feature; accounting details remain in raw audit rows."""
+    result = {'unrealized_in_market_pnl': features['unrealized_in_market_pnl']}
+    missing = features['in_market_pnl_context']['missing_reasons']
+    if missing:
+        result['in_market_pnl_missing_reasons'] = missing
+    return result
+
+
+def pnl_state_for_export(manifest, first_row):
+    """Replay explicitly retained pre-cutoff trades; don't assume a late start is flat."""
+    version = manifest.get('in_market_pnl_version')
+    if version is not None and (type(version) is not int or version != 1):
+        raise ValueError('Unsupported in_market_pnl_version')
+    declared = version == 1
+    history = first_row.get('in_market_pnl_opening_history', []) if declared else []
+    state = InMarketPnL(opening_unknown=not declared and manifest.get('origin_basis') == 'user_supplied')
+    if not isinstance(history, list):
+        raise ValueError('Invalid P&L opening history')
+    previous = None
+    origin = first_row.get('interval', {}).get('start')
+    for group in history:
+        instant = timestamp_us(group['time'])
+        if origin is None or instant >= timestamp_us(origin) or (previous is not None and instant <= previous):
+            raise ValueError('P&L opening history must strictly precede export start')
+        state.apply(group['trades'])
+        previous = instant
+    return state
+
+
+def validate_pnl_features(gap, trade, expected, manifest):
+    if manifest.get('in_market_pnl_version') == 1:
+        for row in (gap, trade):
+            for key, value in expected.items():
+                if row.get(key) != value:
+                    raise ValueError(f'Invalid or missing {key}: rebuild the actor export')
+        if gap.get('in_market_pnl_opening_history') != trade.get('in_market_pnl_opening_history'):
+            raise ValueError('Adjacent P&L opening histories disagree')
+        if gap.get('row_index', 0) != 0 and 'in_market_pnl_opening_history' in gap:
+            raise ValueError('P&L opening history belongs only on the first interval/trade pair')
+
+
 def actor_records(actor, trades, market, events, event_times, origin,
                   market_context_lookup=None, fill_window_seconds=5):
     """Yield exactly two records per distinct execution timestamp.
@@ -1851,8 +1989,16 @@ def actor_records(actor, trades, market, events, event_times, origin,
     A gap's news is deliberately repeated on the following trade row, matching
     the requested schema. No history is expanded again on subsequent rows.
     """
-    previous = origin
-    for index, (instant, executions) in enumerate(groupby(trades, lambda row: row["time_us"]), 1):
+    previous, index = origin, 0
+    pnl = InMarketPnL()
+    opening_history = []
+    for instant, executions in groupby(trades, lambda row: row["time_us"]):
+        values = list(executions)
+        if origin is not None and instant < origin:
+            pnl.apply([value["trade"] for value in values])
+            opening_history.append({"time": utc_time(instant), "trades": [value["trade"] for value in values]})
+            continue
+        index += 1
         lo = 0 if previous is None else bisect_right(event_times, previous)
         hi = bisect_left(event_times, instant)
         news = [news_feature(event) for event in events[lo:hi]]
@@ -1861,11 +2007,13 @@ def actor_records(actor, trades, market, events, event_times, origin,
         base = {"actor_id": actor, "market_id": market["market_id"], "condition_id": market["condition_id"]}
         if market_context_lookup is not None:
             base['market_context'] = market_context_lookup(instant)
+        base.update(pnl.snapshot(base.get('market_context'), utc_time(instant)))
+        if index == 1 and opening_history:
+            base['in_market_pnl_opening_history'] = opening_history
         gap_features = ({'execution_info': execution_evidence(instant, False, fill_window_seconds),
                          'payoff_analysis': []} if market_context_lookup is not None else {})
         yield {**base, "record_type": "interval", "row_index": 2 * index - 2,
                "interval": interval, "news": news, "label": {"action": "NO_TRADE"}, **gap_features}
-        values = list(executions)
         trade_features = ({'execution_info': execution_evidence(instant, True, fill_window_seconds),
                            'payoff_analysis': [execution_payoff(value['trade']) for value in values]}
                           if market_context_lookup is not None else {})
@@ -1873,6 +2021,7 @@ def actor_records(actor, trades, market, events, event_times, origin,
                "timestamp": utc_time(instant), "context_interval": interval,
                "news": news, "label": {"action": "TRADE", "trades": [
                    {"time": value["time"], **value["trade"]} for value in values]}, **trade_features}
+        pnl.apply([value["trade"] for value in values])
         previous = instant
 
 
@@ -2311,7 +2460,8 @@ def export(args):
                 origin, origin_basis = None, "opening_later_than_first_observation_unbounded"
             threshold = args.max_trades_per_actor
             query = """SELECT t.actor,t.payload FROM trades t JOIN actor_counts c ON c.actor=t.actor
-                WHERE (?=0 OR c.n<=?) AND (? IS NULL OR t.instant>=?)
+                WHERE (?=0 OR c.n<=?) AND (? IS NULL OR EXISTS (
+                    SELECT 1 FROM trades later WHERE later.actor=t.actor AND later.instant>=?))
                 ORDER BY t.actor,t.instant,t.ordinal"""
             rows = db.execute(query, (threshold, threshold, origin, origin))
             actors_dir = work / "actors"
@@ -2390,6 +2540,8 @@ def export(args):
             "espn_timed_items": len(events), "espn_unplaced_items": len(context["untimed_events"]),
             "key_events_only": args.key_events_only, "source": source_report,
             "market_context_version": 2, "market_price_history": price_timeline,
+            "in_market_pnl_version": 1,
+            "in_market_pnl_semantics": "unrealized average-cost P&L on remaining captured inventory; before fees; prior prices only",
             "actor_snapshots": snapshot_report,
             "actor_snapshots_skipped": skip_actor_snapshots,
             "market_price_max_age_seconds": price_max_age, "market_price_coverage": dict(price_coverage),
@@ -2471,6 +2623,11 @@ SFT_SYSTEM = (
     "holdings, intent, or whether a trade occurs."
 )
 SFT_SPLITS = ('train', 'validation', 'test')
+SFT_PNL_SYSTEM = (
+    ' unrealized_in_market_pnl values only remaining captured holdings using average purchase cost and strictly prior prices, before fees.'
+    ' Sales remove cost basis; realized profits are excluded. Zero assumes no opening holdings before the supplied history;'
+    ' null means inventory, cost basis or price is unavailable. Transfers and other non-trade operations are unobserved.'
+)
 SFT_MARKERS = ('<|im_start|>', '<|im_end|>', '<think>', '</think>')
 SFT_PROMPT_SCHEMA = 'actor_market_prompt_v2'
 SFT_INTERVAL_SYSTEM = (
@@ -2827,7 +2984,8 @@ def sft_convert_actor(path, source, *, include_no_trade=True):
     snapshot_audit = sft_actor_snapshot_audit(source, actor, rows)
     version = sft_market_context_version(source['manifest'])
     messages = [{'role': 'system', 'content': (SFT_INTERVAL_SYSTEM if include_no_trade else SFT_SYSTEM) + (
-        SFT_CLOB_CONTEXT_SYSTEM if version == 2 else SFT_MARKET_CONTEXT_SYSTEM if version == 1 else '')}]
+        SFT_CLOB_CONTEXT_SYSTEM if version == 2 else SFT_MARKET_CONTEXT_SYSTEM if version == 1 else '') + SFT_PNL_SYSTEM}]
+    pnl = pnl_state_for_export(source['manifest'], rows[0])
     previous = None
     totals = Counter(rows=len(rows))
     first_time = last_time = None
@@ -2871,8 +3029,11 @@ def sft_convert_actor(path, source, *, include_no_trade=True):
                 sft_require(number.is_finite() and (number > 0 if name == 'shares' else 0 <= number <= 1), f'{path}: invalid {name}')
             values.append({key: execution[key] for key in ('side', 'outcome', 'shares', 'price')})
         market_context = sft_validate_market_features(gap, trade, source, when)
+        pnl_features = pnl.snapshot(market_context, trade['timestamp'])
+        validate_pnl_features(gap, trade, pnl_features, source['manifest'])
         context = {'query_time': trade['timestamp'],
                    'news': [{key: item.get(key) for key in ('time', 'type', 'text')} for item in news]}
+        context.update(pnl_prompt_fields(pnl_features))
         if market_context is not None:
             context['market_context'] = sft_prompt_market_context(market_context)
         if index == 0:
@@ -2887,9 +3048,10 @@ def sft_convert_actor(path, source, *, include_no_trade=True):
                              {'role': 'assistant', 'content': sft_compact(gap['label'])}])
             # News, prices and market description are already in the immediately
             # preceding interval turn. Do not repeat them or expose the fill.
-            context = {'query_time': trade['timestamp']}
+            context = {'query_time': trade['timestamp'], **pnl_prompt_fields(pnl_features)}
         messages.extend([{'role': 'user', 'content': sft_compact(context)},
                          {'role': 'assistant', 'content': sft_compact({'action': 'TRADE', 'trades': values})}])
+        pnl.apply(values)
         previous = when
         first_time = first_time or trade['timestamp']
         last_time = trade['timestamp']
@@ -3012,7 +3174,7 @@ def sft_export(args):
         metadata = {'format': 'actor_market_trade_messages_v1', 'created_at': datetime.now(timezone.utc).isoformat(),
             'task': 'execution_attributes_conditional_on_observed_execution', 'no_trade_targets': False,
             'prompt_schema': SFT_PROMPT_SCHEMA, 'prompt_schema_version': 2, 'feature_variant': 'basic',
-            'market_context_version': context_version,
+            'market_context_version': context_version, 'in_market_pnl_version': 1,
             'execution_and_payoff_audit_used_as_model_input': False,
             'actor_snapshots_used_as_model_input': False,
             'history': 'earlier_turns_of_same_actor_and_binary_market; no_cross_market_history',

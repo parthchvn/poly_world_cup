@@ -89,8 +89,7 @@ def collect_new(args, datasets, excluded_fixtures, excluded_markets, cutoff):
         source, candidates, _ = inspect_export(path, expected)
         metric_source = metrics.discover_exports([path], None)[0]
         for item in candidates:
-            basic, audit, _ = builder.sft_convert_actor(item['path'], source,
-                include_no_trade=bool(datasets['basic']['manifest'].get('no_trade_targets')))
+            basic, audit, _ = builder.sft_convert_actor(item['path'], source)
             if timestamp_us(audit['first_query_time']) <= cutoff:
                 args.excluded_early += 1
                 continue  # Whole conversation excluded by time only; no label-based selection.
@@ -150,8 +149,8 @@ def prepare(args):
             'inmarket_config': datasets['inmarket']['manifest']['actor_metrics']['config'],
             'history_protocol': 'observed_prior_actions_only; current_and_future_answers_excluded',
             'base_model_pretraining_contamination': 'unknown; fine_tuning_holdout_only'}
-        if datasets['basic']['manifest'].get('no_trade_targets'):
-            meta.update(task='observed_interval_and_execution_reconstruction',
+        if all(b.get('target_protocol') == 'observed_interval_and_execution_v1' for b, _ in pairs):
+            meta.update(task='observed_interval_and_execution_reconstruction', no_trade_targets=True,
                         prospective_trade_timing_benchmark=False)
         write_json(work / 'manifest.json', meta)
         work.rename(args.out)

@@ -401,7 +401,8 @@ def process_wallet(args, actor, queries, closed, returns, database, client, budg
                 group['time_us'], args.lookback_seconds, args.min_return_periods)
             records.append({'actor_id': actor, 'market_id': source['market_id'],
                 'condition_id': source['condition_id'], 'timestamp': group['timestamp'],
-                'source_trade_row_index': group['row_index'], 'actor_metrics': metrics})
+                'source_trade_row_index': group['row_index'], 'actor_metrics': metrics,
+                **group['pnl_features']})
         entries.append({'market_id': source['market_id'], 'condition_id': source['condition_id'],
                         'source_actor_sha256': target['source_actor_sha256'], 'records': records})
     result = {'identity': checkpoint_identity, 'actor_id': actor, 'capture': capture, 'entries': entries}
@@ -540,7 +541,8 @@ def derive(args):
                             stream.write(base.json_text(record) + '\n')
                             if args.sft_dir:
                                 index[(actor, source['market_id'], group['time_us'])] = {
-                                    'actor_metrics': record['actor_metrics'], 'trades': group['expected']}
+                                    'actor_metrics': record['actor_metrics'], 'trades': group['expected'],
+                                    'pnl_features': group['pnl_features']}
                     inventory_rows[actor].append({'actor_id': actor, 'market_id': source['market_id'],
                         'condition_id': source['condition_id'], 'path': relative, 'rows': len(groups),
                         'source_actor_sha256': target['source_actor_sha256'],
