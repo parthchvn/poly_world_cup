@@ -6,6 +6,10 @@ It prepares scheduled future intervals from saved actor exports, computes causal
 derived features, ranks them with XGBoost on validation data, and trains one
 QLoRA adapter. Testing is a separate next-day command. See
 [launch commands, source requirements, and feature definitions](docs/interval_experiment.md).
+Use `--target-mode trade-details --price-delta ... --shares-relative-delta ...`
+to also predict each side/outcome's interval share total and weighted mean price,
+with numeric tolerances frozen before training. Detailed mode keeps all summaries
+by default because the XGBoost ranking measures activity, not price/size accuracy.
 
 Generate World Cup actor datasets locally and use local conversation exports for
 supervised fine-tuning. This repository keeps scripts, their supporting Python

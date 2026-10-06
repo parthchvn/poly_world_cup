@@ -105,6 +105,95 @@ class IntervalDatasetTests(unittest.TestCase):
         self.assertEqual(manifest['test_actors_seen_in_train'], 0)
         self.assertTrue(manifest['retrospectively_filtered_actor_cohort'])
 
+    @staticmethod
+    def trade_tolerances():
+        return {'price_delta': '0.02', 'shares_relative_delta': '0.1', 'shares_absolute_delta': '0'}
+
+    def test_trade_details_aggregate_all_fills_with_exact_interval_boundaries(self):
+        source, groups, _ = self.raw()
+        groups[1]['expected'].append({'side': 'SELL', 'outcome': 'No',
+                                     'price': '0.1234567890123456789', 'shares': '2.001'})
+        q = source['kickoff'] + 60_000_000
+        one_group = data.interval_target(groups, q, 180_000_000, 'trade-details')
+        self.assertEqual(one_group['action'], 'TRADE')
+        self.assertEqual(one_group['trades'], groups[1]['expected'])
+        self.assertEqual(one_group['trades'][-1]['price'], '0.1234567890123456789')
+        groups[2]['expected'][0]['price'] = '0.6'
+        two_groups = data.interval_target(groups, q, 181_000_000, 'trade-details')
+        self.assertEqual(two_groups['trades'], [
+            {'side': 'BUY', 'outcome': 'Yes', 'price': '0.5', 'shares': '20'},
+            {'side': 'SELL', 'outcome': 'No', 'price': '0.1234567890123456789', 'shares': '2.001'}])
+        self.assertTrue(all(set(fill) == {'side', 'outcome', 'price', 'shares'} for fill in two_groups['trades']))
+        self.assertEqual(data.interval_target(groups, q-60_000_000, 60_000_000, 'trade-details'), {'action': 'NO_TRADE'})
+        self.assertEqual(data.interval_target(groups, q+181_000_000, 60_000_000, 'trade-details'), {'action': 'NO_TRADE'})
+        self.assertEqual(data.interval_target(groups, q, 181_000_000), {'action': 'TRADE'})
+
+    def test_trade_details_pipeline_only_changes_targets_and_instruction(self):
+        original_manifest, basic = self.prepare('activity')
+        detail_manifest, detail = self.prepare('details', target_mode='trade-details',
+                                             trade_tolerances=self.trade_tolerances())
+        self.assertEqual(detail_manifest['target_protocol'], data.TRADE_DETAILS_PROTOCOL)
+        self.assertEqual(detail_manifest['trade_detail_semantics'], 'side_outcome_window_aggregates_v1')
+        self.assertEqual(detail_manifest['trade_tolerances'], self.trade_tolerances())
+        self.assertNotIn('trade_tolerances', original_manifest)
+        self.assertEqual(original_manifest['splits'], detail_manifest['splits'])
+        for split in data.SPLITS:
+            for basic_row, detail_row in zip(self.rows(basic / (split+'.jsonl')), self.rows(detail / (split+'.jsonl'))):
+                self.assertEqual(basic_row['row_id'], detail_row['row_id'])
+                self.assertEqual(basic_row['messages'][1], detail_row['messages'][1])
+                answer = json.loads(detail_row['messages'][-1]['content'])
+                action = json.loads(basic_row['messages'][-1]['content'])['action']
+                self.assertEqual(answer['action'], action)
+                if action == 'TRADE':
+                    self.assertEqual(answer['trades'], [{'side': 'BUY', 'outcome': 'Yes', 'price': '0.4', 'shares': '10'}])
+                else:
+                    self.assertEqual(answer, {'action': 'NO_TRADE'})
+            for basic_row, detail_row in zip(self.rows(basic / (split+'.features.jsonl')),
+                                             self.rows(detail / (split+'.features.jsonl'))):
+                self.assertEqual(basic_row['features'], detail_row['features'])
+                self.assertEqual(basic_row['label'], detail_row['label'])
+
+    def test_future_trade_detail_changes_target_not_its_context(self):
+        _, before = self.prepare('before', target_mode='trade-details', trade_tolerances=self.trade_tolerances())
+        actor_path = next((self.sources[0] / 'actors').glob('*'))
+        raw = self.rows(actor_path)
+        raw[3]['label']['trades'][0].update(price='0.99', shares='1000')
+        self.jsonl(actor_path, raw)
+        _, after = self.prepare('after', target_mode='trade-details', trade_tolerances=self.trade_tolerances())
+        old = self.rows(before / 'train.jsonl')[1]
+        new = self.rows(after / 'train.jsonl')[1]
+        self.assertEqual(old['messages'][:2], new['messages'][:2])
+        self.assertNotEqual(old['messages'][-1], new['messages'][-1])
+        self.assertEqual(json.loads(new['messages'][-1]['content'])['trades'][0]['shares'], '1000')
+
+    def test_detail_variant_preserves_tolerances_protocol_and_exact_targets(self):
+        manifest, source = self.prepare('details', target_mode='trade-details', trade_tolerances=self.trade_tolerances())
+        out = self.root / 'detail_selected'
+        selected = data.export_sft_variant(source, out, ['prior_execution_count'])
+        self.assertEqual(selected['trade_tolerances'], manifest['trade_tolerances'])
+        self.assertEqual(selected['target_protocol'], data.TRADE_DETAILS_PROTOCOL)
+        for split in data.SPLITS:
+            original = self.rows(source / (split+'.jsonl'))
+            derived = self.rows(out / (split+'.jsonl'))
+            self.assertEqual([r['messages'][-1] for r in original], [r['messages'][-1] for r in derived])
+            self.assertEqual(selected['files'][split+'.jsonl'], data.activity.sha(out / (split+'.jsonl')))
+
+    def test_tolerance_choice_does_not_quantize_labels_or_change_features(self):
+        _, first = self.prepare('tolerance_first', target_mode='trade-details', trade_tolerances=self.trade_tolerances())
+        wider = {'price_delta': '0.05', 'shares_relative_delta': '0.2', 'shares_absolute_delta': '1'}
+        _, second = self.prepare('tolerance_second', target_mode='trade-details', trade_tolerances=wider)
+        for split in data.SPLITS:
+            self.assertEqual((first / (split+'.jsonl')).read_bytes(), (second / (split+'.jsonl')).read_bytes())
+            self.assertEqual((first / (split+'.features.jsonl')).read_bytes(), (second / (split+'.features.jsonl')).read_bytes())
+
+    def test_trade_details_requires_explicit_valid_tolerances(self):
+        with self.assertRaisesRegex(ValueError, 'explicit trade_tolerances'):
+            self.prepare(target_mode='trade-details')
+        with self.assertRaisesRegex(ValueError, 'only to trade-details'):
+            self.prepare(trade_tolerances=self.trade_tolerances())
+        with self.assertRaisesRegex(ValueError, 'target_mode'):
+            self.prepare(target_mode='unknown')
+
     def test_goal_kicks_are_not_scoring_events(self):
         self.assertFalse(data._kind_matches('goal-kick', 'goal'))
         self.assertTrue(data._kind_matches('goal---volley', 'goal'))

@@ -29,12 +29,48 @@ import statistics
 import functools
 import tempfile
 from datetime import datetime, timezone
+from decimal import Decimal, InvalidOperation
 
 
 CHAT_KWARGS = {"enable_thinking": False, "preserve_thinking": True}
 MESSAGE_RE = re.compile(r"<\|im_start\|>(system|user|assistant)\n(.*?)<\|im_end\|>", re.S)
 END = "<|im_end|>"
 INTERVAL_PROTOCOL = "prospective_interval_activity_v1"
+INTERVAL_DETAILS_PROTOCOL = "prospective_interval_trade_details_v1"
+PROSPECTIVE_INTERVAL_PROTOCOLS = {INTERVAL_PROTOCOL, INTERVAL_DETAILS_PROTOCOL}
+
+
+def validate_interval_answer(answer, protocol, location):
+    """Keep exact labels; tolerances apply only to downstream evaluation."""
+    if not isinstance(answer, dict) or answer.get('action') not in ('TRADE', 'NO_TRADE'):
+        raise ValueError(f'{location}: interval answer requires TRADE or NO_TRADE')
+    if protocol == INTERVAL_PROTOCOL or answer['action'] == 'NO_TRADE':
+        if set(answer) != {'action'}:
+            raise ValueError(f'{location}: interval answer must contain only binary action')
+        return
+    if set(answer) != {'action', 'trades'} or not isinstance(answer['trades'], list) or not answer['trades']:
+        raise ValueError(f'{location}: detailed TRADE answer requires a nonempty trades list')
+    if len(answer['trades']) > 4:
+        raise ValueError(f'{location}: detailed targets allow at most four side/outcome aggregates')
+    seen = set()
+    for trade in answer['trades']:
+        if not isinstance(trade, dict) or set(trade) != {'side', 'outcome', 'price', 'shares'}:
+            raise ValueError(f'{location}: each detailed fill requires side/outcome/price/shares only')
+        if trade['side'] not in ('BUY', 'SELL') or trade['outcome'] not in ('Yes', 'No'):
+            raise ValueError(f'{location}: unsupported fill side/outcome')
+        group = (trade['side'], trade['outcome'])
+        if group in seen:
+            raise ValueError(f'{location}: detailed targets must aggregate repeated side/outcome groups')
+        seen.add(group)
+        for name in ('price', 'shares'):
+            if not isinstance(trade[name], str):
+                raise ValueError(f'{location}: exact fill {name} must be a decimal string')
+            try:
+                value = Decimal(trade[name])
+            except InvalidOperation:
+                raise ValueError(f'{location}: invalid fill {name}') from None
+            if not value.is_finite() or (not 0 <= value <= 1 if name == 'price' else value <= 0):
+                raise ValueError(f'{location}: fill price must be in [0,1] and shares positive')
 
 
 def interval_timestamp(value):
@@ -53,8 +89,9 @@ def validate_interval_record(record, location="interval record"):
     This validates observable timestamps, not news availability or capture
     completeness: those remain recorded limitations of the source dataset.
     """
-    if record.get("target_protocol") != INTERVAL_PROTOCOL:
-        raise ValueError(f"{location}: expected {INTERVAL_PROTOCOL}")
+    protocol = record.get("target_protocol")
+    if protocol not in PROSPECTIVE_INTERVAL_PROTOCOLS:
+        raise ValueError(f"{location}: expected an explicit prospective interval protocol")
     messages = record.get("messages", [])
     roles = [m.get("role") for m in messages]
     if roles not in (["system", "user", "assistant"], ["user", "assistant"]):
@@ -66,8 +103,7 @@ def validate_interval_record(record, location="interval record"):
             raise ValueError(f"{location}: missing {field}")
     query = json.loads(messages[-2]["content"])
     answer = json.loads(messages[-1]["content"])
-    if not isinstance(answer, dict) or set(answer) != {"action"} or answer["action"] not in ("TRADE", "NO_TRADE"):
-        raise ValueError(f"{location}: interval answer must contain only binary action")
+    validate_interval_answer(answer, protocol, location)
     start = interval_timestamp(record["interval_start"])
     end = interval_timestamp(record["interval_end"])
     if not start < end:
@@ -196,9 +232,9 @@ def read_split(path, tokenizer, max_length):
             protocol_counts[protocol] = protocol_counts.get(protocol, 0) + 1
             has_intervals = any(m.get('role') == 'assistant' and
                 json.loads(m['content']).get('action') == 'NO_TRADE' for m in record['messages'])
-            if protocol == INTERVAL_PROTOCOL:
+            if protocol in PROSPECTIVE_INTERVAL_PROTOCOLS:
                 validate_interval_record(record, f'{path}:{number}')
-            if has_intervals and protocol not in ('observed_interval_and_execution_v1', INTERVAL_PROTOCOL):
+            if has_intervals and protocol not in PROSPECTIVE_INTERVAL_PROTOCOLS | {'observed_interval_and_execution_v1'}:
                 raise ValueError(f'{path}:{number}: NO_TRADE targets require the interval/execution protocol')
             if record.get('target_protocol') == 'observed_interval_and_execution_v1':
                 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
@@ -235,8 +271,8 @@ def split_path(directory, split):
 def validate_target_counts(stats, allow_trade_only=False):
     counts = stats.get('action_counts', {})
     protocols = stats.get('protocol_counts', {})
-    if INTERVAL_PROTOCOL in protocols:
-        if set(protocols) != {INTERVAL_PROTOCOL}:
+    if PROSPECTIVE_INTERVAL_PROTOCOLS & set(protocols):
+        if len(protocols) != 1:
             raise ValueError('Do not mix prospective intervals with retrospective/legacy records')
         if not counts or set(counts) - {'TRADE', 'NO_TRADE'}:
             raise ValueError('Prospective intervals require binary TRADE/NO_TRADE actions')
@@ -441,12 +477,24 @@ def prepare_cache(args):
     }
     manifest_path = args.dataset_dir / 'manifest.json'
     manifest = json.loads(manifest_path.read_text()) if manifest_path.is_file() else {}
-    if manifest.get('target_protocol') == INTERVAL_PROTOCOL:
+    if manifest.get('target_protocol') in PROSPECTIVE_INTERVAL_PROTOCOLS:
         # Bind the frozen test manifest without opening test data during training.
         identity['manifest_sha256'] = sha256_file(manifest_path)
         for split, path in paths.items():
             if manifest.get('files', {}).get(path.name) != identity['sources'][split]['sha256']:
                 raise ValueError(f'{split}: file differs from the frozen interval manifest')
+        if manifest['target_protocol'] == INTERVAL_DETAILS_PROTOCOL:
+            sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
+            from interval_trade_tolerances import validate_tolerances
+            scorer = Path(__file__).resolve().parents[1] / 'tools/interval_trade_tolerances.py'
+            if manifest.get('implementation_sha256', {}).get('tools/interval_trade_tolerances.py') != sha256_file(scorer):
+                raise ValueError('Trade-details scoring implementation differs from the frozen dataset manifest')
+            if manifest.get('trade_detail_semantics') != 'side_outcome_window_aggregates_v1':
+                raise ValueError('Trade-details training requires side/outcome window aggregate semantics')
+            if 'trade_tolerances' not in manifest:
+                raise ValueError('Trade-details training requires frozen trade_tolerances in its manifest')
+            identity['trade_detail_semantics'] = manifest['trade_detail_semantics']
+            identity['trade_tolerances'] = validate_tolerances(manifest['trade_tolerances'])
     key = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
     destination = args.cache_dir / key
     if (destination / "prepared.json").is_file():
@@ -463,7 +511,7 @@ def prepare_cache(args):
             rows, stats[split] = read_split(path, tokenizer, args.max_length)
             validate_target_counts(stats[split], args.allow_trade_only)
             if (manifest.get('no_trade_targets')
-                    and INTERVAL_PROTOCOL not in stats[split].get('protocol_counts', {})):
+                    and not PROSPECTIVE_INTERVAL_PROTOCOLS.intersection(stats[split].get('protocol_counts', {}))):
                 counts = stats[split]['action_counts']
                 if not (counts.get('NO_TRADE', 0) == counts.get('TRADE', 0) > 0):
                     raise ValueError(f'{split}: missing NO_TRADE interval supervision: {counts}')
@@ -479,10 +527,11 @@ def prepare_cache(args):
             raise ValueError(f"Train/validation fixture overlap: {sorted(overlap)}")
         train_protocols = set(stats['train'].get('protocol_counts', {}))
         validation_protocols = set(stats['validation'].get('protocol_counts', {}))
-        if INTERVAL_PROTOCOL in train_protocols | validation_protocols or manifest.get('target_protocol') == INTERVAL_PROTOCOL:
+        if (PROSPECTIVE_INTERVAL_PROTOCOLS & (train_protocols | validation_protocols)
+                or manifest.get('target_protocol') in PROSPECTIVE_INTERVAL_PROTOCOLS):
             if 'manifest_sha256' not in identity:
                 raise ValueError('Prospective interval training requires its frozen protocol manifest.json')
-            if train_protocols != {INTERVAL_PROTOCOL} or validation_protocols != {INTERVAL_PROTOCOL}:
+            if train_protocols != {manifest.get('target_protocol')} or validation_protocols != train_protocols:
                 raise ValueError('Train and validation must use the same prospective interval protocol')
             if not all(stats['train']['action_counts'].get(action, 0) > 0 for action in ('TRADE', 'NO_TRADE')):
                 raise ValueError('Prospective interval training requires examples of both action classes')

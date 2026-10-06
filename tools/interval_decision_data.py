@@ -27,6 +27,8 @@ import build_actor_dataset as builder
 import derive_actor_metrics as metrics
 
 PROTOCOL = 'prospective_interval_activity_v1'
+TRADE_DETAILS_PROTOCOL = 'prospective_interval_trade_details_v1'
+TARGET_PROTOCOLS = {'activity': PROTOCOL, 'trade-details': TRADE_DETAILS_PROTOCOL}
 SPLITS = ('train', 'validation', 'test')
 SYSTEM = (
     'Predict whether this actor has at least one captured execution in the future '
@@ -40,6 +42,35 @@ SYSTEM = (
     'are event-time proxies, not verified publication times. NO_TRADE means no captured '
     'execution; it does not identify unfilled orders or conscious intent.'
 )
+
+TRADE_DETAILS_SYSTEM = SYSTEM.replace(
+    '{"action":"TRADE"} or {"action":"NO_TRADE"}. ',
+    '{"action":"NO_TRADE"} when no execution occurs. Otherwise reply '
+    '{"action":"TRADE","trades":[{"side":"BUY","outcome":"Yes",'
+    '"price":"0.40","shares":"10"}]}. Predict the execution totals in the interval '
+    'using trades entries with side BUY or SELL, outcome Yes or No, '
+    'price in [0,1], and positive shares. Keep price and shares as decimal strings. '
+    'For each side/outcome pair, combine every captured fill in the interval into one entry: '
+    'shares is the total number of shares and price is their share-weighted mean execution price. '
+    'Return at most four entries, sorted by side then outcome; do not predict timestamps. '
+    'The example numbers describe only the output schema, not the present label. '
+)
+
+
+def interval_target(groups, query, horizon, target_mode='activity'):
+    """Side/outcome aggregates over [query,query+horizon); tolerances are evaluation-only.
+
+    Every captured fill contributes its shares and execution notional. The raw
+    actor export is untouched; aggregate price uses the shared Decimal helper.
+    """
+    metrics.require(target_mode in TARGET_PROTOCOLS, 'Unknown target mode')
+    times = [group['time_us'] for group in groups]
+    selected = groups[bisect_left(times, query):bisect_left(times, query + horizon)]
+    target = {'action': 'TRADE' if selected else 'NO_TRADE'}
+    if selected and target_mode == 'trade-details':
+        from interval_trade_tolerances import aggregate_trades
+        target['trades'] = aggregate_trades([trade for group in selected for trade in group['expected']])
+    return target
 
 
 def dump(value):
@@ -212,8 +243,19 @@ def prepare_interval_dataset(input_root, out, *, window_seconds=300, max_rows=20
         news_seconds=1200, max_news_items=20, max_news_chars=300,
         max_trades_per_actor=20, validation_fraction=.1, test_fraction=.1,
         split_file=None, strict_chronology=True, include_actor_id=True,
-        returns_file=None, closed_positions=None, min_return_periods=30, coverage_file=None):
+        returns_file=None, closed_positions=None, min_return_periods=30, coverage_file=None,
+        target_mode='activity', trade_tolerances=None):
     """Write a fresh, immutable split bundle; max_rows is a cap on interval targets."""
+    metrics.require(target_mode in TARGET_PROTOCOLS, 'target_mode must be activity or trade-details')
+    protocol = TARGET_PROTOCOLS[target_mode]
+    normalized_tolerances = None
+    if target_mode == 'trade-details':
+        metrics.require(trade_tolerances is not None, 'trade-details requires explicit trade_tolerances')
+        from interval_trade_tolerances import validate_tolerances
+        normalized_tolerances = validate_tolerances(trade_tolerances)
+    else:
+        metrics.require(trade_tolerances is None, 'trade_tolerances apply only to trade-details targets')
+    system = TRADE_DETAILS_SYSTEM if target_mode == 'trade-details' else SYSTEM
     out = Path(out)
     metrics.require(not out.exists(), f'Output exists: {out}; use a fresh directory')
     for name, value in [('window_seconds', window_seconds), ('max_rows', max_rows),
@@ -344,16 +386,17 @@ def prepare_interval_dataset(input_root, out, *, window_seconds=300, max_rows=20
                     history_groups=history_groups, news_seconds=news_seconds, max_news_items=max_news_items,
                     max_news_chars=max_news_chars, closed=closed.get(ledger_key, []), returns=returns.get(ledger_key, []),
                     min_return_periods=min_return_periods, actor_id=actor if include_actor_id else None)
-                label = activity.answer_at(groups, query, horizon)
-                action = 'TRADE' if label else 'NO_TRADE'
+                target = interval_target(groups, query, horizon, target_mode)
+                action = target['action']
+                label = int(action == 'TRADE')
                 metadata = {'row_id': identity, 'sequence_id': identity, 'actor_id': actor,
                     'market_id': source['market_id'], 'fixture_id': source['fixture_id'],
-                    'target_protocol': PROTOCOL, 'query_time': activity.utc(query),
+                    'target_protocol': protocol, 'query_time': activity.utc(query),
                     'interval_start': activity.utc(query), 'interval_end': activity.utc(query + horizon),
                     'interval_start_utc': activity.utc(query), 'interval_end_utc': activity.utc(query + horizon)}
                 sft = {**metadata, 'target_count': 1, 'messages': [
-                    {'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': dump(context)},
-                    {'role': 'assistant', 'content': dump({'action': action})}]}
+                    {'role': 'system', 'content': system}, {'role': 'user', 'content': dump(context)},
+                    {'role': 'assistant', 'content': dump(target)}]}
                 feature_row = {**metadata, 'label': label, 'action': action, 'features': features}
                 streams[(split, 'sft')].write(dump(sft) + '\n')
                 streams[(split, 'features')].write(dump(feature_row) + '\n')
@@ -373,7 +416,14 @@ def prepare_interval_dataset(input_root, out, *, window_seconds=300, max_rows=20
         write_json(work / 'split_plan.json', split_plan)
         files = {path.name: activity.sha(path) for path in work.glob('*.json*')}
         manifest = {
-            'format': PROTOCOL, 'target_protocol': PROTOCOL, 'task': 'prospective_interval_activity',
+            'format': protocol, 'target_protocol': protocol,
+            'task': 'prospective_interval_trade_details' if target_mode == 'trade-details' else 'prospective_interval_activity',
+            'target_mode': target_mode,
+            'target_semantics': {'window': '[start,end)', 'trade_details': target_mode == 'trade-details',
+                'fill_scope': 'all_captured_fills_in_interval',
+                'amounts': 'total_shares_and_share_weighted_mean_price_by_side_outcome' if target_mode == 'trade-details' else None,
+                'order': 'canonical_side_then_outcome' if target_mode == 'trade-details' else None,
+                'evaluation_tolerances_modify_training_labels': False},
             'no_trade_targets': True, 'targets': len(selected), 'feature_names': feature_names,
             'files': files, 'sources': audits, 'fixture_to_split': mapping,
             'implementation_sha256': {name: activity.sha(ROOT / name) for name in
@@ -413,6 +463,12 @@ def prepare_interval_dataset(input_root, out, *, window_seconds=300, max_rows=20
                 'Inventory omits uncaptured transfers, splits, merges and redemptions; unknown holdings remain null.',
                 'Base-model pretraining may already contain these historical match outcomes.',
             ]}
+        if normalized_tolerances is not None:
+            manifest['trade_tolerances'] = normalized_tolerances
+            manifest['trade_detail_semantics'] = 'side_outcome_window_aggregates_v1'
+            manifest['target_semantics']['aggregate_serialization_significant_digits'] = 40
+            manifest['implementation_sha256']['tools/interval_trade_tolerances.py'] = activity.sha(
+                ROOT / 'tools/interval_trade_tolerances.py')
         write_json(work / 'manifest.json', manifest)
         metrics.require(not out.exists(), f'Output appeared during preparation: {out}')
         work.rename(out)
@@ -433,7 +489,7 @@ def export_sft_variant(source, out, features):
     """
     source, out = Path(source), Path(out)
     manifest = json.loads((source / 'manifest.json').read_text())
-    metrics.require(manifest.get('target_protocol') == PROTOCOL, 'Unsupported dataset protocol')
+    metrics.require(manifest.get('target_protocol') in TARGET_PROTOCOLS.values(), 'Unsupported dataset protocol')
     chosen = list(manifest['feature_names'] if features is None else features)
     metrics.require(len(chosen) == len(set(chosen)) and set(chosen) <= set(manifest['feature_names']), 'Unknown or duplicate feature')
     metrics.require(not out.exists(), f'Output exists: {out}')
