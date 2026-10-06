@@ -1,5 +1,12 @@
 # World Cup collection and training scripts
 
+For the **overnight fixed-interval TRADE/NO_TRADE experiment**, use
+[`scripts/run_interval_experiment.py`](scripts/run_interval_experiment.py).
+It prepares scheduled future intervals from saved actor exports, computes causal
+derived features, ranks them with XGBoost on validation data, and trains one
+QLoRA adapter. Testing is a separate next-day command. See
+[launch commands, source requirements, and feature definitions](docs/interval_experiment.md).
+
 Generate World Cup actor datasets locally and use local conversation exports for
 supervised fine-tuning. This repository keeps scripts, their supporting Python
 modules, configuration, documentation, and tests. Generated datasets, captures,
