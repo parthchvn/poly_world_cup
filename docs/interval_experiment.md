@@ -1,5 +1,33 @@
 # Overnight interval activity experiment
 
+## Upload a whole-actor subset from Windows
+
+`scripts/package_actor_subset.py` packages exactly 200,000 **raw actor history
+rows**, including the original paired NO_TRADE rows. It keeps each selected
+actor's entire captured history in a market, excludes actors with more than
+20 captured executions in that market, and never truncates a history to fit.
+This trade-count filter is a cohort rule, not proof that a wallet is human.
+The selection uses a fixed seed and fails if the exact total is impossible.
+
+In PowerShell, from this repository checkout:
+
+```powershell
+py -u scripts/package_actor_subset.py --input-root "$env:USERPROFILE\wc_collection_v1\exports" --out "$env:USERPROFILE\wc_collection_v1\wc_200k_by_actor_v2.zip" --target-rows 200000 --max-trades-per-actor 20 --seed 42
+```
+
+The ZIP contains `exports/market_*/` with complete selected actor files, rebuilt
+actor indexes and subset manifest counts, plus shared ESPN news, official price
+histories and their provenance. Original manifests are kept as
+`source_manifest.json`; `selection.json` records the selected histories and
+checksums. Existing archives are never overwritten. No API calls or third-party
+Python packages are needed. Extract the ZIP on RunPod and use its `exports/`
+folder as `--input-root` for the interval runner below.
+
+**This raw-row budget is different from `run_interval_experiment.py --max-rows`:**
+the latter caps newly constructed scheduled interval examples. Packaging 200,000
+raw rows does not guarantee 200,000 five-minute examples. Supporting news/price
+files and actor-index entries do not count toward the raw actor-row budget.
+
 ## Price and share-size tolerances
 
 Use `--target-mode trade-details` to predict TRADE/NO_TRADE **plus BUY/SELL,
