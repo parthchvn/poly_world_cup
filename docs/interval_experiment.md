@@ -1,5 +1,137 @@
 # Overnight interval activity experiment
 
+## Upload a whole-actor subset from Windows
+
+`scripts/package_actor_subset.py` packages exactly 200,000 **raw actor history
+rows**, including the original paired NO_TRADE rows. It keeps each selected
+actor's entire captured history in a market, excludes actors with more than
+20 captured executions in that market, and never truncates a history to fit.
+This trade-count filter is a cohort rule, not proof that a wallet is human.
+The selection uses a fixed seed and fails if the exact total is impossible.
+
+In PowerShell, from this repository checkout:
+
+```powershell
+py -u scripts/package_actor_subset.py --input-root "$env:USERPROFILE\wc_collection_v1\exports" --out "$env:USERPROFILE\wc_collection_v1\wc_200k_by_actor_v2.zip" --target-rows 200000 --max-trades-per-actor 20 --seed 42
+```
+
+The ZIP contains `exports/market_*/` with complete selected actor files, rebuilt
+actor indexes and subset manifest counts, plus shared ESPN news, official price
+histories and their provenance. Original manifests are kept as
+`source_manifest.json`; `selection.json` records the selected histories and
+checksums. Existing archives are never overwritten. No API calls or third-party
+Python packages are needed. Extract the ZIP on RunPod and use its `exports/`
+folder as `--input-root` for the interval runner below.
+
+**This raw-row budget is different from `run_interval_experiment.py --max-rows`:**
+the latter caps newly constructed scheduled interval examples. Packaging 200,000
+raw rows does not guarantee 200,000 five-minute examples. Supporting news/price
+files and actor-index entries do not count toward the raw actor-row budget.
+
+## Price and share-size tolerances
+
+Use `--target-mode trade-details` to predict TRADE/NO_TRADE **plus BUY/SELL,
+YES/NO, total shares, and weighted mean execution price** inside each interval.
+The original binary `activity` mode remains available and is still the default.
+Existing binary adapters do not gain numeric outputs by changing evaluation.
+Prepare a new dataset and train a fresh adapter for the detailed task.
+
+There are three independent choices: the prediction horizon, the absolute price
+error tolerance, and the relative share-size error tolerance. The numeric values
+below are **illustrative experimental settings**, not validated optima:
+
+```bash
+git pull --ff-only origin main
+
+python3 scripts/run_interval_experiment.py \
+  --input-root /workspace/world_cup_actor_data/data \
+  --model /workspace/models/Qwen3.6-27B \
+  --out /workspace/experiments/wc_trade_details_v1 \
+  --target-mode trade-details \
+  --window-seconds 300 \
+  --price-delta 0.02 \
+  --shares-relative-delta 0.20 \
+  --max-rows 200000 \
+  --gpus 2 --gpu-ids 0,1 \
+  --install-xgb --background
+```
+
+The details mode requires explicit price and relative-share tolerances. There
+are no hidden numeric defaults. The optional `--shares-absolute-delta` defaults
+to zero and supplies a share-error floor for tiny trades. These choices are
+saved in the dataset manifest, bound to the training run, and cannot be changed
+by the evaluator. Tune settings on development data and freeze them before the
+final experiment; do not widen tolerances after inspecting test results.
+
+For each side/outcome combination, a prediction is accepted when both hold:
+
+```text
+abs(predicted_price - observed_price) <= price_delta
+abs(predicted_shares - observed_shares)
+    <= max(shares_absolute_delta, shares_relative_delta * observed_shares)
+```
+
+The endpoints are inclusive and decimal arithmetic is used. `price_delta=0.02`
+means two cents per share, or two probability percentage points. It does not mean
+two percent of the price. For an observed trade aggregate of 100 shares at 0.60,
+the example settings accept a price estimate in [0.58,0.62] and a share estimate
+in [80,120], provided side and outcome also match. The relative share tolerance
+uses the **observed** size, not the prediction, as its denominator.
+
+These are tolerance criteria around **point predictions**, not confidence bands
+with a claimed coverage probability. SFT labels retain the observed aggregate
+values; changing a tolerance does not change the labels or input features.
+The model is not trained to output an arbitrarily wide interval. A predicted
+price change relative to the current market price would be a different target.
+
+Multiple fills are aggregated separately by `(side,outcome)` over the window.
+For example, BUY YES 10 shares at 0.40 and BUY YES 30 shares at 0.60 yield:
+
+```json
+{"action":"TRADE","trades":[{"side":"BUY","outcome":"Yes","price":"0.55","shares":"40"}]}
+```
+
+Price is share-weighted mean execution price, and shares is the total executed
+quantity. BUY/SELL are not netted against each other. There are at most four
+groups. This prevents exchange fill fragmentation from changing the target;
+group sums and weighted means are serialized deterministically to 40 significant
+digits. NO_TRADE remains `{"action":"NO_TRADE"}`.
+
+For detailed mode, SFT **keeps all derived features by default**. XGBoost still
+ranks TRADE/NO_TRADE prediction, so its shortlist cannot establish which features
+help with price or size. You can explicitly request `--sft-features selected`,
+but that is an activity-based ablation. XGBoost price/size regression is not
+implemented by this runner.
+
+Tomorrow use the separate detailed evaluator:
+
+```bash
+python3 scripts/evaluate_interval_trade_details.py \
+  --dataset-dir /workspace/experiments/wc_trade_details_v1/sft/selected \
+  --run-dir /workspace/experiments/wc_trade_details_v1/runs/selected \
+  --model /workspace/models/Qwen3.6-27B \
+  --out /workspace/experiments/wc_trade_details_v1/evaluation/selected \
+  --gpu 0
+```
+
+Decoding is deterministic. The full user context stays before the interval;
+no true future side, outcome, price or size is passed to generation. The evaluator
+checks the exact training prompt prefix, frozen manifest, test file and tolerance
+scorer. Invalid or unterminated JSON fails the interval. `--check-only` validates
+tokenization first; `--max-context` includes the generation reserve controlled by
+`--max-new-tokens`. Increase the total context budget if valid training prompts
+plus that reserve do not fit; input history is never silently truncated.
+
+Reports include action accuracy, side/outcome-group precision/recall/F1 with both
+numeric tolerances, whole-interval success, and success on **TRADE windows alone**.
+An always-NO_TRADE baseline and actor/match summaries are included. Correct
+negative windows cannot hide failure on every positive window. Predicted groups
+are also aggregated before scoring: splitting a prediction into pieces does not
+change its total, and duplicating quantity can make its size incorrect.
+
+The following sections describe the original binary activity workflow and the
+source preparation shared by both modes.
+
 This pipeline trains **whether an actor executes at least one trade in a future
 interval**, with targets `{"action":"TRADE"}` and `{"action":"NO_TRADE"}`. It is a
 new task aligned with interval testing. It does not predict the future trade's

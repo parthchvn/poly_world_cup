@@ -64,6 +64,8 @@ def normalized_trade_probability(no_trade_loglik, trade_loglik):
 
 def encode_candidates(record, tokenizer, max_context):
     """Reuse the TRAINER's exact chat template and assistant/EOS token mask."""
+    require(record.get('target_protocol') == INTERVAL_PROTOCOL,
+            'Binary likelihood scoring requires activity targets; use evaluate_interval_trade_details.py for fill targets')
     validate_interval_record(record)
     gold = json.loads(record['messages'][-1]['content'])['action']
     require(record['messages'][-1]['content'].strip() == canonical_answer(gold),
@@ -107,7 +109,7 @@ def score_candidates(model, encoded, tokenizer, torch, device):
     return likelihoods
 
 
-def validate_run(run_dir, dataset_dir, model_path, split='test'):
+def validate_run(run_dir, dataset_dir, model_path, split='test', protocol=INTERVAL_PROTOCOL):
     metadata = json.loads((run_dir / 'training_metadata.json').read_text())
     require(metadata.get('status') == 'completed' and metadata.get('mode') in ('full', 'smoke_then_full'),
             'Use a completed full training run with its final adapter')
@@ -116,12 +118,12 @@ def validate_run(run_dir, dataset_dir, model_path, split='test'):
     require(sha256_file(manifest_path) == metadata['signature']['data'].get('manifest_sha256'),
             'Dataset manifest differs from the frozen manifest recorded before training')
     manifest = json.loads(manifest_path.read_text())
-    require(manifest.get('target_protocol') == INTERVAL_PROTOCOL, 'Manifest is not the prospective interval protocol')
+    require(manifest.get('target_protocol') == protocol, f'Manifest does not use the requested {protocol} protocol')
     evaluation_path = split_path(dataset_dir, split)
     require(sha256_file(evaluation_path) == manifest.get('files', {}).get(evaluation_path.name),
             f'{split} file differs from the frozen manifest recorded before training')
     for split in ('train', 'validation'):
-        require(set(metadata['data'][split].get('protocol_counts', {})) == {INTERVAL_PROTOCOL},
+        require(set(metadata['data'][split].get('protocol_counts', {})) == {protocol},
                 f'{split} was not trained with the prospective interval protocol')
         actual = sha256_file(split_path(dataset_dir, split))
         require(actual == metadata['signature']['data']['sources'][split]['sha256'],

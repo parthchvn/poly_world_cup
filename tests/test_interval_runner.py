@@ -84,6 +84,19 @@ class IntervalRunnerTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 runner.parse_args(['--input-root', str(self.input), '--out', str(self.root / 'other'), *extra])
 
+    def test_details_requires_explicit_tolerances_and_keeps_size_features(self):
+        base = ['--input-root', str(self.input), '--out', str(self.root / 'details')]
+        with self.assertRaisesRegex(ValueError, 'requires explicit'):
+            runner.parse_args([*base, '--target-mode', 'trade-details'])
+        args = runner.parse_args([*base, '--target-mode', 'trade-details',
+            '--price-delta', '.02', '--shares-relative-delta', '.20'])
+        self.assertEqual(args.sft_features, 'all')
+        self.assertEqual(args.trade_tolerances, {'price_delta': '0.02',
+            'shares_relative_delta': '0.2', 'shares_absolute_delta': '0'})
+        self.assertEqual(self.args.sft_features, 'selected')
+        with self.assertRaisesRegex(ValueError, 'Numeric tolerances require'):
+            runner.parse_args([*base, '--price-delta', '.02'])
+
 
 if __name__ == '__main__':
     unittest.main()

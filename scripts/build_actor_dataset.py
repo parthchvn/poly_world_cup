@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Collect actor datasets and prepare SFT conversations (Python 3.11+, Mac/Linux).
+"""Collect actor datasets and prepare SFT conversations (Python 3.11+, Windows/Mac/Linux).
 
     python3 build_actor_dataset.py 1897059
     python3 build_actor_dataset.py MARKET_ID --out data/my_market
@@ -448,10 +448,29 @@ def _atomic_json(path: Path, value: Any) -> None:
 
 @contextmanager
 def _writer_lock(directory: Path):
-    # Advisory locks are released by the OS after a process crash, so recovery
-    # does not require deleting stale marker files. This collector targets POSIX.
-    import fcntl
+    # Keep OS-owned locks: a crashed collector must not leave a stale lock that
+    # requires deleting cache files. Windows locks the same byte on every open,
+    # including on an empty file (locking beyond EOF is supported).
+    if os.name == "nt":
+        import errno
+        import msvcrt
 
+        with (directory / ".writer.lock").open("a+b") as handle:
+            handle.seek(0)
+            try:
+                msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+            except OSError as exc:
+                if exc.errno in (errno.EACCES, errno.EAGAIN, errno.EDEADLK):
+                    raise TradeIngestionError("Another collector is writing this condition") from exc
+                raise
+            try:
+                yield
+            finally:
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+        return
+
+    import fcntl
     with (directory / ".writer.lock").open("a") as handle:
         try:
             fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -736,7 +755,7 @@ def ingest_condition(client: Any, *, condition_id: str, output_dir: Path,
     ``url``, ``body_sha256``, and ``retrieved_at``. Use one run directory for a
     traversal; a later independent capture belongs in a different directory.
 
-    POSIX advisory locking prevents concurrent writers. Page data and recovery
+    OS file locking prevents concurrent writers on Windows, macOS and Linux. Page data and recovery
     metadata are durable before the manifest is advanced. Invalid source pages
     raise TradeIngestionError without committing partial observations.
     """

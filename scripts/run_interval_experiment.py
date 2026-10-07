@@ -206,7 +206,7 @@ def run(args):
         'window_seconds', 'max_rows', 'seed', 'match_minutes', 'pre_match_minutes', 'history_groups',
         'news_seconds', 'max_news_items', 'max_news_chars', 'max_trades_per_actor',
         'validation_fraction', 'test_fraction', 'split_file', 'include_actor_id', 'returns_file',
-        'closed_positions', 'min_return_periods', 'coverage_file')}
+        'closed_positions', 'min_return_periods', 'coverage_file', 'target_mode', 'trade_tolerances')}
     stage(args, 'prepare', dataset,
           lambda: prepare_interval_dataset(args.input_root, dataset, strict_chronology=True, **prepare_options))
     if args.prepare_only:
@@ -215,7 +215,10 @@ def run(args):
     ranking = args.out / 'xgboost'
     stage(args, 'xgboost', ranking, lambda: command(args, 'xgboost', xgb_command(args, dataset, ranking)))
     selected = read_json(ranking / 'selected_features.json')['features']
-    log('Validation-selected derived features: ' + ', '.join(selected))
+    log('Activity-ranking shortlist: ' + ', '.join(selected))
+    if args.target_mode == 'trade-details':
+        log('Detailed targets predict total shares and weighted mean prices. XGBoost ranks activity only; '
+            f'SFT summary policy: {args.sft_features}. Frozen tolerances: {args.trade_tolerances}')
     sft = args.out / 'sft'
     selected_sft = sft / 'selected'
     features = selected if args.sft_features == 'selected' else None
@@ -230,9 +233,13 @@ def run(args):
         train_variant(args, 'basic', sft / 'basic')
     atomic_json(args.out / 'completed.json', {'status': 'completed', 'test_evaluated': False,
                 'dataset': str(selected_sft), 'run_dir': str(args.out / 'runs/selected'),
-                'selected_features': selected, 'window_seconds': args.window_seconds})
+                'activity_ranking_features': selected, 'sft_features_policy': args.sft_features,
+                'target_mode': args.target_mode, 'trade_tolerances': args.trade_tolerances,
+                'window_seconds': args.window_seconds})
     log('Training complete. Test evaluation has not been run.')
-    log('Tomorrow: ' + shlex.join([sys.executable, 'scripts/evaluate_interval_decisions.py',
+    evaluator = ('scripts/evaluate_interval_trade_details.py' if args.target_mode == 'trade-details'
+                 else 'scripts/evaluate_interval_decisions.py')
+    log('Tomorrow: ' + shlex.join([sys.executable, evaluator,
         '--dataset-dir', str(selected_sft), '--run-dir', str(args.out / 'runs/selected'),
         '--model', str(args.model), '--out', str(args.out / 'evaluation/selected')]))
 
@@ -243,6 +250,11 @@ def parse_args(argv=None):
     p.add_argument('--out', type=Path, required=True, help='Fresh experiment directory on persistent storage')
     p.add_argument('--model', type=Path, default=Path('/workspace/models/Qwen3.6-27B'))
     p.add_argument('--window-seconds', type=int, default=300)
+    p.add_argument('--target-mode', choices=('activity', 'trade-details'), default='activity',
+                   help='Binary activity, or activity plus side/outcome totals and weighted mean prices')
+    p.add_argument('--price-delta', help='Required for details: absolute price error tolerance, e.g. 0.02 (two cents)')
+    p.add_argument('--shares-relative-delta', help='Required for details: share error fraction of observed shares, e.g. 0.20')
+    p.add_argument('--shares-absolute-delta', default=None, help='Optional absolute share-error floor (default 0 for details)')
     p.add_argument('--max-rows', '--targets', type=int, default=200000, help='Label-independent cap across all splits')
     p.add_argument('--match-minutes', type=int, default=150)
     p.add_argument('--pre-match-minutes', type=int, default=0)
@@ -265,7 +277,8 @@ def parse_args(argv=None):
     p.add_argument('--xgb-rounds', type=int, default=500)
     p.add_argument('--xgb-early-stopping', type=int, default=30)
     p.add_argument('--xgb-threads', type=int, default=8)
-    p.add_argument('--sft-features', choices=('selected', 'all'), default='selected')
+    p.add_argument('--sft-features', choices=('selected', 'all'), default=None,
+                   help='Default selected for activity, all for details: activity ranks do not measure size/price usefulness')
     p.add_argument('--compare-basic', action='store_true', help='Also train a fresh basic adapter after the selected adapter')
     p.add_argument('--gpus', type=int, default=2)
     p.add_argument('--gpu-ids', default=None)
@@ -286,6 +299,19 @@ def parse_args(argv=None):
     p.add_argument('--background', action='store_true', help='Detach runner and write logs under --out/logs')
     p.add_argument('--resume', action='store_true', help='Reuse verified stages and resume a complete training checkpoint')
     args = p.parse_args(argv)
+    if args.target_mode == 'trade-details':
+        from interval_trade_tolerances import validate_tolerances
+        require(args.price_delta is not None and args.shares_relative_delta is not None,
+                '--target-mode trade-details requires explicit --price-delta and --shares-relative-delta')
+        args.trade_tolerances = validate_tolerances({'price_delta': args.price_delta,
+            'shares_relative_delta': args.shares_relative_delta,
+            'shares_absolute_delta': args.shares_absolute_delta or '0'})
+    else:
+        require(all(getattr(args, name) is None for name in
+                    ('price_delta', 'shares_relative_delta', 'shares_absolute_delta')),
+                'Numeric tolerances require --target-mode trade-details; activity has no price/size output')
+        args.trade_tolerances = None
+    args.sft_features = args.sft_features or ('all' if args.target_mode == 'trade-details' else 'selected')
     for name in ('input_root', 'out', 'model', 'split_file', 'returns_file', 'closed_positions', 'coverage_file'):
         if getattr(args, name) is not None:
             setattr(args, name, getattr(args, name).expanduser().resolve())
